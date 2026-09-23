@@ -36,7 +36,7 @@ h1 { font-size: 16pt; font-weight: 700; margin: 0 0 8mm; page-break-after: avoid
 h2 { font-size: 14pt; font-weight: 700; margin: 8mm 0 4mm; page-break-after: avoid; }
 h3 { font-size: 12pt; font-weight: 700; margin: 6mm 0 3mm; page-break-after: avoid; }
 p { margin: 0 0 3.2mm; }
-ul, ol { margin: 0 0 3.2mm; padding-left: 15mm; list-style-position: outside; }
+ul, ol { margin: 0 0 3.2mm; padding-left: 6mm; list-style-position: outside; }
 li { margin: 1.2mm 0; padding-left: 3mm; }
 ol > li::marker { font-variant-numeric: tabular-nums; }
 table { width: 100%; border-collapse: collapse; margin: 4mm 0; font-size: 12pt; }
@@ -125,7 +125,7 @@ def render_report(template: Path, report: Path, lab_number: str) -> Path:
             "author": "",
             "subject": "Отчёт по лабораторной работе",
             "keywords": "",
-            "creator": "scripts/render",
+            "creator": "scripts/render.py",
             "producer": "PyMuPDF",
         }
     )
