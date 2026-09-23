@@ -1,0 +1,170 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.10"
+# dependencies = [
+#   "markdown>=3.6,<4",
+#   "pymupdf>=1.24,<2",
+#   "weasyprint>=62,<70",
+# ]
+# ///
+"""Render every lab-N-report.md file as a PDF with a numbered title page."""
+
+from __future__ import annotations
+
+import argparse
+import re
+import sys
+from pathlib import Path
+
+import markdown
+import pymupdf
+from weasyprint import HTML
+
+REPORT_NAME = re.compile(r"^lab-([1-9][0-9]*)-report\.md$")
+PLACEHOLDER = "<N>"
+
+CSS = """
+@page {
+  size: A4;
+  margin: 18mm 16mm 20mm;
+}
+
+* { box-sizing: border-box; }
+html { font-family: Arial, "Liberation Sans", sans-serif; font-size: 12pt; line-height: 1.42; color: #111; }
+body { margin: 0; }
+h1 { font-size: 16pt; font-weight: 700; margin: 0 0 8mm; page-break-after: avoid; }
+h2 { font-size: 14pt; font-weight: 700; margin: 8mm 0 4mm; page-break-after: avoid; }
+h3 { font-size: 12pt; font-weight: 700; margin: 6mm 0 3mm; page-break-after: avoid; }
+p { margin: 0 0 3.2mm; }
+ul, ol { margin: 0 0 3.2mm; padding-left: 15mm; list-style-position: outside; }
+li { margin: 1.2mm 0; padding-left: 3mm; }
+ol > li::marker { font-variant-numeric: tabular-nums; }
+table { width: 100%; border-collapse: collapse; margin: 4mm 0; font-size: 12pt; }
+th, td { border: 0.25mm solid #777; padding: 2mm; vertical-align: top; }
+th { background: #ececec; font-weight: 700; }
+blockquote { margin: 4mm 0; padding: 2.5mm 4mm; border-left: 1mm solid #777; color: #333; }
+code { font-family: "DejaVu Sans Mono", monospace; font-size: 8.3pt; background: #f1f1f1; padding: 0.2mm 0.8mm; }
+pre { margin: 4mm 0; padding: 3mm; border: 0.25mm solid #bbb; background: #f7f7f7; white-space: pre-wrap; overflow-wrap: anywhere; break-inside: avoid; page-break-inside: avoid; font-family: "DejaVu Sans Mono", monospace; font-size: 7.7pt; line-height: 1.28; }
+pre code { padding: 0; background: transparent; font-size: inherit; }
+img { display: block; max-width: 100%; max-height: 165mm; margin: 4mm auto 6mm; object-fit: contain; page-break-inside: avoid; }
+a { color: #111; text-decoration: none; }
+hr { border: 0; border-top: 0.25mm solid #777; margin: 7mm 0; }
+"""
+
+
+def project_root() -> Path:
+    return Path(__file__).resolve().parent.parent
+
+
+def find_reports(root: Path) -> list[tuple[Path, str]]:
+    reports: list[tuple[Path, str]] = []
+    for candidate in root.rglob("lab-*-report.md"):
+        if any(part in {".git", "local-trash", "templates", "scripts"} for part in candidate.parts):
+            continue
+        match = REPORT_NAME.fullmatch(candidate.name)
+        if match:
+            reports.append((candidate, match.group(1)))
+    return sorted(reports, key=lambda item: item[0])
+
+
+def render_cover(template: Path, lab_number: str) -> pymupdf.Document:
+    document = pymupdf.open(template)
+    if len(document) != 1:
+        raise ValueError(f"Template must contain exactly one page: {template}")
+
+    page = document[0]
+    placeholders = page.search_for(PLACEHOLDER)
+    if len(placeholders) != 1:
+        raise ValueError(
+            f"Expected exactly one {PLACEHOLDER!r} placeholder in {template}, found {len(placeholders)}"
+        )
+
+    placeholder = placeholders[0]
+    baseline = None
+    for block in page.get_text("dict")["blocks"]:
+        for line in block.get("lines", []):
+            for span in line["spans"]:
+                if PLACEHOLDER in span["text"]:
+                    baseline = span["origin"][1]
+                    break
+    if baseline is None:
+        raise ValueError(f"Could not determine placeholder baseline in {template}")
+
+    page.add_redact_annot(placeholder, fill=(1, 1, 1))
+    page.apply_redactions()
+    page.insert_text(
+        pymupdf.Point(placeholder.x0, baseline),
+        lab_number,
+        fontname="hebo",
+        fontsize=20,
+        color=(0, 0, 0),
+        overlay=True,
+    )
+    return document
+
+
+def render_markdown(report: Path) -> bytes:
+    source = report.read_text(encoding="utf-8")
+    body = markdown.markdown(
+        source,
+        extensions=["fenced_code", "sane_lists", "tables"],
+        output_format="html5",
+    )
+    html = f"<!doctype html><html><head><meta charset='utf-8'><style>{CSS}</style></head><body>{body}</body></html>"
+    return HTML(string=html, base_url=str(report.parent)).write_pdf()
+
+
+def render_report(template: Path, report: Path, lab_number: str) -> Path:
+    output = report.with_suffix(".pdf")
+    cover = render_cover(template, lab_number)
+    body = pymupdf.open(stream=render_markdown(report), filetype="pdf")
+    cover.insert_pdf(body)
+    cover.set_metadata(
+        {
+            "title": f"Лабораторная работа №{lab_number}",
+            "author": "",
+            "subject": "Отчёт по лабораторной работе",
+            "keywords": "",
+            "creator": "scripts/render",
+            "producer": "PyMuPDF",
+        }
+    )
+    cover.save(output, garbage=4, deflate=True)
+    body.close()
+    cover.close()
+    return output
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Render lab-N-report.md files as PDFs with numbered title pages."
+    )
+    parser.add_argument(
+        "--root",
+        type=Path,
+        default=project_root(),
+        help="Repository root to scan (default: script parent directory).",
+    )
+    args = parser.parse_args()
+
+    root = args.root.resolve()
+    template = root / "templates" / "win-title.pdf"
+    if not template.is_file():
+        parser.error(f"Template not found: {template}")
+
+    reports = find_reports(root)
+    if not reports:
+        parser.error(f"No lab-N-report.md files found under {root}")
+
+    for report, number in reports:
+        output = render_report(template, report, number)
+        print(f"{report.relative_to(root)} -> {output.relative_to(root)}")
+    return 0
+
+
+if __name__ == "__main__":
+    try:
+        raise SystemExit(main())
+    except (OSError, ValueError) as error:
+        print(f"render: {error}", file=sys.stderr)
+        raise SystemExit(1)
