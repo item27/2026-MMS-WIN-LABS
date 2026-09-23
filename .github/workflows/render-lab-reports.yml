@@ -1,0 +1,64 @@
+name: Render lab reports
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: render-lab-reports-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Render reports
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ ! -f scripts/render || ! -f templates/win-title.pdf ]]; then
+            echo "Renderer or title template is not present on this branch."
+            exit 0
+          fi
+
+          if ! find . -path ./.git -prune -o -type f -name 'lab-*-report.md' -print | grep -Eq '/lab-[1-9][0-9]*-report\.md$'; then
+            echo "No lab report source files found on this branch."
+            exit 0
+          fi
+
+          uv run --script scripts/render
+
+      - name: Commit regenerated PDFs
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mapfile -d '' pdfs < <(find . -type f -name 'lab-*-report.pdf' -print0)
+          if (( ${#pdfs[@]} == 0 )); then
+            echo "No rendered PDFs to stage."
+            exit 0
+          fi
+
+          git add --force -- "${pdfs[@]}"
+          if git diff --cached --quiet; then
+            echo "Rendered PDFs are already current."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "docs: rerender lab PDFs [skip ci]"
+          git push
