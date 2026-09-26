@@ -1,0 +1,3 @@
+FullName,Title,Department,Email,Phone,SamAccountName,Password,OrganizationalUnit,Groups,HomeDirectory,ProfilePath
+Seller One,Sales representative,Sellers,useller1@LAB_DOMAIN,0000000000,uSeller1,ChangeMe!2026,ouSellers,gSellers,C:\UsersHome\uSeller1,\\ad-srv\Profiles$\uSeller1
+Manager One,Sales manager,Managers,umanager1@LAB_DOMAIN,0000000000,uManager1,ChangeMe!2026,ouManagers,gManagers,C:\UsersHome\uManager1,\\ad-srv\Profiles$\uManager1
