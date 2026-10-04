@@ -1,201 +1,387 @@
-# Ход работы
+# Практическая работа №1: основные инструментальные средства управления Windows Server
 
 ## Цель работы
 
-Собрать MMC-консоль для администрирования Windows Server, настроить локальные учётные записи и IPv4, а также подготовить и запустить сценарии CMD и PowerShell
+Собрать пользовательскую консоль Microsoft Management Console (MMC), создать локальные учётные объекты, настроить учебный IPv4-адаптер и подготовить эквивалентные сценарии CMD и PowerShell. Отдельно проверить, что обычный пользователь может открыть ограниченную консоль, но не получает административных прав на управление системной службой.
 
-## Среда выполнения
+## Среда и границы работы
 
-Работа выполнена в Windows Server 2025 Standard Evaluation с Desktop Experience. Сервер запущен в виртуальной машине Proxmox VE/KVM. Для лабораторной сети использован отдельный адаптер Lab-Isolated
+| Параметр | Значение |
+|---|---|
+| ОС | Windows Server 2025 Standard Evaluation, Desktop Experience |
+| Гипервизор | Proxmox VE / KVM |
+| Виртуальная машина повторной демонстрации | VM 107 |
+| Администраторская учётная запись | локальная `Administrator` |
+| Учебный пользователь | `UPart1GMAKMA` |
+| Учебная группа | `GPart1GMAKMA` |
+| Учебный интерфейс | `Lab-Isolated` |
 
-## 1. MMC-консоль
+Виртуальная машина имеет два адаптера. Для задания используется только `Lab-Isolated`, подключённый к изолированному bridge Proxmox. Рабочий адаптер `Ethernet` не переопределялся учебными статическими параметрами: это не позволяет потерять доступ к VM.
 
-В mmc.exe добавлены оснастки локального компьютера:
+Ниже объединены два вида доказательств:
 
-1. Computer Management
-2. Event Viewer
-3. Shared Folders
-4. Services
+1. результаты выполнения лабораторной и запуска сценариев;
+2. повторный пошаговый показ интерфейса на VM 107. Новые снимки `67`--`85` показывают именно экраны, из которых выполняются действия. Они нужны, чтобы по отчёту можно было повторить работу с нуля, а не только увидеть финальные состояния.
 
-![Итоговый состав оснасток MMC](screenshots/30-mmc-final-snapins.png)
+![Windows Server на VM 107, рабочий стол администратора](screenshots/67-vm107-windows-server-desktop.png)
 
-Консоль сохранена по пути:
+## Карта соответствия заданию
+
+| Требование обновлённого задания | Где показано в отчёте |
+|---|---|
+| Запустить MMC и добавить четыре оснастки | раздел 1, снимки 69--76 и 79 |
+| Проверить доступ к оснасткам и службе DNS Client | раздел 1.4; оснастки доступны из итоговой консоли |
+| Создать `Tools` и пять задач | раздел 2, снимки 34--35 и 66 |
+| Создать `UPart1GMAKMA` и `GPart1GMAKMA`, задать членство | раздел 3, снимки 80--82 и 22--23, 37 |
+| Настроить IPv4 на отдельном адаптере | раздел 4, снимки 84, 40 и 24 |
+| Подготовить два CMD-сценария | раздел 5, снимки 85, 41 и 53 |
+| Подготовить два PowerShell-сценария | раздел 6, снимки 85, 44 и 57 |
+| Добавить сценарии в `Tools` | раздел 7, снимок 66 |
+| Ограничить MMC для обычного пользователя и проверить права | раздел 8, снимки 61, 63 и 64 |
+
+---
+
+## 1. Создание основной MMC-консоли
+
+### 1.1. Запуск пустой консоли
+
+**Что делаем.** Открываем `Win + R`, вводим `mmc` и подтверждаем запуск. Появляется пустая консоль с единственным узлом `Console Root`.
+
+**Зачем.** MMC является контейнером. Сама по себе она не администрирует Windows: нужные возможности появляются после добавления оснасток.
+
+![Пустая MMC после запуска mmc](screenshots/69-open-empty-mmc.png)
+
+### 1.2. Открытие окна добавления оснасток
+
+**Что делаем.** В окне MMC выбираем **File -> Add/Remove Snap-in...**. Альтернативный способ -- `Ctrl + M`.
+
+**Зачем.** В этом окне выбираются компоненты, которые войдут именно в созданную консоль. Это отличается от запуска отдельных системных оснасток через `Win + R`.
+
+![Путь File -> Add/Remove Snap-in](screenshots/70-file-menu-add-remove-snapins.png)
+
+![Окно Add or Remove Snap-ins](screenshots/71-add-remove-snapins-dialog.png)
+
+### 1.3. Добавление четырёх оснасток
+
+В левом списке `Available snap-ins` по очереди выбираем оснастку, нажимаем **Add >**, в окне выбора компьютера оставляем **Local computer**, затем нажимаем **Finish**. В правой части `Selected snap-ins` должна сформироваться следующая структура:
+
+1. `Computer Management`;
+2. `Event Viewer`;
+3. `Shared Folders`;
+4. `Services`.
+
+#### Computer Management
+
+**Путь.** `Add/Remove Snap-ins -> Computer Management -> Add -> Local computer -> Finish`.
+
+**Назначение.** Комплексная оснастка для локального компьютера: локальные пользователи и группы, диспетчер устройств, журналы, диски и другие разделы.
+
+![Выбор локального компьютера для Computer Management](screenshots/72-select-local-computer-snapin.png)
+
+#### Event Viewer
+
+**Путь.** `Add/Remove Snap-ins -> Event Viewer -> Add -> Local computer -> OK`.
+
+**Назначение.** Просмотр системных журналов и ошибок служб.
+
+![Выбор локального компьютера для Event Viewer](screenshots/73-selected-first-two-snapins.png)
+
+#### Shared Folders
+
+**Путь.** `Add/Remove Snap-ins -> Shared Folders -> Add -> Local computer -> All -> Finish`.
+
+**Назначение.** Просмотр общих папок, открытых файлов и сессий.
+
+![Настройка Shared Folders для локального компьютера](screenshots/74-select-local-shared-folders.png)
+
+#### Services
+
+**Путь.** `Add/Remove Snap-ins -> Services -> Add -> Local computer -> Finish`.
+
+**Назначение.** Просмотр состояния и управление локальными службами Windows.
+
+![Настройка Services для локального компьютера](screenshots/75-select-local-services.png)
+
+### 1.4. Проверка состава и работы оснасток
+
+Перед нажатием **OK** проверяем правую область `Selected snap-ins`: в ней должны быть только четыре оснастки, перечисленные выше. Лишние оснастки не добавляем.
+
+![Четыре выбранные оснастки перед подтверждением](screenshots/76-four-selected-snapins.png)
+
+После закрытия окна раскрываем каждый узел. Это проверяет, что оснастка добавлена не только формально, а действительно открывает данные локального компьютера. В `Services` находим `DNS Client` и проверяем его состояние. Если службы DNS Client нет в конкретной сборке или её состояние нельзя надёжно показать, для демонстрации ограничений используется `DHCP Client` -- системная служба, присутствующая в VM.
+
+![Итоговая консоль с четырьмя оснастками](screenshots/79-rebuilt-console-final-snapins.png)
+
+### 1.5. Сохранение основной консоли
+
+**Что делаем.** Выбираем **File -> Save As...**, указываем каталог `C:\Console` и имя файла основной консоли. В штатном результате лабораторной используется:
 
 ```text
 C:\Console\lab-1.msc
 ```
 
-![Сохранение MMC-консоли](screenshots/31-mmc-saved.png)
+**Зачем.** После сохранения пользователь открывает именно подготовленную структуру, а не заново собранную временную `Console1`.
 
-В корне консоли создано представление задач Tools. В нём добавлены Network Connections и задачи запуска всех четырёх сценариев
+![Диалог Save As MMC](screenshots/77-save-console-dialog.png)
 
-![Tools с задачами Network Connections и сценариями](screenshots/66-mmc-tools-all-tasks.png)
+На VM 107 в ходе повторного показа создана дополнительная демонстрационная копия `C:\Console\LAB-1-REBUILT.msc`; она содержит те же четыре требуемые оснастки и не заменяет зафиксированный результат задания.
 
-## 2. Локальный пользователь и группа
+![Указание пути демонстрационной копии на VM 107](screenshots/78-save-rebuilt-console-path.png)
 
-Созданы объекты с идентификатором команды GMAKMA:
+Первоначально сохранённая основная консоль также зафиксирована в результатах выполнения:
 
-| Объект | Имя |
-|---|---|
-| Локальный пользователь | UPart1GMAKMA |
-| Локальная группа | GPart1GMAKMA |
+![Сохранение основной MMC-консоли](screenshots/31-mmc-saved.png)
 
-Пользователь добавлен в группу GPart1GMAKMA
+---
 
-![Созданный локальный пользователь](screenshots/22-local-user-created.png)
+## 2. Создание раздела Tools и задач MMC
 
-![Созданная локальная группа](screenshots/23-local-group-created.png)
+### 2.1. Создание папки Tools
 
-![Членство пользователя в GPart1GMAKMA](screenshots/37-group-membership.png)
+**Что делаем.** В корне основной консоли щёлкаем правой кнопкой мыши и выбираем **New Window from Here** или создаём taskpad/папку задач способом, предусмотренным версией MMC. Имя узла -- `Tools`.
 
-## 3. Настройка IPv4
+**Зачем.** `Tools` собирает часто используемые действия в одном месте, поэтому для показа на защите не требуется искать каждый сценарий по файловой системе.
 
-Статические параметры заданы только на изолированном адаптере Lab-Isolated. Основной адаптер виртуальной машины не изменялся
+![Созданный раздел Tools](screenshots/34-mmc-tools-overview.png)
 
-| Параметр | Значение |
-|---|---|
-| IPv4-адрес | 192.168.1.10 |
-| Маска подсети | 255.255.255.0 (/24) |
-| Основной шлюз | 192.168.1.1 |
-| DNS-сервер | 8.8.8.8 |
+### 2.2. Задача Network Connections
 
-![Проверка IPv4-конфигурации Lab-Isolated](screenshots/40-ipconfig-static.png)
+**Что делаем.** В `Tools` создаём задачу запуска окна сетевых адаптеров. Целевой путь: `ncpa.cpl`.
 
-## 4. Сценарии CMD
+**Проверка.** Нажатие задачи открывает `Network Connections`.
 
-### script21.cmd
+![Задача Network Connections в Tools](screenshots/35-tools-network-connections.png)
 
-Сценарий принимает строку из четырёх символов, создаёт пользователя UPart2<строка> и группу GPart2<строка>, добавляет пользователя в группу и активирует его
+### 2.3. Четыре задачи запуска сценариев
 
-```bat
-@echo off
-setlocal EnableExtensions
-set /p "STR=Enter exactly 4 characters without spaces: "
-if "%STR:~3,1%"=="" goto invalid
-if not "%STR:~4,1%"=="" goto invalid
-for /f "tokens=* delims= " %%A in ("%STR%") do if not "%%A"=="%STR%" goto invalid
-net user "UPart2%STR%" /add /active:yes
-net localgroup "GPart2%STR%" /add
-net localgroup "GPart2%STR%" "UPart2%STR%" /add
-echo User and group created.
-goto end
-:invalid
-echo Input must contain exactly 4 non-space characters.
-:end
-endlocal
+В `Tools` добавляем ещё четыре задачи. Каждая задача запускает конкретный файл из `C:\Console\Scripts`:
+
+| Задача в MMC | Целевой файл | Что проверяется |
+|---|---|---|
+| `SCRIPT21.CMD` | `C:\Console\Scripts\script21.cmd` | создание локального пользователя и группы средствами CMD |
+| `SCRIPT22.CMD` | `C:\Console\Scripts\script22.cmd` | DHCP или статический IPv4 средствами `netsh` |
+| `SCRIPT31.PS1` | `C:\Console\Scripts\script31.ps1` | создание локального пользователя и группы средствами PowerShell |
+| `SCRIPT32.PS1` | `C:\Console\Scripts\script32.ps1` | DHCP или статический IPv4 средствами PowerShell |
+
+При создании задачи указываем понятное имя, путь к файлу и рабочую папку `C:\Console\Scripts`. Для `.ps1` при необходимости используем запуск через `powershell.exe` с параметром `-ExecutionPolicy Bypass -File`, чтобы выполнение не зависело от политики для интерактивной сессии.
+
+**Итог.** В `Tools` доступны Network Connections и четыре сценария.
+
+![Полный набор задач Tools](screenshots/66-mmc-tools-all-tasks.png)
+
+---
+
+## 3. Локальный пользователь и группа
+
+### 3.1. Где создаются объекты
+
+**Что делаем.** Открываем `Win + R -> lusrmgr.msc` либо идём в `Computer Management -> Local Users and Groups`. В левой части есть папки `Users` и `Groups`.
+
+![Оснастка Local Users and Groups](screenshots/80-local-users-and-groups-console.png)
+
+### 3.2. Создание пользователя
+
+**Путь.** `Local Users and Groups -> Users -> Action -> New User...`.
+
+**Действие.** Создаём пользователя:
+
+```text
+UPart1GMAKMA
 ```
 
-![Выполнение script21.cmd](screenshots/41-script21-cmd-success.png)
+Пароль задаётся в защищённом диалоге Windows и не записывается в отчёт, исходники или Git. Учётная запись включена.
 
-Исходный файл: [scripts/script21.cmd](scripts/script21.cmd)
+![Список локальных пользователей с учебной учётной записью](screenshots/81-local-users-list.png)
 
-### script22.cmd
+Первичное создание объекта также подтверждено отдельным снимком.
 
-Сценарий принимает Auto или Manual. В режиме Auto он включает DHCP для IPv4 и DNS. В режиме Manual задаёт параметры лабораторной сети через netsh
+![Создание UPart1GMAKMA](screenshots/22-local-user-created.png)
 
-```bat
-@echo off
-setlocal EnableExtensions
-set /p "MODE=Enter Auto or Manual: "
-if /I "%MODE%"=="Auto" (
-  netsh interface ipv4 set address name="Lab-Isolated" source=dhcp
-  netsh interface ipv4 set dnsservers name="Lab-Isolated" source=dhcp
-  echo DHCP enabled for IPv4 and DNS.
-) else if /I "%MODE%"=="Manual" (
-  netsh interface ipv4 set address name="Lab-Isolated" static 192.168.1.10 255.255.255.0 192.168.1.1
-  netsh interface ipv4 set dnsservers name="Lab-Isolated" static 8.8.8.8 primary validate=no
-  echo Static IPv4 configuration applied.
-) else (
-  echo Allowed values: Auto or Manual.
-)
-endlocal
+### 3.3. Создание группы
+
+**Путь.** `Local Users and Groups -> Groups -> Action -> New Group...`.
+
+**Действие.** Создаём группу:
+
+```text
+GPart1GMAKMA
 ```
 
-![Выполнение script22.cmd в режиме Manual](screenshots/53-script22-cmd-success.png)
+![Список локальных групп с GPart1GMAKMA](screenshots/82-local-groups-list.png)
 
-Исходный файл: [scripts/script22.cmd](scripts/script22.cmd)
+![Создание GPart1GMAKMA](screenshots/23-local-group-created.png)
 
-## 5. Сценарии PowerShell
+### 3.4. Добавление пользователя в группу
 
-### script31.ps1
+**Путь.** Открываем свойства `GPart1GMAKMA` двойным щелчком -> **Members** -> **Add...** -> вводим `UPart1GMAKMA` -> **Check Names** -> **OK**.
 
-Сценарий принимает четыре символа, создаёт пользователя UPart3<строка> и группу GPart3<строка>, добавляет пользователя в группу и включает учётную запись
+**Проверка.** В списке `Members` группы отображается `UPart1GMAKMA`.
+
+![Членство UPart1GMAKMA в GPart1GMAKMA](screenshots/37-group-membership.png)
+
+---
+
+## 4. Настройка IPv4
+
+### 4.1. Открытие адаптеров
+
+**Что делаем.** Нажимаем `Win + R`, вводим `ncpa.cpl`. Открывается окно `Network Connections`.
+
+![Окно Network Connections на VM 107](screenshots/84-network-connections.png)
+
+В окне видны два адаптера: обычный `Ethernet` и выделенный для лабораторной `Lab-Isolated`. Меняется только второй.
+
+### 4.2. Ручной ввод статических параметров
+
+**Путь.** `Lab-Isolated -> Properties -> Internet Protocol Version 4 (TCP/IPv4) -> Properties`.
+
+Выбираем **Use the following IP address** и вводим:
+
+| Поле | Значение |
+|---|---|
+| IP address | `192.168.1.10` |
+| Subnet mask | `255.255.255.0` |
+| Default gateway | `192.168.1.1` |
+| Preferred DNS server | `8.8.8.8` |
+
+После подтверждения проверяем параметры командой `ipconfig /all` или в свойствах IPv4. Статическая конфигурация применяется только к `Lab-Isolated`.
+
+![Подтверждение статической IPv4-конфигурации](screenshots/40-ipconfig-static.png)
+
+![Учебный сетевой адаптер Lab-Isolated](screenshots/24-network-adapter.png)
+
+---
+
+## 5. CMD-сценарии
+
+### 5.1. Расположение файлов
+
+Перед настройкой задач MMC создаём папку `C:\Console\Scripts` и помещаем туда все четыре файла. Через проводник можно проверить, что файлы находятся в одной предсказуемой папке.
+
+![Папка C:\Console\Scripts на VM 107](screenshots/85-scripts-folder.png)
+
+### 5.2. `script21.cmd`: пользователь и группа по четырём символам
+
+**Назначение.** Сценарий запрашивает строку ровно из четырёх символов без пробелов. Для строки `ABCD` он создаёт `UPart2ABCD` и `GPart2ABCD`, добавляет пользователя в группу и включает учётную запись.
+
+**Запуск.** Открываем CMD от имени администратора, переходим в `C:\Console\Scripts` и запускаем `script21.cmd`. Вводим четыре символа. Неиспользуемый или уже существующий идентификатор выбирать не следует, чтобы не смешивать результаты повторного запуска.
+
+Исходник: [scripts/script21.cmd](scripts/script21.cmd)
+
+![Успешное выполнение script21.cmd](screenshots/41-script21-cmd-success.png)
+
+### 5.3. `script22.cmd`: DHCP или статический IPv4
+
+**Назначение.** Сценарий принимает строго `Auto` или `Manual`.
+
+- `Auto` включает DHCP для IPv4 и DNS на `Lab-Isolated`.
+- `Manual` задаёт IP `192.168.1.10`, маску `255.255.255.0`, шлюз `192.168.1.1` и DNS `8.8.8.8` через `netsh`.
+
+**Запуск.** Открываем CMD с повышенными правами, запускаем `script22.cmd` и вводим `Manual` для воспроизведения требуемой статической конфигурации. Параметр `validate=no` в команде DNS нужен для учебной изолированной сети: шлюз `192.168.1.1` может не иметь маршрута в Интернет.
+
+Исходник: [scripts/script22.cmd](scripts/script22.cmd)
+
+![Успешный запуск script22.cmd в режиме Manual](screenshots/53-script22-cmd-success.png)
+
+---
+
+## 6. PowerShell-сценарии
+
+### 6.1. `script31.ps1`: пользователь и группа средствами PowerShell
+
+**Назначение.** Сценарий получает строку из четырёх непробельных символов, создаёт `UPart3<строка>` и `GPart3<строка>`, добавляет пользователя в группу и активирует учётную запись.
+
+**Запуск.** Открываем Windows PowerShell от имени администратора и выполняем:
 
 ```powershell
-$str = Read-Host 'Enter exactly 4 characters without spaces'
-if ($str -notmatch '^[^\s]{4}$') {
-    Write-Error 'Input must contain exactly 4 non-space characters.'
-    exit 1
-}
-$userName = "UPart3$str"
-$groupName = "GPart3$str"
-New-LocalUser -Name $userName -NoPassword -AccountNeverExpires -Description 'Lab 1 local user'
-New-LocalGroup -Name $groupName -Description 'Lab 1 local group'
-Add-LocalGroupMember -Group $groupName -Member $userName
-Enable-LocalUser -Name $userName
-Write-Host "Created $userName and $groupName; membership configured."
+Set-ExecutionPolicy -Scope Process Bypass
+C:\Console\Scripts\script31.ps1
 ```
 
-![Выполнение script31.ps1](screenshots/44-script31-powershell-success.png)
+Политика изменяется только для текущего процесса PowerShell. Пароль не хранится внутри файла: сценарий использует `-NoPassword` для демонстрационного учебного объекта.
 
-Исходный файл: [scripts/script31.ps1](scripts/script31.ps1)
+Исходник: [scripts/script31.ps1](scripts/script31.ps1)
 
-### script32.ps1
+![Успешное выполнение script31.ps1](screenshots/44-script31-powershell-success.png)
 
-Сценарий работает только с Lab-Isolated. В режиме Auto он включает DHCP, в режиме Manual задаёт статический IPv4-адрес, шлюз и DNS
+### 6.2. `script32.ps1`: настройка IPv4 средствами PowerShell
 
-```powershell
-$mode = Read-Host 'Enter Auto or Manual'
-$adapter = Get-NetAdapter -Name 'Lab-Isolated' -ErrorAction Stop
-if ($mode -ieq 'Auto') {
-    Set-NetIPInterface -InterfaceIndex $adapter.ifIndex -Dhcp Enabled
-    Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ResetServerAddresses
-    Write-Host 'DHCP enabled for IPv4 and DNS.'
-} elseif ($mode -ieq 'Manual') {
-    Get-NetRoute -InterfaceIndex $adapter.ifIndex -DestinationPrefix '0.0.0.0/0' -ErrorAction SilentlyContinue | Remove-NetRoute -Confirm:$false
-    Get-NetIPAddress -InterfaceIndex $adapter.ifIndex -AddressFamily IPv4 -ErrorAction SilentlyContinue | Remove-NetIPAddress -Confirm:$false
-    New-NetIPAddress -InterfaceIndex $adapter.ifIndex -IPAddress 192.168.1.10 -PrefixLength 24 -DefaultGateway 192.168.1.1
-    Set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ServerAddresses 8.8.8.8
-    Write-Host 'Static IPv4 configuration applied.'
-} else {
-    Write-Error 'Allowed values: Auto or Manual.'
-}
-```
+**Назначение.** Сценарий запрашивает `Auto` или `Manual` и работает строго с адаптером `Lab-Isolated`.
 
-![Выполнение script32.ps1 в режиме Manual](screenshots/57-script32-powershell-success.png)
+- при `Auto` включает DHCP и сбрасывает вручную заданные DNS;
+- при `Manual` удаляет прежний IPv4-адрес и default route только у этого адаптера, после чего добавляет параметры лабораторной сети.
 
-Исходный файл: [scripts/script32.ps1](scripts/script32.ps1)
+**Почему удаляется старый маршрут.** Повторный запуск должен приводить к одному и тому же результату. Без удаления старого default route Windows может сохранить конфликтующий маршрут от предыдущего запуска.
 
-## 6. Проверка обычного пользователя
+**Запуск.** Открываем PowerShell от имени администратора, запускаем `script32.ps1` и вводим `Manual`.
 
-Создана ограниченная копия консоли:
+Исходник: [scripts/script32.ps1](scripts/script32.ps1)
+
+![Успешный запуск script32.ps1 в режиме Manual](screenshots/57-script32-powershell-success.png)
+
+---
+
+## 7. Проверка запуска задач из Tools
+
+Возвращаемся в основную MMC, открываем `Tools` и по очереди запускаем Network Connections, `SCRIPT21.CMD`, `SCRIPT22.CMD`, `SCRIPT31.PS1` и `SCRIPT32.PS1`.
+
+**Что проверяется.**
+
+1. в консоли сохранены правильные пути к файлам;
+2. сценарии открываются без ручного поиска в проводнике;
+3. задания, которые изменяют пользователей или сетевые параметры, запускаются в административном контексте;
+4. в итоговой ветке `Manual` оба сетевых сценария возвращают требуемую статическую конфигурацию.
+
+![Tools: Network Connections и все четыре сценария](screenshots/66-mmc-tools-all-tasks.png)
+
+---
+
+## 8. Ограниченная MMC для обычного пользователя
+
+### 8.1. Создание копии с ограниченным режимом
+
+**Что делаем.** В основной MMC выбираем **File -> Options...** и переключаем режим на **User mode - limited access, single window**. Запрещаем пользователю сохранять изменения, затем сохраняем отдельный файл:
 
 ```text
 C:\Console\LAB-1-USER.msc
 ```
 
-Она открыта под UPart1GMAKMA. В разделе служб для DHCP Client команды запуска, остановки, приостановки и продолжения недоступны. Обычный пользователь может открыть консоль, но не может менять её структуру или управлять системной службой
+**Зачем.** Обычный пользователь может пользоваться согласованным набором инструментов, но не изменяет структуру MMC и не получает права администратора через неё.
 
-![Ограничение управления DHCP Client для обычного пользователя](screenshots/64-upart1-dhcp-actions-disabled.png)
+![Сохранение ограниченной копии MMC](screenshots/61-protected-mmc-saved.png)
+
+### 8.2. Проверка под `UPart1GMAKMA`
+
+Сеанс администратора завершается, после чего пользователь вручную входит как `UPart1GMAKMA` и открывает `C:\Console\LAB-1-USER.msc`.
+
+![Ограниченная консоль, открытая обычным пользователем](screenshots/63-upart1-protected-console.png)
+
+В `Services` выбираем `DHCP Client` и проверяем панель действий. Команды **Start**, **Stop**, **Pause** и **Resume** недоступны. Это ожидаемое доказательство того, что доступ к оснастке не равен административным полномочиям над службой.
+
+![Отключённые действия DHCP Client для UPart1GMAKMA](screenshots/64-upart1-dhcp-actions-disabled.png)
+
+---
 
 ## Контрольные вопросы
 
-### В какие группы вошёл пользователь после части 1?
+### 1. В какие группы вошёл пользователь после части 1?
 
-У пользователя есть индивидуальная локальная группа с тем же именем. В рамках работы пользователь добавлен в GPart1GMAKMA. Остальные группы определяются локальной политикой Windows
+В Windows локальный пользователь имеет индивидуальную группу с тем же именем, а в рамках данной работы `UPart1GMAKMA` явно добавлен в `GPart1GMAKMA`. Остальные эффективные группы могут определяться локальной политикой и встроенными группами Windows, поэтому на защите корректно показывать именно свойства созданной группы и её список `Members`, а не делать предположение о полном наборе токенов безопасности.
 
-### Чем различаются CMD и PowerShell-сценарии?
+### 2. Чем различаются CMD- и PowerShell-сценарии?
 
-CMD использует текстовые команды net и netsh, ввод через set /p и ветвление if. PowerShell работает с cmdlet-ами и объектами, например New-LocalUser, Get-NetAdapter и New-NetIPAddress. Поэтому в PowerShell удобнее получать параметры конкретного адаптера и обрабатывать ошибки
+CMD использует текстовые утилиты `net`, `netsh`, ввод через `set /p` и условные ветви `if`. PowerShell работает с объектами и cmdlet-ами: `New-LocalUser`, `New-LocalGroup`, `Get-NetAdapter`, `New-NetIPAddress`. Поэтому PowerShell удобнее, когда нужно выбрать конкретный интерфейс по имени, получить его `InterfaceIndex` и обработать ошибки объектным способом. CMD легче запускать на минимальных системах, но его синтаксис менее выразителен для сложного администрирования.
 
-### Как добавить несколько IPv4-адресов адаптеру?
+### 3. Как добавить несколько IPv4-адресов одному адаптеру?
 
-В GUI: свойства IPv4 -> **Advanced** -> **IP addresses** -> **Add**. В PowerShell для одного InterfaceIndex можно несколько раз вызвать New-NetIPAddress. В netsh используется команда add address
+В графическом интерфейсе открывают свойства `Internet Protocol Version 4 (TCP/IPv4)`, затем **Advanced...**, в блоке **IP addresses** нажимают **Add...**. В PowerShell для одного `InterfaceIndex` несколько раз вызывают `New-NetIPAddress` с разными значениями `IPAddress`. В `netsh` используется `netsh interface ipv4 add address`. Перед добавлением дополнительного адреса важно проверить маршруты и отсутствие пересечения подсетей.
 
-### Как управлять удалённым компьютером через оснастку?
+### 4. Как управлять удалённым компьютером через оснастку MMC?
 
-В подходящей оснастке MMC нужно выбрать **Connect to another computer**, указать имя или IP удалённого компьютера и войти с учётной записью с административными правами. Для подключения нужны сетевой доступ, работающие RPC/WMI, правила Windows Firewall и права на удалённой машине
+В подходящей оснастке выбирают **Connect to another computer**, вводят имя или IP-адрес удалённого компьютера и используют учётную запись, имеющую нужные права. Нужны маршрутизация до узла, разрешённые правила Windows Firewall, работающие RPC/WMI и соответствующие локальные либо доменные разрешения. Для Services и Computer Management права на удалённое подключение сами по себе не дают права запускать или останавливать защищённые службы.
+
+---
 
 ## Вывод
 
-Собрана MMC-консоль с требуемыми оснастками и задачами. Созданы локальный пользователь и группа, настроен изолированный IPv4-адаптер, подготовлены и проверены CMD- и PowerShell-сценарии. Ограниченная копия MMC подтверждает, что обычный пользователь не может управлять системной службой
+Собрана и сохранена MMC-консоль с `Computer Management`, `Event Viewer`, `Shared Folders` и `Services`. Для неё подготовлен раздел `Tools`, объединяющий сетевые настройки и запуск четырёх сценариев. Созданы локальные объекты `UPart1GMAKMA` и `GPart1GMAKMA`; членство пользователя в группе подтверждено. Статический IPv4 назначен только изолированному интерфейсу `Lab-Isolated`. CMD- и PowerShell-сценарии проверены в ветке `Manual`. Отдельная ограниченная консоль демонстрирует разделение между доступом к интерфейсу MMC и административными правами на управление службой.
