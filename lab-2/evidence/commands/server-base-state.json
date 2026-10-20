@@ -1,0 +1,22 @@
+{
+    "OldInstallationPresent":  true,
+    "Agent":  "Running",
+    "Name":  "AD-SRV",
+    "OS":  {
+               "Caption":  "Microsoft Windows Server 2025 Standard Evaluation",
+               "Version":  "10.0.26100",
+               "InstallDate":  "\/Date(1792567789000)\/"
+           },
+    "IPv4":  [
+                 {
+                     "InterfaceAlias":  "Ethernet",
+                     "IPAddress":  "10.0.0.1",
+                     "PrefixLength":  8
+                 },
+                 {
+                     "InterfaceAlias":  "Loopback Pseudo-Interface 1",
+                     "IPAddress":  "127.0.0.1",
+                     "PrefixLength":  8
+                 }
+             ]
+}

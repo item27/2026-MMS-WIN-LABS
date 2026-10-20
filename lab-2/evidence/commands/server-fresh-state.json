@@ -1,0 +1,28 @@
+{
+    "adapters":  [
+                     {
+                         "Name":  "Ethernet",
+                         "InterfaceIndex":  6,
+                         "MacAddress":  "BC-24-11-DE-ED-1E"
+                     }
+                 ],
+    "computer":  {
+                     "Name":  "WIN-PQ082QLP7FK",
+                     "Domain":  "WORKGROUP",
+                     "PartOfDomain":  false
+                 },
+    "roles":  [
+                  {
+                      "Name":  "AD-Domain-Services",
+                      "InstallState":  0
+                  },
+                  {
+                      "Name":  "DHCP",
+                      "InstallState":  0
+                  },
+                  {
+                      "Name":  "DNS",
+                      "InstallState":  0
+                  }
+              ]
+}

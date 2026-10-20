@@ -1,0 +1,36 @@
+{
+  "104": {
+    "config": {
+      "name": "win-labs-1",
+      "bios": "seabios",
+      "boot": "order=sata0;ide2;ide0",
+      "net1": "e1000=BC:24:11:DE:ED:1E,bridge=vmbr1_lab,firewall=1"
+    },
+    "guest": {
+      "Agent": "Running",
+      "Domain": "WORKGROUP",
+      "Name": "AD-SRV"
+    },
+    "snapshots": [
+      "lab2-a1-server-os-ready"
+    ],
+    "configuration_locked": false
+  },
+  "105": {
+    "config": {
+      "name": "win-labs-2",
+      "bios": "seabios",
+      "boot": "order=sata0;ide2",
+      "net0": "e1000=BC:24:11:53:4F:29,bridge=vmbr1_lab,firewall=1"
+    },
+    "guest": {
+      "Agent": "Running",
+      "Domain": "WORKGROUP",
+      "Name": "AD-CLIENT"
+    },
+    "snapshots": [
+      "lab2-a1-client-os-ready"
+    ],
+    "configuration_locked": false
+  }
+}
