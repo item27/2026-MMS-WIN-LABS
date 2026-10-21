@@ -1,0 +1,1175 @@
+{
+    "OUs":  [
+                {
+                    "Name":  "ouSellers",
+                    "DistinguishedName":  "OU=ouSellers,DC=GMAKMA,DC=local"
+                },
+                {
+                    "Name":  "ouManagers",
+                    "DistinguishedName":  "OU=ouManagers,DC=GMAKMA,DC=local"
+                },
+                {
+                    "Name":  "ouComputers",
+                    "DistinguishedName":  "OU=ouComputers,DC=GMAKMA,DC=local"
+                },
+                {
+                    "Name":  "unit-for-delete",
+                    "DistinguishedName":  "OU=unit-for-delete,DC=GMAKMA,DC=local"
+                }
+            ],
+    "Computers":  [
+                      {
+                          "Name":  "AD-SRV",
+                          "DistinguishedName":  "CN=AD-SRV,OU=Domain Controllers,DC=GMAKMA,DC=local"
+                      },
+                      {
+                          "Name":  "AD-CLIENT",
+                          "DistinguishedName":  "CN=AD-CLIENT,OU=ouComputers,DC=GMAKMA,DC=local"
+                      }
+                  ],
+    "Users":  [
+                  {
+                      "SamAccountName":  "uSeller1",
+                      "Enabled":  true,
+                      "PasswordNeverExpires":  true,
+                      "HomeDrive":  "X:",
+                      "HomeDirectory":  "\\\\ad-srv\\uSeller1$",
+                      "ProfilePath":  "\\\\ad-srv\\uSeller1$\\_profile"
+                  },
+                  {
+                      "SamAccountName":  "uManager1",
+                      "Enabled":  true,
+                      "PasswordNeverExpires":  true,
+                      "HomeDrive":  "X:",
+                      "HomeDirectory":  "\\\\ad-srv\\uManager1$",
+                      "ProfilePath":  "\\\\ad-srv\\uManager1$\\_profile"
+                  }
+              ],
+    "Groups":  [
+                   {
+                       "Name":  "gSellers",
+                       "GroupScope":  1,
+                       "GroupCategory":  1,
+                       "Members":  [
+                                       "CN=uSeller1,OU=ouSellers,DC=GMAKMA,DC=local"
+                                   ]
+                   },
+                   {
+                       "Name":  "gManagers",
+                       "GroupScope":  1,
+                       "GroupCategory":  1,
+                       "Members":  [
+                                       "CN=uManager1,OU=ouManagers,DC=GMAKMA,DC=local"
+                                   ]
+                   }
+               ],
+    "Shares":  [
+                   {
+                       "Name":  "AllUsersCom",
+                       "Path":  "C:\\AllUsers",
+                       "Access":  [
+                                      {
+                                          "CimClass":  {
+                                                           "CimSuperClassName":  null,
+                                                           "CimSuperClass":  null,
+                                                           "CimClassProperties":  [
+                                                                                      {
+                                                                                          "Name":  "AccessControlType",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  6,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True",
+                                                                                                             "ValueMap = ...",
+                                                                                                             "Values = ..."
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "AccessRight",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  6,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True",
+                                                                                                             "ValueMap = ...",
+                                                                                                             "Values = ..."
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "AccountName",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True"
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "Name",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True"
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "ScopeName",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True"
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      }
+                                                                                  ],
+                                                           "CimClassQualifiers":  [
+                                                                                      {
+                                                                                          "Name":  "ClassVersion",
+                                                                                          "Value":  "7",
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "EnableOverride, ToSubclass"
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "Description",
+                                                                                          "Value":  "8",
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "EnableOverride, ToSubclass"
+                                                                                      }
+                                                                                  ],
+                                                           "CimClassMethods":  [
+
+                                                                               ],
+                                                           "CimSystemProperties":  {
+                                                                                       "Namespace":  "ROOT/Microsoft/Windows/SMB",
+                                                                                       "ServerName":  "AD-SRV",
+                                                                                       "ClassName":  "MSFT_SmbShareAccessControlEntry",
+                                                                                       "Path":  null
+                                                                                   }
+                                                       },
+                                          "CimInstanceProperties":  [
+                                                                        {
+                                                                            "Name":  "AccessControlType",
+                                                                            "Value":  0,
+                                                                            "CimType":  6,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        },
+                                                                        {
+                                                                            "Name":  "AccessRight",
+                                                                            "Value":  0,
+                                                                            "CimType":  6,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        },
+                                                                        {
+                                                                            "Name":  "AccountName",
+                                                                            "Value":  "GMAKMA\\Domain Admins",
+                                                                            "CimType":  14,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        },
+                                                                        {
+                                                                            "Name":  "Name",
+                                                                            "Value":  "AllUsersCom",
+                                                                            "CimType":  14,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        },
+                                                                        {
+                                                                            "Name":  "ScopeName",
+                                                                            "Value":  "*",
+                                                                            "CimType":  14,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        }
+                                                                    ],
+                                          "CimSystemProperties":  {
+                                                                      "Namespace":  "ROOT/Microsoft/Windows/SMB",
+                                                                      "ServerName":  "AD-SRV",
+                                                                      "ClassName":  "MSFT_SmbShareAccessControlEntry",
+                                                                      "Path":  null
+                                                                  },
+                                          "AccessControlType":  0,
+                                          "AccessRight":  0,
+                                          "AccountName":  "GMAKMA\\Domain Admins",
+                                          "Name":  "AllUsersCom",
+                                          "ScopeName":  "*",
+                                          "PSComputerName":  null
+                                      },
+                                      {
+                                          "CimClass":  {
+                                                           "CimSuperClassName":  null,
+                                                           "CimSuperClass":  null,
+                                                           "CimClassProperties":  [
+                                                                                      {
+                                                                                          "Name":  "AccessControlType",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  6,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True",
+                                                                                                             "ValueMap = ...",
+                                                                                                             "Values = ..."
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "AccessRight",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  6,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True",
+                                                                                                             "ValueMap = ...",
+                                                                                                             "Values = ..."
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "AccountName",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True"
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "Name",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True"
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "ScopeName",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True"
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      }
+                                                                                  ],
+                                                           "CimClassQualifiers":  [
+                                                                                      {
+                                                                                          "Name":  "ClassVersion",
+                                                                                          "Value":  "7",
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "EnableOverride, ToSubclass"
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "Description",
+                                                                                          "Value":  "8",
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "EnableOverride, ToSubclass"
+                                                                                      }
+                                                                                  ],
+                                                           "CimClassMethods":  [
+
+                                                                               ],
+                                                           "CimSystemProperties":  {
+                                                                                       "Namespace":  "ROOT/Microsoft/Windows/SMB",
+                                                                                       "ServerName":  "AD-SRV",
+                                                                                       "ClassName":  "MSFT_SmbShareAccessControlEntry",
+                                                                                       "Path":  null
+                                                                                   }
+                                                       },
+                                          "CimInstanceProperties":  [
+                                                                        {
+                                                                            "Name":  "AccessControlType",
+                                                                            "Value":  0,
+                                                                            "CimType":  6,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        },
+                                                                        {
+                                                                            "Name":  "AccessRight",
+                                                                            "Value":  1,
+                                                                            "CimType":  6,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        },
+                                                                        {
+                                                                            "Name":  "AccountName",
+                                                                            "Value":  "GMAKMA\\Domain Users",
+                                                                            "CimType":  14,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        },
+                                                                        {
+                                                                            "Name":  "Name",
+                                                                            "Value":  "AllUsersCom",
+                                                                            "CimType":  14,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        },
+                                                                        {
+                                                                            "Name":  "ScopeName",
+                                                                            "Value":  "*",
+                                                                            "CimType":  14,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        }
+                                                                    ],
+                                          "CimSystemProperties":  {
+                                                                      "Namespace":  "ROOT/Microsoft/Windows/SMB",
+                                                                      "ServerName":  "AD-SRV",
+                                                                      "ClassName":  "MSFT_SmbShareAccessControlEntry",
+                                                                      "Path":  null
+                                                                  },
+                                          "AccessControlType":  0,
+                                          "AccessRight":  1,
+                                          "AccountName":  "GMAKMA\\Domain Users",
+                                          "Name":  "AllUsersCom",
+                                          "ScopeName":  "*",
+                                          "PSComputerName":  null
+                                      }
+                                  ]
+                   },
+                   {
+                       "Name":  "uManager1$",
+                       "Path":  "C:\\UsersHome\\uManager1",
+                       "Access":  [
+                                      {
+                                          "CimClass":  {
+                                                           "CimSuperClassName":  null,
+                                                           "CimSuperClass":  null,
+                                                           "CimClassProperties":  [
+                                                                                      {
+                                                                                          "Name":  "AccessControlType",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  6,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True",
+                                                                                                             "ValueMap = ...",
+                                                                                                             "Values = ..."
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "AccessRight",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  6,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True",
+                                                                                                             "ValueMap = ...",
+                                                                                                             "Values = ..."
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "AccountName",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True"
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "Name",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True"
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "ScopeName",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True"
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      }
+                                                                                  ],
+                                                           "CimClassQualifiers":  [
+                                                                                      {
+                                                                                          "Name":  "ClassVersion",
+                                                                                          "Value":  "7",
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "EnableOverride, ToSubclass"
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "Description",
+                                                                                          "Value":  "8",
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "EnableOverride, ToSubclass"
+                                                                                      }
+                                                                                  ],
+                                                           "CimClassMethods":  [
+
+                                                                               ],
+                                                           "CimSystemProperties":  {
+                                                                                       "Namespace":  "ROOT/Microsoft/Windows/SMB",
+                                                                                       "ServerName":  "AD-SRV",
+                                                                                       "ClassName":  "MSFT_SmbShareAccessControlEntry",
+                                                                                       "Path":  null
+                                                                                   }
+                                                       },
+                                          "CimInstanceProperties":  [
+                                                                        {
+                                                                            "Name":  "AccessControlType",
+                                                                            "Value":  0,
+                                                                            "CimType":  6,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        },
+                                                                        {
+                                                                            "Name":  "AccessRight",
+                                                                            "Value":  0,
+                                                                            "CimType":  6,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        },
+                                                                        {
+                                                                            "Name":  "AccountName",
+                                                                            "Value":  "GMAKMA\\uManager1",
+                                                                            "CimType":  14,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        },
+                                                                        {
+                                                                            "Name":  "Name",
+                                                                            "Value":  "uManager1$",
+                                                                            "CimType":  14,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        },
+                                                                        {
+                                                                            "Name":  "ScopeName",
+                                                                            "Value":  "*",
+                                                                            "CimType":  14,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        }
+                                                                    ],
+                                          "CimSystemProperties":  {
+                                                                      "Namespace":  "ROOT/Microsoft/Windows/SMB",
+                                                                      "ServerName":  "AD-SRV",
+                                                                      "ClassName":  "MSFT_SmbShareAccessControlEntry",
+                                                                      "Path":  null
+                                                                  },
+                                          "AccessControlType":  0,
+                                          "AccessRight":  0,
+                                          "AccountName":  "GMAKMA\\uManager1",
+                                          "Name":  "uManager1$",
+                                          "ScopeName":  "*",
+                                          "PSComputerName":  null
+                                      },
+                                      {
+                                          "CimClass":  {
+                                                           "CimSuperClassName":  null,
+                                                           "CimSuperClass":  null,
+                                                           "CimClassProperties":  [
+                                                                                      {
+                                                                                          "Name":  "AccessControlType",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  6,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True",
+                                                                                                             "ValueMap = ...",
+                                                                                                             "Values = ..."
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "AccessRight",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  6,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True",
+                                                                                                             "ValueMap = ...",
+                                                                                                             "Values = ..."
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "AccountName",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True"
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "Name",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True"
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "ScopeName",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True"
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      }
+                                                                                  ],
+                                                           "CimClassQualifiers":  [
+                                                                                      {
+                                                                                          "Name":  "ClassVersion",
+                                                                                          "Value":  "7",
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "EnableOverride, ToSubclass"
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "Description",
+                                                                                          "Value":  "8",
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "EnableOverride, ToSubclass"
+                                                                                      }
+                                                                                  ],
+                                                           "CimClassMethods":  [
+
+                                                                               ],
+                                                           "CimSystemProperties":  {
+                                                                                       "Namespace":  "ROOT/Microsoft/Windows/SMB",
+                                                                                       "ServerName":  "AD-SRV",
+                                                                                       "ClassName":  "MSFT_SmbShareAccessControlEntry",
+                                                                                       "Path":  null
+                                                                                   }
+                                                       },
+                                          "CimInstanceProperties":  [
+                                                                        {
+                                                                            "Name":  "AccessControlType",
+                                                                            "Value":  0,
+                                                                            "CimType":  6,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        },
+                                                                        {
+                                                                            "Name":  "AccessRight",
+                                                                            "Value":  0,
+                                                                            "CimType":  6,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        },
+                                                                        {
+                                                                            "Name":  "AccountName",
+                                                                            "Value":  "GMAKMA\\Domain Admins",
+                                                                            "CimType":  14,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        },
+                                                                        {
+                                                                            "Name":  "Name",
+                                                                            "Value":  "uManager1$",
+                                                                            "CimType":  14,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        },
+                                                                        {
+                                                                            "Name":  "ScopeName",
+                                                                            "Value":  "*",
+                                                                            "CimType":  14,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        }
+                                                                    ],
+                                          "CimSystemProperties":  {
+                                                                      "Namespace":  "ROOT/Microsoft/Windows/SMB",
+                                                                      "ServerName":  "AD-SRV",
+                                                                      "ClassName":  "MSFT_SmbShareAccessControlEntry",
+                                                                      "Path":  null
+                                                                  },
+                                          "AccessControlType":  0,
+                                          "AccessRight":  0,
+                                          "AccountName":  "GMAKMA\\Domain Admins",
+                                          "Name":  "uManager1$",
+                                          "ScopeName":  "*",
+                                          "PSComputerName":  null
+                                      }
+                                  ]
+                   },
+                   {
+                       "Name":  "uSeller1$",
+                       "Path":  "C:\\UsersHome\\uSeller1",
+                       "Access":  [
+                                      {
+                                          "CimClass":  {
+                                                           "CimSuperClassName":  null,
+                                                           "CimSuperClass":  null,
+                                                           "CimClassProperties":  [
+                                                                                      {
+                                                                                          "Name":  "AccessControlType",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  6,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True",
+                                                                                                             "ValueMap = ...",
+                                                                                                             "Values = ..."
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "AccessRight",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  6,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True",
+                                                                                                             "ValueMap = ...",
+                                                                                                             "Values = ..."
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "AccountName",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True"
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "Name",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True"
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "ScopeName",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True"
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      }
+                                                                                  ],
+                                                           "CimClassQualifiers":  [
+                                                                                      {
+                                                                                          "Name":  "ClassVersion",
+                                                                                          "Value":  "7",
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "EnableOverride, ToSubclass"
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "Description",
+                                                                                          "Value":  "8",
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "EnableOverride, ToSubclass"
+                                                                                      }
+                                                                                  ],
+                                                           "CimClassMethods":  [
+
+                                                                               ],
+                                                           "CimSystemProperties":  {
+                                                                                       "Namespace":  "ROOT/Microsoft/Windows/SMB",
+                                                                                       "ServerName":  "AD-SRV",
+                                                                                       "ClassName":  "MSFT_SmbShareAccessControlEntry",
+                                                                                       "Path":  null
+                                                                                   }
+                                                       },
+                                          "CimInstanceProperties":  [
+                                                                        {
+                                                                            "Name":  "AccessControlType",
+                                                                            "Value":  0,
+                                                                            "CimType":  6,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        },
+                                                                        {
+                                                                            "Name":  "AccessRight",
+                                                                            "Value":  0,
+                                                                            "CimType":  6,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        },
+                                                                        {
+                                                                            "Name":  "AccountName",
+                                                                            "Value":  "GMAKMA\\uSeller1",
+                                                                            "CimType":  14,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        },
+                                                                        {
+                                                                            "Name":  "Name",
+                                                                            "Value":  "uSeller1$",
+                                                                            "CimType":  14,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        },
+                                                                        {
+                                                                            "Name":  "ScopeName",
+                                                                            "Value":  "*",
+                                                                            "CimType":  14,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        }
+                                                                    ],
+                                          "CimSystemProperties":  {
+                                                                      "Namespace":  "ROOT/Microsoft/Windows/SMB",
+                                                                      "ServerName":  "AD-SRV",
+                                                                      "ClassName":  "MSFT_SmbShareAccessControlEntry",
+                                                                      "Path":  null
+                                                                  },
+                                          "AccessControlType":  0,
+                                          "AccessRight":  0,
+                                          "AccountName":  "GMAKMA\\uSeller1",
+                                          "Name":  "uSeller1$",
+                                          "ScopeName":  "*",
+                                          "PSComputerName":  null
+                                      },
+                                      {
+                                          "CimClass":  {
+                                                           "CimSuperClassName":  null,
+                                                           "CimSuperClass":  null,
+                                                           "CimClassProperties":  [
+                                                                                      {
+                                                                                          "Name":  "AccessControlType",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  6,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True",
+                                                                                                             "ValueMap = ...",
+                                                                                                             "Values = ..."
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "AccessRight",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  6,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True",
+                                                                                                             "ValueMap = ...",
+                                                                                                             "Values = ..."
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "AccountName",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True"
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "Name",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True"
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "ScopeName",
+                                                                                          "Value":  null,
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "Property, ReadOnly, NullValue",
+                                                                                          "Qualifiers":  [
+                                                                                                             "read = True"
+                                                                                                         ],
+                                                                                          "ReferenceClassName":  null
+                                                                                      }
+                                                                                  ],
+                                                           "CimClassQualifiers":  [
+                                                                                      {
+                                                                                          "Name":  "ClassVersion",
+                                                                                          "Value":  "7",
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "EnableOverride, ToSubclass"
+                                                                                      },
+                                                                                      {
+                                                                                          "Name":  "Description",
+                                                                                          "Value":  "8",
+                                                                                          "CimType":  14,
+                                                                                          "Flags":  "EnableOverride, ToSubclass"
+                                                                                      }
+                                                                                  ],
+                                                           "CimClassMethods":  [
+
+                                                                               ],
+                                                           "CimSystemProperties":  {
+                                                                                       "Namespace":  "ROOT/Microsoft/Windows/SMB",
+                                                                                       "ServerName":  "AD-SRV",
+                                                                                       "ClassName":  "MSFT_SmbShareAccessControlEntry",
+                                                                                       "Path":  null
+                                                                                   }
+                                                       },
+                                          "CimInstanceProperties":  [
+                                                                        {
+                                                                            "Name":  "AccessControlType",
+                                                                            "Value":  0,
+                                                                            "CimType":  6,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        },
+                                                                        {
+                                                                            "Name":  "AccessRight",
+                                                                            "Value":  0,
+                                                                            "CimType":  6,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        },
+                                                                        {
+                                                                            "Name":  "AccountName",
+                                                                            "Value":  "GMAKMA\\Domain Admins",
+                                                                            "CimType":  14,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        },
+                                                                        {
+                                                                            "Name":  "Name",
+                                                                            "Value":  "uSeller1$",
+                                                                            "CimType":  14,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        },
+                                                                        {
+                                                                            "Name":  "ScopeName",
+                                                                            "Value":  "*",
+                                                                            "CimType":  14,
+                                                                            "Flags":  "Property, ReadOnly, NotModified",
+                                                                            "IsValueModified":  false
+                                                                        }
+                                                                    ],
+                                          "CimSystemProperties":  {
+                                                                      "Namespace":  "ROOT/Microsoft/Windows/SMB",
+                                                                      "ServerName":  "AD-SRV",
+                                                                      "ClassName":  "MSFT_SmbShareAccessControlEntry",
+                                                                      "Path":  null
+                                                                  },
+                                          "AccessControlType":  0,
+                                          "AccessRight":  0,
+                                          "AccountName":  "GMAKMA\\Domain Admins",
+                                          "Name":  "uSeller1$",
+                                          "ScopeName":  "*",
+                                          "PSComputerName":  null
+                                      }
+                                  ]
+                   }
+               ],
+    "ACLs":  [
+                 {
+                     "Path":  "C:\\AllUsers",
+                     "Owner":  "BUILTIN\\Administrators",
+                     "Protected":  true,
+                     "Access":  [
+                                    {
+                                        "IdentityReference":  {
+                                                                  "Value":  "NT AUTHORITY\\SYSTEM"
+                                                              },
+                                        "FileSystemRights":  2032127,
+                                        "InheritanceFlags":  3,
+                                        "PropagationFlags":  0,
+                                        "AccessControlType":  0
+                                    },
+                                    {
+                                        "IdentityReference":  {
+                                                                  "Value":  "BUILTIN\\Administrators"
+                                                              },
+                                        "FileSystemRights":  2032127,
+                                        "InheritanceFlags":  3,
+                                        "PropagationFlags":  0,
+                                        "AccessControlType":  0
+                                    },
+                                    {
+                                        "IdentityReference":  {
+                                                                  "Value":  "GMAKMA\\Domain Users"
+                                                              },
+                                        "FileSystemRights":  1179817,
+                                        "InheritanceFlags":  0,
+                                        "PropagationFlags":  0,
+                                        "AccessControlType":  0
+                                    }
+                                ]
+                 },
+                 {
+                     "Path":  "C:\\AllUsers\\Sellers",
+                     "Owner":  "BUILTIN\\Administrators",
+                     "Protected":  true,
+                     "Access":  [
+                                    {
+                                        "IdentityReference":  {
+                                                                  "Value":  "NT AUTHORITY\\SYSTEM"
+                                                              },
+                                        "FileSystemRights":  2032127,
+                                        "InheritanceFlags":  3,
+                                        "PropagationFlags":  0,
+                                        "AccessControlType":  0
+                                    },
+                                    {
+                                        "IdentityReference":  {
+                                                                  "Value":  "BUILTIN\\Administrators"
+                                                              },
+                                        "FileSystemRights":  2032127,
+                                        "InheritanceFlags":  3,
+                                        "PropagationFlags":  0,
+                                        "AccessControlType":  0
+                                    },
+                                    {
+                                        "IdentityReference":  {
+                                                                  "Value":  "GMAKMA\\gSellers"
+                                                              },
+                                        "FileSystemRights":  1180159,
+                                        "InheritanceFlags":  0,
+                                        "PropagationFlags":  0,
+                                        "AccessControlType":  0
+                                    },
+                                    {
+                                        "IdentityReference":  {
+                                                                  "Value":  "GMAKMA\\gSellers"
+                                                              },
+                                        "FileSystemRights":  1245631,
+                                        "InheritanceFlags":  3,
+                                        "PropagationFlags":  2,
+                                        "AccessControlType":  0
+                                    }
+                                ]
+                 },
+                 {
+                     "Path":  "C:\\AllUsers\\Managers",
+                     "Owner":  "BUILTIN\\Administrators",
+                     "Protected":  true,
+                     "Access":  [
+                                    {
+                                        "IdentityReference":  {
+                                                                  "Value":  "NT AUTHORITY\\SYSTEM"
+                                                              },
+                                        "FileSystemRights":  2032127,
+                                        "InheritanceFlags":  3,
+                                        "PropagationFlags":  0,
+                                        "AccessControlType":  0
+                                    },
+                                    {
+                                        "IdentityReference":  {
+                                                                  "Value":  "BUILTIN\\Administrators"
+                                                              },
+                                        "FileSystemRights":  2032127,
+                                        "InheritanceFlags":  3,
+                                        "PropagationFlags":  0,
+                                        "AccessControlType":  0
+                                    },
+                                    {
+                                        "IdentityReference":  {
+                                                                  "Value":  "GMAKMA\\gManagers"
+                                                              },
+                                        "FileSystemRights":  1180159,
+                                        "InheritanceFlags":  0,
+                                        "PropagationFlags":  0,
+                                        "AccessControlType":  0
+                                    },
+                                    {
+                                        "IdentityReference":  {
+                                                                  "Value":  "GMAKMA\\gManagers"
+                                                              },
+                                        "FileSystemRights":  1245631,
+                                        "InheritanceFlags":  3,
+                                        "PropagationFlags":  2,
+                                        "AccessControlType":  0
+                                    }
+                                ]
+                 },
+                 {
+                     "Path":  "C:\\AllUsers\\BlackHole",
+                     "Owner":  "BUILTIN\\Administrators",
+                     "Protected":  true,
+                     "Access":  [
+                                    {
+                                        "IdentityReference":  {
+                                                                  "Value":  "CREATOR OWNER"
+                                                              },
+                                        "FileSystemRights":  1245631,
+                                        "InheritanceFlags":  3,
+                                        "PropagationFlags":  2,
+                                        "AccessControlType":  0
+                                    },
+                                    {
+                                        "IdentityReference":  {
+                                                                  "Value":  "NT AUTHORITY\\SYSTEM"
+                                                              },
+                                        "FileSystemRights":  2032127,
+                                        "InheritanceFlags":  3,
+                                        "PropagationFlags":  0,
+                                        "AccessControlType":  0
+                                    },
+                                    {
+                                        "IdentityReference":  {
+                                                                  "Value":  "BUILTIN\\Administrators"
+                                                              },
+                                        "FileSystemRights":  2032127,
+                                        "InheritanceFlags":  3,
+                                        "PropagationFlags":  0,
+                                        "AccessControlType":  0
+                                    },
+                                    {
+                                        "IdentityReference":  {
+                                                                  "Value":  "GMAKMA\\gManagers"
+                                                              },
+                                        "FileSystemRights":  1180094,
+                                        "InheritanceFlags":  0,
+                                        "PropagationFlags":  0,
+                                        "AccessControlType":  0
+                                    },
+                                    {
+                                        "IdentityReference":  {
+                                                                  "Value":  "GMAKMA\\gSellers"
+                                                              },
+                                        "FileSystemRights":  1180094,
+                                        "InheritanceFlags":  0,
+                                        "PropagationFlags":  0,
+                                        "AccessControlType":  0
+                                    }
+                                ]
+                 },
+                 {
+                     "Path":  "C:\\AllUsers\\Common",
+                     "Owner":  "BUILTIN\\Administrators",
+                     "Protected":  true,
+                     "Access":  [
+                                    {
+                                        "IdentityReference":  {
+                                                                  "Value":  "CREATOR OWNER"
+                                                              },
+                                        "FileSystemRights":  1245631,
+                                        "InheritanceFlags":  3,
+                                        "PropagationFlags":  2,
+                                        "AccessControlType":  0
+                                    },
+                                    {
+                                        "IdentityReference":  {
+                                                                  "Value":  "NT AUTHORITY\\SYSTEM"
+                                                              },
+                                        "FileSystemRights":  2032127,
+                                        "InheritanceFlags":  3,
+                                        "PropagationFlags":  0,
+                                        "AccessControlType":  0
+                                    },
+                                    {
+                                        "IdentityReference":  {
+                                                                  "Value":  "BUILTIN\\Administrators"
+                                                              },
+                                        "FileSystemRights":  2032127,
+                                        "InheritanceFlags":  3,
+                                        "PropagationFlags":  0,
+                                        "AccessControlType":  0
+                                    },
+                                    {
+                                        "IdentityReference":  {
+                                                                  "Value":  "GMAKMA\\Domain Users"
+                                                              },
+                                        "FileSystemRights":  1180095,
+                                        "InheritanceFlags":  3,
+                                        "PropagationFlags":  0,
+                                        "AccessControlType":  0
+                                    }
+                                ]
+                 },
+                 {
+                     "Path":  "C:\\UsersHome\\uSeller1",
+                     "Owner":  "BUILTIN\\Administrators",
+                     "Protected":  true,
+                     "Access":  [
+                                    {
+                                        "IdentityReference":  {
+                                                                  "Value":  "NT AUTHORITY\\SYSTEM"
+                                                              },
+                                        "FileSystemRights":  2032127,
+                                        "InheritanceFlags":  3,
+                                        "PropagationFlags":  0,
+                                        "AccessControlType":  0
+                                    },
+                                    {
+                                        "IdentityReference":  {
+                                                                  "Value":  "BUILTIN\\Administrators"
+                                                              },
+                                        "FileSystemRights":  2032127,
+                                        "InheritanceFlags":  3,
+                                        "PropagationFlags":  0,
+                                        "AccessControlType":  0
+                                    },
+                                    {
+                                        "IdentityReference":  {
+                                                                  "Value":  "GMAKMA\\uSeller1"
+                                                              },
+                                        "FileSystemRights":  1245631,
+                                        "InheritanceFlags":  3,
+                                        "PropagationFlags":  0,
+                                        "AccessControlType":  0
+                                    }
+                                ]
+                 },
+                 {
+                     "Path":  "C:\\UsersHome\\uManager1",
+                     "Owner":  "BUILTIN\\Administrators",
+                     "Protected":  true,
+                     "Access":  [
+                                    {
+                                        "IdentityReference":  {
+                                                                  "Value":  "NT AUTHORITY\\SYSTEM"
+                                                              },
+                                        "FileSystemRights":  2032127,
+                                        "InheritanceFlags":  3,
+                                        "PropagationFlags":  0,
+                                        "AccessControlType":  0
+                                    },
+                                    {
+                                        "IdentityReference":  {
+                                                                  "Value":  "BUILTIN\\Administrators"
+                                                              },
+                                        "FileSystemRights":  2032127,
+                                        "InheritanceFlags":  3,
+                                        "PropagationFlags":  0,
+                                        "AccessControlType":  0
+                                    },
+                                    {
+                                        "IdentityReference":  {
+                                                                  "Value":  "GMAKMA\\uManager1"
+                                                              },
+                                        "FileSystemRights":  1245631,
+                                        "InheritanceFlags":  3,
+                                        "PropagationFlags":  0,
+                                        "AccessControlType":  0
+                                    }
+                                ]
+                 }
+             ]
+}

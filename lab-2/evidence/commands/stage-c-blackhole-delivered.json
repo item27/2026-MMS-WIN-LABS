@@ -1,0 +1,14 @@
+[
+    {
+        "Name":  "manager-drop.txt",
+        "Length":  37,
+        "Owner":  "GMAKMA\\uManager1",
+        "Content":  "Drag and drop from GMAKMA\\uManager1\r\n"
+    },
+    {
+        "Name":  "seller-drop.txt",
+        "Length":  36,
+        "Owner":  "GMAKMA\\uSeller1",
+        "Content":  "Drag and drop from GMAKMA\\uSeller1\r\n"
+    }
+]

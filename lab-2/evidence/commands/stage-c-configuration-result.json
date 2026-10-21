@@ -1,0 +1,6 @@
+{
+  "exited": 1,
+  "out-data": "[\r\n    {\r\n        \"Name\":  \"AllUsersCom\",\r\n        \"Path\":  \"C:\\\\AllUsers\",\r\n        \"CachingMode\":  0\r\n    },\r\n    {\r\n        \"Name\":  \"uManager1$\",\r\n        \"Path\":  \"C:\\\\UsersHome\\\\uManager1\",\r\n        \"CachingMode\":  0\r\n    },\r\n    {\r\n        \"Name\":  \"uSeller1$\",\r\n        \"Path\":  \"C:\\\\UsersHome\\\\uSeller1\",\r\n        \"CachingMode\":  0\r\n    }\r\n]\r\n",
+  "out-truncated": 0,
+  "exitcode": 0
+}

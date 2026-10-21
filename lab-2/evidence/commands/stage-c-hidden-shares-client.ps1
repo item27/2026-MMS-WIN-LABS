@@ -1,0 +1,1 @@
+whoami;net view \\ad-srv;Get-PSDrive X|Format-Table Name,DisplayRoot -AutoSize

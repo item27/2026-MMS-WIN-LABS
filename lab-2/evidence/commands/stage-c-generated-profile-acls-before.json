@@ -1,0 +1,48 @@
+[
+    {
+        "Path":  "C:\\UsersHome\\uSeller1\\_profile.V6",
+        "Owner":  "GMAKMA\\uSeller1",
+        "Protected":  true,
+        "Access":  [
+                       {
+                           "IdentityReference":  {
+                                                     "Value":  "NT AUTHORITY\\SYSTEM"
+                                                 },
+                           "FileSystemRights":  2032127,
+                           "InheritanceFlags":  3,
+                           "PropagationFlags":  0
+                       },
+                       {
+                           "IdentityReference":  {
+                                                     "Value":  "GMAKMA\\uSeller1"
+                                                 },
+                           "FileSystemRights":  2032127,
+                           "InheritanceFlags":  3,
+                           "PropagationFlags":  0
+                       }
+                   ]
+    },
+    {
+        "Path":  "C:\\UsersHome\\uManager1\\_profile.V6",
+        "Owner":  "GMAKMA\\uManager1",
+        "Protected":  true,
+        "Access":  [
+                       {
+                           "IdentityReference":  {
+                                                     "Value":  "NT AUTHORITY\\SYSTEM"
+                                                 },
+                           "FileSystemRights":  2032127,
+                           "InheritanceFlags":  3,
+                           "PropagationFlags":  0
+                       },
+                       {
+                           "IdentityReference":  {
+                                                     "Value":  "GMAKMA\\uManager1"
+                                                 },
+                           "FileSystemRights":  2032127,
+                           "InheritanceFlags":  3,
+                           "PropagationFlags":  0
+                       }
+                   ]
+    }
+]

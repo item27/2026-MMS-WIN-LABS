@@ -1,0 +1,155 @@
+[
+    {
+        "User":  "GMAKMA\\uSeller1",
+        "Test":  "AllUsers root list",
+        "Expected":  "Allow",
+        "Succeeded":  true,
+        "Pass":  true,
+        "Exception":  "",
+        "Detail":  ""
+    },
+    {
+        "User":  "GMAKMA\\uSeller1",
+        "Test":  "department create directory",
+        "Expected":  "Allow",
+        "Succeeded":  true,
+        "Pass":  true,
+        "Exception":  "",
+        "Detail":  ""
+    },
+    {
+        "User":  "GMAKMA\\uSeller1",
+        "Test":  "department create file",
+        "Expected":  "Allow",
+        "Succeeded":  true,
+        "Pass":  true,
+        "Exception":  "",
+        "Detail":  ""
+    },
+    {
+        "User":  "GMAKMA\\uSeller1",
+        "Test":  "department modify/read file",
+        "Expected":  "Allow",
+        "Succeeded":  true,
+        "Pass":  true,
+        "Exception":  "",
+        "Detail":  ""
+    },
+    {
+        "User":  "GMAKMA\\uSeller1",
+        "Test":  "department delete child file",
+        "Expected":  "Allow",
+        "Succeeded":  true,
+        "Pass":  true,
+        "Exception":  "",
+        "Detail":  ""
+    },
+    {
+        "User":  "GMAKMA\\uSeller1",
+        "Test":  "department delete child directory",
+        "Expected":  "Allow",
+        "Succeeded":  true,
+        "Pass":  true,
+        "Exception":  "",
+        "Detail":  ""
+    },
+    {
+        "User":  "GMAKMA\\uSeller1",
+        "Test":  "department delete root",
+        "Expected":  "AccessDenied",
+        "Succeeded":  false,
+        "Pass":  true,
+        "Exception":  "System.Management.Automation.MethodInvocationException",
+        "Detail":  "Exception calling \"Delete\" with \"1\" argument(s): \"Access to the path \u0027\\\\ad-srv\\AllUsersCom\\Sellers\u0027 is denied.\""
+    },
+    {
+        "User":  "GMAKMA\\uSeller1",
+        "Test":  "department change ACL",
+        "Expected":  "AccessDenied",
+        "Succeeded":  false,
+        "Pass":  true,
+        "Exception":  "System.UnauthorizedAccessException",
+        "Detail":  "Attempted to perform an unauthorized operation."
+    },
+    {
+        "User":  "GMAKMA\\uSeller1",
+        "Test":  "other department list",
+        "Expected":  "AccessDenied",
+        "Succeeded":  false,
+        "Pass":  true,
+        "Exception":  "System.UnauthorizedAccessException",
+        "Detail":  "Access to the path \u0027\\\\ad-srv\\AllUsersCom\\Managers\u0027 is denied."
+    },
+    {
+        "User":  "GMAKMA\\uSeller1",
+        "Test":  "BlackHole list",
+        "Expected":  "AccessDenied",
+        "Succeeded":  false,
+        "Pass":  true,
+        "Exception":  "System.UnauthorizedAccessException",
+        "Detail":  "Access to the path \u0027\\\\ad-srv\\AllUsersCom\\BlackHole\u0027 is denied."
+    },
+    {
+        "User":  "GMAKMA\\uSeller1",
+        "Test":  "home X mapping",
+        "Expected":  "Allow",
+        "Succeeded":  true,
+        "Pass":  true,
+        "Exception":  "",
+        "Detail":  ""
+    },
+    {
+        "User":  "GMAKMA\\uSeller1",
+        "Test":  "home write/read",
+        "Expected":  "Allow",
+        "Succeeded":  true,
+        "Pass":  true,
+        "Exception":  "",
+        "Detail":  ""
+    },
+    {
+        "User":  "GMAKMA\\uSeller1",
+        "Test":  "other home read",
+        "Expected":  "AccessDenied",
+        "Succeeded":  false,
+        "Pass":  true,
+        "Exception":  "System.UnauthorizedAccessException",
+        "Detail":  "Access is denied"
+    },
+    {
+        "User":  "GMAKMA\\uSeller1",
+        "Test":  "Common create own",
+        "Expected":  "Allow",
+        "Succeeded":  true,
+        "Pass":  true,
+        "Exception":  "",
+        "Detail":  ""
+    },
+    {
+        "User":  "GMAKMA\\uSeller1",
+        "Test":  "Common modify own",
+        "Expected":  "Allow",
+        "Succeeded":  true,
+        "Pass":  true,
+        "Exception":  "",
+        "Detail":  ""
+    },
+    {
+        "User":  "GMAKMA\\uSeller1",
+        "Test":  "Common delete own",
+        "Expected":  "Allow",
+        "Succeeded":  true,
+        "Pass":  true,
+        "Exception":  "",
+        "Detail":  ""
+    },
+    {
+        "User":  "GMAKMA\\uSeller1",
+        "Test":  "Common recreate own",
+        "Expected":  "Allow",
+        "Succeeded":  true,
+        "Pass":  true,
+        "Exception":  "",
+        "Detail":  ""
+    }
+]

@@ -1,0 +1,12 @@
+[
+    {
+        "Name":  "manager-owned.txt",
+        "Owner":  "GMAKMA\\uManager1",
+        "Content":  "GMAKMA\\uManager1\r\nedited by GMAKMA\\uSeller1\r\n"
+    },
+    {
+        "Name":  "seller-owned.txt",
+        "Owner":  "GMAKMA\\uSeller1",
+        "Content":  "GMAKMA\\uSeller1\r\n"
+    }
+]

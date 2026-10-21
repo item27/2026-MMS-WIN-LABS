@@ -1,0 +1,116 @@
+{
+  "104": {
+    "status": "running",
+    "network": {
+      "net1": "e1000=BC:24:11:DE:ED:1E,bridge=vmbr1_lab,firewall=1"
+    },
+    "lock": null,
+    "snapshots": [
+      {
+        "name": "lab2-server-preconfig",
+        "vmstate": 0,
+        "snaptime": 1791146088,
+        "description": "Rollback before server configuration"
+      },
+      {
+        "description": "",
+        "snaptime": 1792539564,
+        "vmstate": 0,
+        "name": "lab2-a1-server-os-ready",
+        "parent": "pre-attempt1-clean-reinstall"
+      },
+      {
+        "description": "Before nonadmin SMB functional tests; AD and shares configured",
+        "snaptime": 1792549251,
+        "name": "lab2-stage-c-before-acl-tests",
+        "vmstate": 0,
+        "parent": "lab2-a1-server-os-ready"
+      },
+      {
+        "parent": "lab2-server-preconfig",
+        "name": "pre-attempt1-clean-reinstall",
+        "vmstate": 0,
+        "snaptime": 1791481726,
+        "description": "Preserved state before user-authorized clean attempt 1 reinstall"
+      },
+      {
+        "description": "Windows Server base: AD, DNS and DHCP ready",
+        "snaptime": 1791158915,
+        "name": "lab2-server-base",
+        "vmstate": 0,
+        "parent": "lab2-server-preconfig"
+      },
+      {
+        "snaptime": 1792552917,
+        "description": "Stage C verified: both users SMB ACLs and drag/drop, home, seller reboot/relogon roaming profile",
+        "parent": "lab2-stage-c-before-acl-tests",
+        "vmstate": 0,
+        "name": "lab2-stage-c-verified"
+      },
+      {
+        "running": 1,
+        "description": "You are here!",
+        "parent": "lab2-stage-c-verified",
+        "digest": "2f0e4d220de7eb3ef801c30fa511f67f49e2700a",
+        "name": "current"
+      }
+    ]
+  },
+  "105": {
+    "status": "running",
+    "network": {
+      "net0": "e1000=BC:24:11:53:4F:29,bridge=vmbr1_lab,firewall=1"
+    },
+    "lock": null,
+    "snapshots": [
+      {
+        "description": "Stage C verified: both users SMB ACLs and drag/drop, home, seller reboot/relogon roaming profile",
+        "snaptime": 1792552917,
+        "name": "lab2-stage-c-verified",
+        "vmstate": 0,
+        "parent": "lab2-stage-c-before-acl-tests"
+      },
+      {
+        "parent": "lab2-client-preinstall",
+        "vmstate": 0,
+        "name": "lab2-client-base",
+        "snaptime": 1791158916,
+        "description": "Windows 10 Pro installed and named ad-client"
+      },
+      {
+        "snaptime": 1792539566,
+        "description": "",
+        "parent": "pre-attempt1-clean-reinstall",
+        "vmstate": 0,
+        "name": "lab2-a1-client-os-ready"
+      },
+      {
+        "vmstate": 0,
+        "name": "lab2-stage-c-before-acl-tests",
+        "parent": "lab2-a1-client-os-ready",
+        "description": "Before nonadmin SMB functional tests; AD and shares configured",
+        "snaptime": 1792549251
+      },
+      {
+        "description": "Rollback before Windows 10 installation",
+        "snaptime": 1791146089,
+        "name": "lab2-client-preinstall",
+        "vmstate": 0
+      },
+      {
+        "description": "Preserved state before user-authorized clean attempt 1 reinstall",
+        "snaptime": 1791481728,
+        "vmstate": 0,
+        "name": "pre-attempt1-clean-reinstall",
+        "parent": "lab2-client-base"
+      },
+      {
+        "description": "You are here!",
+        "running": 1,
+        "parent": "lab2-stage-c-verified",
+        "digest": "243a992e01034ea663c7edf226f450b3b11a157a",
+        "name": "current"
+      }
+    ]
+  }
+}

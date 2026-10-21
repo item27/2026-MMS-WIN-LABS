@@ -463,3 +463,383 @@ hostname
 ![Рисунок 76 – объект AD-SRV в подразделении Domain Controllers](screenshots/240-aduc-domain-controller-object.png)
 
 По результатам проверки сервер `ad-srv` работает как контроллер домена `GMAKMA.local`, а `ad-client` включён в этот домен как рабочая станция. Для клиента подтверждены получение адреса из заданного пула DHCP, DNS и шлюза `10.0.0.1`, работоспособный защищённый канал и интерактивный вход под администратором домена.
+
+## 3. Управление объектами AD, NTFS и SMB
+
+### 3.1. Подразделения и размещение компьютера
+
+На сервере `ad-srv` открыта оснастка `dsa.msc`. В домене `GMAKMA.local` через **New -> Organizational Unit** созданы подразделения `ouSellers`, `ouManagers`, `ouComputers` и `unit-for-delete`. В поле **Name** каждого диалога указано соответствующее имя.
+
+![Рисунок 77 – создание подразделения ouSellers](screenshots/254-create-ou-name.png)
+
+![Рисунок 78 – создание подразделения ouManagers](screenshots/257-create-ou-managers.png)
+
+![Рисунок 79 – создание подразделения ouComputers](screenshots/258-create-ouComputers.png)
+
+![Рисунок 80 – создание подразделения unit-for-delete](screenshots/259-create-unit-for-delete.png)
+
+Объект рабочей станции перенесён из стандартного контейнера `Computers` в `ouComputers`:
+
+```powershell
+Get-ADComputer ad-client |
+    Move-ADObject -TargetPath 'OU=ouComputers,DC=GMAKMA,DC=local'
+```
+
+После обновления представления оснастки объект `AD-CLIENT` отображается в `ouComputers`.
+
+![Рисунок 81 – рабочая станция AD-CLIENT в ouComputers](screenshots/338-client-in-ouComputers-refreshed.png)
+
+Контроль выполнен командами `Get-ADOrganizationalUnit -Filter *` и `Get-ADComputer -Filter *`. В [инвентаризации](evidence/commands/stage-c-state.json) сохранены четыре OU и итоговые DN компьютеров:
+
+```text
+CN=AD-CLIENT,OU=ouComputers,DC=GMAKMA,DC=local
+CN=AD-SRV,OU=Domain Controllers,DC=GMAKMA,DC=local
+```
+
+Контроллер домена оставлен в `Domain Controllers`.
+
+### 3.2. Пользователи и группы отделов
+
+В `ouSellers` через **New -> User** создан пользователь `uSeller1`, в `ouManagers` - `uManager1`. В мастерах заданы полные имена и имена входа; парольные страницы в отчёт не включены.
+
+![Рисунок 82 – имя входа пользователя uSeller1](screenshots/263-seller-user-logon-name.png)
+
+![Рисунок 83 – параметры создания пользователя uSeller1](screenshots/264-create-seller-summary.png)
+
+![Рисунок 84 – имя пользователя uManager1](screenshots/265-create-manager-user-name.png)
+
+![Рисунок 85 – параметры создания пользователя uManager1](screenshots/266-create-manager-summary.png)
+
+Обе учётные записи включены. Для учебных входов отключено требование сменить пароль при первом входе и установлен флаг **Password never expires**. Эти параметры относятся к созданным пользователям; доменная политика паролей на данном этапе не изменялась.
+
+В тех же OU через **New -> Group** созданы `gSellers` и `gManagers`. Для каждой группы выбраны **Group scope: Global** и **Group type: Security**.
+
+![Рисунок 86 – создание глобальной группы безопасности gSellers](screenshots/271-sellers-global-security.png)
+
+![Рисунок 87 – создание глобальной группы безопасности gManagers](screenshots/270-managers-global-security.png)
+
+Пользователи добавлены в соответствующие группы:
+
+```powershell
+Add-ADGroupMember gSellers uSeller1
+Add-ADGroupMember gManagers uManager1
+Get-ADGroupMember gSellers
+Get-ADGroupMember gManagers
+```
+
+Во вкладке **Members** группы `gSellers` находится `uSeller1`, а группы `gManagers` - `uManager1`.
+
+![Рисунок 88 – состав группы gSellers](screenshots/328-sellers-group-members.png)
+
+![Рисунок 89 – состав группы gManagers](screenshots/330-managers-group-members.png)
+
+Членство, тип и область групп дополнительно сохранены в `stage-c-state.json`. Обычные пользователи не добавлялись в административные группы; при функциональной проверке каждая пользовательская сессия вывела `ADMIN: False`.
+
+### 3.3. Общий каталог AllUsers и ресурс AllUsersCom
+
+На диске `C:` сервера создан каталог `AllUsers` с четырьмя дочерними папками:
+
+```text
+C:\AllUsers
+  Sellers
+  Managers
+  BlackHole
+  Common
+```
+
+Каталоги созданы командой `New-Item -ItemType Directory`, затем проверены в Проводнике.
+
+![Рисунок 90 – структура каталога AllUsers на сервере](screenshots/276-allusers-folders.png)
+
+Каталог опубликован под сетевым именем `AllUsersCom`. На уровне SMB группе `GMAKMA\Domain Users` предоставлен доступ **Change**, группе `GMAKMA\Domain Admins` - **Full**. Запрещающие SMB-записи не использовались. Доступ к содержимому отдельных папок ограничен NTFS.
+
+```powershell
+New-SmbShare -Name AllUsersCom -Path C:\AllUsers `
+    -ChangeAccess 'GMAKMA\Domain Users' `
+    -FullAccess 'GMAKMA\Domain Admins' -CachingMode None
+Get-SmbShare -Name AllUsersCom
+Get-SmbShareAccess -Name AllUsersCom
+```
+
+В **Properties -> Sharing -> Advanced Sharing** проверено имя общего ресурса.
+
+![Рисунок 91 – сетевое имя AllUsersCom](screenshots/320-allusers-share-name.png)
+
+В **Permissions** для `Domain Users` отмечены **Change** и **Read**, но не **Full Control**.
+
+![Рисунок 92 – разрешения Domain Users на уровне SMB](screenshots/324-allusers-domain-users-change-read.png)
+
+Для корня `C:\AllUsers` создан защищённый DACL. `SYSTEM` и `Administrators` имеют полный доступ ко всей этой учебной папке. `Domain Users` имеют **Read & execute** только на сам корень (**This folder only**). Поэтому чтение корня не распространяется на защищённые папки отделов и `BlackHole`.
+
+![Рисунок 93 – NTFS-права корня AllUsers и область This folder only](screenshots/286-allusers-advanced-security.png)
+
+Фактические пути ресурсов, SMB-разрешения и NTFS-записи проверены чтением состояния после настройки. Выполненные команды настройки приведены в [stage-c-configuration.ps1](evidence/commands/stage-c-configuration.ps1), а команда инвентаризации - в [stage-c-read-state.ps1](evidence/commands/stage-c-read-state.ps1). Изменения ограничены учебными каталогами, а не диском `C:` целиком.
+
+### 3.4. Разрешения папок Sellers и Managers
+
+Для обеих папок отключено неподходящее наследование. Сохранены наследуемые **Full control** для `SYSTEM` и `Administrators`. Права соответствующей группы отдела разделены на две записи:
+
+| Объект | Субъект | Область | Разрешения |
+|---|---|---|---|
+| `Sellers` | `gSellers` | This folder only | Read & execute, Write, Delete subfolders and files |
+| `Sellers` | `gSellers` | Subfolders and files only | Modify |
+| `Managers` | `gManagers` | This folder only | Read & execute, Write, Delete subfolders and files |
+| `Managers` | `gManagers` | Subfolders and files only | Modify |
+
+В первой записи отсутствуют **Delete**, **Change permissions** и **Take ownership**. Пользователь может удалять вложенные объекты, но не корневую папку отдела и не её DACL. Общая запрещающая запись `Deny Delete` на всё дерево не создавалась.
+
+В **Security -> Advanced** папки `Sellers` видны две записи для `gSellers` с разными областями применения.
+
+![Рисунок 94 – две области действия прав gSellers](screenshots/290-sellers-advanced-security.png)
+
+В расширенном представлении первой записи включено **Delete subfolders and files**, а **Delete**, **Change permissions** и **Take ownership** выключены.
+
+![Рисунок 95 – специальные права gSellers на корень Sellers](screenshots/293-sellers-expanded-permissions.png)
+
+Аналогичная настройка выполнена для `Managers` и `gManagers`.
+
+![Рисунок 96 – две области действия прав gManagers](screenshots/342-managers-advanced-security-verified.png)
+
+![Рисунок 97 – специальные права gManagers на корень Managers](screenshots/343-managers-root-special-permissions.png)
+
+Контроль DACL выполнен для обеих папок:
+
+```powershell
+(Get-Acl C:\AllUsers\Sellers).Access |
+    Format-Table IdentityReference,FileSystemRights,InheritanceFlags,PropagationFlags
+(Get-Acl C:\AllUsers\Managers).Access |
+    Format-Table IdentityReference,FileSystemRights,InheritanceFlags,PropagationFlags
+```
+
+### 3.5. Проверка доступа к отделам под обычными пользователями
+
+До отрицательных проверок сохранены согласованные снимки двух машин `lab2-stage-c-before-acl-tests`. Проверки выполнялись на `ad-client` через UNC-пути `\\ad-srv\AllUsersCom\...`, а не локально на сервере.
+
+На клиенте выполнен интерактивный вход как `uSeller1@GMAKMA.local`. В пользовательской сессии запущены [команды проверки](evidence/commands/stage-c-user-tests.ps1); идентичность определена через `WindowsIdentity.GetCurrent()`, наличие административной роли проверено отдельно. Для продавца использована папка `Sellers`, для менеджера после отдельного входа - `Managers`.
+
+| Операция | uSeller1 в Sellers | uManager1 в Managers |
+|---|---|---|
+| Создать вложенный каталог | Разрешено | Разрешено |
+| Создать файл внутри него | Разрешено | Разрешено |
+| Изменить и прочитать файл | Разрешено | Разрешено |
+| Удалить файл | Разрешено | Разрешено |
+| Удалить созданный вложенный каталог | Разрешено | Разрешено |
+| Удалить пустой корень отдела | Access denied | Access denied |
+| Записать DACL корня через Set-Acl | Access denied | Access denied |
+| Перечислить содержимое другого отдела | Access denied | Access denied |
+
+Перед попыткой удалить корень тестовый файл и вложенный каталог удалены. Поэтому отрицательный результат не подменён ошибкой «каталог не пуст». Для изменения DACL использована попытка `Get-Acl` -> `Set-Acl` того же дескриптора; она требует права записи разрешений и завершилась отказом.
+
+Первая серия продавца завершилась результатом `TOTAL=17 PASS=17 FAIL=0`. Кроме прав отдела она включает проверки `BlackHole`, `Common` и домашнего диска, описанные ниже.
+
+![Рисунок 98 – результаты первой серии проверок uSeller1](screenshots/292-seller-functional-tests-complete.png)
+
+Первая серия менеджера завершилась результатом `TOTAL=20 PASS=20 FAIL=0`. Дополнительные три проверки относятся к чтению, изменению и запрещённому удалению файла продавца в `Common`.
+
+![Рисунок 99 – результаты проверок uManager1](screenshots/309-manager-functional-tests-complete.png)
+
+Каждая операция, ожидаемое разрешение, фактический результат и текст исключения сохранены в [журнале продавца](evidence/commands/stage-c-seller-first.json) и [журнале менеджера](evidence/commands/stage-c-manager-first.json). В обоих случаях отказ удаления корня и отказ `Set-Acl` получены в неадминистративном контексте.
+
+### 3.6. BlackHole: копирование без просмотра содержимого
+
+Для `C:\AllUsers\BlackHole` создан отдельный защищённый DACL. `SYSTEM` и `Administrators` имеют **Full control**. Группы `gSellers` и `gManagers` получают на саму папку **Traverse**, **Write**, чтение атрибутов и разрешений, а также **Synchronize**, но не **List folder / read data**. Общая запись `Domain Users Read` сюда не наследуется.
+
+Для **CREATOR OWNER** задано **Modify** только на дочерние каталоги и файлы. Эта запись позволяет создателю завершить копирование собственного файла и не даёт права перечислять корень `BlackHole`.
+
+![Рисунок 100 – защищённый DACL BlackHole с правами двух групп и CREATOR OWNER](screenshots/306-blackhole-advanced-security.png)
+
+![Рисунок 101 – специальные права записи без List folder / read data](screenshots/308-blackhole-no-list-permissions.png)
+
+Под `uSeller1` на рабочем столе создан файл `DropSource\seller-drop.txt`. В двух окнах Проводника открыты локальная папка-источник и `\\ad-srv\AllUsersCom`. Файл мышью перетащен на значок папки `BlackHole`.
+
+![Рисунок 102 – локальный файл продавца и сетевая папка назначения](screenshots/294-seller-drag-source-target.png)
+
+После копирования попытка открыть `BlackHole` из той же сессии завершилась сообщением **You don't currently have permission to access this folder**. Каталог нельзя просмотреть, хотя запись файла разрешена.
+
+![Рисунок 103 – отказ просмотра BlackHole для uSeller1](screenshots/299-seller-blackhole-list-denied.png)
+
+После отдельного интерактивного входа `uManager1` таким же способом перетащен локальный `manager-drop.txt`.
+
+![Рисунок 104 – локальный файл менеджера и сетевая папка назначения](screenshots/310-manager-drag-source-target.png)
+
+Открытие `BlackHole` под менеджером также завершилось отказом.
+
+![Рисунок 105 – отказ просмотра BlackHole для uManager1](screenshots/312-manager-blackhole-list-denied.png)
+
+На сервере проверено наличие обоих доставленных файлов. Размер `seller-drop.txt` составил 36 байт, `manager-drop.txt` - 37 байт. Владельцами являются соответственно `GMAKMA\uSeller1` и `GMAKMA\uManager1`. Внутри файлов находятся строки с идентичностью отправителя.
+
+![Рисунок 106 – оба файла в BlackHole на файловом сервере](screenshots/340-blackhole-two-files-on-server.png)
+
+Серверная проверка содержимого и владельцев сохранена в [stage-c-blackhole-delivered.json](evidence/commands/stage-c-blackhole-delivered.json). Кроме графического отказа, обе пользовательские серии получили `Access denied` от `Get-ChildItem` по SMB. Таким образом, проверены отдельно запись, фактическая доставка и запрет перечисления для двух пользователей.
+
+### 3.7. Common: изменять общие файлы, удалять только свои
+
+В `C:\AllUsers\Common` настроены следующие записи:
+
+- `SYSTEM` и `Administrators` - **Full control** на папку и потомков;
+- `Domain Users` - **Read & execute, Write** на папку и потомков, без **Delete** и **Delete subfolders and files**;
+- `CREATOR OWNER` - **Modify** только на дочерние объекты.
+
+![Рисунок 107 – DACL Common с отдельной записью CREATOR OWNER](screenshots/314-common-advanced-security.png)
+
+![Рисунок 108 – права Domain Users в Common без двух разрешений удаления](screenshots/316-common-without-delete-permissions.png)
+
+Продавец создал `seller-owned.txt`, менеджер - `manager-owned.txt`. Каждый сначала изменил, удалил и повторно создал собственный файл. Затем проверены операции над файлом другого пользователя:
+
+| Операция через SMB | uSeller1 | uManager1 |
+|---|---|---|
+| Создать собственный файл | Разрешено | Разрешено |
+| Изменить собственный файл | Разрешено | Разрешено |
+| Удалить собственный файл | Разрешено | Разрешено |
+| Прочитать чужой файл | Разрешено | Разрешено |
+| Дописать строку в чужой файл | Разрешено | Разрешено |
+| Удалить чужой файл | Access denied | Access denied |
+
+Менеджер выполнил проверку над `seller-owned.txt` в первой серии. Проверка продавца над `manager-owned.txt` выполнена после повторного входа, когда файл менеджера уже существовал. Вторая серия продавца завершилась результатом `TOTAL=7 PASS=7 FAIL=0`; она также проверила сохранение данных после перезагрузки.
+
+![Рисунок 109 – взаимная проверка Common и данных после повторного входа продавца](screenshots/326-seller-second-functional-tests-complete.png)
+
+Подробности находятся в [stage-c-seller-second.json](evidence/commands/stage-c-seller-second.json) и журнале менеджера. Итоговые владельцы и содержимое файлов сохранены в [stage-c-common-final-owners.json](evidence/commands/stage-c-common-final-owners.json). В `manager-owned.txt` осталась строка `edited by GMAKMA\uSeller1`, но владельцем файла остался `GMAKMA\uManager1`. Оба файла сохранены для повторной проверки.
+
+### 3.8. Домашние каталоги и скрытые ресурсы
+
+На сервере созданы `C:\UsersHome\uSeller1` и `C:\UsersHome\uManager1`. На каждой домашней папке отключено наследование. В DACL оставлены только `SYSTEM`, `Administrators` и соответствующий пользователь. Первые два субъекта имеют **Full control**, пользователь - **Modify** с наследованием на дочерние объекты.
+
+![Рисунок 110 – NTFS-права домашнего каталога uSeller1](screenshots/345-seller-home-ntfs-verified.png)
+
+![Рисунок 111 – NTFS-права домашнего каталога uManager1](screenshots/346-manager-home-ntfs-verified.png)
+
+Папки опубликованы как `uSeller1$` и `uManager1$`. Знак `$` входит в имя каждого ресурса. На уровне SMB доступ **Full** выдан только владельцу домашнего ресурса и `Domain Admins`; ограничения фактических файлов остаются в NTFS. Для ресурсов установлен `CachingMode None`.
+
+```powershell
+Get-SmbShare -Name 'uSeller1$','uManager1$'
+Get-SmbShareAccess -Name 'uSeller1$'
+Get-SmbShareAccess -Name 'uManager1$'
+```
+
+![Рисунок 112 – скрытое сетевое имя uSeller1$](screenshots/360-seller-hidden-share-correct.png)
+
+![Рисунок 113 – SMB-доступ владельца домашнего ресурса uSeller1$](screenshots/361-seller-home-smb-full-correct.png)
+
+![Рисунок 114 – скрытое сетевое имя uManager1$](screenshots/347-manager-hidden-share.png)
+
+![Рисунок 115 – SMB-доступ владельца домашнего ресурса uManager1$](screenshots/354-manager-home-smb-user-full.png)
+
+В свойствах пользователей ADUC открыта вкладка **Profile** и выбрано **Home folder -> Connect X:**. Для подключения использованы UNC-пути:
+
+| Пользователь | HomeDrive | HomeDirectory | ProfilePath |
+|---|---|---|---|
+| `uSeller1` | `X:` | `\\ad-srv\uSeller1$` | `\\ad-srv\uSeller1$\_profile` |
+| `uManager1` | `X:` | `\\ad-srv\uManager1$` | `\\ad-srv\uManager1$\_profile` |
+
+![Рисунок 116 – UNC-пути домашней папки и профиля uSeller1 в ADUC](screenshots/333-seller-profile-home-unc.png)
+
+![Рисунок 117 – UNC-пути домашней папки и профиля uManager1 в ADUC](screenshots/332-manager-profile-home-unc.png)
+
+Для обоих пользователей в реальных клиентских сессиях проверены подключение `X:`, запись и чтение `X:\home-proof.txt`. Попытка перечислить домашний ресурс другого пользователя в обоих направлениях получила **Access denied**.
+
+Дополнительно под продавцом выполнена команда `net view \\ad-srv`. В списке отображаются `AllUsersCom`, `NETLOGON` и `SYSVOL`, но отсутствуют домашние ресурсы с `$`. Одновременно `Get-PSDrive X` показывает подключение `\\ad-srv\uSeller1$`.
+
+![Рисунок 118 – скрытые домашние ресурсы отсутствуют в общем списке, но X: подключён](screenshots/341-seller-shares-hidden-home-mapped.png)
+
+### 3.9. Перемещаемый профиль
+
+Для профилей выбрана единая схема хранения внутри домашнего ресурса. В AD записаны UNC-пути `\\ad-srv\uSeller1$\_profile` и `\\ad-srv\uManager1$\_profile`. Локальный путь `X:\_profile` в поле **Profile path** не использовался: сетевой профиль должен быть доступен службе профилей до подключения пользовательского диска.
+
+После первого входа и выхода Windows 10 создала на сервере фактические каталоги `_profile.V6`. Внутри появились `Desktop`, `AppData`, другие папки профиля, `NTUSER.DAT` и `ntuser.ini`. Таким образом, фактический путь для изучения данных с клиента - `X:\_profile.V6`; суффикс `.V6` установлен по созданным файлам и свойству `RoamingPath`, а не выбран заранее.
+
+Созданные Windows каталоги профиля имели защищённый DACL с полным доступом пользователя и `SYSTEM`. Для административной проверки добавлена отдельная наследуемая запись `Administrators Full control`, без смены владельца и без разрешений для остальных пользователей:
+
+```powershell
+$acl = Get-Acl 'C:\UsersHome\uSeller1\_profile.V6'
+$acl.AddAccessRule(
+    [Security.AccessControl.FileSystemAccessRule]::new(
+        [Security.Principal.SecurityIdentifier]'S-1-5-32-544',
+        'FullControl','ContainerInherit,ObjectInherit','None','Allow'))
+Set-Acl 'C:\UsersHome\uSeller1\_profile.V6' $acl
+```
+
+Та же операция выполнена для профиля менеджера. Точные команды и контроль неизменности владельца приведены в [stage-c-profile-admin-access.ps1](evidence/commands/stage-c-profile-admin-access.ps1). Начальные и итоговые DACL сохранены отдельно в `stage-c-generated-profile-acls-before.json` и `stage-c-generated-profile-acls-final.json`.
+
+![Рисунок 119 – владелец и административный доступ к реальному каталогу профиля](screenshots/359-roaming-owner-admin-dacl-verified.png)
+
+Серверная проверка показала владельца `GMAKMA\uSeller1`, файл `NTUSER.DAT` размером 786432 байта и файл-маркер рабочего стола. Запись AD `ProfilePath` при этом остаётся без суффикса: `\\ad-srv\uSeller1$\_profile`.
+
+![Рисунок 120 – файлы профиля и маркер рабочего стола на сервере](screenshots/352-server-roaming-profile-files-verified.png)
+
+Отдельный общий ресурс `Profiles$` не создавался: в выбранной схеме оба профиля находятся в уже защищённых домашних ресурсах. Пустой каталог на `X:` не использовался как доказательство перемещаемого профиля.
+
+### 3.10. Перезагрузка, повторный вход и синхронизация профиля
+
+При первом интерактивном входе `uSeller1` на рабочем столе создан `roaming-proof.txt` со строкой `Roaming profile marker: GMAKMA\uSeller1`. Независимый файл `X:\home-proof.txt` создан в домашней папке. Затем сеанс продавца завершён командой `logoff`, после чего на сервере проверено появление `_profile.V6` и файлов профиля.
+
+После входа менеджера и завершения его проверок клиент действительно перезагружен:
+
+```bat
+shutdown.exe /r /t 5
+```
+
+Сведения `Win32_OperatingSystem.LastBootUpTime` сохранены [до перезагрузки](evidence/commands/stage-c-boot-before.json) и [после неё](evidence/commands/stage-c-boot-after.json). Итоговое время загрузки Windows - `2026-10-21 13:46:44`, часовой пояс клиентской ОС - `GMT Standard Time`. Это время гостевой Windows, а не время сервера или хоста виртуализации.
+
+После загрузки снова выполнен вход именно как `uSeller1@GMAKMA.local`. Команда `whoami` вернула `gmakma\useller1`, диск `X:` подключился к прежнему UNC. На рабочем столе сохранился файл-маркер, а домашний файл был прочитан и дополнен строкой `reboot/relogon verified`.
+
+```powershell
+whoami
+Get-PSDrive X
+Get-Content "$env:USERPROFILE\Desktop\roaming-proof.txt"
+Get-Content X:\home-proof.txt
+Get-ChildItem X:\_profile.V6 -Force
+```
+
+![Рисунок 121 – домашний диск, маркеры и реальные данные X:\_profile.V6 после повторного входа](screenshots/335-seller-home-roaming-after-reboot.png)
+
+Для загруженного профиля `Win32_UserProfile` вернул:
+
+```text
+LocalPath          C:\Users\uSeller1
+RoamingConfigured  True
+RoamingPath        \\ad-srv\uSeller1$\_profile.V6
+Status             2
+Loaded             True
+LastDownloadTime   21/10/2026 13:56:10
+LastUploadTime     21/10/2026 13:35:01
+```
+
+Проверен журнал **Microsoft-Windows-User Profile Service/Operational**. Событие `7` содержит фактическое направление синхронизации с сервера на клиент и успешный результат:
+
+```text
+Finished synchronize profile from \\ad-srv\uSeller1$\_profile.V6
+  to C:\Users\uSeller1.
+Result: The operation completed successfully.
+```
+
+![Рисунок 122 – параметры загруженного roaming profile и успешное событие синхронизации](screenshots/337-seller-roaming-service-proof.png)
+
+В том же журнале событие `67` указывает **Logon type: Regular** и **Profile type: Roaming**. В [выборке ошибок Application](evidence/commands/stage-c-profile-error-events.json) за проверенный интервал количество событий с идентификаторами `1500, 1502, 1505, 1508, 1509, 1511, 1515, 1521, 1542` равно нулю. В Operational есть предупреждение `69` о том, что `NTUSER.DAT` не копировался поверх локального файла из-за сравнения временных меток; завершение синхронизации при этом зарегистрировано как успешное. Предупреждение сохранено в журнале и не скрыто.
+
+Контрольные суммы SHA-256 серверного и клиентского `Desktop\roaming-proof.txt` совпали:
+
+```text
+986A33361E5C4E12A5D0C78FF405720DB6F70F3D56A8C12C7B7F192CF1DF23F9
+```
+
+Исходные результаты находятся в `stage-c-server-profile-hashes.json` и `stage-c-client-marker-hash.json`. Данные `Win32_UserProfile` сохранены в [stage-c-client-profiles.json](evidence/commands/stage-c-client-profiles.json); события - в [JSON-журнале](evidence/commands/stage-c-profile-service-events.json) и настоящем экспортированном [EVTX](evidence/commands/stage-c-profile-service.evtx).
+
+Перемещаемый профиль подтверждён не только наличием файла на домашнем диске: на сервер выгружены файлы профиля, после перезагрузки выполнен обычный вход, служба профилей зарегистрировала загрузку из UNC, а файл рабочего стола совпал с серверной копией. Локальный кеш профиля не удалялся.
+
+### 3.11. Итоговая функциональная проверка
+
+Итоговые журналы содержат 44 проверки с ожидаемым результатом:
+
+| Серия | Проверок | Успешно | Неуспешно |
+|---|---:|---:|---:|
+| `uSeller1`, первый вход | 17 | 17 | 0 |
+| `uManager1`, отдельный вход | 20 | 20 | 0 |
+| `uSeller1`, после reboot/relogon | 7 | 7 | 0 |
+| Всего | 44 | 44 | 0 |
+
+Два графических перетаскивания файлов в `BlackHole` проверены отдельно по содержимому и владельцам реально доставленных файлов; они не включены в число 44.
+
+Подтверждены четыре OU, размещение клиента в `ouComputers`, две глобальные группы безопасности и их состав, разделение NTFS-прав отделов, запрет изменения DACL и удаления корней, запись без просмотра `BlackHole`, удаление только собственных файлов в `Common`, два скрытых домашних ресурса, подключение `X:` у обоих пользователей и реальная синхронизация перемещаемого профиля продавца после перезагрузки.
+
+После проверок обе машины оставлены работающими. На клиенте открыт доменный сеанс `GMAKMA\uSeller1`, проверка `Test-ComputerSecureChannel` вернула `True`. Сетевые интерфейсы обеих машин подключены только к `vmbr1_lab`. Сохранены и проверены итоговые снимки `lab2-stage-c-verified` для VM104 и VM105. Состояние машин и список снимков находятся в [stage-c-final-vm-state.json](evidence/commands/stage-c-final-vm-state.json). Эти снимки не заменяют отдельную итоговую резервную копию.

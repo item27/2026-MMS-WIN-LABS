@@ -1,0 +1,18 @@
+[
+    {
+        "Name":  "uSeller1",
+        "SamAccountName":  "uSeller1",
+        "UserPrincipalName":  "uSeller1@GMAKMA.local",
+        "DistinguishedName":  "CN=uSeller1,OU=ouSellers,DC=GMAKMA,DC=local",
+        "Enabled":  true,
+        "PasswordNeverExpires":  true
+    },
+    {
+        "Name":  "uManager1",
+        "SamAccountName":  "uManager1",
+        "UserPrincipalName":  "uManager1@GMAKMA.local",
+        "DistinguishedName":  "CN=uManager1,OU=ouManagers,DC=GMAKMA,DC=local",
+        "Enabled":  true,
+        "PasswordNeverExpires":  true
+    }
+]
