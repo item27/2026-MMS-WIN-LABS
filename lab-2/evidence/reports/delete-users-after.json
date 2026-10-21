@@ -1,0 +1,52 @@
+[
+    {
+        "SamAccountName":  "uDelete1",
+        "GUID":  "045cbcf8-7484-4173-ac4c-14a0644bc905",
+        "SID":  "S-1-5-21-3793483027-3712407111-974862227-1116",
+        "SameGUID":  true,
+        "SameSID":  true,
+        "SameMetadata":  true,
+        "SameMembership":  true,
+        "SameHomeShareAcl":  true
+    },
+    {
+        "SamAccountName":  "uDelete2",
+        "GUID":  "c8d2c947-e4b9-43c6-9670-e928bf8f3e44",
+        "SID":  "S-1-5-21-3793483027-3712407111-974862227-1117",
+        "SameGUID":  true,
+        "SameSID":  true,
+        "SameMetadata":  true,
+        "SameMembership":  true,
+        "SameHomeShareAcl":  true
+    },
+    {
+        "SamAccountName":  "uDelete3",
+        "GUID":  "97c8f891-fb75-4fc1-84d8-c6db5a5b396d",
+        "SID":  "S-1-5-21-3793483027-3712407111-974862227-1118",
+        "SameGUID":  true,
+        "SameSID":  true,
+        "SameMetadata":  true,
+        "SameMembership":  true,
+        "SameHomeShareAcl":  true
+    },
+    {
+        "SamAccountName":  "uDelete4",
+        "GUID":  "8f345402-f0f7-4c6d-a69e-f1e1fe8b324c",
+        "SID":  "S-1-5-21-3793483027-3712407111-974862227-1119",
+        "SameGUID":  true,
+        "SameSID":  true,
+        "SameMetadata":  true,
+        "SameMembership":  true,
+        "SameHomeShareAcl":  true
+    },
+    {
+        "SamAccountName":  "uDelete5",
+        "GUID":  "508a8bc3-e0f5-4709-b611-cff0669668a3",
+        "SID":  "S-1-5-21-3793483027-3712407111-974862227-1120",
+        "SameGUID":  true,
+        "SameSID":  true,
+        "SameMetadata":  true,
+        "SameMembership":  true,
+        "SameHomeShareAcl":  true
+    }
+]

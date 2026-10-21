@@ -1,0 +1,6 @@
+{
+  "out-truncated": 0,
+  "exitcode": 0,
+  "exited": 1,
+  "out-data": " USERNAME              SESSIONNAME        ID  STATE   IDLE TIME  LOGON TIME\r\n useller1              console             2  Active         31  21/10/2026 16:17\r\n umanager1                                 4  Disc           43  21/10/2026 16:39\r\nTrue\r\n\r\nName      Domain       UserName       \r\n----      ------       --------       \r\nAD-CLIENT GMAKMA.local GMAKMA\\uSeller1\r\n\r\n\r\n"
+}

@@ -1,0 +1,6 @@
+{
+  "exitcode": 0,
+  "out-truncated": 0,
+  "out-data": "{\r\n    \"Status\":  \"Completed\",\r\n    \"ReportPath\":  \"C:\\\\Lab2\\\\provision-delete.html\",\r\n    \"CreatedOUs\":  0,\r\n    \"CreatedGroups\":  1,\r\n    \"CreatedUsers\":  5,\r\n    \"CreatedDirectories\":  5,\r\n    \"CreatedFiles\":  1,\r\n    \"CreatedShares\":  5\r\n}\r\n",
+  "exited": 1
+}

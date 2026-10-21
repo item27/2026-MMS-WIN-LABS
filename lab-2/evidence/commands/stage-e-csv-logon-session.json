@@ -1,0 +1,6 @@
+{
+  "out-truncated": 0,
+  "exitcode": 0,
+  "out-data": " USERNAME              SESSIONNAME        ID  STATE   IDLE TIME  LOGON TIME\r\n umanager1                                 4  Disc         1:01  21/10/2026 16:39\r\n ucsvseller1           console             5  Active      none   21/10/2026 17:46\r\n\r\nUserName          \r\n--------          \r\nGMAKMA\\uCsvSeller1\r\n\r\n\r\n",
+  "exited": 1
+}

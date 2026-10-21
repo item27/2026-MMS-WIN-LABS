@@ -1,0 +1,6 @@
+{
+  "exitcode": 0,
+  "out-truncated": 0,
+  "exited": 1,
+  "out-data": " USERNAME              SESSIONNAME        ID  STATE   IDLE TIME  LOGON TIME\r\n umanager1                                 4  Disc         1:25  21/10/2026 16:39\r\n ucsvseller1           console             6  Active      none   21/10/2026 18:09\r\n{\r\n    \"LocalPath\":  \"C:\\\\Users\\\\uCsvSeller1\",\r\n    \"Loaded\":  true,\r\n    \"RoamingConfigured\":  true,\r\n    \"RoamingPath\":  \"\\\\\\\\ad-srv\\\\Profiles$\\\\uCsvSeller1.V6\",\r\n    \"LastDownloadTime\":  \"\\/Date(1792602591337)\\/\",\r\n    \"LastUploadTime\":  \"\\/Date(1792601567786)\\/\",\r\n    \"Status\":  2\r\n}\r\n"
+}

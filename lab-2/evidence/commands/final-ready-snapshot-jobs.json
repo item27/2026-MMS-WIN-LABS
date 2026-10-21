@@ -1,0 +1,36 @@
+[
+  {
+    "vmid": 104,
+    "snapshot": "lab2-a1-server-ready",
+    "upid": "UPID:ymir:000CAFC2:019E5CEF:6AD871DE:qmsnapshot:104:herme@pve:",
+    "taskResult": {
+      "id": "104",
+      "user": "herme@pve",
+      "type": "qmsnapshot",
+      "status": "stopped",
+      "node": "ymir",
+      "pstart": 27155695,
+      "exitstatus": "OK",
+      "starttime": 1792569822,
+      "upid": "UPID:ymir:000CAFC2:019E5CEF:6AD871DE:qmsnapshot:104:herme@pve:",
+      "pid": 831426
+    }
+  },
+  {
+    "vmid": 105,
+    "snapshot": "lab2-a1-client-ready",
+    "upid": "UPID:ymir:000CAFC4:019E5CF6:6AD871DE:qmsnapshot:105:herme@pve:",
+    "taskResult": {
+      "exitstatus": "OK",
+      "pstart": 27155702,
+      "node": "ymir",
+      "pid": 831428,
+      "upid": "UPID:ymir:000CAFC4:019E5CF6:6AD871DE:qmsnapshot:105:herme@pve:",
+      "starttime": 1792569822,
+      "user": "herme@pve",
+      "id": "105",
+      "type": "qmsnapshot",
+      "status": "stopped"
+    }
+  }
+]

@@ -1,0 +1,6 @@
+{
+  "out-data": "{\r\n    \"Status\":  \"Completed\",\r\n    \"ReportPath\":  \"C:\\\\Lab2\\\\provision-first.html\",\r\n    \"CreatedOUs\":  2,\r\n    \"CreatedGroups\":  3,\r\n    \"CreatedUsers\":  2,\r\n    \"CreatedDirectories\":  3,\r\n    \"CreatedFiles\":  1,\r\n    \"CreatedShares\":  3\r\n}\r\n",
+  "exited": 1,
+  "out-truncated": 0,
+  "exitcode": 0
+}

@@ -1,0 +1,6 @@
+{
+  "exited": 1,
+  "out-data": "[\r\n    {\r\n        \"File\":  \"C:\\\\Lab2\\\\Provision-Lab2.ps1\",\r\n        \"Errors\":  [\r\n\r\n                   ]\r\n    },\r\n    {\r\n        \"File\":  \"C:\\\\Lab2\\\\Test-Lab2Provisioning.ps1\",\r\n        \"Errors\":  [\r\n\r\n                   ]\r\n    }\r\n]\r\n",
+  "exitcode": 0,
+  "out-truncated": 0
+}

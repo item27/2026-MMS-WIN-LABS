@@ -1,0 +1,6 @@
+{
+  "exited": 1,
+  "out-data": "PASS: four-entry manifest rejected before restoring any object\r\n{\r\n    \"LiveUsers\":  0\r\n}\r\n",
+  "exitcode": 0,
+  "out-truncated": 0
+}

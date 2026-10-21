@@ -1302,3 +1302,991 @@ Test-Path 'C:\Program Files\7-Zip\7z.exe'
 - [Accounts: Administrator account status](https://learn.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/accounts-administrator-account-status).
 
 Административные экспорты настроек: [Default Domain Policy](evidence/reports/stage-d-Default-Domain-Policy.html), [Lab2-Sellers](evidence/reports/stage-d-Lab2-Sellers.html), [Lab2-Managers](evidence/reports/stage-d-Lab2-Managers.html), [Lab2-Computers](evidence/reports/stage-d-Lab2-Computers.html), [Lab2-Deploy-7Zip](evidence/reports/stage-d-Lab2-Deploy-7Zip.html). Эти экспорты дополняют, но не заменяют клиентские функциональные проверки.
+
+## 5. Автоматизация по CSV
+
+### 5.1. Формат данных и подготовка файлов
+
+Для автоматизации подготовлен скрипт `Provision-Lab2.ps1`. Его входной параметр `CsvPath` задаёт путь к CSV. Скрипт получает имя текущего домена через `Get-ADDomain`, проверяет существование подразделений и групп, создаёт недостающие объекты, назначает атрибуты пользователей и членство в группах. Для каждого пользователя он также создаёт домашнюю папку и скрытый SMB-ресурс, задаёт разрешения NTFS и формирует HTML с перечнем объектов, созданных именно в текущем запуске.
+
+CSV содержит одиннадцать столбцов:
+
+```csv
+FullName,Title,Department,Email,Phone,SamAccountName,Password,OrganizationalUnit,Groups,HomeDirectory,ProfilePath
+```
+
+| Поле | Назначение |
+|---|---|
+| FullName | ФИО, атрибут DisplayName |
+| Title | Должность |
+| Department | Отдел |
+| Email | Адрес электронной почты, атрибут mail |
+| Phone | Телефон, атрибут telephoneNumber |
+| SamAccountName | Доменный логин |
+| Password | Начальный пароль, только в закрытом рабочем CSV |
+| OrganizationalUnit | Имя OU или её DN в текущем домене |
+| Groups | Список групп; несколько имён разделяются `;` внутри ячейки |
+| HomeDirectory | Домашняя папка пользователя; в AD записывается UNC, диск X: |
+| ProfilePath | UNC-путь перемещаемого профиля |
+
+Рабочий CSV размещён на AD-SRV в `C:\Lab2Private\lab2-users.csv`. Наследование разрешений для `C:\Lab2Private` отключено. Полный доступ имеют только SYSTEM и встроенная группа Administrators. Каталог `C:\Lab2`, из которого запускаются публичные скрипты и открываются HTML, не содержит рабочих CSV с паролями.
+
+В репозитории сохранён только [публичный пример](data/lab2-users.example.csv). Во всех его строках Password заменён на `REDACTED_NOT_A_PASSWORD`; этот текст не является действующим паролем. Остальные поля повторяют использованную структуру данных.
+
+Для первой проверки выбраны новые учётные записи, чтобы отдельно подтвердить создание объектов, а не использовать уже существующих uSeller1 и uManager1:
+
+| Параметр | uCsvSeller1 | uCsvManager1 |
+|---|---|---|
+| FullName | CSV Seller One | CSV Manager One |
+| Title | Sales specialist | Sales manager |
+| Department | Sales CSV | Management CSV |
+| Email | uCsvSeller1@GMAKMA.local | uCsvManager1@GMAKMA.local |
+| Phone | +7-495-555-01-10 | +7-495-555-01-11 |
+| OrganizationalUnit | ouCsvSellers | ouCsvManagers |
+| Groups | gCsvSellers;gCsvStaff | gCsvManagers;gCsvStaff |
+| HomeDirectory | `\\ad-srv\uCsvSeller1$` | `\\ad-srv\uCsvManager1$` |
+| ProfilePath | `\\ad-srv\Profiles$\uCsvSeller1` | `\\ad-srv\Profiles$\uCsvManager1` |
+
+Для CSV-пользователей использовано отдельное хранилище профилей `C:\Profiles`, опубликованное как `Profiles$`. Домашние папки находятся в `C:\UsersHome\имя`. В части 3 профиль uSeller1 и uManager1 размещался в `_profile` внутри личного ресурса. Эти ранее настроенные пути не изменялись; схема `Profiles$` относится к новым пользователям автоматизации.
+
+### 5.2. Проверка CSV до создания объектов
+
+До первого рабочего запуска подготовлены две ошибочные копии CSV: в одной отсутствовал обязательный столбец Phone, в другой в последней записи была лишняя ячейка. Обе команды завершились с кодом 1 и сообщением:
+
+```text
+CSV cannot be parsed or has an invalid schema/record width; no changes made.
+```
+
+Число новых OU, групп и пользователей с именами рабочих CSV-объектов до и после ошибочных запусков осталось равным нулю. Затем дополнительно выполнена повторная проверка на отдельных, ещё не существовавших именах с префиксом `uNegCsv/gNegCsv/ouNegCsv` и корнях `C:\NegativeCsvHomes`, `C:\NegativeCsvProfiles`. Проверка охватывала не только AD, но и SMB и файловую систему:
+
+| Объекты отрицательного теста | До | После |
+|---|---:|---:|
+| Объекты AD | 0 | 0 |
+| SMB-ресурсы | 0 | 0 |
+| Каталоги | 0 | 0 |
+
+![Рисунок 169 – CSV без обязательного заголовка и с лишней ячейкой отклонены; новые AD/SMB/каталоги 0](screenshots/421-e-negative-csv.png)
+
+
+
+Скрипт сначала целиком читает файл через `Microsoft.VisualBasic.FileIO.TextFieldParser`, проверяет заголовки и ширину каждой записи. Создание объектов начинается только после проверки всего файла и существующих целевых объектов. Поэтому лишнее поле в последней строке не приводит к частичному выполнению первых строк. В ошибку не попадают строка CSV и значение Password.
+
+Фактические результаты сохранены в [первой отрицательной проверке](evidence/commands/stage-e-negative-header.json), [проверке ширины записи](evidence/commands/stage-e-negative-width.json), [исходном состоянии отдельных тестовых целей](evidence/commands/stage-e-negative-isolated-before.json) и [повторном чтении их состояния](evidence/commands/stage-e-negative-isolated-after.json).
+
+### 5.3. Первый рабочий запуск и HTML-отчёт
+
+На AD-SRV выполнен скрипт с закрытым CSV:
+
+```powershell
+C:\Lab2\Provision-Lab2.ps1 -CsvPath C:\Lab2Private\lab2-users.csv -ReportPath C:\Lab2\provision-first.html
+```
+
+Скрипт завершился со статусом Completed. Он создал `ouCsvSellers` и `ouCsvManagers`, группы `gCsvSellers`, `gCsvManagers`, `gCsvStaff` и двух пользователей. Общая группа gCsvStaff находится в ouCsvSellers; оба пользователя состоят в ней и в своей профильной группе.
+
+| Результат первого запуска | Количество |
+|---|---:|
+| CreatedOUs | 2 |
+| CreatedGroups | 3 |
+| CreatedUsers | 2 |
+| CreatedDirectories | 3 |
+| CreatedShares | 3 |
+| CreatedFiles | 1 |
+
+Три новых каталога – `C:\Profiles` и две личные домашние папки. Корень `C:\UsersHome` уже существовал. Три новых SMB-ресурса – Profiles$ и два личных скрытых ресурса. Единственный новый файл в этой сводке – сам HTML-отчёт.
+
+![Рисунок 170 – HTML первого запуска: созданы 2 OU, 3 группы и 2 пользователя](screenshots/409-e-first-html.png)
+
+
+
+[HTML первого запуска](evidence/reports/provision-first.html) сохранён без последующей перезаписи. Он содержит домен GMAKMA.local, статус, счётчики и реальные имена созданных объектов, но не пароли. [Фактический результат команды](evidence/commands/stage-e-provision-first.json) подтверждает те же значения.
+
+### 5.4. Повторный запуск и проверка GUID
+
+В повышенной консоли Windows PowerShell повторён тот же запуск с тем же CSV; изменено только имя HTML:
+
+```powershell
+C:\Lab2\Provision-Lab2.ps1 -CsvPath C:\Lab2Private\lab2-users.csv -ReportPath C:\Lab2\provision-second.html
+```
+
+Первый результат на экране прочитан из сохранённой сводки первого запуска; второй результат получен при выполнении команды в этой консоли.
+
+![Рисунок 171 – Первый и повторный запуск Provision-Lab2.ps1; повторное создание объектов отсутствует](screenshots/408-e-csv-two-runs.png)
+
+
+
+| Объекты | Первый запуск | Второй запуск |
+|---|---:|---:|
+| OU | 2 | 0 |
+| Группы | 3 | 0 |
+| Пользователи | 2 | 0 |
+| Каталоги | 3 | 0 |
+| SMB-ресурсы | 3 | 0 |
+| Файлы отчётов | 1 | 1 |
+
+Создание `provision-second.html` учитывается как новый файл, но не как новый объект AD. Пароли существующих пользователей скрипт не сбрасывает.
+
+![Рисунок 172 – HTML повторного запуска: 0 новых OU, групп и пользователей](screenshots/410-e-second-html.png)
+
+
+
+Сравнены не только количество объектов, но и ObjectGUID каждого пользователя, группы и OU:
+
+| Объект | ObjectGUID после первого запуска | После второго запуска |
+|---|---|---|
+| gCsvManagers | `da25c77c-72de-4b12-a48e-762771d648e1` | совпал |
+| gCsvSellers | `010b00b1-08a6-4e62-bc90-6a94071a1b7a` | совпал |
+| gCsvStaff | `9d8fef08-38a2-457f-8220-18dc90ed58a1` | совпал |
+| uCsvManager1 | `d5d3adcf-0268-406e-9170-fa4f1284c3cc` | совпал |
+| uCsvSeller1 | `4c88c6b1-2a12-4fb7-be0f-a6cdc6ae5519` | совпал |
+| ouCsvManagers | `1bfd719e-3f83-4548-9407-8bda040c4040` | совпал |
+| ouCsvSellers | `1f98b22c-72c9-4991-bb63-c6f04f47b6f3` | совпал |
+
+Все семь GUID совпали. Это подтверждает, что второй запуск использовал существующие объекты, а не создавал их заново. Сохранены [первый набор GUID](evidence/commands/stage-e-identities-first.json), [второй набор GUID](evidence/commands/stage-e-identities-second.json), [результат повторной команды](evidence/commands/stage-e-provision-second.json) и [второй HTML](evidence/reports/provision-second.html).
+
+### 5.5. Проверка атрибутов, групп, NTFS и SMB
+
+Открытые поля обеих строк CSV проверены по атрибутам AD: DisplayName, Title, Department, mail, telephoneNumber, HomeDirectory и ProfilePath. Все значения совпали. HomeDrive для обоих пользователей равен X:.
+
+Для проверки серверной конфигурации в FixtureUsers переданы именно новые объекты:
+
+```powershell
+$fixtures = @(
+    [pscustomobject]@{
+        SamAccountName = 'uCsvSeller1'
+        OrganizationalUnit = 'ouCsvSellers'
+        Groups = @('gCsvSellers','gCsvStaff')
+    },
+    [pscustomobject]@{
+        SamAccountName = 'uCsvManager1'
+        OrganizationalUnit = 'ouCsvManagers'
+        Groups = @('gCsvManagers','gCsvStaff')
+    }
+)
+C:\Lab2\Test-Lab2Provisioning.ps1 -FixtureUsers $fixtures
+```
+
+Все 14 серверных проверок завершились PASS. Они подтвердили OU и членство, точные UNC-пути, X:, наличие личных ресурсов, их шифрование, отключённое кэширование и AccessBased enumeration. Для домашних папок проверен защищённый DACL с полным доступом только пользователя, SYSTEM и Administrators; для общего корня профилей – права CREATOR OWNER и корневые права Authenticated Users. Проверка также исключила альтернативный неадминистративный ресурс, который открывал бы это хранилище через другой путь.
+
+[Результаты 14 проверок](evidence/commands/stage-e-server-verification.json) и [сравнение полей CSV с AD](evidence/commands/stage-e-csv-metadata.json) сохранены отдельно. Серверная проверка не заменяет вход на клиенте, поэтому далее выполнена проверка работы учётной записи в пользовательском сеансе.
+
+### 5.6. Доменный вход CSV-пользователя и профиль
+
+На AD-CLIENT выбран Other user и выполнен вход как `uCsvSeller1@GMAKMA.local`. После создания первого профиля выполнена проверка от имени этого пользователя, без повышения прав. Команда whoami показала GMAKMA\uCsvSeller1; SID совпал с созданным объектом AD. Диск X: указывал на `\\ad-srv\uCsvSeller1$`.
+
+Файл `X:\stage-e-home-write.txt` записан и прочитан обратно. Доступ к чужой папке `\\ad-srv\uCsvManager1$` завершился отказом. На рабочем столе создан маркер профиля `stage-e-roaming-marker.txt`.
+
+![Рисунок 173 – Вход uCsvSeller1 на AD-CLIENT: X:, запись в домашнюю папку и отказ к чужой папке](screenshots/411-e-csv-client-home.png)
+
+
+
+После выхода из сеанса на сервере появились `C:\Profiles\uCsvSeller1.V6\NTUSER.DAT` и маркер рабочего стола. Затем выполнен повторный вход тем же CSV-пользователем. X: снова подключился; запись и чтение сохранились.
+
+![Рисунок 174 – Повторный доменный вход CSV-пользователя: доступ к X: сохранён, маркер профиля совпал](screenshots/419-e-csv-client-second.png)
+
+
+
+Маркер проверен через серверный UNC `\\ad-srv\Profiles$\uCsvSeller1.V6\Desktop\stage-e-roaming-marker.txt` и в локальном профиле. Обе SHA256-суммы совпали:
+
+```text
+94AD420B53AA4F72E5ACB27B5267E8882A77852B6A1F52CD2846CF4F5C547DA6
+```
+
+![Рисунок 175 – Перемещаемый профиль uCsvSeller1.V6 на сервере; SHA256 маркера на сервере и клиенте совпадают](screenshots/420-e-csv-roaming.png)
+
+
+
+В Win32_UserProfile для CSV-пользователя получены `RoamingConfigured=True`, `Status=2` и путь `\\ad-srv\Profiles$\uCsvSeller1.V6`, а также отметки LastUploadTime и LastDownloadTime. Журнал User Profile Service содержит события 6 и 7 загрузки профиля с сервера; завершение синхронизации имеет результат `The operation completed successfully`. Таким образом, вывод о работе профиля опирается на серверные файлы и события синхронизации, а не только на сохранившийся локальный кэш.
+
+Сохранены [первый пользовательский тест](evidence/commands/stage-e-csv-client-first.json), [повторный тест](evidence/commands/stage-e-csv-client-second.json), [серверное чтение профиля](evidence/commands/stage-e-csv-profile-upload-structured.json) и [состояние профиля с событиями](evidence/commands/stage-e-csv-roaming-events.json). Исходный [пользовательский проверочный скрипт](evidence/commands/stage-e-csv-client-check.ps1) также приложен.
+
+### 5.7. Полный листинг скрипта автоматизации
+
+Ниже приведён полный текст фактически выполненного [Provision-Lab2.ps1](scripts/Provision-Lab2.ps1). Файл на сервере и публикуемый исходный файл имеют одинаковую SHA256-сумму. Он был проверен не только синтаксическим анализатором Windows PowerShell, но и двумя рабочими запусками, отрицательными сценариями и клиентским входом.
+
+```powershell
+#requires -Version 5.1
+#requires -Modules ActiveDirectory, SmbShare
+<#
+.SYNOPSIS
+Provision lab users from a private CSV on the domain-joined file server.
+.DESCRIPTION
+Run elevated in Windows PowerShell 5.1 on Windows Server 2025. No credentials
+are requested or generated. The private CSV is read only at runtime; do not put
+it in the repository or run this script under a transcript that records input.
+
+Required headers: FullName,Title,Department,Email,Phone,SamAccountName,Password,
+OrganizationalUnit,Groups,HomeDirectory,ProfilePath. Groups are separated by ;.
+OU may be a simple top-level name or an OU-only DN in the current domain.
+HomeDirectory must be HomeRoot\SamAccountName or \\THIS-SERVER\SamAccountName$.
+ProfilePath must be \\THIS-SERVER\Profiles$\SamAccountName (or the configured
+ProfileShareName). Short and domain-qualified local server names are accepted.
+Only simple SAM names (1-20 letters/digits/._-, starting with a letter) are
+supported. Reserved local/privileged account names are refused.
+
+The complete CSV and existing target state are checked before any writes.
+Existing users must already be in the requested OU. Passwords on existing users
+are NEVER reset; existing memberships are preserved and missing ones added.
+Only dedicated home/profile roots, per-user home folders, and their shares are
+reconciled. No recursive reset, delete, move, or system-wide ACL change occurs.
+Roaming profile folders are created by Windows at first logon, not precreated.
+Profile root NTFS: SYSTEM/Administrators full; CREATOR OWNER inheritable full;
+Authenticated Users root-only read/traverse and create directories. SMB is full
+for Authenticated Users/Administrators; NTFS isolates user profile descendants.
+The home NTFS DACL contains only the user, SYSTEM and Administrators (full).
+
+The HTML inventory counts only successful creations in THIS invocation, including
+new directories and the report file itself. Existing objects have a zero count.
+A partial HTML inventory is attempted on execution failure. AD/SMB/filesystem
+operations are not transactional; preflight cannot predict password policy,
+quota, replication, or concurrent administrative changes. Never publish the CSV.
+.EXAMPLE
+.\Provision-Lab2.ps1 -CsvPath C:\Private\lab2.csv -ReportPath C:\Private\lab2-results.html
+#>
+[CmdletBinding()]
+param(
+    [Parameter(Mandatory = $true)][string]$CsvPath,
+    [string]$HomeRoot = 'C:\UsersHome',
+    [string]$ProfileRoot = 'C:\Profiles',
+    [string]$ProfileShareName = 'Profiles$',
+    [string]$ReportPath = (Join-Path $PSScriptRoot 'Provision-Lab2-report.html')
+)
+Set-StrictMode -Version 2.0
+$ErrorActionPreference = 'Stop'
+
+function Read-Lab2Csv {
+    param([string]$Path)
+    # Import-Csv silently discards excess cells. Check record widths explicitly.
+    Add-Type -AssemblyName Microsoft.VisualBasic
+    $expectedHeaders = @('FullName','Title','Department','Email','Phone','SamAccountName','Password','OrganizationalUnit','Groups','HomeDirectory','ProfilePath')
+    $parser = New-Object Microsoft.VisualBasic.FileIO.TextFieldParser($Path, [Text.Encoding]::UTF8, $true)
+    $parser.TextFieldType = [Microsoft.VisualBasic.FileIO.FieldType]::Delimited
+    $parser.SetDelimiters(',')
+    $parser.HasFieldsEnclosedInQuotes = $true
+    $parser.TrimWhiteSpace = $false
+    try {
+        if ($parser.EndOfData) { throw 'CSV is empty.' }
+        $columnNames = $parser.ReadFields()
+        if ($columnNames.Count -ne $expectedHeaders.Count -or @(Compare-Object $expectedHeaders $columnNames -CaseSensitive).Count -or @($columnNames | Select-Object -Unique).Count -ne $expectedHeaders.Count) { throw 'CSV header does not match the required schema.' }
+        $records = New-Object 'System.Collections.Generic.List[object]'
+        while (-not $parser.EndOfData) {
+            $cells = $parser.ReadFields()
+            if ($cells.Count -ne $columnNames.Count) { throw 'CSV record has an incorrect number of fields.' }
+            $values = [ordered]@{}
+            for ($i = 0; $i -lt $columnNames.Count; $i++) { $values[$columnNames[$i]] = [string]$cells[$i] }
+            $records.Add([pscustomobject]$values)
+            if ($records.Count -gt 1000) { throw 'CSV exceeds the 1000-user limit.' }
+        }
+        return $records.ToArray()
+    } finally { $parser.Dispose() }
+}
+function Assert-Lab2Sam {
+    param([string]$Value)
+    if ($Value -cnotmatch '^[A-Za-z][A-Za-z0-9._-]{0,19}$' -or
+        $Value -match '[.]$|^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9]|Administrator|Guest|krbtgt|DefaultAccount|WDAGUtilityAccount)$') {
+        throw 'Invalid or reserved SAM name.'
+    }
+}
+function ConvertTo-Lab2OuDn {
+    param([string]$Value, [string]$DomainDn)
+    $namePattern = '[\p{L}\p{N}][\p{L}\p{N} _-]{0,63}'
+    if ($Value -match ('^' + $namePattern + '$')) { return ('OU={0},{1}' -f $Value, $DomainDn) }
+    $suffix = ',' + $DomainDn
+    if (-not $Value.EndsWith($suffix, [StringComparison]::OrdinalIgnoreCase)) { throw 'OU must be in the current domain.' }
+    $prefix = $Value.Substring(0, $Value.Length - $suffix.Length)
+    if ($prefix -notmatch ('^OU=' + $namePattern + '(,OU=' + $namePattern + ')*$')) { throw 'Only simple OU-only distinguished names are supported.' }
+    return $Value
+}
+function Assert-Lab2Root {
+    param([string]$Path)
+    if ($Path -notmatch '^[A-Za-z]:\\[A-Za-z0-9_-]+(?:\\[A-Za-z0-9_-]+)*$' -or
+        $Path -match '(?i)(^|\\)(Windows|Users|ProgramData|Program Files|System Volume Information|Recovery|Boot|PerfLogs|CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])(\\|$)') {
+        throw 'Use a dedicated absolute local directory without system, dot, UNC, or reserved components.'
+    }
+}
+function Assert-Lab2NoReparse {
+    param([string]$Path)
+    $current = $Path
+    while ($current) {
+        if (Test-Path -LiteralPath $current) {
+            $item = Get-Item -LiteralPath $current -Force
+            if (-not $item.PSIsContainer -or ($item.Attributes -band [IO.FileAttributes]::ReparsePoint)) { throw 'Target or ancestor is not a regular directory.' }
+        }
+        $parent = Split-Path -Path $current -Parent
+        if ($parent -eq $current) { break }
+        $current = $parent
+    }
+}
+function Get-Lab2AdUser {
+    param([string]$Identity)
+    try { return Get-ADUser -Identity $Identity -Server $script:dc -Properties HomeDirectory,HomeDrive,ProfilePath,MemberOf,DisplayName,Title,Department,mail,telephoneNumber,Enabled }
+    catch [Microsoft.ActiveDirectory.Management.ADIdentityNotFoundException] { return $null }
+}
+function Get-Lab2AdGroup {
+    param([string]$Identity)
+    try { return Get-ADGroup -Identity $Identity -Server $script:dc }
+    catch [Microsoft.ActiveDirectory.Management.ADIdentityNotFoundException] { return $null }
+}
+function Get-Lab2Ou {
+    param([string]$Dn)
+    try { return Get-ADOrganizationalUnit -Identity $Dn -Server $script:dc }
+    catch [Microsoft.ActiveDirectory.Management.ADIdentityNotFoundException] { return $null }
+}
+function Add-Lab2Directory {
+    param([string]$Path)
+    if (-not (Test-Path -LiteralPath $Path)) {
+        # Account separately for every ancestor actually created by this run.
+        $missing = New-Object 'System.Collections.Generic.List[string]'
+        $p = $Path
+        while (-not (Test-Path -LiteralPath $p)) { $missing.Add($p); $p = Split-Path -Path $p -Parent }
+        for ($i = $missing.Count - 1; $i -ge 0; $i--) {
+            [void](New-Item -ItemType Directory -Path $missing[$i])
+            $script:created.Directories.Add($missing[$i])
+        }
+    }
+}
+function Set-Lab2DirectoryAcl {
+    param([string]$Path, [string]$UserSid, [switch]$Profiles)
+    $acl = New-Object System.Security.AccessControl.DirectorySecurity
+    $acl.SetAccessRuleProtection($true, $false)
+    $admin = New-Object System.Security.Principal.SecurityIdentifier('S-1-5-32-544')
+    $system = New-Object System.Security.Principal.SecurityIdentifier('S-1-5-18')
+    $acl.SetOwner($admin)
+    $inherit = [System.Security.AccessControl.InheritanceFlags]'ContainerInherit,ObjectInherit'
+    foreach ($sid in @($admin, $system)) {
+        $rule = New-Object System.Security.AccessControl.FileSystemAccessRule($sid, 'FullControl', $inherit, 'None', 'Allow')
+        [void]$acl.AddAccessRule($rule)
+    }
+    if ($Profiles) {
+        $creator = New-Object System.Security.Principal.SecurityIdentifier('S-1-3-0')
+        $auth = New-Object System.Security.Principal.SecurityIdentifier('S-1-5-11')
+        [void]$acl.AddAccessRule((New-Object System.Security.AccessControl.FileSystemAccessRule($creator, 'FullControl', $inherit, 'InheritOnly', 'Allow')))
+        $rights = [System.Security.AccessControl.FileSystemRights]'ReadAndExecute,CreateDirectories,Synchronize'
+        [void]$acl.AddAccessRule((New-Object System.Security.AccessControl.FileSystemAccessRule($auth, $rights, 'None', 'None', 'Allow')))
+    } elseif ($UserSid) {
+        $user = New-Object System.Security.Principal.SecurityIdentifier($UserSid)
+        [void]$acl.AddAccessRule((New-Object System.Security.AccessControl.FileSystemAccessRule($user, 'FullControl', $inherit, 'None', 'Allow')))
+    }
+    Set-Acl -LiteralPath $Path -AclObject $acl
+    $readBack = Get-Acl -LiteralPath $Path
+    if (-not $readBack.AreAccessRulesProtected -or $readBack.GetOwner([Security.Principal.SecurityIdentifier]).Value -ne $admin.Value) { throw 'NTFS owner/protection read-back mismatch.' }
+    $expected = @($acl.GetAccessRules($true, $true, [Security.Principal.SecurityIdentifier]) | ForEach-Object {
+        '{0}|{1}|{2}|{3}|{4}|{5}' -f $_.IdentityReference.Value, [int]$_.FileSystemRights, $_.AccessControlType, $_.InheritanceFlags, $_.PropagationFlags, $_.IsInherited
+    } | Sort-Object)
+    $actual = @($readBack.GetAccessRules($true, $true, [Security.Principal.SecurityIdentifier]) | ForEach-Object {
+        '{0}|{1}|{2}|{3}|{4}|{5}' -f $_.IdentityReference.Value, [int]$_.FileSystemRights, $_.AccessControlType, $_.InheritanceFlags, $_.PropagationFlags, $_.IsInherited
+    } | Sort-Object)
+    if (@(Compare-Object $expected $actual).Count) { throw 'NTFS access rules read-back mismatch.' }
+}
+function Resolve-Lab2Sid {
+    param([string]$Account)
+    return (New-Object System.Security.Principal.NTAccount($Account)).Translate([System.Security.Principal.SecurityIdentifier]).Value
+}
+function Set-Lab2Share {
+    param([string]$Name, [string]$Path, [string[]]$FullSids)
+    $accounts = @($FullSids | ForEach-Object {
+        (New-Object System.Security.Principal.SecurityIdentifier($_)).Translate([System.Security.Principal.NTAccount]).Value
+    })
+    $existing = @(Get-SmbShare | Where-Object { $_.Name -eq $Name })
+    if (-not $existing.Count) {
+        [void](New-SmbShare -Name $Name -Path $Path -FullAccess $accounts -CachingMode None -FolderEnumerationMode AccessBased -EncryptData $true)
+        $script:created.Shares.Add(('\\{0}\{1} -> {2}' -f $env:COMPUTERNAME, $Name, $Path))
+    } else {
+        if ($existing.Count -ne 1 -or $existing[0].Path -ine $Path) { throw 'SMB target changed since validation.' }
+        foreach ($ace in @(Get-SmbShareAccess -Name $Name)) {
+            $sid = Resolve-Lab2Sid $ace.AccountName
+            if ($ace.AccessControlType -ne 'Allow' -or $sid -notin $FullSids -or $ace.AccessRight -ne 'Full') {
+                if ($ace.AccessControlType -eq 'Deny') { [void](Unblock-SmbShareAccess -Name $Name -AccountName $ace.AccountName -Force) }
+                else { [void](Revoke-SmbShareAccess -Name $Name -AccountName $ace.AccountName -Force) }
+            }
+        }
+        foreach ($account in $accounts) { [void](Grant-SmbShareAccess -Name $Name -AccountName $account -AccessRight Full -Force) }
+        Set-SmbShare -Name $Name -CachingMode None -FolderEnumerationMode AccessBased -EncryptData $true -Force
+    }
+    # Read back the exact target before reporting a successful reconciliation.
+    $share = Get-SmbShare -Name $Name
+    if ($share.Path -ine $Path -or $share.CachingMode -ne 'None' -or -not $share.EncryptData -or $share.FolderEnumerationMode -ne 'AccessBased') { throw 'SMB read-back mismatch.' }
+    $access = @(Get-SmbShareAccess -Name $Name)
+    if ($access.Count -ne $FullSids.Count) { throw 'SMB ACL read-back mismatch.' }
+    foreach ($ace in $access) {
+        if ($ace.AccessControlType -ne 'Allow' -or $ace.AccessRight -ne 'Full' -or (Resolve-Lab2Sid $ace.AccountName) -notin $FullSids) { throw 'SMB ACL read-back mismatch.' }
+    }
+}
+function Write-Lab2Inventory {
+    param([string]$Status)
+    $newReport = -not (Test-Path -LiteralPath $script:reportFile)
+    if ($newReport) { $script:created.Files.Add($script:reportFile) }
+    $html = New-Object System.Text.StringBuilder
+    [void]$html.Append('<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Lab 2 provisioning inventory</title></head><body>')
+    [void]$html.Append(('<h1>Lab 2 provisioning inventory</h1><p>Status: {0}</p><p>Domain: {1}</p>' -f [Net.WebUtility]::HtmlEncode($Status), [Net.WebUtility]::HtmlEncode($script:domain.DNSRoot)))
+    [void]$html.Append('<p>Only objects newly created in this invocation are listed. Directories and files are counted separately. No passwords are included.</p>')
+    foreach ($kind in @('OUs','Groups','Users','Directories','Files','Shares')) {
+        [void]$html.Append(('<h2>{0}: {1}</h2><ul>' -f $kind, $script:created[$kind].Count))
+        foreach ($name in $script:created[$kind]) { [void]$html.Append(('<li>{0}</li>' -f [Net.WebUtility]::HtmlEncode($name))) }
+        [void]$html.Append('</ul>')
+    }
+    [void]$html.Append('</body></html>')
+    try { [IO.File]::WriteAllText($script:reportFile, $html.ToString(), (New-Object Text.UTF8Encoding($false))) }
+    catch { if ($newReport) { [void]$script:created.Files.Remove($script:reportFile) }; throw }
+}
+
+# Phase 1: read-only validation of the entire input and every existing target.
+$identity = [Security.Principal.WindowsIdentity]::GetCurrent()
+$principal = New-Object Security.Principal.WindowsPrincipal($identity)
+if (-not $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { throw 'Run elevated on the domain-joined file server.' }
+Assert-Lab2Root $HomeRoot
+Assert-Lab2Root $ProfileRoot
+if ($HomeRoot -ieq $ProfileRoot -or $HomeRoot.StartsWith($ProfileRoot + '\', [StringComparison]::OrdinalIgnoreCase) -or $ProfileRoot.StartsWith($HomeRoot + '\', [StringComparison]::OrdinalIgnoreCase)) { throw 'Home and profile roots must be disjoint.' }
+if ($ProfileShareName -notmatch '^[A-Za-z][A-Za-z0-9_-]{0,59}\$$' -or $ProfileShareName -match '^(ADMIN|IPC|NETLOGON|SYSVOL|[A-Za-z])\$$') { throw 'Use a dedicated hidden profile share name.' }
+Assert-Lab2NoReparse $HomeRoot
+Assert-Lab2NoReparse $ProfileRoot
+$script:domain = Get-ADDomain -Current LocalComputer
+$script:dc = $domain.PDCEmulator
+$serverNames = @($env:COMPUTERNAME, ($env:COMPUTERNAME + '.' + $domain.DNSRoot))
+$csvFile = (Resolve-Path -LiteralPath $CsvPath).ProviderPath
+if ([IO.Path]::GetExtension($csvFile) -ine '.csv' -or -not (Test-Path -LiteralPath $csvFile -PathType Leaf)) { throw 'CsvPath must name an existing private CSV file.' }
+$script:reportFile = [IO.Path]::GetFullPath($ReportPath)
+if ($reportFile -ieq $csvFile -or [IO.Path]::GetExtension($reportFile) -ine '.html') { throw 'ReportPath must be a separate .html file.' }
+$reportParent = Split-Path -Path $reportFile -Parent
+if (-not (Test-Path -LiteralPath $reportParent -PathType Container)) { throw 'Report parent must already exist.' }
+Assert-Lab2NoReparse $reportParent
+if (Test-Path -LiteralPath $reportFile) {
+    $ri = Get-Item -LiteralPath $reportFile -Force
+    if ($ri.PSIsContainer -or ($ri.Attributes -band [IO.FileAttributes]::ReparsePoint)) { throw 'Unsafe report target.' }
+}
+$headers = @('FullName','Title','Department','Email','Phone','SamAccountName','Password','OrganizationalUnit','Groups','HomeDirectory','ProfilePath')
+try { $rows = @(Read-Lab2Csv $csvFile) } catch { throw 'CSV cannot be parsed or has an invalid schema/record width; no changes made.' }
+if (-not $rows.Count -or $rows.Count -gt 1000) { throw 'CSV must contain between 1 and 1000 users.' }
+$actualHeaders = @($rows[0].PSObject.Properties.Name)
+if (@(Compare-Object $headers $actualHeaders).Count) { throw 'CSV header names must exactly match the documented schema.' }
+$plan = New-Object 'System.Collections.Generic.List[object]'
+$seenUsers = @{}; $groups = @{}; $ous = @{}
+$rowNumber = 1
+foreach ($row in $rows) {
+    $rowNumber++
+    try {
+        foreach ($header in $headers) {
+            if ($null -eq $row.$header) { throw 'Missing CSV field.' }
+            if ($header -ne 'Password' -and ($row.$header -match '[\x00-\x1f\x7f]' -or $row.$header -ne $row.$header.Trim())) { throw 'Control characters or surrounding whitespace are not supported.' }
+        }
+        Assert-Lab2Sam $row.SamAccountName
+        $sam = $row.SamAccountName
+        if ($seenUsers.ContainsKey($sam)) { throw 'Duplicate user.' }; $seenUsers[$sam] = $true
+        if ([string]::IsNullOrWhiteSpace($row.FullName) -or $row.FullName.Length -gt 256 -or [string]::IsNullOrEmpty($row.Password) -or $row.Password.Length -gt 256) { throw 'Invalid display name or password field.' }
+        if ($row.Title.Length -gt 128 -or $row.Department.Length -gt 64 -or $row.Phone.Length -gt 64 -or $row.Email.Length -gt 256) { throw 'Attribute length exceeded.' }
+        if ($row.Email -and $row.Email -notmatch '^[^\s@]+@[^\s@]+\.[^\s@]+$') { throw 'Invalid email.' }
+        $ouDn = ConvertTo-Lab2OuDn $row.OrganizationalUnit $domain.DistinguishedName
+        $ouPart = $ouDn
+        while ($ouPart -ine $domain.DistinguishedName) { $ous[$ouPart] = $true; $ouPart = $ouPart.Substring($ouPart.IndexOf(',') + 1) }
+        $userGroups = @()
+        if ($row.Groups) {
+            foreach ($g in $row.Groups.Split(';')) { $g = $g.Trim(); Assert-Lab2Sam $g; if ($g -iin $userGroups) { throw 'Duplicate group in a row.' }; $userGroups += $g; if (-not $groups.ContainsKey($g)) { $groups[$g] = $ouDn } }
+        }
+        $homeLocal = Join-Path $HomeRoot $sam
+        $homeUnc = '\\' + $env:COMPUTERNAME + '\' + $sam + '$'
+        $homeAccepted = @($homeLocal) + @($serverNames | ForEach-Object { '\\' + $_ + '\' + $sam + '$' })
+        if ($row.HomeDirectory -in $homeAccepted) { } else { throw 'HomeDirectory must resolve to the dedicated local per-user folder/share.' }
+        if ($row.HomeDirectory.StartsWith('\\')) { $homeUnc = $row.HomeDirectory }
+        $profilesAccepted = @($serverNames | ForEach-Object { '\\' + $_ + '\' + $ProfileShareName + '\' + $sam })
+        if ($row.ProfilePath -notin $profilesAccepted) { throw 'ProfilePath must be the dedicated local profile share and matching user leaf.' }
+        if (($sam + '$') -ieq $ProfileShareName) { throw 'Home/profile share name collision.' }
+        Assert-Lab2NoReparse $homeLocal
+        foreach ($root in @($HomeRoot,$ProfileRoot)) {
+            if ($reportFile.StartsWith($root + '\', [StringComparison]::OrdinalIgnoreCase)) { throw 'Keep reports outside provisioned home/profile storage.' }
+        }
+        $plan.Add([pscustomobject]@{ Sam = $sam; OuDn = $ouDn; Groups = $userGroups; HomeLocal = $homeLocal; HomeUnc = $homeUnc; ProfilePath = $row.ProfilePath; Row = $row; Existing = $null })
+    } catch { throw ('Invalid CSV row {0}; check the documented field/path rules. No changes made.' -f $rowNumber) }
+}
+foreach ($g in $groups.Keys) { if ($seenUsers.ContainsKey($g)) { throw 'A user and a group cannot share the same SAM name.' } }
+$existingOus = @{}; $existingGroups = @{}
+foreach ($dn in $ous.Keys) { $existingOus[$dn] = Get-Lab2Ou $dn }
+foreach ($g in $groups.Keys) {
+    $group = Get-Lab2AdGroup $g
+    if ($group -and ($group.GroupScope -ne 'Global' -or $group.GroupCategory -ne 'Security' -or [int]($group.SID.Value.Split('-')[-1]) -lt 1000)) { throw 'Existing target group is built-in or is not a global security group.' }
+    $existingGroups[$g] = $group
+    # The expression is an AD filter AST with a variable, not interpolated LDAP.
+    if (-not $group -and @(Get-ADObject -Filter { sAMAccountName -eq $g } -Server $dc).Count) { throw 'SAM name collides with a non-group object.' }
+}
+foreach ($entry in $plan) {
+    $sam = $entry.Sam
+    $user = Get-Lab2AdUser $sam
+    if ($user) {
+        $parent = $user.DistinguishedName.Substring($user.DistinguishedName.IndexOf(',') + 1)
+        if ($parent -ine $entry.OuDn) { throw 'Existing user is outside the requested OU; no users are moved.' }
+        if ([int]($user.SID.Value.Split('-')[-1]) -lt 1000 -or -not $user.Enabled) { throw 'Built-in or disabled accounts are not provisioning targets.' }
+    } elseif (@(Get-ADObject -Filter { sAMAccountName -eq $sam } -Server $dc).Count) { throw 'SAM name collides with a non-user object.' }
+    if (-not $user -and $existingOus[$entry.OuDn]) {
+        $targetName = $sam
+        if (@(Get-ADObject -SearchBase $entry.OuDn -SearchScope OneLevel -Filter { Name -eq $targetName } -Server $dc).Count) { throw 'User CN is occupied by another object.' }
+    }
+    $entry.Existing = $user
+}
+foreach ($g in $groups.Keys) {
+    if (-not $existingGroups[$g] -and $existingOus[$groups[$g]]) {
+        $targetName = $g
+        if (@(Get-ADObject -SearchBase $groups[$g] -SearchScope OneLevel -Filter { Name -eq $targetName } -Server $dc).Count) { throw 'Group CN is occupied by another object.' }
+    }
+}
+$allShares = @(Get-SmbShare)
+$shareTargets = @(@{Name = $ProfileShareName; Path = $ProfileRoot})
+foreach ($entry in $plan) { $shareTargets += @{Name = ($entry.Sam + '$'); Path = $entry.HomeLocal} }
+foreach ($target in $shareTargets) {
+    $matching = @($allShares | Where-Object { $_.Name -ieq $target.Name })
+    if ($matching.Count -gt 1 -or ($matching.Count -and $matching[0].Path -ine $target.Path)) { throw 'A target share already points elsewhere or is clustered; no changes made.' }
+    # Do not leave an alternate share that bypasses the intended hidden-share ACL.
+    foreach ($s in $allShares) {
+        $administrative = $s.Special -and $s.Name -match '^(ADMIN|IPC|[A-Za-z])\$$'
+        if (-not $administrative -and $s.Path -and $s.Name -ine $target.Name -and
+            ($target.Path -ieq $s.Path -or $target.Path.StartsWith($s.Path.TrimEnd('\') + '\', [StringComparison]::OrdinalIgnoreCase) -or $s.Path.StartsWith($target.Path.TrimEnd('\') + '\', [StringComparison]::OrdinalIgnoreCase))) { throw 'An existing non-administrative share overlaps target storage through another path.' }
+    }
+}
+
+# Phase 2: only now may mutations begin. Passwords never leave the runtime row.
+$script:created = [ordered]@{}
+foreach ($kind in @('OUs','Groups','Users','Directories','Files','Shares')) { $created[$kind] = New-Object 'System.Collections.Generic.List[string]' }
+$stage = 'initialization'
+try {
+    $stage = 'OU creation'
+    foreach ($dn in @($ous.Keys | Sort-Object { ($_ -split ',').Count })) {
+        if (-not $existingOus[$dn]) {
+            $first = $dn.IndexOf(',')
+            [void](New-ADOrganizationalUnit -Name $dn.Substring(3, $first - 3) -Path $dn.Substring($first + 1) -Server $dc -ProtectedFromAccidentalDeletion $true)
+            $created.OUs.Add($dn)
+            if (-not (Get-Lab2Ou $dn)) { throw 'OU read-back failed.' }
+        }
+    }
+    $stage = 'group creation'
+    foreach ($g in $groups.Keys) {
+        if (-not $existingGroups[$g]) {
+            [void](New-ADGroup -Name $g -SamAccountName $g -GroupScope Global -GroupCategory Security -Path $groups[$g] -Server $dc)
+            $created.Groups.Add($g)
+            $existingGroups[$g] = Get-Lab2AdGroup $g
+            if (-not $existingGroups[$g]) { throw 'Group read-back failed.' }
+        }
+    }
+    $stage = 'storage roots'
+    Add-Lab2Directory $HomeRoot
+    Set-Lab2DirectoryAcl -Path $HomeRoot
+    Add-Lab2Directory $ProfileRoot
+    Set-Lab2DirectoryAcl -Path $ProfileRoot -Profiles
+    Set-Lab2Share -Name $ProfileShareName -Path $ProfileRoot -FullSids @('S-1-5-32-544','S-1-5-11')
+    foreach ($entry in $plan) {
+        $stage = 'user creation and attributes'
+        $sam = $entry.Sam
+        $row = $entry.Row
+        if (-not $entry.Existing) {
+            $securePassword = New-Object Security.SecureString
+            foreach ($character in $row.Password.ToCharArray()) { $securePassword.AppendChar($character) }
+            $securePassword.MakeReadOnly()
+            $character = $null
+            try {
+                [void](New-ADUser -Name $sam -DisplayName $row.FullName -SamAccountName $sam -UserPrincipalName ($sam + '@' + $domain.DNSRoot) -Path $entry.OuDn -AccountPassword $securePassword -Enabled $true -Server $dc)
+            } catch {
+                # AD may create a disabled account before rejecting its password.
+                # Include that real partial creation in the failure inventory.
+                if (Get-Lab2AdUser $sam) { $created.Users.Add($sam) }
+                throw
+            } finally { if ($securePassword) { $securePassword.Dispose() }; $securePassword = $null }
+            $created.Users.Add($sam)
+        }
+        $user = Get-Lab2AdUser $sam
+        if (-not $user) { throw 'User read-back failed.' }
+        $attributes = @{}
+        $clear = @()
+        foreach ($pair in @(@('title','Title'),@('department','Department'),@('mail','Email'),@('telephoneNumber','Phone'))) {
+            if ($row.($pair[1])) { $attributes[$pair[0]] = $row.($pair[1]) } elseif ($user.PSObject.Properties[$pair[0]] -and $user.($pair[0])) { $clear += $pair[0] }
+        }
+        $set = @{Identity = $user.DistinguishedName; DisplayName = $row.FullName; HomeDrive = 'X:'; HomeDirectory = $entry.HomeUnc; ProfilePath = $entry.ProfilePath; Server = $dc}
+        if ($attributes.Count) { $set.Replace = $attributes }
+        if ($clear.Count) { $set.Clear = $clear }
+        Set-ADUser @set
+        $stage = 'group memberships'
+        foreach ($g in $entry.Groups) {
+            $group = $existingGroups[$g]
+            if ($group.DistinguishedName -notin @($user.MemberOf)) { Add-ADGroupMember -Identity $group -Members $user -Server $dc }
+        }
+        $stage = 'individual home storage'
+        Add-Lab2Directory $entry.HomeLocal
+        Set-Lab2DirectoryAcl -Path $entry.HomeLocal -UserSid $user.SID.Value
+        Set-Lab2Share -Name ($sam + '$') -Path $entry.HomeLocal -FullSids @('S-1-5-32-544', $user.SID.Value)
+        $check = Get-Lab2AdUser $sam
+        if (-not $check.Enabled -or $check.HomeDrive -ne 'X:' -or $check.HomeDirectory -ine $entry.HomeUnc -or $check.ProfilePath -ine $entry.ProfilePath -or $check.DisplayName -cne $row.FullName) { throw 'User attributes read-back failed.' }
+        foreach ($pair in @(@('title','Title'),@('department','Department'),@('mail','Email'),@('telephoneNumber','Phone'))) {
+            $actualValue = ''
+            if ($check.PSObject.Properties[$pair[0]]) { $actualValue = [string]$check.($pair[0]) }
+            if ($actualValue -cne [string]$row.($pair[1])) { throw 'CSV attribute read-back failed.' }
+        }
+        foreach ($g in $entry.Groups) { if ($existingGroups[$g].DistinguishedName -notin @($check.MemberOf)) { throw 'Membership read-back failed.' } }
+        $row.Password = $null
+    }
+    $stage = 'HTML inventory'
+    Write-Lab2Inventory 'Completed'
+} catch {
+    # Do not echo exception records or row objects: provider errors may include input.
+    $safeStage = $stage
+    try { Write-Lab2Inventory ('Failed during ' + $safeStage + '; partial creations listed, no rollback performed') } catch { Write-Warning 'Could not write the partial HTML inventory.' }
+    throw ('Provisioning stopped during {0}. Inspect domain/filesystem state and the HTML inventory before retrying. No credentials are included in this error.' -f $safeStage)
+} finally {
+    foreach ($r in $rows) { $r.Password = $null }
+}
+[pscustomobject]@{
+    Status = 'Completed'; ReportPath = $reportFile
+    CreatedOUs = $created.OUs.Count; CreatedGroups = $created.Groups.Count
+    CreatedUsers = $created.Users.Count; CreatedDirectories = $created.Directories.Count
+    CreatedFiles = $created.Files.Count; CreatedShares = $created.Shares.Count
+}
+```
+
+## 6. Корзина AD и восстановление пользователей
+
+### 6.1. Проверка и включение корзины
+
+Перед изменением прочитано состояние Recycle Bin Feature: EnabledScopes был пуст. Для обеих работающих виртуальных машин сохранена согласованная пара снимков `lab2-stage-e-before-recyclebin`. Затем на AD-SRV выполнены команды:
+
+```powershell
+Enable-ADOptionalFeature 'Recycle Bin Feature' -Scope ForestOrConfigurationSet -Target 'GMAKMA.local' -Confirm:$false
+(Get-ADOptionalFeature 'Recycle Bin Feature').EnabledScopes
+```
+
+На сервере появилась область `CN=Partitions,CN=Configuration,DC=GMAKMA,DC=local`. Включение необратимо: предупреждение PowerShell и значение IsDisableable=False показаны на снимке. Повторное включение не выполнялось.
+
+![Рисунок 176 – Recycle Bin Feature включена в лесу GMAKMA.local; IsDisableable=False](screenshots/412-e-recyclebin-enabled.png)
+
+
+
+Сохранены [исходное состояние](evidence/commands/stage-e-recyclebin-before.json), [результат включения](evidence/commands/stage-e-recyclebin-enabled.json) и [итоговое состояние домена](evidence/commands/stage-e-final-domain-state.json). При итоговой проверке EnabledScopes также содержал область NTDS Settings контроллера AD-SRV.
+
+### 6.2. Создание пяти пользователей и сохранение исходных идентификаторов
+
+В отдельном закрытом CSV заданы `uDelete1`–`uDelete5`, OU `unit-for-delete`, группу gDeleteLab2, личные скрытые домашние ресурсы и профили в Profiles$. Для создания использован тот же скрипт из части 5:
+
+```powershell
+C:\Lab2\Provision-Lab2.ps1 -CsvPath C:\Lab2Private\lab2-delete-users.csv -ReportPath C:\Lab2\provision-delete.html
+```
+
+Результат – Completed: создано 5 пользователей, 1 группа, 5 домашних папок и 5 личных SMB-ресурсов. OU уже существовала, поэтому CreatedOUs=0. [HTML этого запуска](evidence/reports/provision-delete.html) и [результат команды](evidence/commands/stage-e-provision-delete.json) сохранены.
+
+Чтобы внутри unit-for-delete находились только пять пользователей, созданная группа gDeleteLab2 перед удалением перенесена в ouCsvSellers. Членство пользователей в группе сохранилось:
+
+```powershell
+$g = Get-ADGroup gDeleteLab2
+Move-ADObject -Identity $g.ObjectGUID -TargetPath 'OU=ouCsvSellers,DC=GMAKMA,DC=local'
+```
+
+![Рисунок 177 – OU unit-for-delete до удаления: uDelete1–uDelete5](screenshots/413-e-aduc-five-before.png)
+
+
+
+Перед удалением проверены точный набор имён и отсутствие других объектов в OU. Сохранён manifest с SamAccountName, ObjectGUID, SID и DistinguishedName, но без паролей. Дополнительно сохранены открытые атрибуты, группы, пути и ACL домашних папок. Полная использованная проверка:
+
+```powershell
+$ErrorActionPreference='Stop'
+Import-Module ActiveDirectory
+$base='OU=unit-for-delete,DC=GMAKMA,DC=local'
+$names=@(1..5|ForEach-Object {'uDelete'+$_})
+$all=@(Get-ADObject -SearchBase $base -SearchScope OneLevel -Filter *)
+$users=@(Get-ADUser -SearchBase $base -SearchScope OneLevel -Filter * -Properties DisplayName,Title,Department,mail,telephoneNumber,HomeDirectory,HomeDrive,ProfilePath,MemberOf,Enabled)
+if($all.Count -ne 5 -or $users.Count -ne 5 -or @(Compare-Object $names @($users.SamAccountName)).Count){throw 'Safety gate: only exactly uDelete1-uDelete5 are allowed'}
+$users|Select SamAccountName,ObjectGUID,SID,DistinguishedName|Export-Clixml C:\Lab2\delete-users-manifest.xml
+$before=foreach($u in ($users|Sort-Object SamAccountName)){
+ $homePath='C:\UsersHome\'+$u.SamAccountName
+ $u|Select SamAccountName,@{N='GUID';E={$_.ObjectGUID.ToString()}},@{N='SID';E={$_.SID.Value}},DistinguishedName,DisplayName,Title,Department,mail,telephoneNumber,HomeDirectory,HomeDrive,ProfilePath,Enabled,@{N='Groups';E={@($_.MemberOf|Sort-Object)}},@{N='HomeExists';E={Test-Path $homePath}},@{N='HomeSDDL';E={(Get-Acl $homePath).Sddl}},@{N='SharePath';E={(Get-SmbShare -Name ($_.SamAccountName+'$')).Path}}
+}
+$before|ConvertTo-Json -Depth 5|Set-Content C:\Lab2\delete-users-before.json
+$users|Sort-Object SamAccountName|Select SamAccountName,ObjectGUID,@{N='SID';E={$_.SID.Value}}|Format-Table -AutoSize
+Write-Host 'PASS safety gate: exactly 5 known users, no unrelated objects'
+```
+
+Проверка завершилась `PASS safety gate: exactly 5 known users, no unrelated objects`. Manifest сохранён как [delete-users-manifest.xml](evidence/reports/delete-users-manifest.xml), расширенное исходное состояние – [delete-users-before.json](evidence/reports/delete-users-before.json).
+
+### 6.3. Удаление через dsquery и dsrm
+
+Создан командный файл [Remove-Lab2DeletedUsers.cmd](scripts/Remove-Lab2DeletedUsers.cmd):
+
+```bat
+@echo off
+dsquery user "OU=unit-for-delete,DC=GMAKMA,DC=local" -limit 0 | dsrm -noprompt
+```
+
+После повторной проверки точного набора пользователей файл выполнен через CMD:
+
+```powershell
+cmd.exe /d /c C:\Lab2\Remove-Lab2DeletedUsers.cmd
+```
+
+В конвейере dsquery выбирает только пользователей указанной OU. Параметр `-limit 0` снимает ограничение количества результатов, но не расширяет SearchBase; dsrm получает только эти DN. OU, группы и пользователи других контейнеров не удалялись.
+
+![Рисунок 178 – Выполнен CMD-конвейер dsquery user | dsrm: удалено пять пользователей, осталось 0](screenshots/414-e-dsquery-dsrm.png)
+
+
+
+Для каждого из uDelete1–uDelete5 получено `dsrm succeeded`, код CMD равен 0. Затем выполнена проверка:
+
+```powershell
+@(Get-ADUser -SearchBase 'OU=unit-for-delete,DC=GMAKMA,DC=local' -Filter *).Count
+```
+
+Результат – 0. Обновлённая оснастка Active Directory Users and Computers показывает пустую OU unit-for-delete; сама OU сохранена.
+
+![Рисунок 179 – OU unit-for-delete после удаления пуста; сама OU сохранена](screenshots/415-e-aduc-empty.png)
+
+
+
+[Фактический вывод CMD и контрольный счётчик](evidence/commands/stage-e-delete-cmd-result.json) приложены к отчёту.
+
+### 6.4. Проверка удалённых объектов и отказ по неправильному manifest
+
+По каждому из пяти ObjectGUID из manifest выполнена команда `Get-ADObject -IncludeDeletedObjects`. Для всех получены `isDeleted=True` и `lastKnownParent=OU=unit-for-delete,DC=GMAKMA,DC=local`. GUID и SID остались исходными.
+
+Для отрицательной проверки использован manifest только с четырьмя записями. Скрипт восстановления завершился с кодом 1 и сообщением `Expected a five-user manifest`. Проверочный сценарий подтвердил, что до и после отказа в OU оставалось 0 пользователей. Восстановление ни одного объекта не началось.
+
+![Рисунок 180 – Пять удалённых GUID имеют isDeleted=True; неправильный manifest отклонён без восстановления](screenshots/416-e-deleted-and-negative.png)
+
+
+
+Сохранены [пять удалённых объектов](evidence/commands/stage-e-deleted-objects.json), [ненулевой результат прямого запуска с четырьмя записями](evidence/commands/stage-e-restore-wrong-count.json) и [контроль отсутствия восстановления](evidence/commands/stage-e-restore-negative-deleted.json).
+
+### 6.5. Восстановление только пяти исходных GUID
+
+Создан и выполнен [Restore-Lab2DeletedUsers.ps1](scripts/Restore-Lab2DeletedUsers.ps1). Сначала скрипт проверяет количество записей и состояние всех указанных объектов. Только после успешной проверки всех пяти он вызывает Restore-ADObject. Запроса на восстановление всех удалённых объектов домена здесь нет.
+
+Полный листинг:
+
+```powershell
+#requires -Modules ActiveDirectory
+[CmdletBinding()]
+param([string]$ManifestPath = 'C:\Lab2\delete-users-manifest.xml')
+$ErrorActionPreference = 'Stop'
+$base = 'OU=unit-for-delete,DC=GMAKMA,DC=local'
+$expected = @(Import-Clixml -LiteralPath $ManifestPath)
+if ($expected.Count -ne 5) { throw 'Expected a five-user manifest' }
+foreach ($entry in $expected) {
+    $object = Get-ADObject -Identity $entry.ObjectGUID -IncludeDeletedObjects -Properties isDeleted,lastKnownParent
+    if (-not $object.isDeleted -or $object.lastKnownParent -ne $base) {
+        throw 'Unexpected object state or original OU; no broad restore is allowed'
+    }
+}
+foreach ($entry in $expected) {
+    Get-ADObject -Identity $entry.ObjectGUID -IncludeDeletedObjects | Restore-ADObject -TargetPath $base
+}
+foreach ($entry in $expected) {
+    $user = Get-ADUser -Identity $entry.ObjectGUID
+    if ($user.SID.Value -ne $entry.SID.Value -or $user.SamAccountName -ne $entry.SamAccountName) {
+        throw 'Restored identity differs from the original manifest'
+    }
+    $user | Select-Object SamAccountName,ObjectGUID,SID,DistinguishedName
+}
+```
+
+Запуск:
+
+```powershell
+C:\Lab2\Restore-Lab2DeletedUsers.ps1 -ManifestPath C:\Lab2\delete-users-manifest.xml
+```
+
+После восстановления пользователи прочитаны по прежним GUID и сравнены с исходным состоянием. Совпали SamAccountName, полный SID и DN, DisplayName, должность, отдел, почта, телефон, Enabled, HomeDrive, HomeDirectory, ProfilePath и членство в группе gDeleteLab2. Сохранились домашние папки, их SDDL и пути SMB-ресурсов.
+
+![Рисунок 181 – Восстановлены те же пять GUID/SID; метаданные, группы и домашние папки совпали](screenshots/417-e-restore-identities.png)
+
+
+
+| Пользователь | ObjectGUID до удаления и после восстановления | RID исходного SID | GUID/SID |
+|---|---|---:|---|
+| uDelete1 | `045cbcf8-7484-4173-ac4c-14a0644bc905` | `1116` | совпали |
+| uDelete2 | `c8d2c947-e4b9-43c6-9670-e928bf8f3e44` | `1117` | совпали |
+| uDelete3 | `97c8f891-fb75-4fc1-84d8-c6db5a5b396d` | `1118` | совпали |
+| uDelete4 | `8f345402-f0f7-4c6d-a69e-f1e1fe8b324c` | `1119` | совпали |
+| uDelete5 | `508a8bc3-e0f5-4709-b611-cff0669668a3` | `1120` | совпали |
+
+Префикс SID всех пяти пользователей: `S-1-5-21-3793483027-3712407111-974862227`. В manifest и JSON сохранены полные SID, а в таблице отдельно указан последний компонент RID.
+
+![Рисунок 182 – После Restore-ADObject в unit-for-delete снова пять исходных пользователей](screenshots/418-e-aduc-five-restored.png)
+
+
+
+В OU снова ровно 5 исходных пользователей. Проверка [StageECompareRestored](evidence/commands/stage-e-compare-restored.ps1) дала True для всех пяти признаков SameGUID, SameSID, SameMetadata, SameMembership и SameHomeShareAcl у каждого пользователя. Сохранены [итоговая таблица](evidence/reports/delete-users-after.json) и [результат сравнения](evidence/commands/stage-e-restore-identity-comparison.json).
+
+### 6.6. Вход восстановленным пользователем и итоговая проверка
+
+На AD-CLIENT выполнен вход как `uDelete1@GMAKMA.local` с тем же паролем, который был задан до удаления. Сброс пароля после восстановления не выполнялся. В пользовательском сеансе проверены whoami и SID; он равен исходному `S-1-5-21-3793483027-3712407111-974862227-1116`. Диск X: подключился к `\\ad-srv\uDelete1$`. Создание и чтение файла в домашней папке завершились успешно.
+
+![Рисунок 183 – Восстановленный uDelete1 вошёл с исходным паролем и SID, запись/чтение X: работают](screenshots/422-e-restored-client.png)
+
+
+
+[Результат входа и пользовательской проверки](evidence/commands/stage-e-restored-client-check.json) подтверждает сохранение работоспособности восстановленной учётной записи.
+
+В завершение повторно выполнен Test-Lab2Provisioning.ps1 для всех семи пользователей части 5 и 6. Все 34 серверные проверки завершились PASS. Проверки точного CMD-конвейера и отказа по неправильному manifest также завершились PASS. Windows PowerShell Parser не обнаружил ошибок в четырёх публичных PS1-файлах, а их SHA256 на сервере совпали с публикуемыми файлами.
+
+После проверок сохранена пара снимков `lab2-stage-e-csv-recyclebin-verified`. Это снимки завершённого этапа, а не замена итогового резервного копирования всей лабораторной работы. Обе VM оставлены включёнными и подключены только к vmbr1_lab. Проверка `Test-ComputerSecureChannel` на клиенте вернула True. AD-SRV остался в Domain Controllers, AD-CLIENT – в ouComputers; ранее созданные пользователи, их пути профилей и политики не изменялись.
+
+Подтверждения: [34 серверные проверки](evidence/commands/stage-e-all-seven-server-verification.json), [Windows Parser и SHA256](evidence/commands/stage-e-final-windows-parser.json), [итоговые проверки восстановления](evidence/commands/stage-e-final-recovery-contracts.json), [состояние клиента](evidence/commands/stage-e-final-client-state.json) и [питание/сеть обеих VM](evidence/commands/stage-e-final-vm-readback.json).
+
+## 7. Ответы на контрольные вопросы
+
+### 7.1. Раскройте смысл терминов дерево доменов, лес и схема Active Directory?
+
+Дерево доменов – иерархия доменов с общим непрерывным пространством DNS-имён. Например, домены `example.local` и `sales.example.local` относятся к одному дереву. Между доменами дерева действуют доверительные отношения. Лес объединяет одно или несколько деревьев с общей схемой, конфигурацией и глобальным каталогом. Деревья одного леса могут иметь разные DNS-имена. Схема AD определяет классы объектов, их атрибуты и правила построения каталога: например, какие данные можно хранить в объекте пользователя. Схема общая для всего леса. [F1, F2]
+
+В работе создан лес с единственным доменом `GMAKMA.local`. Он является корневым доменом леса; дополнительных доменов и деревьев не создавалось (раздел 2.2).
+
+### 7.2. Где на контроллере домена хранится данные об объектах Active Directory в виде файлов? Какие файлы за что отвечают?
+
+База AD DS хранится на контроллере домена. На AD-SRV при развёртывании оставлены пути `C:\WINDOWS\NTDS` для базы и журналов (раздел 2.2). Основные файлы имеют следующее назначение. [F3, F4]
+
+| Файл | Назначение |
+|---|---|
+| `ntds.dit` | База каталога: объекты AD, их атрибуты и данные безопасности |
+| `edb.log`, нумерованные `edb*.log` | Текущий и предыдущие журналы транзакций. Содержат операции изменения базы и используются для её приведения в согласованное состояние после сбоя |
+| `edb.chk` | Контрольная точка: позиция в потоке журналов, до которой операции уже записаны в базу. Помогает определить, откуда продолжать воспроизведение журналов при восстановлении |
+| `edb*.jrs` | Резервные журналы для завершения необходимых операций при нехватке места на диске |
+| `temp.edb` | Временная база для служебных операций движка ESE |
+
+Это назначение файлов AD DS, а не результат отдельной инвентаризации содержимого каталога на VM. Журналы и контрольная точка не заменяют резервную копию базы. [F3, F4]
+
+### 7.3. Где на контроллере домена хранятся файлы, содержащие групповые политики домена?
+
+Файловая часть доменных GPO хранится в SYSVOL. В этой работе корневой путь SYSVOL – `C:\WINDOWS\SYSVOL`, а путь общей папки – `C:\WINDOWS\SYSVOL\sysvol` (раздел 2.2). Для домена каталог политик доступен по UNC:
+
+```text
+\\GMAKMA.local\SYSVOL\GMAKMA.local\Policies\{GUID-GPO}
+```
+
+Здесь `{GUID-GPO}` обозначает идентификатор конкретной политики. Соответствующий локальный путь на AD-SRV: `C:\WINDOWS\SYSVOL\sysvol\GMAKMA.local\Policies\{GUID-GPO}`. [F5, F6]
+
+GPO состоит из двух частей. GPT (Group Policy Template) – папка с файлами параметров, сценариями и другими данными политики в SYSVOL. GPC (Group Policy Container) – объект в доменном разделе AD с метаданными политики, включая сведения о версии. Поэтому одного копирования папки из SYSVOL недостаточно для полноценного восстановления GPO. [F5, F6]
+
+### 7.4. Какие компоненты автоматически устанавливаются мастером при добавлении ролей Active Directory?
+
+При добавлении AD DS через Server Manager мастер предлагает необходимые компоненты и средства управления. В работе подтверждены Group Policy Management, средства администрирования AD и модуль Active Directory для PowerShell; установка выполнялась с включённым добавлением средств управления (раздел 2.1). Средства AD DS и AD LDS включают оснастки и командные утилиты. Наличие средств управления AD LDS не означает установку самой роли AD LDS. [F7, F8]
+
+Установка роли AD DS и повышение сервера до контроллера домена – разные этапы. DNS Server в работе установлен при создании нового леса с выбранным DNS server. DHCP Server добавлен и настроен отдельно, он не является автоматически устанавливаемой частью AD DS. Роли AD CS и AD FS также не выбирались (разделы 2.1–2.4). [F7]
+
+### 7.5. Для чего нужен пароль DSRM?
+
+Пароль DSRM нужен для входа под локальной учётной записью администратора контроллера в Directory Services Restore Mode, режиме восстановления служб каталогов. Он задаётся при повышении сервера до контроллера домена и используется при обслуживании и восстановлении AD DS, в частности при восстановлении состояния системы из резервной копии. Это отдельный пароль, а не обычный пароль доменного Administrator. Его следует хранить отдельно от отчёта в защищённом месте. [F9, F10]
+
+### 7.6. Как восстановить пароль DSRM, если он был утерян после установки?
+
+Утраченный пароль не требуется узнавать: администратор задаёт новый через `ntdsutil`. На работающем в обычном режиме контроллере домена нужно открыть повышенную командную строку с правами администратора домена и последовательно выполнить: [F9]
+
+```text
+ntdsutil
+set dsrm password
+reset password on server null
+```
+
+`null` означает текущий сервер. После третьей команды новый пароль вводится и подтверждается в интерактивных запросах; символы при вводе не отображаются. Затем из обоих уровней утилиты выходят командами:
+
+```text
+q
+q
+```
+
+Для другого контроллера вместо `null` указывают его DNS-имя. Описанный способ не применяется, если целевой сервер уже загружен в DSRM. Здесь приведена справочная процедура; сброс пароля в ходе подготовки этого раздела не выполнялся, значения паролей не публикуются. [F9]
+
+### 7.7. Зачем нужно имя домена NetBIOS?
+
+NetBIOS-имя – короткое имя домена, используемое для совместимости и в формате входа `ДОМЕН\пользователь`. В работе DNS-имя домена – `GMAKMA.local`, NetBIOS-имя – `GMAKMA`, поэтому учётную запись можно указать как `GMAKMA\uSeller1`. Формат UPN для этого пользователя – `uSeller1@GMAKMA.local`. NetBIOS-имя не заменяет полное DNS-имя домена. [F11]
+
+### 7.8. Какие группы пользователей создаются в AD автоматически? Опишите минимум 5 из них.
+
+При создании домена AD появляются стандартные группы безопасности. Они находятся прежде всего в контейнерах Users и Builtin. Ниже приведены шесть примеров; это описание стандартных ролей групп, а не список специально созданных в работе `gSellers` и `gManagers`. [F12]
+
+| Группа | Назначение |
+|---|---|
+| Domain Users | Базовая группа пользователей домена. По умолчанию является основной группой новых доменных пользователей; сама по себе не предоставляет административных прав |
+| Domain Admins | Администрирование своего домена. По умолчанию входит в Administrators на контроллерах и компьютерах, присоединённых к домену |
+| Enterprise Admins | Администрирование леса, включая операции с доменами. Создаётся только в корневом домене леса |
+| Schema Admins | Изменение общей схемы AD. Создаётся только в корневом домене леса |
+| Group Policy Creator Owners | Создание доменных GPO и управление созданными участником объектами политик; членство не означает права изменять любую существующую GPO |
+| Backup Operators | Резервное копирование и восстановление файлов на контроллерах домена, в том числе независимо от обычных файловых разрешений в рамках этих операций |
+
+Права административных групп широкие, поэтому их не следует выдавать обычным пользователям для повседневной работы. Полномочия владельца созданной GPO отдельно описаны Microsoft в документации по делегированию управления групповыми политиками. [F12, F17]
+
+### 7.9. Какие записи в DNS создаются специально для AD? Перечислите их, укажете их назначение.
+
+AD использует служебные DNS-записи для поиска контроллеров и служб. В таблице указаны типовые имена для домена и леса `GMAKMA.local`; обозначения в угловых скобках заменяются реальными значениями. Это справочный перечень, а не утверждение об отдельной проверке каждой записи на сервере. [F13, F14]
+
+| Тип | Имя записи | Назначение |
+|---|---|---|
+| SRV | `_ldap._tcp.GMAKMA.local` | Поиск LDAP-службы домена |
+| SRV | `_ldap._tcp.dc._msdcs.GMAKMA.local` | Поиск контроллеров домена |
+| SRV | `_kerberos._tcp.GMAKMA.local`, `_kerberos._udp.GMAKMA.local` | Поиск службы выдачи билетов Kerberos (KDC) |
+| SRV | `_kpasswd._tcp.GMAKMA.local`, `_kpasswd._udp.GMAKMA.local` | Поиск службы смены пароля Kerberos |
+| SRV | `_gc._tcp.GMAKMA.local` | Поиск глобального каталога леса |
+| SRV | `_ldap._tcp.pdc._msdcs.GMAKMA.local` | Поиск контроллера с ролью PDC Emulator |
+| SRV | `_ldap._tcp.<сайт>._sites.dc._msdcs.GMAKMA.local` | Поиск контроллера домена в указанном сайте |
+| SRV | `_ldap._tcp.<GUID-домена>.domains._msdcs.GMAKMA.local` | Поиск контроллера по GUID домена |
+| CNAME | `<GUID-NTDS-Settings>._msdcs.GMAKMA.local` | Сопоставление GUID объекта NTDS Settings с DNS-именем контроллера; используется при репликации AD |
+
+После получения имени сервера из SRV или CNAME нужны A/AAAA-записи для определения его IP-адреса. Эти типы записей не специфичны для AD. На лабораторном сервере подтверждены зоны `GMAKMA.local`, `_msdcs.GMAKMA.local` и A-запись `ad-srv` с адресом `10.0.0.1` (раздел 2.3). [F13, F14]
+
+## 8. Требуемые командные артефакты
+
+### 8.1. Приведите скриншоты групповых политик AD из части 4.
+
+Скриншоты настройки и проверки GPO приведены в разделах 4.1–4.8. Ограничение выполнения пункта об ACL всех файловых объектов диска C описано отдельно в разделе 4.6: защищённые системные ACL и разрешения профилей сохранены. Буквальная единая ACL на каждом объекте C не применена. Рабочие защищённые ACL сохранены как оговорённое исключение из буквального требования задания, а не как подтверждение его полного выполнения.
+
+### 8.2. Приведите скрипт из части 5.
+
+Полный листинг фактически выполненного скрипта приведён в разделе 5.7. Отдельный файл: [Provision-Lab2.ps1](scripts/Provision-Lab2.ps1). Формат CSV, отрицательные проверки, первый и повторный запуски с HTML-отчётами описаны в разделах 5.1–5.5; повторно листинг здесь не дублируется.
+
+### 8.3. Как с помощью Powershell восстановить удаленный объект AD?
+
+При включённой до удаления корзине AD удалённый объект можно получить через `Get-ADObject -IncludeDeletedObjects` и передать в `Restore-ADObject`. Для конкретного объекта следует использовать известный ObjectGUID, а не выбирать все удалённые объекты домена. Родительский контейнер должен существовать; нужный путь можно явно указать в `-TargetPath`. [F15, F16]
+
+В работе выполнен [Restore-Lab2DeletedUsers.ps1](scripts/Restore-Lab2DeletedUsers.ps1), полный листинг приведён в разделе 6.5. Он читает [manifest пяти исходных пользователей](evidence/reports/delete-users-manifest.xml), до восстановления проверяет число записей, признак `isDeleted` и исходную OU каждого объекта. После восстановления выполняется чтение по GUID и сравнение SID и SamAccountName с manifest. Проверки и фактический результат находятся в разделах 6.4–6.6.
+
+### 8.4. Приведите конвейер команд из ч.6 п.3
+
+Фактически выполненный CMD-конвейер из [Remove-Lab2DeletedUsers.cmd](scripts/Remove-Lab2DeletedUsers.cmd):
+
+```bat
+dsquery user "OU=unit-for-delete,DC=GMAKMA,DC=local" -limit 0 | dsrm -noprompt
+```
+
+Перед запуском проверено, что OU содержит только пять ожидаемых пользователей `uDelete1`–`uDelete5` и не содержит посторонних объектов. Проверка и результат удаления приведены в разделах 6.2–6.3. Параметр `-limit 0` возвращает все совпадения в указанной области поиска, а `-noprompt` отключает подтверждение удаления. Поэтому повторять команду без проверки состава OU нельзя. [F18, F19]
+
+### 8.5. Приведите конвейер команд из ч.6 п.4
+
+Конвейер внутри цикла фактически выполненного [Restore-Lab2DeletedUsers.ps1](scripts/Restore-Lab2DeletedUsers.ps1):
+
+```powershell
+foreach ($entry in $expected) {
+    Get-ADObject -Identity $entry.ObjectGUID -IncludeDeletedObjects | Restore-ADObject -TargetPath $base
+}
+```
+
+Это фрагмент скрипта, а не самостоятельная команда запуска. В полном листинге раздела 6.5 перед ним заданы `$base = 'OU=unit-for-delete,DC=GMAKMA,DC=local'`, загрузка `$expected` из manifest и все предварительные проверки: ровно пять записей, каждый объект удалён и его `lastKnownParent` равен целевой OU. Только после успешной проверки всех записей начинается восстановление. После цикла сверяются SID и SamAccountName. Восстановлены именно пять GUID из manifest; широкого восстановления всех удалённых пользователей домена не выполнялось.
+
+### Источники Microsoft к разделам 7–8
+
+- [F1] [Understanding the Active Directory Logical Model](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/understanding-the-active-directory-logical-model) – лес, домен и общая схема.
+- [F2] [Domain Trees](https://learn.microsoft.com/en-us/windows/win32/ad/domain-trees) – дерево и непрерывное пространство имён.
+- [F3] [Microsoft Defender Antivirus exclusions on Windows Server](https://learn.microsoft.com/ru-ru/defender-endpoint/microsoft-defender-antivirus-exclusions-windows-server) – расположение и имена файлов NTDS.
+- [F4] [Extensible Storage Engine Files](https://learn.microsoft.com/en-us/windows/win32/extensible-storage-engine/extensible-storage-engine-files) – журналы транзакций, контрольная точка и резервные файлы.
+- [F5] [Group Policy Storage](https://learn.microsoft.com/en-us/previous-versions/windows/desktop/policy/group-policy-storage) – разделение GPO на GPC и GPT.
+- [F6] [Working with Group Policy Objects using GPMC](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/dn789193%28v%3Dws.11%29) – хранение файловой части в SYSVOL\Policies.
+- [F7] [Install Active Directory Domain Services](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/deploy/install-active-directory-domain-services--level-100-) – установка AD DS, средств управления и создание контроллера с DNS.
+- [F8] [Install a New Windows Server 2012 Active Directory Forest (Level 200)](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/deploy/install-a-new-windows-server-2012-active-directory-forest--level-200-) – автоматическое добавление необходимых служб и средств управления мастером; общий механизм, не описание интерфейса Windows Server 2025.
+- [F9] [How to reset the Directory Services Restore Mode administrator account password](https://learn.microsoft.com/en-us/troubleshoot/windows-server/active-directory/reset-directory-services-restore-mode-admin-pwd) – точная последовательность команд `ntdsutil` и ограничения сброса.
+- [F10] [Active Directory Forest Recovery – Determine how to recover the forest](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/forest-recovery-guide/ad-forest-recovery-determine-how-to-recover) – необходимость DSRM-пароля для восстановления состояния системы.
+- [F11] [User Name Formats](https://learn.microsoft.com/en-us/windows/win32/secauthn/user-name-formats) – NetBIOS-имя в формате входа и формат UPN.
+- [F12] [Active Directory Security Groups](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-groups) – стандартные группы и их полномочия.
+- [F13] [[MS-ADTS]: DNS-Based Discovery](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/7fcdce70-5205-44d6-9c3a-260e616a2f04) – имена и назначение служебных SRV-записей.
+- [F14] [Active Directory replication error 1753](https://learn.microsoft.com/en-us/troubleshoot/windows-server/active-directory/replication-error-1753) – CNAME по ObjectGUID объекта NTDS Settings и разрешение адреса партнёра репликации.
+- [F15] [Restore-ADObject](https://learn.microsoft.com/en-us/powershell/module/activedirectory/restore-adobject?view=windowsserver2025-ps) – восстановление удалённого объекта, конвейер и `TargetPath`.
+- [F16] [Enable Active Directory Recycle Bin in Windows Server](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/adac/active-directory-recycle-bin) – корзина должна быть включена до удаления восстанавливаемых объектов.
+- [F17] [Delegating Administration of Group Policy](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2003/cc781991%28v%3Dws.10%29) – права участников Group Policy Creator Owners только на созданные ими GPO.
+- [F18] [Dsquery user](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/cc725702%28v%3Dws.11%29) – область поиска и параметр `-limit 0`.
+- [F19] [Dsrm](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/cc731865%28v%3Dws.11%29) – получение DN через стандартный ввод и параметр `-noprompt`.
+
+## 9. Вывод и состояние стенда
+
+Развёрнут домен `GMAKMA.local` с AD DS, DNS и авторизованным DHCP. Клиент получает сетевые параметры автоматически, входит в домен и использует домашние каталоги и перемещаемые профили. Права отделов, `BlackHole` и `Common` проверены положительными и отрицательными операциями под двумя обычными пользователями.
+
+Групповые политики проверены на клиенте, а 7-Zip установлен назначением MSI через отдельную GPO. В пункте ACL системного диска сохранено оговорённое исключение: корень C настроен политикой, защищённые разрешения Windows и профилей не заменены. Буквальная единая DACL каждого объекта C не заявляется выполненной.
+
+Сценарий CSV создаёт необходимые объекты и не дублирует их при повторном запуске. Пять пользователей удалены конвейером `dsquery | dsrm` и восстановлены с исходными GUID, SID и членством в группах. Вход восстановленной учётной записью и работа домашнего диска подтверждены.
+
+Обе машины оставлены включёнными в изолированной сети `vmbr1_lab`. Для защиты доступны ADUC, DNS, DHCP, GPMC, общие папки, установленные приложения и HTML-отчёты. Сохранены и перечитаны финальные снимки `lab2-a1-server-ready` и `lab2-a1-client-ready`; [состояние VM](evidence/commands/final-ready-vms.json) и [завершение задач создания снимков](evidence/commands/final-ready-snapshot-jobs.json) приложены к отчёту. Снимки не заменяют отдельную полную резервную копию.

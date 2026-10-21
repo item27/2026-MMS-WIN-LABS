@@ -1,0 +1,71 @@
+[
+  {
+    "description": "Stage C verified: both users SMB ACLs and drag/drop, home, seller reboot/relogon roaming profile",
+    "snaptime": 1792552917,
+    "name": "lab2-stage-c-verified",
+    "vmstate": 0,
+    "parent": "lab2-stage-c-before-acl-tests"
+  },
+  {
+    "description": "",
+    "snaptime": 1792539566,
+    "vmstate": 0,
+    "name": "lab2-a1-client-os-ready",
+    "parent": "pre-attempt1-clean-reinstall"
+  },
+  {
+    "snaptime": 1791158916,
+    "description": "Windows 10 Pro installed and named ad-client",
+    "parent": "lab2-client-preinstall",
+    "vmstate": 0,
+    "name": "lab2-client-base"
+  },
+  {
+    "snaptime": 1792549251,
+    "description": "Before nonadmin SMB functional tests; AD and shares configured",
+    "parent": "lab2-a1-client-os-ready",
+    "name": "lab2-stage-c-before-acl-tests",
+    "vmstate": 0
+  },
+  {
+    "vmstate": 0,
+    "name": "lab2-stage-d-before-gpo",
+    "parent": "lab2-stage-c-verified",
+    "description": "Stage C verified; before stage D GPO changes",
+    "snaptime": 1792555027
+  },
+  {
+    "parent": "lab2-client-base",
+    "name": "pre-attempt1-clean-reinstall",
+    "vmstate": 0,
+    "snaptime": 1791481728,
+    "description": "Preserved state before user-authorized clean attempt 1 reinstall"
+  },
+  {
+    "snaptime": 1791146089,
+    "description": "Rollback before Windows 10 installation",
+    "name": "lab2-client-preinstall",
+    "vmstate": 0
+  },
+  {
+    "vmstate": 0,
+    "name": "lab2-stage-e-before-recyclebin",
+    "parent": "lab2-stage-d-safe-gpo-verified",
+    "description": "CSV provisioning verified; before irreversible enabling of AD Recycle Bin; paired VM104/105 checkpoint",
+    "snaptime": 1792565637
+  },
+  {
+    "vmstate": 0,
+    "name": "lab2-stage-d-safe-gpo-verified",
+    "parent": "lab2-stage-d-before-gpo",
+    "description": "GPO and assigned 7-Zip verified. C root ACL propagated; protected OS/profile ACL retained; literal D8 all-objects not fulfilled.",
+    "snaptime": 1792562295
+  },
+  {
+    "description": "You are here!",
+    "running": 1,
+    "parent": "lab2-stage-e-before-recyclebin",
+    "digest": "bf3ec318545e2cd96dd21c09c94b805dba042d1b",
+    "name": "current"
+  }
+]

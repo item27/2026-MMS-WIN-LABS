@@ -1,0 +1,137 @@
+[
+  {
+    "figure": 169,
+    "screenshot": 421,
+    "file": "screenshots/421-e-negative-csv.png",
+    "caption": "CSV без обязательного заголовка и с лишней ячейкой отклонены; новые AD/SMB/каталоги 0",
+    "section": "5.2",
+    "vmid": 104,
+    "sha256": "dfc2e95e25029334b5d43ad723b61a626432e23eec3de8c288960e696eec414a"
+  },
+  {
+    "figure": 170,
+    "screenshot": 409,
+    "file": "screenshots/409-e-first-html.png",
+    "caption": "HTML первого запуска: созданы 2 OU, 3 группы и 2 пользователя",
+    "section": "5.3",
+    "vmid": 104,
+    "sha256": "3bd52506af3b0b486fe26d94d1a82f4d30f5cc1c0727a871691b97c1c03cf8f6"
+  },
+  {
+    "figure": 171,
+    "screenshot": 408,
+    "file": "screenshots/408-e-csv-two-runs.png",
+    "caption": "Первый и повторный запуск Provision-Lab2.ps1; повторное создание объектов отсутствует",
+    "section": "5.4",
+    "vmid": 104,
+    "sha256": "9c6eb9d218fd33d39a2c3ba00621d042bd79be885da9fa34dbf4b7b49f5a1060"
+  },
+  {
+    "figure": 172,
+    "screenshot": 410,
+    "file": "screenshots/410-e-second-html.png",
+    "caption": "HTML повторного запуска: 0 новых OU, групп и пользователей",
+    "section": "5.4",
+    "vmid": 104,
+    "sha256": "0444d8caf511094e9f31f91f20e4d0160522d26a4c001b9a371d14f39fd250be"
+  },
+  {
+    "figure": 173,
+    "screenshot": 411,
+    "file": "screenshots/411-e-csv-client-home.png",
+    "caption": "Вход uCsvSeller1 на AD-CLIENT: X:, запись в домашнюю папку и отказ к чужой папке",
+    "section": "5.6",
+    "vmid": 105,
+    "sha256": "18d9384162381be30c862f79ac9d8f8aea7602dd5f2f9e47de4e9d055a446f60"
+  },
+  {
+    "figure": 174,
+    "screenshot": 419,
+    "file": "screenshots/419-e-csv-client-second.png",
+    "caption": "Повторный доменный вход CSV-пользователя: доступ к X: сохранён, маркер профиля совпал",
+    "section": "5.6",
+    "vmid": 105,
+    "sha256": "9f023bcfc935789e339de9747e19387af32ab1e2357acd52f5c663659e0bdad3"
+  },
+  {
+    "figure": 175,
+    "screenshot": 420,
+    "file": "screenshots/420-e-csv-roaming.png",
+    "caption": "Перемещаемый профиль uCsvSeller1.V6 на сервере; SHA256 маркера на сервере и клиенте совпадают",
+    "section": "5.6",
+    "vmid": 105,
+    "sha256": "571130d09b0b1dd36a73fdd8dce96445ce318014076f13c0ff9d977b00d39382"
+  },
+  {
+    "figure": 176,
+    "screenshot": 412,
+    "file": "screenshots/412-e-recyclebin-enabled.png",
+    "caption": "Recycle Bin Feature включена в лесу GMAKMA.local; IsDisableable=False",
+    "section": "6.1",
+    "vmid": 104,
+    "sha256": "67489e007f084c454066287ee93129a4f7e5403faa110ccb2bbb425f944cfefa"
+  },
+  {
+    "figure": 177,
+    "screenshot": 413,
+    "file": "screenshots/413-e-aduc-five-before.png",
+    "caption": "OU unit-for-delete до удаления: uDelete1–uDelete5",
+    "section": "6.2",
+    "vmid": 104,
+    "sha256": "e2036950f6285331a77fbbd538aeb8b24fb766f498ed0c5ccb6ee232c909a8ca"
+  },
+  {
+    "figure": 178,
+    "screenshot": 414,
+    "file": "screenshots/414-e-dsquery-dsrm.png",
+    "caption": "Выполнен CMD-конвейер dsquery user | dsrm: удалено пять пользователей, осталось 0",
+    "section": "6.3",
+    "vmid": 104,
+    "sha256": "2e01bc7fb63bd1984996916ae287dbf374170a2510df9b1c48622c4b86d5331c"
+  },
+  {
+    "figure": 179,
+    "screenshot": 415,
+    "file": "screenshots/415-e-aduc-empty.png",
+    "caption": "OU unit-for-delete после удаления пуста; сама OU сохранена",
+    "section": "6.3",
+    "vmid": 104,
+    "sha256": "8c64f898a67fda9e9157bbe3d847e3ef5979d4f852666228934ccc778dacf0c9"
+  },
+  {
+    "figure": 180,
+    "screenshot": 416,
+    "file": "screenshots/416-e-deleted-and-negative.png",
+    "caption": "Пять удалённых GUID имеют isDeleted=True; неправильный manifest отклонён без восстановления",
+    "section": "6.4",
+    "vmid": 104,
+    "sha256": "82fc6363115bae9ccc8929ffdbb7cd163eaada0b84bdbfd0f3d2ea1c76e2dea8"
+  },
+  {
+    "figure": 181,
+    "screenshot": 417,
+    "file": "screenshots/417-e-restore-identities.png",
+    "caption": "Восстановлены те же пять GUID/SID; метаданные, группы и домашние папки совпали",
+    "section": "6.5",
+    "vmid": 104,
+    "sha256": "0cafcd4225bfd2d37c864ca121128abe879cb52ff9724d8711074b729e9b9ca0"
+  },
+  {
+    "figure": 182,
+    "screenshot": 418,
+    "file": "screenshots/418-e-aduc-five-restored.png",
+    "caption": "После Restore-ADObject в unit-for-delete снова пять исходных пользователей",
+    "section": "6.5",
+    "vmid": 104,
+    "sha256": "59231bf7556d45004ac785247737a83a08f9dff39ad7545a98842dd4a067d5a7"
+  },
+  {
+    "figure": 183,
+    "screenshot": 422,
+    "file": "screenshots/422-e-restored-client.png",
+    "caption": "Восстановленный uDelete1 вошёл с исходным паролем и SID, запись/чтение X: работают",
+    "section": "6.6",
+    "vmid": 105,
+    "sha256": "41b32046a1463dfbff3fe99e6ceefb79a75426c4cc7c6264ea3afff8e186d080"
+  }
+]

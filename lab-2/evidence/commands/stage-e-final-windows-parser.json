@@ -1,0 +1,6 @@
+{
+  "exited": 1,
+  "out-data": "[\r\n    {\r\n        \"File\":  \"C:\\\\Lab2\\\\Provision-Lab2.ps1\",\r\n        \"ParserErrors\":  0,\r\n        \"SHA256\":  \"2AB107F475C822F4DBE2F20C935C87A2267F1A5B3505D1F8466FFFF2CA8CD8AE\"\r\n    },\r\n    {\r\n        \"File\":  \"C:\\\\Lab2\\\\Test-Lab2Provisioning.ps1\",\r\n        \"ParserErrors\":  0,\r\n        \"SHA256\":  \"2CC197721908F94607C20279659FFC7BC34F29E45E8F08A8DE3A1714F4A9A6E2\"\r\n    },\r\n    {\r\n        \"File\":  \"C:\\\\Lab2\\\\Restore-Lab2DeletedUsers.ps1\",\r\n        \"ParserErrors\":  0,\r\n        \"SHA256\":  \"2BB5B466E8AA274D2124A5ED59AB9780607EE14A3B916CB5F1026950F0276FD2\"\r\n    },\r\n    {\r\n        \"File\":  \"C:\\\\Lab2\\\\Test-Lab2RecoveryContract.ps1\",\r\n        \"ParserErrors\":  0,\r\n        \"SHA256\":  \"027D1ED23FDC14138B9EA41858D58B1B4049945A237BBC804F7B57E0919D2086\"\r\n    }\r\n]\r\n",
+  "exitcode": 0,
+  "out-truncated": 0
+}

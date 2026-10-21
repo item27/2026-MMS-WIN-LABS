@@ -1,0 +1,30 @@
+[
+  {
+    "vmid": 104,
+    "snapshot": "lab2-stage-e-before-recyclebin",
+    "status": "stopped",
+    "exitstatus": "OK",
+    "task": "UPID:ymir:000C7D22:0197FA18:6AD86185:qmsnapshot:104:herme@pve:"
+  },
+  {
+    "vmid": 105,
+    "snapshot": "lab2-stage-e-before-recyclebin",
+    "status": "stopped",
+    "exitstatus": "OK",
+    "task": "UPID:ymir:000C7D23:0197FA18:6AD86185:qmsnapshot:105:herme@pve:"
+  },
+  {
+    "vmid": 104,
+    "snapshot": "lab2-stage-e-csv-recyclebin-verified",
+    "status": "stopped",
+    "exitstatus": "OK",
+    "task": "UPID:ymir:000C9870:019B60F3:6AD86A3A:qmsnapshot:104:herme@pve:"
+  },
+  {
+    "vmid": 105,
+    "snapshot": "lab2-stage-e-csv-recyclebin-verified",
+    "status": "stopped",
+    "exitstatus": "OK",
+    "task": "UPID:ymir:000C9871:019B60F3:6AD86A3A:qmsnapshot:105:herme@pve:"
+  }
+]

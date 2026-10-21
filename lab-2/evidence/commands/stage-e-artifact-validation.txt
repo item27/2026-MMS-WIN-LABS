@@ -1,0 +1,12 @@
+test_evidence_hashes_dimensions_and_vms (__main__.StageEArtifactChecks.test_evidence_hashes_dimensions_and_vms) ... ok
+test_links_and_figure_sequence (__main__.StageEArtifactChecks.test_links_and_figure_sequence) ... ok
+test_original_negative_and_two_runs (__main__.StageEArtifactChecks.test_original_negative_and_two_runs) ... ok
+test_public_csv_and_secret_absence (__main__.StageEArtifactChecks.test_public_csv_and_secret_absence) ... ok
+test_real_full_script_listings (__main__.StageEArtifactChecks.test_real_full_script_listings) ... ok
+test_recovery_identity_and_client (__main__.StageEArtifactChecks.test_recovery_identity_and_client) ... ok
+test_user_logon_and_roaming (__main__.StageEArtifactChecks.test_user_logon_and_roaming) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.025s
+
+OK

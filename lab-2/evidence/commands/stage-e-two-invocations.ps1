@@ -1,0 +1,1 @@
+$Host.UI.RawUI.WindowTitle='Lab2 CSV provisioning';Clear-Host;Write-Host 'FIRST RUN - recorded result:';Get-Content C:\Lab2\stage-e-first-result.json;Write-Host 'SECOND RUN - same CSV, separate report:';$r=& C:\Lab2\Provision-Lab2.ps1 -CsvPath C:\Lab2Private\lab2-users.csv -ReportPath C:\Lab2\provision-second.html;$r|ConvertTo-Json|Tee-Object C:\Lab2\stage-e-second-result.json
