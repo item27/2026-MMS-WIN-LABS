@@ -1,0 +1,94 @@
+{
+    "Scope":  {
+                  "ScopeId":  {
+                                  "Address":  10,
+                                  "AddressFamily":  2,
+                                  "ScopeId":  null,
+                                  "IsIPv6Multicast":  false,
+                                  "IsIPv6LinkLocal":  false,
+                                  "IsIPv6SiteLocal":  false,
+                                  "IsIPv6Teredo":  false,
+                                  "IsIPv4MappedToIPv6":  false,
+                                  "IPAddressToString":  "10.0.0.0"
+                              },
+                  "Name":  "Lab2Scope",
+                  "StartRange":  {
+                                     "Address":  1677721610,
+                                     "AddressFamily":  2,
+                                     "ScopeId":  null,
+                                     "IsIPv6Multicast":  false,
+                                     "IsIPv6LinkLocal":  false,
+                                     "IsIPv6SiteLocal":  false,
+                                     "IsIPv6Teredo":  false,
+                                     "IsIPv4MappedToIPv6":  false,
+                                     "IPAddressToString":  "10.0.0.100"
+                                 },
+                  "EndRange":  {
+                                   "Address":  1845493770,
+                                   "AddressFamily":  2,
+                                   "ScopeId":  null,
+                                   "IsIPv6Multicast":  false,
+                                   "IsIPv6LinkLocal":  false,
+                                   "IsIPv6SiteLocal":  false,
+                                   "IsIPv6Teredo":  false,
+                                   "IsIPv4MappedToIPv6":  false,
+                                   "IPAddressToString":  "10.0.0.110"
+                               },
+                  "SubnetMask":  {
+                                     "Address":  255,
+                                     "AddressFamily":  2,
+                                     "ScopeId":  null,
+                                     "IsIPv6Multicast":  false,
+                                     "IsIPv6LinkLocal":  false,
+                                     "IsIPv6SiteLocal":  false,
+                                     "IsIPv6Teredo":  false,
+                                     "IsIPv4MappedToIPv6":  false,
+                                     "IPAddressToString":  "255.0.0.0"
+                                 },
+                  "State":  "Active"
+              },
+    "Authorized":  {
+                       "DnsName":  "ad-srv.gmakma.local",
+                       "IPAddress":  {
+                                         "Address":  16777226,
+                                         "AddressFamily":  2,
+                                         "ScopeId":  null,
+                                         "IsIPv6Multicast":  false,
+                                         "IsIPv6LinkLocal":  false,
+                                         "IsIPv6SiteLocal":  false,
+                                         "IsIPv6Teredo":  false,
+                                         "IsIPv4MappedToIPv6":  false,
+                                         "IPAddressToString":  "10.0.0.1"
+                                     }
+                   },
+    "Options":  [
+                    {
+                        "OptionId":  51,
+                        "Name":  "Lease",
+                        "Value":  [
+                                      "691200"
+                                  ]
+                    },
+                    {
+                        "OptionId":  3,
+                        "Name":  "Router",
+                        "Value":  [
+                                      "10.0.0.1"
+                                  ]
+                    },
+                    {
+                        "OptionId":  15,
+                        "Name":  "DNS Domain Name",
+                        "Value":  [
+                                      "GMAKMA.local"
+                                  ]
+                    },
+                    {
+                        "OptionId":  6,
+                        "Name":  "DNS Servers",
+                        "Value":  [
+                                      "10.0.0.1"
+                                  ]
+                    }
+                ]
+}

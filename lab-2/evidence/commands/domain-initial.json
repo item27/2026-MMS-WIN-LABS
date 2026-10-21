@@ -1,0 +1,36 @@
+{
+    "Shares":  [
+                   {
+                       "Name":  "NETLOGON",
+                       "Path":  "C:\\WINDOWS\\SYSVOL\\sysvol\\GMAKMA.local\\SCRIPTS"
+                   },
+                   {
+                       "Name":  "SYSVOL",
+                       "Path":  "C:\\WINDOWS\\SYSVOL\\sysvol"
+                   }
+               ],
+    "Domain":  {
+                   "DNSRoot":  "GMAKMA.local",
+                   "NetBIOSName":  "GMAKMA",
+                   "DistinguishedName":  "DC=GMAKMA,DC=local",
+                   "PDCEmulator":  "ad-srv.GMAKMA.local"
+               },
+    "Forest":  {
+                   "RootDomain":  "GMAKMA.local",
+                   "ForestMode":  10
+               },
+    "Services":  [
+                     {
+                         "Name":  "DNS",
+                         "Status":  4
+                     },
+                     {
+                         "Name":  "Netlogon",
+                         "Status":  4
+                     },
+                     {
+                         "Name":  "NTDS",
+                         "Status":  4
+                     }
+                 ]
+}
