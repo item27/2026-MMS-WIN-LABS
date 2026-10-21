@@ -32,7 +32,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          if [[ ! -f scripts/render || ! -f templates/win-title.pdf ]]; then
+          if [[ ! -f scripts/render.py || ! -f templates/win-title.pdf ]]; then
             echo "Renderer or title template is not present on this branch."
             exit 0
           fi
@@ -42,7 +42,7 @@ jobs:
             exit 0
           fi
 
-          uv run --script scripts/render
+          uv run --script scripts/render.py
 
       - name: Commit regenerated PDFs
         shell: bash

@@ -17,7 +17,7 @@ from pathlib import Path
 import pymupdf
 
 ROOT = Path(__file__).resolve().parent.parent
-RENDER = runpy.run_path(str(ROOT / "scripts" / "render"))["render_markdown"]
+RENDER = runpy.run_path(str(ROOT / "scripts" / "render.py"))["render_markdown"]
 SCREENSHOT = ROOT / "lab-2" / "screenshots" / "011-client-pro-selected.png"
 
 
