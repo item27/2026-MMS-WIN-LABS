@@ -1,0 +1,6 @@
+{
+  "exitcode": 0,
+  "out-truncated": 0,
+  "out-data": "\r\nSessionId\r\n---------\r\n        5\r\n        4\r\n{\r\n    \"LocalPath\":  \"C:\\\\Users\\\\uCsvSeller1\",\r\n    \"Loaded\":  true,\r\n    \"RoamingConfigured\":  true,\r\n    \"RoamingPath\":  \"\\\\\\\\ad-srv\\\\Profiles$\\\\uCsvSeller1.V6\",\r\n    \"Status\":  2\r\n}\r\n\r\n\r\n",
+  "exited": 1
+}

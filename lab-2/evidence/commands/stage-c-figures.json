@@ -1,0 +1,278 @@
+[
+  {
+    "figure": 77,
+    "image": "screenshots/254-create-ou-name.png",
+    "caption": "создание подразделения ouSellers",
+    "sha256": "2496de6811a2c7e5d609c6d56627e49c741aca3c3a4fcad61e5ec6102bcca436"
+  },
+  {
+    "figure": 78,
+    "image": "screenshots/257-create-ou-managers.png",
+    "caption": "создание подразделения ouManagers",
+    "sha256": "e4c2a1f17223a463ad6e546c53c774fc45da5a1a990ee63be58d2600f9dd4544"
+  },
+  {
+    "figure": 79,
+    "image": "screenshots/258-create-ouComputers.png",
+    "caption": "создание подразделения ouComputers",
+    "sha256": "de86cd197c9f5899d67a581e81bdc038286b7de0943d4a129e435119a3666b6a"
+  },
+  {
+    "figure": 80,
+    "image": "screenshots/259-create-unit-for-delete.png",
+    "caption": "создание подразделения unit-for-delete",
+    "sha256": "8c63e0967fe687e43c908bc7b1a3afc39846c153966c240c87a477063366e935"
+  },
+  {
+    "figure": 81,
+    "image": "screenshots/338-client-in-ouComputers-refreshed.png",
+    "caption": "рабочая станция AD-CLIENT в ouComputers",
+    "sha256": "2b775e0c1b00eed98b78f8c3bf545eeab21d12a86fcc2d7723c761829beacf36"
+  },
+  {
+    "figure": 82,
+    "image": "screenshots/263-seller-user-logon-name.png",
+    "caption": "имя входа пользователя uSeller1",
+    "sha256": "8a31174b57048f0b87dd44153d0d5547b4ff424263941de9683d1b53d1ab5fd7"
+  },
+  {
+    "figure": 83,
+    "image": "screenshots/264-create-seller-summary.png",
+    "caption": "параметры создания пользователя uSeller1",
+    "sha256": "e21bb57a38b51c7d782022ede7ccd57b64b7aa4972e2289d1ce090a3d50185cd"
+  },
+  {
+    "figure": 84,
+    "image": "screenshots/265-create-manager-user-name.png",
+    "caption": "имя пользователя uManager1",
+    "sha256": "350d8afe4d42c8cd4ea2807f4e6fda7dafff88dce113158e2809e5dbb507bab3"
+  },
+  {
+    "figure": 85,
+    "image": "screenshots/266-create-manager-summary.png",
+    "caption": "параметры создания пользователя uManager1",
+    "sha256": "87ac4b7ef118fcf15b4bceb6408d6c4b1e25b05701547472d7dc706784d110ef"
+  },
+  {
+    "figure": 86,
+    "image": "screenshots/271-sellers-global-security.png",
+    "caption": "создание глобальной группы безопасности gSellers",
+    "sha256": "843f370838720a99acd9b5c995ab08679a27b6ab880e40e2d76a01209bcbbb4a"
+  },
+  {
+    "figure": 87,
+    "image": "screenshots/270-managers-global-security.png",
+    "caption": "создание глобальной группы безопасности gManagers",
+    "sha256": "66792660c02f8c32cfee5209ab2c18b4d1580d2fda76e03486048900de79484e"
+  },
+  {
+    "figure": 88,
+    "image": "screenshots/328-sellers-group-members.png",
+    "caption": "состав группы gSellers",
+    "sha256": "a90a2a46fbc46dda2ce647cd1498cd4a3766ba551ead8321ad1ec92c1905bbfc"
+  },
+  {
+    "figure": 89,
+    "image": "screenshots/330-managers-group-members.png",
+    "caption": "состав группы gManagers",
+    "sha256": "26808ced3f8e2df61d3c17e234328431763d9a9e7668ed057473e3e107f1a275"
+  },
+  {
+    "figure": 90,
+    "image": "screenshots/276-allusers-folders.png",
+    "caption": "структура каталога AllUsers на сервере",
+    "sha256": "a628f04830e4da9fb1892ee8aed8cd1ad146b61624e1abf440210166ff8ec44d"
+  },
+  {
+    "figure": 91,
+    "image": "screenshots/320-allusers-share-name.png",
+    "caption": "сетевое имя AllUsersCom",
+    "sha256": "067d2b19de545be8e60e9784350f48d7db147405ae0aa50458c0f9474b72de15"
+  },
+  {
+    "figure": 92,
+    "image": "screenshots/324-allusers-domain-users-change-read.png",
+    "caption": "разрешения Domain Users на уровне SMB",
+    "sha256": "2419b030a980ce9d69ee727707904e4bcf4c9fccd9f4a3551b6163653f5ccd8d"
+  },
+  {
+    "figure": 93,
+    "image": "screenshots/286-allusers-advanced-security.png",
+    "caption": "NTFS-права корня AllUsers и область This folder only",
+    "sha256": "1387f3c9f8429da2a51dffbaa51acd2f3e59f1324bcf9443dd1ef66929837308"
+  },
+  {
+    "figure": 94,
+    "image": "screenshots/290-sellers-advanced-security.png",
+    "caption": "две области действия прав gSellers",
+    "sha256": "d2c75faed326346ac54ba24e1b408f6d8a9d3beb165790507124b35d5a094287"
+  },
+  {
+    "figure": 95,
+    "image": "screenshots/293-sellers-expanded-permissions.png",
+    "caption": "специальные права gSellers на корень Sellers",
+    "sha256": "6dcf9dd2cca45b02cb36f633bdac30d1bf2dce423d50b5a96585758904685cdf"
+  },
+  {
+    "figure": 96,
+    "image": "screenshots/342-managers-advanced-security-verified.png",
+    "caption": "две области действия прав gManagers",
+    "sha256": "4b3216d00f65bd977b9bce7b420649eaeeea5687bb96e28eaaf8d35ae4ee34c7"
+  },
+  {
+    "figure": 97,
+    "image": "screenshots/343-managers-root-special-permissions.png",
+    "caption": "специальные права gManagers на корень Managers",
+    "sha256": "78c207d7de24c5faa4a564e821395c7f4462fbceeca4eb4960564f72f3ce33d0"
+  },
+  {
+    "figure": 98,
+    "image": "screenshots/292-seller-functional-tests-complete.png",
+    "caption": "результаты первой серии проверок uSeller1",
+    "sha256": "5c98bb4d81e3942072c777667f0e71111ecc4ee875a3c286de0fa0008d7708cd"
+  },
+  {
+    "figure": 99,
+    "image": "screenshots/309-manager-functional-tests-complete.png",
+    "caption": "результаты проверок uManager1",
+    "sha256": "39817da089b585ce92077aee2dbb302010e3f1de7b571dc3b18a95ed90407464"
+  },
+  {
+    "figure": 100,
+    "image": "screenshots/306-blackhole-advanced-security.png",
+    "caption": "защищённый DACL BlackHole с правами двух групп и CREATOR OWNER",
+    "sha256": "fc1248a921a35b85bc5280ce7178c9c03710fd47a76518e40a634f8c2853708b"
+  },
+  {
+    "figure": 101,
+    "image": "screenshots/308-blackhole-no-list-permissions.png",
+    "caption": "специальные права записи без List folder / read data",
+    "sha256": "e6d21a878c68d3f28852e307d70c73e7ba8c0b12553c3e77250cc23f46f781af"
+  },
+  {
+    "figure": 102,
+    "image": "screenshots/294-seller-drag-source-target.png",
+    "caption": "локальный файл продавца и сетевая папка назначения",
+    "sha256": "ed5f108e677fb71f4207495db9c04a45d727444878bd37c966835109e89076bb"
+  },
+  {
+    "figure": 103,
+    "image": "screenshots/299-seller-blackhole-list-denied.png",
+    "caption": "отказ просмотра BlackHole для uSeller1",
+    "sha256": "9432a64b6f64578672d6e27bb0c825f18f7be95b36a17a4837408ba0c4fedfb0"
+  },
+  {
+    "figure": 104,
+    "image": "screenshots/310-manager-drag-source-target.png",
+    "caption": "локальный файл менеджера и сетевая папка назначения",
+    "sha256": "53b6238fb61c0a6e8a6dd9af0beedc54f170e4d9319ea5cf090aeec15f4e8497"
+  },
+  {
+    "figure": 105,
+    "image": "screenshots/312-manager-blackhole-list-denied.png",
+    "caption": "отказ просмотра BlackHole для uManager1",
+    "sha256": "ed9f3453caa2f5c23cb112d3e63550d49a315bbcf016dc43498fc89a6f90118e"
+  },
+  {
+    "figure": 106,
+    "image": "screenshots/340-blackhole-two-files-on-server.png",
+    "caption": "оба файла в BlackHole на файловом сервере",
+    "sha256": "d509e275724580bfc013e9a5848b9c48f358856721480051da95a8707315d636"
+  },
+  {
+    "figure": 107,
+    "image": "screenshots/314-common-advanced-security.png",
+    "caption": "DACL Common с отдельной записью CREATOR OWNER",
+    "sha256": "cc7827c987248f403a85ba31aad0d7cb5e644fdf1797f8f03b42bc52a86cf6c7"
+  },
+  {
+    "figure": 108,
+    "image": "screenshots/316-common-without-delete-permissions.png",
+    "caption": "права Domain Users в Common без двух разрешений удаления",
+    "sha256": "82932af1f797d30474109c6c00471527af14d2dbb9d9841fe28f7a805e55c065"
+  },
+  {
+    "figure": 109,
+    "image": "screenshots/326-seller-second-functional-tests-complete.png",
+    "caption": "взаимная проверка Common и данных после повторного входа продавца",
+    "sha256": "54053b0203e07219a3e33a2e17f2778ff94ea36822e74a93250e985d43386747"
+  },
+  {
+    "figure": 110,
+    "image": "screenshots/345-seller-home-ntfs-verified.png",
+    "caption": "NTFS-права домашнего каталога uSeller1",
+    "sha256": "99bda3697c12df8d319f959800d7831b3194fb358d825a4ab119bd2bd0e8f46d"
+  },
+  {
+    "figure": 111,
+    "image": "screenshots/346-manager-home-ntfs-verified.png",
+    "caption": "NTFS-права домашнего каталога uManager1",
+    "sha256": "3a5146f2e5ba5f32dbfb503a8181a5794489f37c26e01f4cc0055e7327e57b15"
+  },
+  {
+    "figure": 112,
+    "image": "screenshots/360-seller-hidden-share-correct.png",
+    "caption": "скрытое сетевое имя uSeller1$",
+    "sha256": "0f78fe30640fb32fdc64aecf579bd030aa2c9a6ada4133d45808153d2f7c6986"
+  },
+  {
+    "figure": 113,
+    "image": "screenshots/361-seller-home-smb-full-correct.png",
+    "caption": "SMB-доступ владельца домашнего ресурса uSeller1$",
+    "sha256": "3a97ee78b9e2975a0e34a4eb5fb994983198fa326757b44e0aeb8eb60932b5f5"
+  },
+  {
+    "figure": 114,
+    "image": "screenshots/347-manager-hidden-share.png",
+    "caption": "скрытое сетевое имя uManager1$",
+    "sha256": "7f8dd7acf90aa549eb93ef00727dadeddf9edccdc83a02c627fb59c8fd19ba9c"
+  },
+  {
+    "figure": 115,
+    "image": "screenshots/354-manager-home-smb-user-full.png",
+    "caption": "SMB-доступ владельца домашнего ресурса uManager1$",
+    "sha256": "df66e476be713ba8334b7d1b8e24bce768f113eb0897e9cad609bb3c14054b99"
+  },
+  {
+    "figure": 116,
+    "image": "screenshots/333-seller-profile-home-unc.png",
+    "caption": "UNC-пути домашней папки и профиля uSeller1 в ADUC",
+    "sha256": "a3ff594bef4f204569077c58da4bde18a68d3c0cdc49655f63196276bad44331"
+  },
+  {
+    "figure": 117,
+    "image": "screenshots/332-manager-profile-home-unc.png",
+    "caption": "UNC-пути домашней папки и профиля uManager1 в ADUC",
+    "sha256": "2c7b3ca035b03cc27cce3c29027438339ceb0de3da7dc4a9e6cf980cdd68d65e"
+  },
+  {
+    "figure": 118,
+    "image": "screenshots/341-seller-shares-hidden-home-mapped.png",
+    "caption": "скрытые домашние ресурсы отсутствуют в общем списке, но X: подключён",
+    "sha256": "d6defe4b465f0999e7f466a57ee5ae1b9f2fd198931610293593ee00b30eee03"
+  },
+  {
+    "figure": 119,
+    "image": "screenshots/359-roaming-owner-admin-dacl-verified.png",
+    "caption": "владелец и административный доступ к реальному каталогу профиля",
+    "sha256": "e5411c89ccb1e3d51578ce50e2079aaa6e959a93b054f1c1a85631af76592c36"
+  },
+  {
+    "figure": 120,
+    "image": "screenshots/352-server-roaming-profile-files-verified.png",
+    "caption": "файлы профиля и маркер рабочего стола на сервере",
+    "sha256": "5b0f384e115a9776d26bf16c2b5a7db5e6c29e2ba9860386f20ca0da61c63588"
+  },
+  {
+    "figure": 121,
+    "image": "screenshots/335-seller-home-roaming-after-reboot.png",
+    "caption": "домашний диск, маркеры и реальные данные X:\\_profile.V6 после повторного входа",
+    "sha256": "f272d2c21318752e8a8ae4e23dc538116a530559dc340c05a736cf537d08533d"
+  },
+  {
+    "figure": 122,
+    "image": "screenshots/337-seller-roaming-service-proof.png",
+    "caption": "параметры загруженного roaming profile и успешное событие синхронизации",
+    "sha256": "0c24ee6607540e91d0cb0d0075490170bd4d606c158457f1c5e9872647442ab8"
+  }
+]

@@ -1,0 +1,6 @@
+{
+  "exited": 1,
+  "out-data": "{\r\n    \"Identity\":  \"GMAKMA\\\\uDelete1\",\r\n    \"SID\":  \"S-1-5-21-3793483027-3712407111-974862227-1116\",\r\n    \"OriginalSID\":  true,\r\n    \"Computer\":  \"AD-CLIENT\",\r\n    \"SessionId\":  7,\r\n    \"HomeUNC\":  \"\\\\\\\\ad-srv\\\\uDelete1$\",\r\n    \"HomeWriteRead\":  true,\r\n    \"Time\":  \"2026-10-21T18:26:24.9593106+01:00\"\r\n}\r\n\r\n",
+  "exitcode": 0,
+  "out-truncated": 0
+}

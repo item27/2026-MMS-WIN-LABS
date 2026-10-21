@@ -1,0 +1,156 @@
+[
+    {
+        "User":  "uSeller1",
+        "HomeOwner":  "BUILTIN\\Administrators",
+        "ProfileOwner":  "GMAKMA\\uSeller1",
+        "HomeFiles":  [
+                          {
+                              "Name":  "_profile.V6",
+                              "Length":  null
+                          },
+                          {
+                              "Name":  "home-proof.txt",
+                              "Length":  47
+                          }
+                      ],
+        "ProfileFiles":  [
+                             {
+                                 "Name":  "3D Objects",
+                                 "Length":  null
+                             },
+                             {
+                                 "Name":  "AppData",
+                                 "Length":  null
+                             },
+                             {
+                                 "Name":  "Contacts",
+                                 "Length":  null
+                             },
+                             {
+                                 "Name":  "Desktop",
+                                 "Length":  null
+                             },
+                             {
+                                 "Name":  "Documents",
+                                 "Length":  null
+                             },
+                             {
+                                 "Name":  "Downloads",
+                                 "Length":  null
+                             },
+                             {
+                                 "Name":  "Favorites",
+                                 "Length":  null
+                             },
+                             {
+                                 "Name":  "Links",
+                                 "Length":  null
+                             },
+                             {
+                                 "Name":  "Music",
+                                 "Length":  null
+                             },
+                             {
+                                 "Name":  "Pictures",
+                                 "Length":  null
+                             },
+                             {
+                                 "Name":  "Saved Games",
+                                 "Length":  null
+                             },
+                             {
+                                 "Name":  "Searches",
+                                 "Length":  null
+                             },
+                             {
+                                 "Name":  "Videos",
+                                 "Length":  null
+                             },
+                             {
+                                 "Name":  "NTUSER.DAT",
+                                 "Length":  786432
+                             },
+                             {
+                                 "Name":  "ntuser.ini",
+                                 "Length":  294
+                             }
+                         ]
+    },
+    {
+        "User":  "uManager1",
+        "HomeOwner":  "BUILTIN\\Administrators",
+        "ProfileOwner":  "GMAKMA\\uManager1",
+        "HomeFiles":  [
+                          {
+                              "Name":  "_profile.V6",
+                              "Length":  null
+                          },
+                          {
+                              "Name":  "home-proof.txt",
+                              "Length":  23
+                          }
+                      ],
+        "ProfileFiles":  [
+                             {
+                                 "Name":  "3D Objects",
+                                 "Length":  null
+                             },
+                             {
+                                 "Name":  "AppData",
+                                 "Length":  null
+                             },
+                             {
+                                 "Name":  "Contacts",
+                                 "Length":  null
+                             },
+                             {
+                                 "Name":  "Desktop",
+                                 "Length":  null
+                             },
+                             {
+                                 "Name":  "Documents",
+                                 "Length":  null
+                             },
+                             {
+                                 "Name":  "Downloads",
+                                 "Length":  null
+                             },
+                             {
+                                 "Name":  "Favorites",
+                                 "Length":  null
+                             },
+                             {
+                                 "Name":  "Links",
+                                 "Length":  null
+                             },
+                             {
+                                 "Name":  "Music",
+                                 "Length":  null
+                             },
+                             {
+                                 "Name":  "Pictures",
+                                 "Length":  null
+                             },
+                             {
+                                 "Name":  "Saved Games",
+                                 "Length":  null
+                             },
+                             {
+                                 "Name":  "Searches",
+                                 "Length":  null
+                             },
+                             {
+                                 "Name":  "Videos",
+                                 "Length":  null
+                             },
+                             {
+                                 "Name":  "NTUSER.DAT",
+                                 "Length":  786432
+                             },
+                             {
+                                 "Name":  "ntuser.ini",
+                                 "Length":  294
+                             }
+                         ]
+    }
+]

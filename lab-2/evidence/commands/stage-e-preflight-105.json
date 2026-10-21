@@ -1,0 +1,214 @@
+{
+  "status": {
+    "diskread": 22320856064,
+    "vmid": 105,
+    "mem": 4363317248,
+    "balloon": 4294967296,
+    "blockstat": {
+      "ide2": {
+        "failed_wr_operations": 0,
+        "failed_flush_operations": 0,
+        "flush_operations": 0,
+        "unmap_operations": 0,
+        "rd_merged": 0,
+        "invalid_zone_append_operations": 0,
+        "zone_append_total_time_ns": 0,
+        "unmap_merged": 0,
+        "idle_time_ns": 4124556948398,
+        "zone_append_bytes": 0,
+        "zone_append_merged": 0,
+        "wr_merged": 0,
+        "failed_rd_operations": 0,
+        "zone_append_operations": 0,
+        "timed_stats": [],
+        "invalid_rd_operations": 0,
+        "invalid_flush_operations": 0,
+        "wr_operations": 0,
+        "unmap_total_time_ns": 0,
+        "flush_total_time_ns": 0,
+        "wr_total_time_ns": 0,
+        "failed_zone_append_operations": 0,
+        "wr_bytes": 0,
+        "invalid_unmap_operations": 0,
+        "rd_bytes": 5339015168,
+        "unmap_bytes": 0,
+        "rd_total_time_ns": 69520563090,
+        "wr_highest_offset": 0,
+        "account_failed": true,
+        "failed_unmap_operations": 0,
+        "invalid_wr_operations": 0,
+        "account_invalid": true,
+        "rd_operations": 64090
+      },
+      "sata0": {
+        "failed_zone_append_operations": 0,
+        "wr_bytes": 20350116864,
+        "flush_total_time_ns": 2318638062439,
+        "wr_total_time_ns": 37160825978818,
+        "unmap_total_time_ns": 216368414,
+        "invalid_flush_operations": 0,
+        "wr_operations": 496397,
+        "invalid_wr_operations": 0,
+        "account_invalid": true,
+        "rd_operations": 437335,
+        "account_failed": true,
+        "wr_highest_offset": 68719476736,
+        "failed_unmap_operations": 0,
+        "rd_total_time_ns": 10565102363298,
+        "unmap_bytes": 78041952256,
+        "invalid_unmap_operations": 0,
+        "rd_bytes": 16981840896,
+        "unmap_merged": 0,
+        "rd_merged": 0,
+        "unmap_operations": 22072,
+        "zone_append_total_time_ns": 0,
+        "invalid_zone_append_operations": 0,
+        "failed_flush_operations": 0,
+        "flush_operations": 33345,
+        "failed_wr_operations": 0,
+        "zone_append_operations": 0,
+        "invalid_rd_operations": 0,
+        "timed_stats": [],
+        "failed_rd_operations": 0,
+        "wr_merged": 0,
+        "idle_time_ns": 1930119770,
+        "zone_append_merged": 0,
+        "zone_append_bytes": 0
+      }
+    },
+    "running-machine": "pc-q35-11.0+pve0",
+    "pressurememoryfull": 0,
+    "pid": 676822,
+    "name": "win-labs-2",
+    "netin": 25483450,
+    "uptime": 38851,
+    "running-qemu": "11.0.0",
+    "nics": {
+      "tap105i0": {
+        "netin": 25483450,
+        "netout": 13297818
+      }
+    },
+    "ha": {
+      "managed": 0
+    },
+    "pressureiosome": 0,
+    "disk": 0,
+    "cpu": 0.0275852829500018,
+    "diskwrite": 20350116864,
+    "pressurecpufull": 0,
+    "maxdisk": 68719476736,
+    "status": "running",
+    "pressurememorysome": 0,
+    "agent": 1,
+    "cpus": 2,
+    "pressurecpusome": 0,
+    "proxmox-support": {
+      "pbs-dirty-bitmap": true,
+      "query-bitmap-info": true,
+      "pbs-dirty-bitmap-savevm": true,
+      "backup-access-api": true,
+      "pbs-masterkey": true,
+      "pbs-library-version": "2.0.2 (594183eab9fa275f45dfff5dd15b16f150abd503)",
+      "backup-max-workers": true,
+      "backup-fleecing": true,
+      "pbs-dirty-bitmap-migration": true
+    },
+    "maxmem": 4294967296,
+    "memhost": 4363317248,
+    "netout": 13297818,
+    "qmpstatus": "running",
+    "ballooninfo": {
+      "max_mem": 4294967296,
+      "actual": 4294967296
+    },
+    "pressureiofull": 0
+  },
+  "config": {
+    "machine": "pc-q35-11.0",
+    "agent": "1",
+    "memory": "4096",
+    "vmgenid": "c772b0f7-f956-458b-82c1-7668e2e01e9b",
+    "smbios1": "uuid=1dcfd7b7-8934-4b12-8348-92ff87ff6087",
+    "bios": "seabios",
+    "net0": "e1000=BC:24:11:53:4F:29,bridge=vmbr1_lab,firewall=1",
+    "efidisk0": "hd1t:vm-105-disk-0,efitype=4m,ms-cert=2023k,pre-enrolled-keys=1,size=4M",
+    "ide2": "truenas-backup:iso/Win10_22H2_EnglishInternational_x64v1.iso,media=cdrom,size=5991830K",
+    "name": "win-labs-2",
+    "digest": "b499f95349d9285a306b522639323fb147232b5f",
+    "numa": 0,
+    "sockets": 1,
+    "parent": "lab2-stage-d-safe-gpo-verified",
+    "sata0": "hd1t:vm-105-disk-1,size=64G",
+    "cpu": "x86-64-v2-AES",
+    "cores": 2,
+    "boot": "order=sata0;ide2",
+    "meta": "creation-qemu=11.0.0,ctime=1791142632",
+    "ostype": "win11",
+    "scsihw": "virtio-scsi-single"
+  },
+  "snapshots": [
+    {
+      "vmstate": 0,
+      "name": "lab2-client-preinstall",
+      "snaptime": 1791146089,
+      "description": "Rollback before Windows 10 installation"
+    },
+    {
+      "vmstate": 0,
+      "name": "pre-attempt1-clean-reinstall",
+      "parent": "lab2-client-base",
+      "description": "Preserved state before user-authorized clean attempt 1 reinstall",
+      "snaptime": 1791481728
+    },
+    {
+      "vmstate": 0,
+      "name": "lab2-stage-d-before-gpo",
+      "parent": "lab2-stage-c-verified",
+      "description": "Stage C verified; before stage D GPO changes",
+      "snaptime": 1792555027
+    },
+    {
+      "name": "lab2-stage-c-before-acl-tests",
+      "vmstate": 0,
+      "parent": "lab2-a1-client-os-ready",
+      "description": "Before nonadmin SMB functional tests; AD and shares configured",
+      "snaptime": 1792549251
+    },
+    {
+      "snaptime": 1792562295,
+      "description": "GPO and assigned 7-Zip verified. C root ACL propagated; protected OS/profile ACL retained; literal D8 all-objects not fulfilled.",
+      "parent": "lab2-stage-d-before-gpo",
+      "vmstate": 0,
+      "name": "lab2-stage-d-safe-gpo-verified"
+    },
+    {
+      "vmstate": 0,
+      "name": "lab2-stage-c-verified",
+      "parent": "lab2-stage-c-before-acl-tests",
+      "description": "Stage C verified: both users SMB ACLs and drag/drop, home, seller reboot/relogon roaming profile",
+      "snaptime": 1792552917
+    },
+    {
+      "name": "lab2-client-base",
+      "vmstate": 0,
+      "parent": "lab2-client-preinstall",
+      "description": "Windows 10 Pro installed and named ad-client",
+      "snaptime": 1791158916
+    },
+    {
+      "vmstate": 0,
+      "name": "lab2-a1-client-os-ready",
+      "parent": "pre-attempt1-clean-reinstall",
+      "description": "",
+      "snaptime": 1792539566
+    },
+    {
+      "parent": "lab2-stage-d-safe-gpo-verified",
+      "digest": "b499f95349d9285a306b522639323fb147232b5f",
+      "name": "current",
+      "description": "You are here!",
+      "running": 1
+    }
+  ]
+}

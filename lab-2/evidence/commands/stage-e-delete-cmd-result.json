@@ -1,0 +1,6 @@
+{
+  "exited": 1,
+  "out-data": "{\r\n    \"CmdExitCode\":  0,\r\n    \"UsersRemaining\":  0,\r\n    \"Time\":  \"2026-10-21T10:01:54.4413517-07:00\"\r\n}\r\n\r\ndsrm succeeded:CN=uDelete1,OU=unit-for-delete,DC=GMAKMA,DC=local\r\ndsrm succeeded:CN=uDelete2,OU=unit-for-delete,DC=GMAKMA,DC=local\r\ndsrm succeeded:CN=uDelete3,OU=unit-for-delete,DC=GMAKMA,DC=local\r\ndsrm succeeded:CN=uDelete4,OU=unit-for-delete,DC=GMAKMA,DC=local\r\ndsrm succeeded:CN=uDelete5,OU=unit-for-delete,DC=GMAKMA,DC=local\r\n",
+  "out-truncated": 0,
+  "exitcode": 0
+}

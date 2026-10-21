@@ -1,0 +1,6 @@
+{
+  "exited": 1,
+  "out-data": "\r\nLastTaskResult\r\n--------------\r\n             0\r\n              \r\nC:\\Users\\uSeller1\\Start Menu\\*: Access is denied.\r\nC:\\Users\\uSeller1\\Templates\\*: Access is denied.\r\nC:\\Windows\\System32\\config\\systemprofile\\AppData\\Local\\Microsoft\\Windows\\INetCache\\Content.IE5\\*: Access is denied.\r\nSuccessfully processed 0 files; Failed processing 108 files\r\n\r\n\r\n",
+  "exitcode": 0,
+  "out-truncated": 0
+}

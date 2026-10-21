@@ -1,0 +1,41 @@
+{
+    "SID":  "S-1-5-21-3793483027-3712407111-974862227-1107",
+    "RestrictRun":  1,
+    "Allowed":  [
+                    {
+                        "Name":  "1",
+                        "Value":  "mspaint.exe"
+                    },
+                    {
+                        "Name":  "2",
+                        "Value":  "calc.exe"
+                    },
+                    {
+                        "Name":  "3",
+                        "Value":  "notepad.exe"
+                    }
+                ],
+    "Processes":  [
+                      {
+                          "Name":  "mspaint.exe",
+                          "SessionId":  4,
+                          "Owner":  "GMAKMA\\uManager1",
+                          "OwnerDomain":  "GMAKMA",
+                          "OwnerUser":  "uManager1"
+                      },
+                      {
+                          "Name":  "Calculator.exe",
+                          "SessionId":  4,
+                          "Owner":  "GMAKMA\\uManager1",
+                          "OwnerDomain":  "GMAKMA",
+                          "OwnerUser":  "uManager1"
+                      },
+                      {
+                          "Name":  "notepad.exe",
+                          "SessionId":  4,
+                          "Owner":  "GMAKMA\\uManager1",
+                          "OwnerDomain":  "GMAKMA",
+                          "OwnerUser":  "uManager1"
+                      }
+                  ]
+}

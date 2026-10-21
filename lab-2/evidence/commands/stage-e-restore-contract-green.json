@@ -1,0 +1,6 @@
+{
+  "exitcode": 0,
+  "out-truncated": 0,
+  "out-data": "PASS: four-entry manifest rejected before restoring any object\r\n",
+  "exited": 1
+}

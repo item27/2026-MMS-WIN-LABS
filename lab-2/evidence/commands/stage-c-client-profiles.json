@@ -1,0 +1,24 @@
+[
+    {
+        "SID":  "S-1-5-21-3793483027-3712407111-974862227-1107",
+        "LocalPath":  "C:\\Users\\uManager1",
+        "Loaded":  false,
+        "RoamingConfigured":  true,
+        "RoamingPath":  "\\\\ad-srv\\uManager1$\\_profile.V6",
+        "Status":  2,
+        "LastUseTime":  "\/Date(1792586754971)\/",
+        "LastDownloadTime":  null,
+        "LastUploadTime":  "\/Date(1792586763706)\/"
+    },
+    {
+        "SID":  "S-1-5-21-3793483027-3712407111-974862227-1106",
+        "LocalPath":  "C:\\Users\\uSeller1",
+        "Loaded":  true,
+        "RoamingConfigured":  true,
+        "RoamingPath":  "\\\\ad-srv\\uSeller1$\\_profile.V6",
+        "Status":  2,
+        "LastUseTime":  "\/Date(1792587530864)\/",
+        "LastDownloadTime":  "\/Date(1792587370402)\/",
+        "LastUploadTime":  "\/Date(1792586101817)\/"
+    }
+]

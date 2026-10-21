@@ -1,0 +1,6 @@
+{
+  "exitcode": 0,
+  "out-truncated": 0,
+  "out-data": "{\r\n    \"Owner\":  \"BUILTIN\\\\Administrators\",\r\n    \"AreAccessRulesProtected\":  true,\r\n    \"Access\":  {\r\n                   \"value\":  [\r\n                                 {\r\n                                     \"IdentityReference\":  {\r\n                                                               \"Value\":  \"NT AUTHORITY\\\\SYSTEM\"\r\n                                                           },\r\n                                     \"FileSystemRights\":  2032127,\r\n                                     \"IsInherited\":  false\r\n                                 },\r\n                                 {\r\n                                     \"IdentityReference\":  {\r\n                                                               \"Value\":  \"BUILTIN\\\\Administrators\"\r\n                                                           },\r\n                                     \"FileSystemRights\":  2032127,\r\n                                     \"IsInherited\":  false\r\n                                 }\r\n                             ],\r\n                   \"Count\":  2\r\n               }\r\n}\r\n",
+  "exited": 1
+}

@@ -1,0 +1,6 @@
+{
+  "out-data": "{\r\n    \"Name\":  \"gDeleteLab2\",\r\n    \"DistinguishedName\":  \"CN=gDeleteLab2,OU=ouCsvSellers,DC=GMAKMA,DC=local\",\r\n    \"ObjectGUID\":  \"ca5d4b12-47f4-4af2-b02e-fed459a4024e\"\r\n}\r\n",
+  "exited": 1,
+  "out-truncated": 0,
+  "exitcode": 0
+}

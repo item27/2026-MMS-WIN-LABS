@@ -46,7 +46,9 @@ blockquote { margin: 4mm 0; padding: 2.5mm 4mm; border-left: 1mm solid #777; col
 code { font-family: "DejaVu Sans Mono", monospace; font-size: 8.3pt; background: #f1f1f1; padding: 0.2mm 0.8mm; }
 pre { margin: 4mm 0; padding: 3mm; border: 0.25mm solid #bbb; background: #f7f7f7; white-space: pre-wrap; overflow-wrap: anywhere; break-inside: avoid; page-break-inside: avoid; font-family: "DejaVu Sans Mono", monospace; font-size: 7.7pt; line-height: 1.28; }
 pre code { padding: 0; background: transparent; font-size: inherit; }
-img { display: block; max-width: 100%; max-height: 165mm; margin: 4mm auto 6mm; object-fit: contain; page-break-inside: avoid; }
+img { display: block; max-width: 155mm; max-height: 90mm; margin: 2mm auto; object-fit: contain; page-break-inside: avoid; }
+p:has(> img:only-child) { margin: 0; break-after: avoid; page-break-after: avoid; }
+p:has(> img:only-child) + p { break-before: avoid; page-break-before: avoid; break-inside: avoid; }
 a { color: #111; text-decoration: none; }
 hr { border: 0; border-top: 0.25mm solid #777; margin: 7mm 0; }
 """

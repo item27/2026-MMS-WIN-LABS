@@ -1,0 +1,6 @@
+{
+  "out-data": "[\r\n    {\r\n        \"ValueName\":  \"1\",\r\n        \"Value\":  \"mspaint.exe\"\r\n    },\r\n    {\r\n        \"ValueName\":  \"2\",\r\n        \"Value\":  \"calc.exe\"\r\n    },\r\n    {\r\n        \"ValueName\":  \"3\",\r\n        \"Value\":  \"notepad.exe\"\r\n    }\r\n]\r\n",
+  "exited": 1,
+  "out-truncated": 0,
+  "exitcode": 0
+}

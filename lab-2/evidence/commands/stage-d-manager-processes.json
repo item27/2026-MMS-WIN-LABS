@@ -1,0 +1,6 @@
+{
+  "exited": 1,
+  "out-data": "\r\nName           ProcessId SessionId\r\n----           --------- ---------\r\nmspaint.exe         1760         3\r\nnotepad.exe         3308         3\r\nCalculator.exe      4420         3\r\n\r\n\r\n",
+  "out-truncated": 0,
+  "exitcode": 1
+}

@@ -1,0 +1,6 @@
+{
+  "out-truncated": 0,
+  "exitcode": 0,
+  "exited": 1,
+  "out-data": "{\r\n    \"Identity\":  \"GMAKMA\\\\uCsvSeller1\",\r\n    \"SID\":  \"S-1-5-21-3793483027-3712407111-974862227-1113\",\r\n    \"Computer\":  \"AD-CLIENT\",\r\n    \"SessionId\":  6,\r\n    \"UserProfile\":  \"C:\\\\Users\\\\uCsvSeller1\",\r\n    \"HomeDrive\":  \"X\",\r\n    \"HomeUNC\":  \"\\\\\\\\ad-srv\\\\uCsvSeller1$\",\r\n    \"HomeWriteAndRead\":  true,\r\n    \"OtherCsvHomeDenied\":  true,\r\n    \"MarkerSHA256\":  \"94AD420B53AA4F72E5ACB27B5267E8882A77852B6A1F52CD2846CF4F5C547DA6\",\r\n    \"Time\":  \"2026-10-21T18:10:30.4763931+01:00\"\r\n}\r\n\r\n"
+}

@@ -1,0 +1,18 @@
+[
+    {
+        "Name":  "ouSellers",
+        "DistinguishedName":  "OU=ouSellers,DC=GMAKMA,DC=local"
+    },
+    {
+        "Name":  "ouManagers",
+        "DistinguishedName":  "OU=ouManagers,DC=GMAKMA,DC=local"
+    },
+    {
+        "Name":  "ouComputers",
+        "DistinguishedName":  "OU=ouComputers,DC=GMAKMA,DC=local"
+    },
+    {
+        "Name":  "unit-for-delete",
+        "DistinguishedName":  "OU=unit-for-delete,DC=GMAKMA,DC=local"
+    }
+]

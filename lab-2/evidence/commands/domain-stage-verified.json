@@ -1,0 +1,27 @@
+{
+    "Scope":  [
+                  {
+                      "Name":  "Lab2Scope",
+                      "ScopeId":  "10.0.0.0",
+                      "StartRange":  "10.0.0.100",
+                      "EndRange":  "10.0.0.110",
+                      "SubnetMask":  "255.0.0.0",
+                      "State":  "Active"
+                  }
+              ],
+    "ComputerObjects":  [
+                            {
+                                "Name":  "AD-SRV",
+                                "DistinguishedName":  "CN=AD-SRV,OU=Domain Controllers,DC=GMAKMA,DC=local"
+                            },
+                            {
+                                "Name":  "AD-CLIENT",
+                                "DistinguishedName":  "CN=AD-CLIENT,CN=Computers,DC=GMAKMA,DC=local"
+                            }
+                        ],
+    "DhcpService":  "Running",
+    "Controller":  {
+                       "HostName":  "ad-srv.GMAKMA.local",
+                       "Domain":  "GMAKMA.local"
+                   }
+}

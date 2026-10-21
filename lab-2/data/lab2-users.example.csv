@@ -1,0 +1,8 @@
+FullName,Title,Department,Email,Phone,SamAccountName,Password,OrganizationalUnit,Groups,HomeDirectory,ProfilePath
+CSV Seller One,Sales specialist,Sales CSV,uCsvSeller1@GMAKMA.local,+7-495-555-01-10,uCsvSeller1,REDACTED_NOT_A_PASSWORD,ouCsvSellers,gCsvSellers;gCsvStaff,\\ad-srv\uCsvSeller1$,\\ad-srv\Profiles$\uCsvSeller1
+CSV Manager One,Sales manager,Management CSV,uCsvManager1@GMAKMA.local,+7-495-555-01-11,uCsvManager1,REDACTED_NOT_A_PASSWORD,ouCsvManagers,gCsvManagers;gCsvStaff,\\ad-srv\uCsvManager1$,\\ad-srv\Profiles$\uCsvManager1
+Deletion User 1,Recovery trainee,Recovery,uDelete1@GMAKMA.local,+7-495-555-01-10,uDelete1,REDACTED_NOT_A_PASSWORD,unit-for-delete,gDeleteLab2,\\ad-srv\uDelete1$,\\ad-srv\Profiles$\uDelete1
+Deletion User 2,Recovery trainee,Recovery,uDelete2@GMAKMA.local,+7-495-555-01-11,uDelete2,REDACTED_NOT_A_PASSWORD,unit-for-delete,gDeleteLab2,\\ad-srv\uDelete2$,\\ad-srv\Profiles$\uDelete2
+Deletion User 3,Recovery trainee,Recovery,uDelete3@GMAKMA.local,+7-495-555-01-12,uDelete3,REDACTED_NOT_A_PASSWORD,unit-for-delete,gDeleteLab2,\\ad-srv\uDelete3$,\\ad-srv\Profiles$\uDelete3
+Deletion User 4,Recovery trainee,Recovery,uDelete4@GMAKMA.local,+7-495-555-01-13,uDelete4,REDACTED_NOT_A_PASSWORD,unit-for-delete,gDeleteLab2,\\ad-srv\uDelete4$,\\ad-srv\Profiles$\uDelete4
+Deletion User 5,Recovery trainee,Recovery,uDelete5@GMAKMA.local,+7-495-555-01-14,uDelete5,REDACTED_NOT_A_PASSWORD,unit-for-delete,gDeleteLab2,\\ad-srv\uDelete5$,\\ad-srv\Profiles$\uDelete5

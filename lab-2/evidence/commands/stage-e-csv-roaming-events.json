@@ -1,0 +1,6 @@
+{
+  "exitcode": 0,
+  "out-truncated": 0,
+  "exited": 1,
+  "out-data": "{\r\n    \"Profile\":  {\r\n                    \"LocalPath\":  \"C:\\\\Users\\\\uCsvSeller1\",\r\n                    \"RoamingConfigured\":  true,\r\n                    \"RoamingPath\":  \"\\\\\\\\ad-srv\\\\Profiles$\\\\uCsvSeller1.V6\",\r\n                    \"Loaded\":  true,\r\n                    \"Status\":  2,\r\n                    \"LastDownload\":  \"2026-10-21T18:09:51.3370000+01:00\",\r\n                    \"LastUpload\":  \"2026-10-21T17:52:47.7860000+01:00\"\r\n                },\r\n    \"Events\":  [\r\n                   {\r\n                       \"TimeCreated\":  \"\\/Date(1792602590887)\\/\",\r\n                       \"Id\":  7,\r\n                       \"Message\":  \"Finished synchronize profile from \\\\\\\\ad-srv\\\\Profiles$\\\\uCsvSeller1.V6 to C:\\\\Users\\\\uCsvSeller1. \\r\\n\\r\\nResult: The operation completed successfully.\\r\\n\"\r\n                   },\r\n                   {\r\n                       \"TimeCreated\":  \"\\/Date(1792602590669)\\/\",\r\n                       \"Id\":  6,\r\n                       \"Message\":  \"Starting synchronize profile from \\\\\\\\ad-srv\\\\Profiles$\\\\uCsvSeller1.V6 to C:\\\\Users\\\\uCsvSeller1.\"\r\n                   }\r\n               ]\r\n}\r\n"
+}

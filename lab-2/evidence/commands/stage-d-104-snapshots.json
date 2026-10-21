@@ -1,0 +1,58 @@
+[
+  {
+    "parent": "lab2-stage-c-verified",
+    "vmstate": 0,
+    "name": "lab2-stage-d-before-gpo",
+    "snaptime": 1792555027,
+    "snapstate": "prepare",
+    "description": "Stage C verified; before stage D GPO changes"
+  },
+  {
+    "snaptime": 1792549251,
+    "description": "Before nonadmin SMB functional tests; AD and shares configured",
+    "parent": "lab2-a1-server-os-ready",
+    "name": "lab2-stage-c-before-acl-tests",
+    "vmstate": 0
+  },
+  {
+    "parent": "lab2-server-preconfig",
+    "vmstate": 0,
+    "name": "pre-attempt1-clean-reinstall",
+    "snaptime": 1791481726,
+    "description": "Preserved state before user-authorized clean attempt 1 reinstall"
+  },
+  {
+    "vmstate": 0,
+    "name": "lab2-server-preconfig",
+    "description": "Rollback before server configuration",
+    "snaptime": 1791146088
+  },
+  {
+    "description": "",
+    "snaptime": 1792539564,
+    "vmstate": 0,
+    "name": "lab2-a1-server-os-ready",
+    "parent": "pre-attempt1-clean-reinstall"
+  },
+  {
+    "name": "lab2-stage-c-verified",
+    "vmstate": 0,
+    "parent": "lab2-stage-c-before-acl-tests",
+    "description": "Stage C verified: both users SMB ACLs and drag/drop, home, seller reboot/relogon roaming profile",
+    "snaptime": 1792552917
+  },
+  {
+    "name": "lab2-server-base",
+    "vmstate": 0,
+    "parent": "lab2-server-preconfig",
+    "description": "Windows Server base: AD, DNS and DHCP ready",
+    "snaptime": 1791158915
+  },
+  {
+    "running": 1,
+    "description": "You are here!",
+    "parent": "lab2-stage-c-verified",
+    "digest": "41cec53bec064604e6ed2feaea25c0089204bbde",
+    "name": "current"
+  }
+]

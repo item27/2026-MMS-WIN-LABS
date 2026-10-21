@@ -1,0 +1,30 @@
+[
+    {
+        "Script":  "stage-c-configuration",
+        "ParseErrorCount":  0,
+        "Errors":  [
+
+                   ]
+    },
+    {
+        "Script":  "stage-c-read-state",
+        "ParseErrorCount":  0,
+        "Errors":  [
+
+                   ]
+    },
+    {
+        "Script":  "stage-c-user-tests",
+        "ParseErrorCount":  0,
+        "Errors":  [
+
+                   ]
+    },
+    {
+        "Script":  "stage-c-profile-admin-access",
+        "ParseErrorCount":  0,
+        "Errors":  [
+
+                   ]
+    }
+]

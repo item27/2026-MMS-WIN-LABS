@@ -24,6 +24,9 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v5
 
+      - name: Test screenshot layout
+        run: uv run --script tests/test_render.py -v
+
       - name: Render reports
         shell: bash
         run: |

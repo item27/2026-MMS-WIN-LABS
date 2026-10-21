@@ -1,0 +1,88 @@
+{
+    "Registry":  [
+                     {
+                         "registryKey":  "Software\\Policies\\Microsoft\\Windows\\NetCache",
+                         "valueName":  "Enabled",
+                         "valueType":  4,
+                         "value":  [
+                                       0,
+                                       0,
+                                       0,
+                                       0
+                                   ],
+                         "GPOID":  "cn={2c121627-0f4c-4539-af39-ef1da291fc8b},cn=policies,cn=system,DC=GMAKMA,DC=local",
+                         "precedence":  1
+                     },
+                     {
+                         "registryKey":  "Software\\Policies\\Microsoft\\Windows\\NetCache",
+                         "valueName":  "",
+                         "valueType":  0,
+                         "value":  [
+
+                                   ],
+                         "GPOID":  "cn={2c121627-0f4c-4539-af39-ef1da291fc8b},cn=policies,cn=system,DC=GMAKMA,DC=local",
+                         "precedence":  1
+                     },
+                     {
+                         "registryKey":  "Software\\Policies\\Microsoft\\Windows\\Windows Error Reporting",
+                         "valueName":  "Disabled",
+                         "valueType":  4,
+                         "value":  [
+                                       1,
+                                       0,
+                                       0,
+                                       0
+                                   ],
+                         "GPOID":  "cn={2c121627-0f4c-4539-af39-ef1da291fc8b},cn=policies,cn=system,DC=GMAKMA,DC=local",
+                         "precedence":  1
+                     },
+                     {
+                         "registryKey":  "Software\\Policies\\Microsoft\\Windows\\Windows Error Reporting",
+                         "valueName":  "",
+                         "valueType":  0,
+                         "value":  [
+
+                                   ],
+                         "GPOID":  "cn={2c121627-0f4c-4539-af39-ef1da291fc8b},cn=policies,cn=system,DC=GMAKMA,DC=local",
+                         "precedence":  1
+                     }
+                 ],
+    "Security":  [
+                     {
+                         "KeyName":  "PasswordComplexity",
+                         "Setting":  false,
+                         "Precedence":  1,
+                         "GPOID":  "CN={31B2F340-016D-11D2-945F-00C04FB984F9},CN=Policies,CN=System,DC=GMAKMA,DC=local"
+                     },
+                     {
+                         "KeyName":  "ClearTextPassword",
+                         "Setting":  false,
+                         "Precedence":  1,
+                         "GPOID":  "CN={31B2F340-016D-11D2-945F-00C04FB984F9},CN=Policies,CN=System,DC=GMAKMA,DC=local"
+                     },
+                     {
+                         "KeyName":  "ForceLogoffWhenHourExpire",
+                         "Setting":  false,
+                         "Precedence":  1,
+                         "GPOID":  "CN={31B2F340-016D-11D2-945F-00C04FB984F9},CN=Policies,CN=System,DC=GMAKMA,DC=local"
+                     },
+                     {
+                         "KeyName":  "RequireLogonToChangePassword",
+                         "Setting":  false,
+                         "Precedence":  1,
+                         "GPOID":  "CN={31B2F340-016D-11D2-945F-00C04FB984F9},CN=Policies,CN=System,DC=GMAKMA,DC=local"
+                     },
+                     {
+                         "KeyName":  "LSAAnonymousNameLookup",
+                         "Setting":  false,
+                         "Precedence":  1,
+                         "GPOID":  "CN={31B2F340-016D-11D2-945F-00C04FB984F9},CN=Policies,CN=System,DC=GMAKMA,DC=local"
+                     },
+                     {
+                         "KeyName":  "EnableAdminAccount",
+                         "Setting":  false,
+                         "Precedence":  1,
+                         "GPOID":  "cn={2c121627-0f4c-4539-af39-ef1da291fc8b},cn=policies,cn=system,DC=GMAKMA,DC=local"
+                     }
+                 ]
+}

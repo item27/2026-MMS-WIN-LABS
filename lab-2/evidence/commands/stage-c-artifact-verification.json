@@ -1,0 +1,54 @@
+{
+  "series": {
+    "seller-first": {
+      "total": 17,
+      "pass": 17,
+      "fail": 0
+    },
+    "manager-first": {
+      "total": 20,
+      "pass": 20,
+      "fail": 0
+    },
+    "seller-second": {
+      "total": 7,
+      "pass": 7,
+      "fail": 0
+    }
+  },
+  "total_tests": 44,
+  "passed": 44,
+  "figures": 46,
+  "first_figure": 77,
+  "last_figure": 122,
+  "new_console_images": 94,
+  "checks": {
+    "all_nonadmin_user_tests_pass": true,
+    "both_users_tested": true,
+    "four_ous": true,
+    "client_ou_dc_preserved": true,
+    "groups_members": true,
+    "shares_present": true,
+    "user_paths": true,
+    "protected_training_dacls": true,
+    "Sellers_root_not_delete_or_write_dacl_or_write_owner": true,
+    "Sellers_root_delete_child": true,
+    "Managers_root_not_delete_or_write_dacl_or_write_owner": true,
+    "Managers_root_delete_child": true,
+    "profile_marker_hash_same": true,
+    "roaming_loaded_not_temporary": true,
+    "successful_real_server_to_client_sync_event": true,
+    "regular_roaming_profile_event": true,
+    "evtx_signature": true,
+    "figure_sequence": true,
+    "figure_integrity": true,
+    "uncropped_1024x768_images": true,
+    "no_blank_images": true,
+    "all_intended_root_relative_links_exist": true,
+    "no_disallowed_typography": true,
+    "only_lab_bridge_running_final_snapshots": true,
+    "no_known_password_values_in_new_artifacts": true
+  },
+  "all_checks_pass": true,
+  "secret_leak_file_count": 0
+}

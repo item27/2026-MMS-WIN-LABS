@@ -1,0 +1,6 @@
+{
+  "out-truncated": 0,
+  "exitcode": 0,
+  "exited": 1,
+  "out-data": "{\r\n    \"Name\":  \"Recycle Bin Feature\",\r\n    \"EnabledScopes\":  [\r\n                          \"CN=Partitions,CN=Configuration,DC=GMAKMA,DC=local\"\r\n                      ],\r\n    \"IsDisableable\":  false\r\n}\r\n\r\n"
+}

@@ -1,0 +1,302 @@
+[
+    {
+        "TimeCreated":  "\/Date(1792587370472)\/",
+        "Id":  2,
+        "LevelDisplayName":  "Information",
+        "Message":  "Finished processing user logon notification on session 1."
+    },
+    {
+        "TimeCreated":  "\/Date(1792587370472)\/",
+        "Id":  59,
+        "LevelDisplayName":  "Information",
+        "Message":  "Disable background user hive upload task succeeded."
+    },
+    {
+        "TimeCreated":  "\/Date(1792587370407)\/",
+        "Id":  75,
+        "LevelDisplayName":  "Information",
+        "Message":  "Roaming Profiles configuration is being controlled by Group Policy."
+    },
+    {
+        "TimeCreated":  "\/Date(1792587370407)\/",
+        "Id":  67,
+        "LevelDisplayName":  "Information",
+        "Message":  "Logon type: Regular \r\nLocal profile location: C:\\Users\\uSeller1 \r\nProfile type: Roaming"
+    },
+    {
+        "TimeCreated":  "\/Date(1792587370407)\/",
+        "Id":  68,
+        "LevelDisplayName":  "Information",
+        "Message":  "LastDownloadTime: Year: 2026, Month 10, Day 21, Hour 12, Minute 56 \r\nLastUploadTime: Year: 2026, Month 10, Day 21, Hour 12, Minute 35"
+    },
+    {
+        "TimeCreated":  "\/Date(1792587370404)\/",
+        "Id":  5,
+        "LevelDisplayName":  "Information",
+        "Message":  "Registry file C:\\Users\\uSeller1\\AppData\\Local\\Microsoft\\Windows\\\\UsrClass.dat is loaded at HKU\\S-1-5-21-3793483027-3712407111-974862227-1106_Classes."
+    },
+    {
+        "TimeCreated":  "\/Date(1792587370148)\/",
+        "Id":  5,
+        "LevelDisplayName":  "Information",
+        "Message":  "Registry file C:\\Users\\uSeller1\\ntuser.dat is loaded at HKU\\S-1-5-21-3793483027-3712407111-974862227-1106."
+    },
+    {
+        "TimeCreated":  "\/Date(1792587370035)\/",
+        "Id":  7,
+        "LevelDisplayName":  "Information",
+        "Message":  "Finished synchronize profile from \\\\ad-srv\\uSeller1$\\_profile.V6 to C:\\Users\\uSeller1. \r\n\r\nResult: The operation completed successfully.\r\n"
+    },
+    {
+        "TimeCreated":  "\/Date(1792587369710)\/",
+        "Id":  69,
+        "LevelDisplayName":  "Warning",
+        "Message":  "\\\\ad-srv\\uSeller1$\\_profile.V6\\NTUSER.DAT which has timestamp Year: 2026, Month 10, Day 21, Hour 12, Minute 34 was not copied to C:\\Users\\uSeller1\\NTUSER.DAT which has timestamp Year: 2026, Month 10, Day 21, Hour 12, Minute 35 since it is older than the file it would be overwriting."
+    },
+    {
+        "TimeCreated":  "\/Date(1792587369373)\/",
+        "Id":  6,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting synchronize profile from \\\\ad-srv\\uSeller1$\\_profile.V6 to C:\\Users\\uSeller1."
+    },
+    {
+        "TimeCreated":  "\/Date(1792587369326)\/",
+        "Id":  63,
+        "LevelDisplayName":  "Information",
+        "Message":  "This computer is a primary computer for this user."
+    },
+    {
+        "TimeCreated":  "\/Date(1792587369279)\/",
+        "Id":  1,
+        "LevelDisplayName":  "Information",
+        "Message":  "Recieved user logon notification on session 1."
+    },
+    {
+        "TimeCreated":  "\/Date(1792586763718)\/",
+        "Id":  4,
+        "LevelDisplayName":  "Information",
+        "Message":  "Finished processing user logoff notification on session 3."
+    },
+    {
+        "TimeCreated":  "\/Date(1792586754227)\/",
+        "Id":  59,
+        "LevelDisplayName":  "Information",
+        "Message":  "Disable background user hive upload task succeeded."
+    },
+    {
+        "TimeCreated":  "\/Date(1792586754213)\/",
+        "Id":  3,
+        "LevelDisplayName":  "Information",
+        "Message":  "Recieved user logoff notification on session 3."
+    },
+    {
+        "TimeCreated":  "\/Date(1792586231373)\/",
+        "Id":  2,
+        "LevelDisplayName":  "Information",
+        "Message":  "Finished processing user logon notification on session 3."
+    },
+    {
+        "TimeCreated":  "\/Date(1792586231373)\/",
+        "Id":  59,
+        "LevelDisplayName":  "Information",
+        "Message":  "Disable background user hive upload task succeeded."
+    },
+    {
+        "TimeCreated":  "\/Date(1792586231362)\/",
+        "Id":  75,
+        "LevelDisplayName":  "Information",
+        "Message":  "Roaming Profiles configuration is being controlled by Group Policy."
+    },
+    {
+        "TimeCreated":  "\/Date(1792586231217)\/",
+        "Id":  67,
+        "LevelDisplayName":  "Information",
+        "Message":  "Logon type: Regular \r\nLocal profile location: C:\\Users\\uManager1 \r\nProfile type: Roaming"
+    },
+    {
+        "TimeCreated":  "\/Date(1792586231217)\/",
+        "Id":  68,
+        "LevelDisplayName":  "Information",
+        "Message":  "LastDownloadTime: Year: 1601, Month 1, Day 1, Hour 0, Minute 0 \r\nLastUploadTime: Year: 1601, Month 1, Day 1, Hour 0, Minute 0"
+    },
+    {
+        "TimeCreated":  "\/Date(1792586231092)\/",
+        "Id":  5,
+        "LevelDisplayName":  "Information",
+        "Message":  "Registry file C:\\Users\\uManager1\\AppData\\Local\\Microsoft\\Windows\\\\UsrClass.dat is loaded at HKU\\S-1-5-21-3793483027-3712407111-974862227-1107_Classes."
+    },
+    {
+        "TimeCreated":  "\/Date(1792586230656)\/",
+        "Id":  5,
+        "LevelDisplayName":  "Information",
+        "Message":  "Registry file C:\\Users\\uManager1\\ntuser.dat is loaded at HKU\\S-1-5-21-3793483027-3712407111-974862227-1107."
+    },
+    {
+        "TimeCreated":  "\/Date(1792586229682)\/",
+        "Id":  63,
+        "LevelDisplayName":  "Information",
+        "Message":  "This computer is a primary computer for this user."
+    },
+    {
+        "TimeCreated":  "\/Date(1792586229535)\/",
+        "Id":  1,
+        "LevelDisplayName":  "Information",
+        "Message":  "Recieved user logon notification on session 3."
+    },
+    {
+        "TimeCreated":  "\/Date(1792586101823)\/",
+        "Id":  4,
+        "LevelDisplayName":  "Information",
+        "Message":  "Finished processing user logoff notification on session 2."
+    },
+    {
+        "TimeCreated":  "\/Date(1792586092142)\/",
+        "Id":  59,
+        "LevelDisplayName":  "Information",
+        "Message":  "Disable background user hive upload task succeeded."
+    },
+    {
+        "TimeCreated":  "\/Date(1792586092126)\/",
+        "Id":  3,
+        "LevelDisplayName":  "Information",
+        "Message":  "Recieved user logoff notification on session 2."
+    },
+    {
+        "TimeCreated":  "\/Date(1792585485581)\/",
+        "Id":  2,
+        "LevelDisplayName":  "Information",
+        "Message":  "Finished processing user logon notification on session 2."
+    },
+    {
+        "TimeCreated":  "\/Date(1792585485581)\/",
+        "Id":  59,
+        "LevelDisplayName":  "Information",
+        "Message":  "Disable background user hive upload task succeeded."
+    },
+    {
+        "TimeCreated":  "\/Date(1792585485549)\/",
+        "Id":  75,
+        "LevelDisplayName":  "Information",
+        "Message":  "Roaming Profiles configuration is being controlled by Group Policy."
+    },
+    {
+        "TimeCreated":  "\/Date(1792585485369)\/",
+        "Id":  67,
+        "LevelDisplayName":  "Information",
+        "Message":  "Logon type: Regular \r\nLocal profile location: C:\\Users\\uSeller1 \r\nProfile type: Roaming"
+    },
+    {
+        "TimeCreated":  "\/Date(1792585485369)\/",
+        "Id":  68,
+        "LevelDisplayName":  "Information",
+        "Message":  "LastDownloadTime: Year: 1601, Month 1, Day 1, Hour 0, Minute 0 \r\nLastUploadTime: Year: 1601, Month 1, Day 1, Hour 0, Minute 0"
+    },
+    {
+        "TimeCreated":  "\/Date(1792585485054)\/",
+        "Id":  5,
+        "LevelDisplayName":  "Information",
+        "Message":  "Registry file C:\\Users\\uSeller1\\AppData\\Local\\Microsoft\\Windows\\\\UsrClass.dat is loaded at HKU\\S-1-5-21-3793483027-3712407111-974862227-1106_Classes."
+    },
+    {
+        "TimeCreated":  "\/Date(1792585484466)\/",
+        "Id":  5,
+        "LevelDisplayName":  "Information",
+        "Message":  "Registry file C:\\Users\\uSeller1\\ntuser.dat is loaded at HKU\\S-1-5-21-3793483027-3712407111-974862227-1106."
+    },
+    {
+        "TimeCreated":  "\/Date(1792585483595)\/",
+        "Id":  63,
+        "LevelDisplayName":  "Information",
+        "Message":  "This computer is a primary computer for this user."
+    },
+    {
+        "TimeCreated":  "\/Date(1792585483430)\/",
+        "Id":  1,
+        "LevelDisplayName":  "Information",
+        "Message":  "Recieved user logon notification on session 2."
+    },
+    {
+        "TimeCreated":  "\/Date(1792585381268)\/",
+        "Id":  4,
+        "LevelDisplayName":  "Information",
+        "Message":  "Finished processing user logoff notification on session 1."
+    },
+    {
+        "TimeCreated":  "\/Date(1792585378357)\/",
+        "Id":  3,
+        "LevelDisplayName":  "Information",
+        "Message":  "Recieved user logoff notification on session 1."
+    },
+    {
+        "TimeCreated":  "\/Date(1792583015785)\/",
+        "Id":  2,
+        "LevelDisplayName":  "Information",
+        "Message":  "Finished processing user logon notification on session 1."
+    },
+    {
+        "TimeCreated":  "\/Date(1792583015042)\/",
+        "Id":  67,
+        "LevelDisplayName":  "Information",
+        "Message":  "Logon type: Regular \r\nLocal profile location: C:\\Users\\Administrator \r\nProfile type: Regular"
+    },
+    {
+        "TimeCreated":  "\/Date(1792583014530)\/",
+        "Id":  5,
+        "LevelDisplayName":  "Information",
+        "Message":  "Registry file C:\\Users\\Administrator\\AppData\\Local\\Microsoft\\Windows\\\\UsrClass.dat is loaded at HKU\\S-1-5-21-3793483027-3712407111-974862227-500_Classes."
+    },
+    {
+        "TimeCreated":  "\/Date(1792583013745)\/",
+        "Id":  5,
+        "LevelDisplayName":  "Information",
+        "Message":  "Registry file C:\\Users\\Administrator\\ntuser.dat is loaded at HKU\\S-1-5-21-3793483027-3712407111-974862227-500."
+    },
+    {
+        "TimeCreated":  "\/Date(1792583011450)\/",
+        "Id":  1,
+        "LevelDisplayName":  "Information",
+        "Message":  "Recieved user logon notification on session 1."
+    },
+    {
+        "TimeCreated":  "\/Date(1792582048869)\/",
+        "Id":  59,
+        "LevelDisplayName":  "Information",
+        "Message":  "Disable background user hive upload task succeeded."
+    },
+    {
+        "TimeCreated":  "\/Date(1792553063327)\/",
+        "Id":  4,
+        "LevelDisplayName":  "Information",
+        "Message":  "Finished processing user logoff notification on session 1."
+    },
+    {
+        "TimeCreated":  "\/Date(1792553062437)\/",
+        "Id":  3,
+        "LevelDisplayName":  "Information",
+        "Message":  "Recieved user logoff notification on session 1."
+    },
+    {
+        "TimeCreated":  "\/Date(1792546742209)\/",
+        "Id":  2,
+        "LevelDisplayName":  "Information",
+        "Message":  "Finished processing user logon notification on session 1."
+    },
+    {
+        "TimeCreated":  "\/Date(1792546742034)\/",
+        "Id":  67,
+        "LevelDisplayName":  "Information",
+        "Message":  "Logon type: Regular \r\nLocal profile location: C:\\Users\\LabAdmin \r\nProfile type: Regular"
+    },
+    {
+        "TimeCreated":  "\/Date(1792546742032)\/",
+        "Id":  5,
+        "LevelDisplayName":  "Information",
+        "Message":  "Registry file C:\\Users\\LabAdmin\\AppData\\Local\\Microsoft\\Windows\\\\UsrClass.dat is loaded at HKU\\S-1-5-21-2832659627-1375781648-1801406234-1001_Classes."
+    },
+    {
+        "TimeCreated":  "\/Date(1792546741810)\/",
+        "Id":  5,
+        "LevelDisplayName":  "Information",
+        "Message":  "Registry file C:\\Users\\LabAdmin\\ntuser.dat is loaded at HKU\\S-1-5-21-2832659627-1375781648-1801406234-1001."
+    }
+]

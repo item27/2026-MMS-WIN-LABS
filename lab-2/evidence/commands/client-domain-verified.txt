@@ -1,0 +1,39 @@
+{
+    "Name":  "AD-CLIENT",
+    "Domain":  "GMAKMA.local",
+    "PartOfDomain":  true,
+    "UserName":  "GMAKMA\\Administrator"
+}
+True
+
+Windows IP Configuration
+
+   Host Name . . . . . . . . . . . . : ad-client
+   Primary Dns Suffix  . . . . . . . : GMAKMA.local
+   Node Type . . . . . . . . . . . . : Hybrid
+   IP Routing Enabled. . . . . . . . : No
+   WINS Proxy Enabled. . . . . . . . : No
+   DNS Suffix Search List. . . . . . : GMAKMA.local
+
+Ethernet adapter Ethernet:
+
+   Connection-specific DNS Suffix  . : GMAKMA.local
+   Description . . . . . . . . . . . : Intel(R) PRO/1000 MT Network Connection
+   Physical Address. . . . . . . . . : BC-24-11-53-4F-29
+   DHCP Enabled. . . . . . . . . . . : Yes
+   Autoconfiguration Enabled . . . . : Yes
+   Link-local IPv6 Address . . . . . : fe80::bbb:f6ed:3bd0:fbc7%5(Preferred)
+   IPv4 Address. . . . . . . . . . . : 10.0.0.100(Preferred)
+   Subnet Mask . . . . . . . . . . . : 255.0.0.0
+   Lease Obtained. . . . . . . . . . : 21 October 2026 04:25:59
+   Lease Expires . . . . . . . . . . : 29 October 2026 12:26:04
+   Default Gateway . . . . . . . . . : 10.0.0.1
+   DHCP Server . . . . . . . . . . . : 10.0.0.1
+   DHCPv6 IAID . . . . . . . . . . . : 112993297
+   DHCPv6 Client DUID. . . . . . . . : 00-01-00-01-32-69-A9-B8-BC-24-11-53-4F-29
+   DNS Servers . . . . . . . . . . . : 10.0.0.1
+   NetBIOS over Tcpip. . . . . . . . : Enabled
+
+Name                                           Type   TTL   Section    IPAddress
+----                                           ----   ---   -------    ---------
+ad-srv.GMAKMA.local                            A      3600  Answer     10.0.0.1

@@ -1,0 +1,6 @@
+{
+  "exitcode": 0,
+  "out-truncated": 0,
+  "out-data": "\r\nAlgorithm       Hash                                                                   Path                            \r\n---------       ----                                                                   ----                            \r\nSHA256          0B01334A418654293513449F61D6BFC99E5196CA371E3C3DC961EDA57CD535C6       C:\\Lab2Packages\\7z2604-x64.msi  \r\n\r\nAccessControlType : Allow\r\nAccessRight       : Full\r\nAccountName       : GMAKMA\\Domain Admins\r\nName              : LabPackages$\r\nScopeName         : *\r\nPSComputerName    : \r\n\r\n\r\nAccessControlType : Allow\r\nAccessRight       : Read\r\nAccountName       : GMAKMA\\Domain Computers\r\nName              : LabPackages$\r\nScopeName         : *\r\nPSComputerName    : \r\n\r\n\r\nPath : Microsoft.PowerShell.Core\\FileSystem::C:\\Lab2Packages\r\nSddl : O:BAG:SYD:PAI(A;OICI;FA;;;SY)(A;OICI;FA;;;BA)(A;OICI;0x1200a9;;;DC)\r\n\r\n\r\n\r\n",
+  "exited": 1
+}

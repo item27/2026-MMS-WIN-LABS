@@ -1,0 +1,65 @@
+[
+    {
+        "User":  "GMAKMA\\uSeller1",
+        "Test":  "Common read foreign",
+        "Expected":  "Allow",
+        "Succeeded":  true,
+        "Pass":  true,
+        "Exception":  "",
+        "Detail":  ""
+    },
+    {
+        "User":  "GMAKMA\\uSeller1",
+        "Test":  "Common modify foreign",
+        "Expected":  "Allow",
+        "Succeeded":  true,
+        "Pass":  true,
+        "Exception":  "",
+        "Detail":  ""
+    },
+    {
+        "User":  "GMAKMA\\uSeller1",
+        "Test":  "Common delete foreign",
+        "Expected":  "AccessDenied",
+        "Succeeded":  false,
+        "Pass":  true,
+        "Exception":  "System.UnauthorizedAccessException",
+        "Detail":  "Access to the path \u0027\\\\ad-srv\\AllUsersCom\\Common\\manager-owned.txt\u0027 is denied."
+    },
+    {
+        "User":  "GMAKMA\\uSeller1",
+        "Test":  "Common delete own after relogon",
+        "Expected":  "Allow",
+        "Succeeded":  true,
+        "Pass":  true,
+        "Exception":  "",
+        "Detail":  ""
+    },
+    {
+        "User":  "GMAKMA\\uSeller1",
+        "Test":  "Common recreate own after relogon",
+        "Expected":  "Allow",
+        "Succeeded":  true,
+        "Pass":  true,
+        "Exception":  "",
+        "Detail":  ""
+    },
+    {
+        "User":  "GMAKMA\\uSeller1",
+        "Test":  "roaming desktop marker after reboot",
+        "Expected":  "Allow",
+        "Succeeded":  true,
+        "Pass":  true,
+        "Exception":  "",
+        "Detail":  ""
+    },
+    {
+        "User":  "GMAKMA\\uSeller1",
+        "Test":  "home X write after reboot",
+        "Expected":  "Allow",
+        "Succeeded":  true,
+        "Pass":  true,
+        "Exception":  "",
+        "Detail":  ""
+    }
+]

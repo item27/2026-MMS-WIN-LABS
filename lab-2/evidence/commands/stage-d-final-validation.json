@@ -1,0 +1,25 @@
+{
+  "capturedAt": "2026-10-21T06:16:24.767600+00:00",
+  "vmidsReadOrChanged": [
+    104,
+    105
+  ],
+  "runningAndIsolated": true,
+  "coordinatedBeforeSnapshots": true,
+  "coordinatedFinalSnapshots": true,
+  "report": {
+    "figures": 46,
+    "first": 123,
+    "last": 168,
+    "linksValid": true,
+    "imageDimensions": "1024x768",
+    "sha256Verified": true
+  },
+  "windowsParserFiles": 4,
+  "ordinaryManagerAppsVerified": true,
+  "credentialValueLeaks": 0,
+  "debugScreensOutsideRepo": 75,
+  "D8LiteralAllObjects": "NOT_FULFILLED: protected OS/profile ACL intentionally retained",
+  "D8RootGPO": "APPLIED_AND_VERIFIED",
+  "gitCommitOrPushPerformed": false
+}

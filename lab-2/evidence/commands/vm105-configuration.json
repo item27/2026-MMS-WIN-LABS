@@ -1,0 +1,11 @@
+{
+  "name": "win-labs-2",
+  "bios": "seabios",
+  "boot": "order=ide2;sata0",
+  "cores": 2,
+  "memory": "4096",
+  "sata0": "hd1t:vm-105-disk-1,size=64G",
+  "ide2": "truenas-backup:iso/Win10_22H2_EnglishInternational_x64v1.iso,media=cdrom,size=5991830K",
+  "net0": "e1000=BC:24:11:53:4F:29,bridge=vmbr1_lab,firewall=1",
+  "agent": "1"
+}

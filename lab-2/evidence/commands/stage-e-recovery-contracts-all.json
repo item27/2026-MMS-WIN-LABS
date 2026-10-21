@@ -1,0 +1,6 @@
+{
+  "exited": 1,
+  "out-data": "PASS: exact deletion pipeline, user objects in unit-for-delete only\r\nPASS: four-entry manifest rejected before restoring any object\r\n",
+  "out-truncated": 0,
+  "exitcode": 0
+}

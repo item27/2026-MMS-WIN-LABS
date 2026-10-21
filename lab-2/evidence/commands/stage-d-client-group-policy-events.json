@@ -1,0 +1,1752 @@
+[
+    {
+        "TimeCreated":  "\/Date(1792595446645)\/",
+        "Id":  8005,
+        "RecordId":  918,
+        "LevelDisplayName":  "Information",
+        "Message":  "Completed manual processing of policy for user GMAKMA\\uSeller1 in 0 seconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595446618)\/",
+        "Id":  5016,
+        "RecordId":  917,
+        "LevelDisplayName":  "Information",
+        "Message":  "Completed Registry Extension Processing in 31 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595446578)\/",
+        "Id":  4016,
+        "RecordId":  916,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting Registry Extension Processing. \r\n\r\nList of applicable Group Policy objects: (Changes were detected.)\r\n\r\nLab2-Sellers\n"
+    },
+    {
+        "TimeCreated":  "\/Date(1792595446578)\/",
+        "Id":  5320,
+        "RecordId":  915,
+        "LevelDisplayName":  "Information",
+        "Message":  "Finished checking for non-system extensions."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595446578)\/",
+        "Id":  5320,
+        "RecordId":  914,
+        "LevelDisplayName":  "Information",
+        "Message":  "Service configuration update to standalone is not required and will be skipped."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595446578)\/",
+        "Id":  5320,
+        "RecordId":  913,
+        "LevelDisplayName":  "Information",
+        "Message":  "Checking for Group Policy client extensions that are not part of the system."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595446554)\/",
+        "Id":  5313,
+        "RecordId":  912,
+        "LevelDisplayName":  "Information",
+        "Message":  "The following Group Policy objects were not applicable because they were filtered out: \r\n\r\nLocal Group Policy\n\tNot Applied (Empty)\n"
+    },
+    {
+        "TimeCreated":  "\/Date(1792595446554)\/",
+        "Id":  5312,
+        "RecordId":  911,
+        "LevelDisplayName":  "Information",
+        "Message":  "List of applicable Group Policy objects: \r\n\r\nLab2-Sellers\n"
+    },
+    {
+        "TimeCreated":  "\/Date(1792595446554)\/",
+        "Id":  5126,
+        "RecordId":  910,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy successfully got applicable GPOs from the domain controller."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595446554)\/",
+        "Id":  5216,
+        "RecordId":  909,
+        "LevelDisplayName":  "Information",
+        "Message":  "Successfully saved policies to the local datastore."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595446536)\/",
+        "Id":  4216,
+        "RecordId":  908,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting to save policies to the local datastore."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595446535)\/",
+        "Id":  5257,
+        "RecordId":  907,
+        "LevelDisplayName":  "Information",
+        "Message":  "Successfully completed downloading policies."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595446535)\/",
+        "Id":  5017,
+        "RecordId":  906,
+        "LevelDisplayName":  "Information",
+        "Message":  "The system calls to access specified file completed. \r\n\\\\GMAKMA.local\\SysVol\\GMAKMA.local\\Policies\\{613B9683-92B2-4C8E-A5A5-EA6301FC5429}\\gpt.ini\r\nThe call completed in 0 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595446526)\/",
+        "Id":  4017,
+        "RecordId":  905,
+        "LevelDisplayName":  "Information",
+        "Message":  "Making system calls to access specified file. \r\n\\\\GMAKMA.local\\SysVol\\GMAKMA.local\\Policies\\{613B9683-92B2-4C8E-A5A5-EA6301FC5429}\\gpt.ini"
+    },
+    {
+        "TimeCreated":  "\/Date(1792595446525)\/",
+        "Id":  5314,
+        "RecordId":  904,
+        "LevelDisplayName":  "Information",
+        "Message":  "A fast link was detected. The Estimated bandwidth is 37454 kbps. The slow link threshold is 500 kbps."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595446525)\/",
+        "Id":  5327,
+        "RecordId":  903,
+        "LevelDisplayName":  "Information",
+        "Message":  "Estimated network bandwidth on one of the connections: 4681845 kbps."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595446206)\/",
+        "Id":  4257,
+        "RecordId":  902,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting to download policies."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595446206)\/",
+        "Id":  4126,
+        "RecordId":  901,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy receiving applicable GPOs from the domain controller."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595446206)\/",
+        "Id":  5311,
+        "RecordId":  900,
+        "LevelDisplayName":  "Information",
+        "Message":  "The loopback policy processing mode is \"No loopback mode\"."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595446201)\/",
+        "Id":  5310,
+        "RecordId":  899,
+        "LevelDisplayName":  "Information",
+        "Message":  "Account details: \r\n\tAccount Name: CN=uSeller1,OU=ouSellers,DC=GMAKMA,DC=local\r\n\tAccount Domain Name: GMAKMA.LOCAL\r\n\tDC Name: \\\\ad-srv.GMAKMA.local\r\n\tDC Domain Name: GMAKMA.LOCAL"
+    },
+    {
+        "TimeCreated":  "\/Date(1792595446201)\/",
+        "Id":  5309,
+        "RecordId":  898,
+        "LevelDisplayName":  "Information",
+        "Message":  "Computer details: \r\n\tComputer role: 2\r\n\tNetwork name: "
+    },
+    {
+        "TimeCreated":  "\/Date(1792595446201)\/",
+        "Id":  5326,
+        "RecordId":  897,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy successfully discovered the Domain Controller in 328 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595446201)\/",
+        "Id":  5308,
+        "RecordId":  896,
+        "LevelDisplayName":  "Information",
+        "Message":  "Domain Controller details: \r\n\tDomain Controller Name: ad-srv.GMAKMA.local\r\n\tDomain Controller IP Address: 10.0.0.1"
+    },
+    {
+        "TimeCreated":  "\/Date(1792595446201)\/",
+        "Id":  5017,
+        "RecordId":  895,
+        "LevelDisplayName":  "Information",
+        "Message":  "The LDAP call to connect and bind to Active Directory completed. \r\nad-srv.GMAKMA.local\r\nThe call completed in 0 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595446197)\/",
+        "Id":  4017,
+        "RecordId":  894,
+        "LevelDisplayName":  "Information",
+        "Message":  "Making LDAP calls to connect and bind to Active Directory. \r\nad-srv.GMAKMA.local"
+    },
+    {
+        "TimeCreated":  "\/Date(1792595445882)\/",
+        "Id":  5320,
+        "RecordId":  893,
+        "LevelDisplayName":  "Information",
+        "Message":  "Retrieving Domain Controller details."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595445882)\/",
+        "Id":  4326,
+        "RecordId":  892,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy is trying to discover the Domain Controller information."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595445881)\/",
+        "Id":  5320,
+        "RecordId":  891,
+        "LevelDisplayName":  "Information",
+        "Message":  "Retrieved account information."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595445881)\/",
+        "Id":  5017,
+        "RecordId":  890,
+        "LevelDisplayName":  "Information",
+        "Message":  "The system call to get account information completed. \r\nCN=uSeller1,OU=ouSellers,DC=GMAKMA,DC=local\r\nThe call completed in 0 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595445876)\/",
+        "Id":  4017,
+        "RecordId":  889,
+        "LevelDisplayName":  "Information",
+        "Message":  "Making system call to get account information. \r\n"
+    },
+    {
+        "TimeCreated":  "\/Date(1792595445876)\/",
+        "Id":  5320,
+        "RecordId":  888,
+        "LevelDisplayName":  "Information",
+        "Message":  "Attempting to retrieve the account information."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595445876)\/",
+        "Id":  5340,
+        "RecordId":  887,
+        "LevelDisplayName":  "Information",
+        "Message":  "The Group Policy processing mode is Background."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595445874)\/",
+        "Id":  4005,
+        "RecordId":  886,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting manual processing of policy for user GMAKMA\\uSeller1. \r\nActivity id: {50dcaaa4-c06f-4ca6-8032-797d1f23372a}"
+    },
+    {
+        "TimeCreated":  "\/Date(1792595278372)\/",
+        "Id":  8005,
+        "RecordId":  885,
+        "LevelDisplayName":  "Information",
+        "Message":  "Completed manual processing of policy for user GMAKMA\\uSeller1 in 0 seconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595278344)\/",
+        "Id":  5016,
+        "RecordId":  884,
+        "LevelDisplayName":  "Information",
+        "Message":  "Completed Registry Extension Processing in 93 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595278239)\/",
+        "Id":  4016,
+        "RecordId":  883,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting Registry Extension Processing. \r\n\r\nList of applicable Group Policy objects: (Changes were detected.)\r\n\r\nLab2-Sellers\n"
+    },
+    {
+        "TimeCreated":  "\/Date(1792595278239)\/",
+        "Id":  5320,
+        "RecordId":  882,
+        "LevelDisplayName":  "Information",
+        "Message":  "Finished checking for non-system extensions."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595278239)\/",
+        "Id":  5320,
+        "RecordId":  881,
+        "LevelDisplayName":  "Information",
+        "Message":  "Service configuration update to standalone is not required and will be skipped."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595278238)\/",
+        "Id":  5320,
+        "RecordId":  880,
+        "LevelDisplayName":  "Information",
+        "Message":  "Checking for Group Policy client extensions that are not part of the system."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595278216)\/",
+        "Id":  5313,
+        "RecordId":  879,
+        "LevelDisplayName":  "Information",
+        "Message":  "The following Group Policy objects were not applicable because they were filtered out: \r\n\r\nLocal Group Policy\n\tNot Applied (Empty)\n"
+    },
+    {
+        "TimeCreated":  "\/Date(1792595278216)\/",
+        "Id":  5312,
+        "RecordId":  878,
+        "LevelDisplayName":  "Information",
+        "Message":  "List of applicable Group Policy objects: \r\n\r\nLab2-Sellers\n"
+    },
+    {
+        "TimeCreated":  "\/Date(1792595278215)\/",
+        "Id":  5126,
+        "RecordId":  877,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy successfully got applicable GPOs from the domain controller."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595278215)\/",
+        "Id":  5216,
+        "RecordId":  876,
+        "LevelDisplayName":  "Information",
+        "Message":  "Successfully saved policies to the local datastore."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595278199)\/",
+        "Id":  4216,
+        "RecordId":  875,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting to save policies to the local datastore."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595278198)\/",
+        "Id":  5257,
+        "RecordId":  874,
+        "LevelDisplayName":  "Information",
+        "Message":  "Successfully completed downloading policies."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595278198)\/",
+        "Id":  5017,
+        "RecordId":  873,
+        "LevelDisplayName":  "Information",
+        "Message":  "The system calls to access specified file completed. \r\n\\\\GMAKMA.local\\SysVol\\GMAKMA.local\\Policies\\{613B9683-92B2-4C8E-A5A5-EA6301FC5429}\\gpt.ini\r\nThe call completed in 0 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595278192)\/",
+        "Id":  4017,
+        "RecordId":  872,
+        "LevelDisplayName":  "Information",
+        "Message":  "Making system calls to access specified file. \r\n\\\\GMAKMA.local\\SysVol\\GMAKMA.local\\Policies\\{613B9683-92B2-4C8E-A5A5-EA6301FC5429}\\gpt.ini"
+    },
+    {
+        "TimeCreated":  "\/Date(1792595278192)\/",
+        "Id":  5314,
+        "RecordId":  871,
+        "LevelDisplayName":  "Information",
+        "Message":  "A fast link was detected. The Estimated bandwidth is 38251 kbps. The slow link threshold is 500 kbps."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595278191)\/",
+        "Id":  5327,
+        "RecordId":  870,
+        "LevelDisplayName":  "Information",
+        "Message":  "Estimated network bandwidth on one of the connections: 4781480 kbps."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595277874)\/",
+        "Id":  4257,
+        "RecordId":  869,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting to download policies."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595277874)\/",
+        "Id":  4126,
+        "RecordId":  868,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy receiving applicable GPOs from the domain controller."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595277874)\/",
+        "Id":  5311,
+        "RecordId":  867,
+        "LevelDisplayName":  "Information",
+        "Message":  "The loopback policy processing mode is \"No loopback mode\"."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595277867)\/",
+        "Id":  5310,
+        "RecordId":  866,
+        "LevelDisplayName":  "Information",
+        "Message":  "Account details: \r\n\tAccount Name: CN=uSeller1,OU=ouSellers,DC=GMAKMA,DC=local\r\n\tAccount Domain Name: GMAKMA.LOCAL\r\n\tDC Name: \\\\ad-srv.GMAKMA.local\r\n\tDC Domain Name: GMAKMA.LOCAL"
+    },
+    {
+        "TimeCreated":  "\/Date(1792595277867)\/",
+        "Id":  5309,
+        "RecordId":  865,
+        "LevelDisplayName":  "Information",
+        "Message":  "Computer details: \r\n\tComputer role: 2\r\n\tNetwork name: "
+    },
+    {
+        "TimeCreated":  "\/Date(1792595277867)\/",
+        "Id":  5326,
+        "RecordId":  864,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy successfully discovered the Domain Controller in 313 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595277867)\/",
+        "Id":  5308,
+        "RecordId":  863,
+        "LevelDisplayName":  "Information",
+        "Message":  "Domain Controller details: \r\n\tDomain Controller Name: ad-srv.GMAKMA.local\r\n\tDomain Controller IP Address: 10.0.0.1"
+    },
+    {
+        "TimeCreated":  "\/Date(1792595277867)\/",
+        "Id":  5017,
+        "RecordId":  862,
+        "LevelDisplayName":  "Information",
+        "Message":  "The LDAP call to connect and bind to Active Directory completed. \r\nad-srv.GMAKMA.local\r\nThe call completed in 0 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595277863)\/",
+        "Id":  4017,
+        "RecordId":  861,
+        "LevelDisplayName":  "Information",
+        "Message":  "Making LDAP calls to connect and bind to Active Directory. \r\nad-srv.GMAKMA.local"
+    },
+    {
+        "TimeCreated":  "\/Date(1792595277551)\/",
+        "Id":  5320,
+        "RecordId":  860,
+        "LevelDisplayName":  "Information",
+        "Message":  "Retrieving Domain Controller details."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595277551)\/",
+        "Id":  4326,
+        "RecordId":  859,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy is trying to discover the Domain Controller information."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595277550)\/",
+        "Id":  5320,
+        "RecordId":  858,
+        "LevelDisplayName":  "Information",
+        "Message":  "Retrieved account information."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595277550)\/",
+        "Id":  5017,
+        "RecordId":  857,
+        "LevelDisplayName":  "Information",
+        "Message":  "The system call to get account information completed. \r\nCN=uSeller1,OU=ouSellers,DC=GMAKMA,DC=local\r\nThe call completed in 15 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595277545)\/",
+        "Id":  4017,
+        "RecordId":  856,
+        "LevelDisplayName":  "Information",
+        "Message":  "Making system call to get account information. \r\n"
+    },
+    {
+        "TimeCreated":  "\/Date(1792595277545)\/",
+        "Id":  5320,
+        "RecordId":  855,
+        "LevelDisplayName":  "Information",
+        "Message":  "Attempting to retrieve the account information."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595277544)\/",
+        "Id":  5340,
+        "RecordId":  854,
+        "LevelDisplayName":  "Information",
+        "Message":  "The Group Policy processing mode is Background."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595277543)\/",
+        "Id":  4005,
+        "RecordId":  853,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting manual processing of policy for user GMAKMA\\uSeller1. \r\nActivity id: {48cc2fd9-406b-4723-a5f8-f0b5aa2d9b98}"
+    },
+    {
+        "TimeCreated":  "\/Date(1792595220742)\/",
+        "Id":  5117,
+        "RecordId":  852,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group policy session completed successfully."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595219810)\/",
+        "Id":  8001,
+        "RecordId":  851,
+        "LevelDisplayName":  "Information",
+        "Message":  "Completed user logon policy processing for GMAKMA\\uSeller1 in 2 seconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595219779)\/",
+        "Id":  5016,
+        "RecordId":  850,
+        "LevelDisplayName":  "Information",
+        "Message":  "Completed Registry Extension Processing in 562 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595219228)\/",
+        "Id":  4016,
+        "RecordId":  849,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting Registry Extension Processing. \r\n\r\nList of applicable Group Policy objects: (Changes were detected.)\r\n\r\nLab2-Sellers\n"
+    },
+    {
+        "TimeCreated":  "\/Date(1792595219228)\/",
+        "Id":  5320,
+        "RecordId":  848,
+        "LevelDisplayName":  "Information",
+        "Message":  "Finished checking for non-system extensions."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595219228)\/",
+        "Id":  5320,
+        "RecordId":  847,
+        "LevelDisplayName":  "Information",
+        "Message":  "Service configuration update to standalone is not required and will be skipped."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595219227)\/",
+        "Id":  5320,
+        "RecordId":  846,
+        "LevelDisplayName":  "Information",
+        "Message":  "Checking for Group Policy client extensions that are not part of the system."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595218293)\/",
+        "Id":  6339,
+        "RecordId":  845,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy Winlogon Start Shell handling completed."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595218293)\/",
+        "Id":  5324,
+        "RecordId":  844,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy received the notification StartShell from Winlogon for session 1."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595218171)\/",
+        "Id":  5313,
+        "RecordId":  843,
+        "LevelDisplayName":  "Information",
+        "Message":  "The following Group Policy objects were not applicable because they were filtered out: \r\n\r\nLocal Group Policy\n\tNot Applied (Empty)\n"
+    },
+    {
+        "TimeCreated":  "\/Date(1792595218171)\/",
+        "Id":  5312,
+        "RecordId":  842,
+        "LevelDisplayName":  "Information",
+        "Message":  "List of applicable Group Policy objects: \r\n\r\nLab2-Sellers\n"
+    },
+    {
+        "TimeCreated":  "\/Date(1792595218162)\/",
+        "Id":  5126,
+        "RecordId":  841,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy successfully got applicable GPOs from the domain controller."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595218162)\/",
+        "Id":  5216,
+        "RecordId":  840,
+        "LevelDisplayName":  "Information",
+        "Message":  "Successfully saved policies to the local datastore."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595218103)\/",
+        "Id":  4216,
+        "RecordId":  839,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting to save policies to the local datastore."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595218102)\/",
+        "Id":  5257,
+        "RecordId":  838,
+        "LevelDisplayName":  "Information",
+        "Message":  "Successfully completed downloading policies."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595218102)\/",
+        "Id":  5017,
+        "RecordId":  837,
+        "LevelDisplayName":  "Information",
+        "Message":  "The system calls to access specified file completed. \r\n\\\\GMAKMA.local\\SysVol\\GMAKMA.local\\Policies\\{613B9683-92B2-4C8E-A5A5-EA6301FC5429}\\gpt.ini\r\nThe call completed in 0 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595218091)\/",
+        "Id":  4017,
+        "RecordId":  836,
+        "LevelDisplayName":  "Information",
+        "Message":  "Making system calls to access specified file. \r\n\\\\GMAKMA.local\\SysVol\\GMAKMA.local\\Policies\\{613B9683-92B2-4C8E-A5A5-EA6301FC5429}\\gpt.ini"
+    },
+    {
+        "TimeCreated":  "\/Date(1792595218090)\/",
+        "Id":  5314,
+        "RecordId":  835,
+        "LevelDisplayName":  "Information",
+        "Message":  "A fast link was detected. The Estimated bandwidth is 223737 kbps. The slow link threshold is 500 kbps."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595218090)\/",
+        "Id":  5327,
+        "RecordId":  834,
+        "LevelDisplayName":  "Information",
+        "Message":  "Estimated network bandwidth on one of the connections: 27967243 kbps."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595217777)\/",
+        "Id":  4257,
+        "RecordId":  833,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting to download policies."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595217777)\/",
+        "Id":  4126,
+        "RecordId":  832,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy receiving applicable GPOs from the domain controller."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595217777)\/",
+        "Id":  5311,
+        "RecordId":  831,
+        "LevelDisplayName":  "Information",
+        "Message":  "The loopback policy processing mode is \"No loopback mode\"."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595217660)\/",
+        "Id":  5310,
+        "RecordId":  830,
+        "LevelDisplayName":  "Information",
+        "Message":  "Account details: \r\n\tAccount Name: CN=uSeller1,OU=ouSellers,DC=GMAKMA,DC=local\r\n\tAccount Domain Name: GMAKMA.LOCAL\r\n\tDC Name: \\\\ad-srv.GMAKMA.local\r\n\tDC Domain Name: GMAKMA.LOCAL"
+    },
+    {
+        "TimeCreated":  "\/Date(1792595217660)\/",
+        "Id":  5309,
+        "RecordId":  829,
+        "LevelDisplayName":  "Information",
+        "Message":  "Computer details: \r\n\tComputer role: 2\r\n\tNetwork name: "
+    },
+    {
+        "TimeCreated":  "\/Date(1792595217660)\/",
+        "Id":  5326,
+        "RecordId":  828,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy successfully discovered the Domain Controller in 328 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595217660)\/",
+        "Id":  5308,
+        "RecordId":  827,
+        "LevelDisplayName":  "Information",
+        "Message":  "Domain Controller details: \r\n\tDomain Controller Name: ad-srv.GMAKMA.local\r\n\tDomain Controller IP Address: 10.0.0.1"
+    },
+    {
+        "TimeCreated":  "\/Date(1792595217660)\/",
+        "Id":  5017,
+        "RecordId":  826,
+        "LevelDisplayName":  "Information",
+        "Message":  "The LDAP call to connect and bind to Active Directory completed. \r\nad-srv.GMAKMA.local\r\nThe call completed in 0 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595217657)\/",
+        "Id":  4017,
+        "RecordId":  825,
+        "LevelDisplayName":  "Information",
+        "Message":  "Making LDAP calls to connect and bind to Active Directory. \r\nad-srv.GMAKMA.local"
+    },
+    {
+        "TimeCreated":  "\/Date(1792595217329)\/",
+        "Id":  5320,
+        "RecordId":  824,
+        "LevelDisplayName":  "Information",
+        "Message":  "Retrieving Domain Controller details."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595217329)\/",
+        "Id":  4326,
+        "RecordId":  823,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy is trying to discover the Domain Controller information."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595217328)\/",
+        "Id":  5320,
+        "RecordId":  822,
+        "LevelDisplayName":  "Information",
+        "Message":  "Retrieved account information."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595217328)\/",
+        "Id":  5017,
+        "RecordId":  821,
+        "LevelDisplayName":  "Information",
+        "Message":  "The system call to get account information completed. \r\nCN=uSeller1,OU=ouSellers,DC=GMAKMA,DC=local\r\nThe call completed in 31 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595217306)\/",
+        "Id":  4017,
+        "RecordId":  820,
+        "LevelDisplayName":  "Information",
+        "Message":  "Making system call to get account information. \r\n"
+    },
+    {
+        "TimeCreated":  "\/Date(1792595217306)\/",
+        "Id":  5320,
+        "RecordId":  819,
+        "LevelDisplayName":  "Information",
+        "Message":  "Attempting to retrieve the account information."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595217305)\/",
+        "Id":  5340,
+        "RecordId":  818,
+        "LevelDisplayName":  "Information",
+        "Message":  "The Group Policy processing mode is Foreground asynchronous."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595217293)\/",
+        "Id":  4001,
+        "RecordId":  817,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting user logon Policy processing for GMAKMA\\uSeller1. \r\nActivity id: {1c33b088-93b4-42f2-bcc0-e1b6ad3d3c61}"
+    },
+    {
+        "TimeCreated":  "\/Date(1792595217292)\/",
+        "Id":  4117,
+        "RecordId":  816,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy Service started."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595217290)\/",
+        "Id":  5351,
+        "RecordId":  815,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group policy session returned to winlogon."
+    },
+    {
+        "TimeCreated":  "\/Date(1792595217289)\/",
+        "Id":  5324,
+        "RecordId":  814,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy received the notification Logon from Winlogon for session 1."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594738447)\/",
+        "Id":  5117,
+        "RecordId":  813,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group policy session completed successfully."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594737523)\/",
+        "Id":  8000,
+        "RecordId":  812,
+        "LevelDisplayName":  "Information",
+        "Message":  "Completed computer boot policy processing for GMAKMA\\AD-CLIENT$ in 18 seconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594737510)\/",
+        "Id":  5351,
+        "RecordId":  811,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group policy session returned to winlogon."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594737510)\/",
+        "Id":  6338,
+        "RecordId":  810,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy Winlogon status reporting has completed."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594737510)\/",
+        "Id":  6346,
+        "RecordId":  809,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy switches sync mode process to async mode."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594737509)\/",
+        "Id":  5016,
+        "RecordId":  808,
+        "LevelDisplayName":  "Information",
+        "Message":  "Completed Software Installation Extension Processing in 13641 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594723873)\/",
+        "Id":  4016,
+        "RecordId":  807,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting Software Installation Extension Processing. \r\n\r\nList of applicable Group Policy objects: (Changes were detected.)\r\n\r\nLab2-Deploy-7Zip\n"
+    },
+    {
+        "TimeCreated":  "\/Date(1792594723624)\/",
+        "Id":  5320,
+        "RecordId":  806,
+        "LevelDisplayName":  "Information",
+        "Message":  "Finished checking for non-system extensions."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594723624)\/",
+        "Id":  5320,
+        "RecordId":  805,
+        "LevelDisplayName":  "Information",
+        "Message":  "Service configuration update to standalone is not required and will be skipped."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594723624)\/",
+        "Id":  5320,
+        "RecordId":  804,
+        "LevelDisplayName":  "Information",
+        "Message":  "Checking for Group Policy client extensions that are not part of the system."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594718625)\/",
+        "Id":  5217,
+        "RecordId":  803,
+        "LevelDisplayName":  "Information",
+        "Message":  "Successfully loaded policies from the local datastore."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594718623)\/",
+        "Id":  4217,
+        "RecordId":  802,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting to load policies from the local datastore."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594718582)\/",
+        "Id":  5340,
+        "RecordId":  801,
+        "LevelDisplayName":  "Information",
+        "Message":  "The Group Policy processing mode is Foreground synchronous."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594718581)\/",
+        "Id":  4000,
+        "RecordId":  800,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting computer boot policy processing for GMAKMA\\AD-CLIENT$. \r\nActivity id: {4090edce-93de-451d-9ee6-20ff36d7aa4d}"
+    },
+    {
+        "TimeCreated":  "\/Date(1792594718580)\/",
+        "Id":  5322,
+        "RecordId":  799,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group policy waited for 1953 milliseconds for the network subsystem at computer boot."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594716730)\/",
+        "Id":  5321,
+        "RecordId":  798,
+        "LevelDisplayName":  "Information",
+        "Message":  "A previous instance of the Group Policy Client Service has been detected. Parameter: 174e71d5-ee92-4210-99e3-3ebd1d6cc06f"
+    },
+    {
+        "TimeCreated":  "\/Date(1792594716729)\/",
+        "Id":  5320,
+        "RecordId":  797,
+        "LevelDisplayName":  "Information",
+        "Message":  "Initialising service instance state to detect previous instances of the service."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594716729)\/",
+        "Id":  5320,
+        "RecordId":  796,
+        "LevelDisplayName":  "Information",
+        "Message":  "Initialising and reading current service configuration for the Group Policy Client service."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594716729)\/",
+        "Id":  5320,
+        "RecordId":  795,
+        "LevelDisplayName":  "Information",
+        "Message":  "The Group Policy Client service is currently configured as a shared service."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594716616)\/",
+        "Id":  4117,
+        "RecordId":  794,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy Service started."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594716604)\/",
+        "Id":  5324,
+        "RecordId":  793,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy received the notification CreateSession from Winlogon for session 1."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594716583)\/",
+        "Id":  5116,
+        "RecordId":  792,
+        "LevelDisplayName":  "Information",
+        "Message":  "Successfully completed the Group Policy Service initialisation phase."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594716554)\/",
+        "Id":  4115,
+        "RecordId":  791,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy Service started."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594716505)\/",
+        "Id":  4116,
+        "RecordId":  790,
+        "LevelDisplayName":  "Information",
+        "Message":  "Started the Group Policy service initialisation phase."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594657494)\/",
+        "Id":  5115,
+        "RecordId":  789,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy Service stopped."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594657493)\/",
+        "Id":  5325,
+        "RecordId":  788,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy received Preshutdown notification from Service Control Manager."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594655262)\/",
+        "Id":  5324,
+        "RecordId":  787,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy received the notification Logoff from Winlogon for session 3."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594655180)\/",
+        "Id":  5324,
+        "RecordId":  786,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy received the notification EndShell from Winlogon for session 3."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594405485)\/",
+        "Id":  8004,
+        "RecordId":  785,
+        "LevelDisplayName":  "Information",
+        "Message":  "Completed manual processing of policy for computer GMAKMA\\AD-CLIENT$ in 3 seconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594405473)\/",
+        "Id":  8016,
+        "RecordId":  784,
+        "LevelDisplayName":  "Information",
+        "Message":  "Software Installation Extension ({c6dc5466-785a-11d2-84d0-00c04fb169f7}) requests a sync mode process."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594405473)\/",
+        "Id":  6035,
+        "RecordId":  783,
+        "LevelDisplayName":  "Warning",
+        "Message":  "Software Installation Extension deferred processing until next synchronous foreground. Refer to a Resultant Set of Policy report for more information."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594405473)\/",
+        "Id":  6016,
+        "RecordId":  782,
+        "LevelDisplayName":  "Warning",
+        "Message":  "Completed Software Installation Extension Processing in 359 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594405109)\/",
+        "Id":  4016,
+        "RecordId":  781,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting Software Installation Extension Processing. \r\n\r\nList of applicable Group Policy objects: (Changes were detected.)\r\n\r\nLab2-Deploy-7Zip\n"
+    },
+    {
+        "TimeCreated":  "\/Date(1792594405101)\/",
+        "Id":  5016,
+        "RecordId":  780,
+        "LevelDisplayName":  "Information",
+        "Message":  "Completed Security Extension Processing in 2328 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594402767)\/",
+        "Id":  4016,
+        "RecordId":  779,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting Security Extension Processing. \r\n\r\nList of applicable Group Policy objects: (Changes were detected.)\r\n\r\nDefault Domain Policy\nLab2-Computers\n"
+    },
+    {
+        "TimeCreated":  "\/Date(1792594402749)\/",
+        "Id":  5016,
+        "RecordId":  778,
+        "LevelDisplayName":  "Information",
+        "Message":  "Completed Registry Extension Processing in 47 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594402706)\/",
+        "Id":  4016,
+        "RecordId":  777,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting Registry Extension Processing. \r\n\r\nList of applicable Group Policy objects: (Changes were detected.)\r\n\r\nDefault Domain Policy\nLab2-Computers\n"
+    },
+    {
+        "TimeCreated":  "\/Date(1792594402706)\/",
+        "Id":  5320,
+        "RecordId":  776,
+        "LevelDisplayName":  "Information",
+        "Message":  "Finished checking for non-system extensions."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594402706)\/",
+        "Id":  5320,
+        "RecordId":  775,
+        "LevelDisplayName":  "Information",
+        "Message":  "Service configuration update to standalone is not required and will be skipped."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594402705)\/",
+        "Id":  5320,
+        "RecordId":  774,
+        "LevelDisplayName":  "Information",
+        "Message":  "Checking for Group Policy client extensions that are not part of the system."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594402657)\/",
+        "Id":  5313,
+        "RecordId":  773,
+        "LevelDisplayName":  "Information",
+        "Message":  "The following Group Policy objects were not applicable because they were filtered out: \r\n\r\nLocal Group Policy\n\tNot Applied (Empty)\n"
+    },
+    {
+        "TimeCreated":  "\/Date(1792594402657)\/",
+        "Id":  5312,
+        "RecordId":  772,
+        "LevelDisplayName":  "Information",
+        "Message":  "List of applicable Group Policy objects: \r\n\r\nDefault Domain Policy\nLab2-Deploy-7Zip\nLab2-Computers\n"
+    },
+    {
+        "TimeCreated":  "\/Date(1792594402656)\/",
+        "Id":  5126,
+        "RecordId":  771,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy successfully got applicable GPOs from the domain controller."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594402656)\/",
+        "Id":  5216,
+        "RecordId":  770,
+        "LevelDisplayName":  "Information",
+        "Message":  "Successfully saved policies to the local datastore."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594402542)\/",
+        "Id":  4216,
+        "RecordId":  769,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting to save policies to the local datastore."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594402541)\/",
+        "Id":  5257,
+        "RecordId":  768,
+        "LevelDisplayName":  "Information",
+        "Message":  "Successfully completed downloading policies."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594402541)\/",
+        "Id":  5017,
+        "RecordId":  767,
+        "LevelDisplayName":  "Information",
+        "Message":  "The system calls to access specified file completed. \r\n\\\\GMAKMA.local\\SysVol\\GMAKMA.local\\Policies\\{2C121627-0F4C-4539-AF39-EF1DA291FC8B}\\gpt.ini\r\nThe call completed in 0 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594402539)\/",
+        "Id":  4017,
+        "RecordId":  766,
+        "LevelDisplayName":  "Information",
+        "Message":  "Making system calls to access specified file. \r\n\\\\GMAKMA.local\\SysVol\\GMAKMA.local\\Policies\\{2C121627-0F4C-4539-AF39-EF1DA291FC8B}\\gpt.ini"
+    },
+    {
+        "TimeCreated":  "\/Date(1792594402539)\/",
+        "Id":  5017,
+        "RecordId":  765,
+        "LevelDisplayName":  "Information",
+        "Message":  "The system calls to access specified file completed. \r\n\\\\GMAKMA.local\\SysVol\\GMAKMA.local\\Policies\\{163EA89C-A6BB-4874-92D4-2872AF30F41C}\\gpt.ini\r\nThe call completed in 0 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594402537)\/",
+        "Id":  4017,
+        "RecordId":  764,
+        "LevelDisplayName":  "Information",
+        "Message":  "Making system calls to access specified file. \r\n\\\\GMAKMA.local\\SysVol\\GMAKMA.local\\Policies\\{163EA89C-A6BB-4874-92D4-2872AF30F41C}\\gpt.ini"
+    },
+    {
+        "TimeCreated":  "\/Date(1792594402537)\/",
+        "Id":  5017,
+        "RecordId":  763,
+        "LevelDisplayName":  "Information",
+        "Message":  "The system calls to access specified file completed. \r\n\\\\GMAKMA.local\\sysvol\\GMAKMA.local\\Policies\\{31B2F340-016D-11D2-945F-00C04FB984F9}\\gpt.ini\r\nThe call completed in 0 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594402527)\/",
+        "Id":  4017,
+        "RecordId":  762,
+        "LevelDisplayName":  "Information",
+        "Message":  "Making system calls to access specified file. \r\n\\\\GMAKMA.local\\sysvol\\GMAKMA.local\\Policies\\{31B2F340-016D-11D2-945F-00C04FB984F9}\\gpt.ini"
+    },
+    {
+        "TimeCreated":  "\/Date(1792594402527)\/",
+        "Id":  5314,
+        "RecordId":  761,
+        "LevelDisplayName":  "Information",
+        "Message":  "A fast link was detected. The Estimated bandwidth is 36223 kbps. The slow link threshold is 500 kbps."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594402527)\/",
+        "Id":  5327,
+        "RecordId":  760,
+        "LevelDisplayName":  "Information",
+        "Message":  "Estimated network bandwidth on one of the connections: 4527941 kbps."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594402106)\/",
+        "Id":  4257,
+        "RecordId":  759,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting to download policies."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594402104)\/",
+        "Id":  4126,
+        "RecordId":  758,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy receiving applicable GPOs from the domain controller."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594402104)\/",
+        "Id":  5311,
+        "RecordId":  757,
+        "LevelDisplayName":  "Information",
+        "Message":  "The loopback policy processing mode is \"No loopback mode\"."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401990)\/",
+        "Id":  5310,
+        "RecordId":  756,
+        "LevelDisplayName":  "Information",
+        "Message":  "Account details: \r\n\tAccount Name: CN=AD-CLIENT,OU=ouComputers,DC=GMAKMA,DC=local\r\n\tAccount Domain Name: GMAKMA.local\r\n\tDC Name: \\\\ad-srv.GMAKMA.local\r\n\tDC Domain Name: GMAKMA.local"
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401990)\/",
+        "Id":  5309,
+        "RecordId":  755,
+        "LevelDisplayName":  "Information",
+        "Message":  "Computer details: \r\n\tComputer role: 2\r\n\tNetwork name: GMAKMA.local"
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401989)\/",
+        "Id":  5326,
+        "RecordId":  754,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy successfully discovered the Domain Controller in 344 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401989)\/",
+        "Id":  5308,
+        "RecordId":  753,
+        "LevelDisplayName":  "Information",
+        "Message":  "Domain Controller details: \r\n\tDomain Controller Name: ad-srv.GMAKMA.local\r\n\tDomain Controller IP Address: 10.0.0.1"
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401989)\/",
+        "Id":  5017,
+        "RecordId":  752,
+        "LevelDisplayName":  "Information",
+        "Message":  "The LDAP call to connect and bind to Active Directory completed. \r\nad-srv.GMAKMA.local\r\nThe call completed in 16 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401964)\/",
+        "Id":  4017,
+        "RecordId":  751,
+        "LevelDisplayName":  "Information",
+        "Message":  "Making LDAP calls to connect and bind to Active Directory. \r\nad-srv.GMAKMA.local"
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401642)\/",
+        "Id":  5320,
+        "RecordId":  750,
+        "LevelDisplayName":  "Information",
+        "Message":  "Retrieving Domain Controller details."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401642)\/",
+        "Id":  4326,
+        "RecordId":  749,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy is trying to discover the Domain Controller information."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401642)\/",
+        "Id":  5320,
+        "RecordId":  748,
+        "LevelDisplayName":  "Information",
+        "Message":  "Retrieved account information."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401642)\/",
+        "Id":  5017,
+        "RecordId":  747,
+        "LevelDisplayName":  "Information",
+        "Message":  "The system call to get account information completed. \r\nCN=AD-CLIENT,OU=ouComputers,DC=GMAKMA,DC=local\r\nThe call completed in 0 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401639)\/",
+        "Id":  4017,
+        "RecordId":  746,
+        "LevelDisplayName":  "Information",
+        "Message":  "Making system call to get account information. \r\n"
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401639)\/",
+        "Id":  5320,
+        "RecordId":  745,
+        "LevelDisplayName":  "Information",
+        "Message":  "Attempting to retrieve the account information."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401638)\/",
+        "Id":  5340,
+        "RecordId":  744,
+        "LevelDisplayName":  "Information",
+        "Message":  "The Group Policy processing mode is Background."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401636)\/",
+        "Id":  4004,
+        "RecordId":  743,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting manual processing of policy for computer GMAKMA\\AD-CLIENT$. \r\nActivity id: {c3a10a00-127a-47b6-9bcb-3d78d5600a33}"
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401626)\/",
+        "Id":  5117,
+        "RecordId":  742,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group policy session completed successfully."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401625)\/",
+        "Id":  5321,
+        "RecordId":  741,
+        "LevelDisplayName":  "Information",
+        "Message":  "A previous instance of the Group Policy Client Service has been detected. Parameter: 82ed0d00-0680-4409-a44d-df87fa9da3c7"
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401625)\/",
+        "Id":  5320,
+        "RecordId":  740,
+        "LevelDisplayName":  "Information",
+        "Message":  "Initialising service instance state to detect previous instances of the service."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401625)\/",
+        "Id":  5320,
+        "RecordId":  739,
+        "LevelDisplayName":  "Information",
+        "Message":  "Initialising and reading current service configuration for the Group Policy Client service."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401625)\/",
+        "Id":  5320,
+        "RecordId":  738,
+        "LevelDisplayName":  "Information",
+        "Message":  "The Group Policy Client service is currently configured as a shared service."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401625)\/",
+        "Id":  5117,
+        "RecordId":  737,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group policy session completed successfully."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401624)\/",
+        "Id":  5116,
+        "RecordId":  736,
+        "LevelDisplayName":  "Information",
+        "Message":  "Successfully completed the Group Policy Service initialisation phase."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401622)\/",
+        "Id":  4117,
+        "RecordId":  735,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy Service started."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401620)\/",
+        "Id":  5351,
+        "RecordId":  734,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group policy session returned to winlogon."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401617)\/",
+        "Id":  4117,
+        "RecordId":  733,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy Service started."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401615)\/",
+        "Id":  5351,
+        "RecordId":  732,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group policy session returned to winlogon."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401615)\/",
+        "Id":  5324,
+        "RecordId":  731,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy received the notification CreateSession from Winlogon for session 0."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401615)\/",
+        "Id":  4115,
+        "RecordId":  730,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy Service started."
+    },
+    {
+        "TimeCreated":  "\/Date(1792594401611)\/",
+        "Id":  4116,
+        "RecordId":  729,
+        "LevelDisplayName":  "Information",
+        "Message":  "Started the Group Policy service initialisation phase."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593348116)\/",
+        "Id":  5117,
+        "RecordId":  728,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group policy session completed successfully."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593348020)\/",
+        "Id":  8001,
+        "RecordId":  727,
+        "LevelDisplayName":  "Information",
+        "Message":  "Completed user logon policy processing for GMAKMA\\uManager1 in 0 seconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593348016)\/",
+        "Id":  5320,
+        "RecordId":  726,
+        "LevelDisplayName":  "Information",
+        "Message":  "Finished checking for non-system extensions."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593348016)\/",
+        "Id":  5320,
+        "RecordId":  725,
+        "LevelDisplayName":  "Information",
+        "Message":  "Service configuration update to standalone is not required and will be skipped."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593348016)\/",
+        "Id":  5320,
+        "RecordId":  724,
+        "LevelDisplayName":  "Information",
+        "Message":  "Checking for Group Policy client extensions that are not part of the system."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347995)\/",
+        "Id":  5313,
+        "RecordId":  723,
+        "LevelDisplayName":  "Information",
+        "Message":  "The following Group Policy objects were not applicable because they were filtered out: \r\n\r\nLocal Group Policy\n\tNot Applied (Empty)\n"
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347995)\/",
+        "Id":  5312,
+        "RecordId":  722,
+        "LevelDisplayName":  "Information",
+        "Message":  "List of applicable Group Policy objects: \r\n\r\nLab2-Managers\n"
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347995)\/",
+        "Id":  5126,
+        "RecordId":  721,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy successfully got applicable GPOs from the domain controller."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347995)\/",
+        "Id":  5216,
+        "RecordId":  720,
+        "LevelDisplayName":  "Information",
+        "Message":  "Successfully saved policies to the local datastore."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347964)\/",
+        "Id":  4216,
+        "RecordId":  719,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting to save policies to the local datastore."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347963)\/",
+        "Id":  5257,
+        "RecordId":  718,
+        "LevelDisplayName":  "Information",
+        "Message":  "Successfully completed downloading policies."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347963)\/",
+        "Id":  5017,
+        "RecordId":  717,
+        "LevelDisplayName":  "Information",
+        "Message":  "The system calls to access specified file completed. \r\n\\\\GMAKMA.local\\SysVol\\GMAKMA.local\\Policies\\{AFF25524-73A8-471C-A7F6-73CFD06538D3}\\gpt.ini\r\nThe call completed in 78 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347888)\/",
+        "Id":  4017,
+        "RecordId":  716,
+        "LevelDisplayName":  "Information",
+        "Message":  "Making system calls to access specified file. \r\n\\\\GMAKMA.local\\SysVol\\GMAKMA.local\\Policies\\{AFF25524-73A8-471C-A7F6-73CFD06538D3}\\gpt.ini"
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347888)\/",
+        "Id":  5314,
+        "RecordId":  715,
+        "LevelDisplayName":  "Information",
+        "Message":  "A fast link was detected. The Estimated bandwidth is 225475 kbps. The slow link threshold is 500 kbps."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347887)\/",
+        "Id":  5327,
+        "RecordId":  714,
+        "LevelDisplayName":  "Information",
+        "Message":  "Estimated network bandwidth on one of the connections: 28184451 kbps."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347564)\/",
+        "Id":  4257,
+        "RecordId":  713,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting to download policies."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347564)\/",
+        "Id":  4126,
+        "RecordId":  712,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy receiving applicable GPOs from the domain controller."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347564)\/",
+        "Id":  5311,
+        "RecordId":  711,
+        "LevelDisplayName":  "Information",
+        "Message":  "The loopback policy processing mode is \"No loopback mode\"."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347456)\/",
+        "Id":  5310,
+        "RecordId":  710,
+        "LevelDisplayName":  "Information",
+        "Message":  "Account details: \r\n\tAccount Name: CN=uManager1,OU=ouManagers,DC=GMAKMA,DC=local\r\n\tAccount Domain Name: GMAKMA.LOCAL\r\n\tDC Name: \\\\ad-srv.GMAKMA.local\r\n\tDC Domain Name: GMAKMA.LOCAL"
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347456)\/",
+        "Id":  5309,
+        "RecordId":  709,
+        "LevelDisplayName":  "Information",
+        "Message":  "Computer details: \r\n\tComputer role: 2\r\n\tNetwork name: "
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347455)\/",
+        "Id":  5326,
+        "RecordId":  708,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy successfully discovered the Domain Controller in 359 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347455)\/",
+        "Id":  5308,
+        "RecordId":  707,
+        "LevelDisplayName":  "Information",
+        "Message":  "Domain Controller details: \r\n\tDomain Controller Name: ad-srv.GMAKMA.local\r\n\tDomain Controller IP Address: 10.0.0.1"
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347455)\/",
+        "Id":  5017,
+        "RecordId":  706,
+        "LevelDisplayName":  "Information",
+        "Message":  "The LDAP call to connect and bind to Active Directory completed. \r\nad-srv.GMAKMA.local\r\nThe call completed in 16 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347452)\/",
+        "Id":  4017,
+        "RecordId":  705,
+        "LevelDisplayName":  "Information",
+        "Message":  "Making LDAP calls to connect and bind to Active Directory. \r\nad-srv.GMAKMA.local"
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347171)\/",
+        "Id":  6339,
+        "RecordId":  704,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy Winlogon Start Shell handling completed."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347171)\/",
+        "Id":  5324,
+        "RecordId":  703,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy received the notification StartShell from Winlogon for session 3."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347108)\/",
+        "Id":  5320,
+        "RecordId":  702,
+        "LevelDisplayName":  "Information",
+        "Message":  "Retrieving Domain Controller details."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347108)\/",
+        "Id":  4326,
+        "RecordId":  701,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy is trying to discover the Domain Controller information."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347107)\/",
+        "Id":  5320,
+        "RecordId":  700,
+        "LevelDisplayName":  "Information",
+        "Message":  "Retrieved account information."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347107)\/",
+        "Id":  5017,
+        "RecordId":  699,
+        "LevelDisplayName":  "Information",
+        "Message":  "The system call to get account information completed. \r\nCN=uManager1,OU=ouManagers,DC=GMAKMA,DC=local\r\nThe call completed in 16 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347094)\/",
+        "Id":  4017,
+        "RecordId":  698,
+        "LevelDisplayName":  "Information",
+        "Message":  "Making system call to get account information. \r\n"
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347094)\/",
+        "Id":  5320,
+        "RecordId":  697,
+        "LevelDisplayName":  "Information",
+        "Message":  "Attempting to retrieve the account information."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347094)\/",
+        "Id":  5340,
+        "RecordId":  696,
+        "LevelDisplayName":  "Information",
+        "Message":  "The Group Policy processing mode is Foreground asynchronous."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347086)\/",
+        "Id":  4001,
+        "RecordId":  695,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting user logon Policy processing for GMAKMA\\uManager1. \r\nActivity id: {f03b793c-17b0-4bf7-9d6c-04cb5366aa69}"
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347084)\/",
+        "Id":  4117,
+        "RecordId":  694,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy Service started."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347083)\/",
+        "Id":  5351,
+        "RecordId":  693,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group policy session returned to winlogon."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593347082)\/",
+        "Id":  5324,
+        "RecordId":  692,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy received the notification Logon from Winlogon for session 3."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593308818)\/",
+        "Id":  5324,
+        "RecordId":  691,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy received the notification Logoff from Winlogon for session 2."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593308746)\/",
+        "Id":  5324,
+        "RecordId":  690,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy received the notification EndShell from Winlogon for session 2."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593230102)\/",
+        "Id":  8005,
+        "RecordId":  689,
+        "LevelDisplayName":  "Information",
+        "Message":  "Completed manual processing of policy for user GMAKMA\\uManager1 in 0 seconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593230074)\/",
+        "Id":  5016,
+        "RecordId":  688,
+        "LevelDisplayName":  "Information",
+        "Message":  "Completed Registry Extension Processing in 31 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593230047)\/",
+        "Id":  4016,
+        "RecordId":  687,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting Registry Extension Processing. \r\n\r\nList of applicable Group Policy objects: (Changes were detected.)\r\n\r\nLab2-Managers\n"
+    },
+    {
+        "TimeCreated":  "\/Date(1792593230047)\/",
+        "Id":  5320,
+        "RecordId":  686,
+        "LevelDisplayName":  "Information",
+        "Message":  "Finished checking for non-system extensions."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593230047)\/",
+        "Id":  5320,
+        "RecordId":  685,
+        "LevelDisplayName":  "Information",
+        "Message":  "Service configuration update to standalone is not required and will be skipped."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593230047)\/",
+        "Id":  5320,
+        "RecordId":  684,
+        "LevelDisplayName":  "Information",
+        "Message":  "Checking for Group Policy client extensions that are not part of the system."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593230024)\/",
+        "Id":  5313,
+        "RecordId":  683,
+        "LevelDisplayName":  "Information",
+        "Message":  "The following Group Policy objects were not applicable because they were filtered out: \r\n\r\nLocal Group Policy\n\tNot Applied (Empty)\n"
+    },
+    {
+        "TimeCreated":  "\/Date(1792593230024)\/",
+        "Id":  5312,
+        "RecordId":  682,
+        "LevelDisplayName":  "Information",
+        "Message":  "List of applicable Group Policy objects: \r\n\r\nLab2-Managers\n"
+    },
+    {
+        "TimeCreated":  "\/Date(1792593230023)\/",
+        "Id":  5126,
+        "RecordId":  681,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy successfully got applicable GPOs from the domain controller."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593230023)\/",
+        "Id":  5216,
+        "RecordId":  680,
+        "LevelDisplayName":  "Information",
+        "Message":  "Successfully saved policies to the local datastore."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593229977)\/",
+        "Id":  4216,
+        "RecordId":  679,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting to save policies to the local datastore."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593229976)\/",
+        "Id":  5257,
+        "RecordId":  678,
+        "LevelDisplayName":  "Information",
+        "Message":  "Successfully completed downloading policies."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593229976)\/",
+        "Id":  5017,
+        "RecordId":  677,
+        "LevelDisplayName":  "Information",
+        "Message":  "The system calls to access specified file completed. \r\n\\\\GMAKMA.local\\SysVol\\GMAKMA.local\\Policies\\{AFF25524-73A8-471C-A7F6-73CFD06538D3}\\gpt.ini\r\nThe call completed in 0 milliseconds."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593229964)\/",
+        "Id":  4017,
+        "RecordId":  676,
+        "LevelDisplayName":  "Information",
+        "Message":  "Making system calls to access specified file. \r\n\\\\GMAKMA.local\\SysVol\\GMAKMA.local\\Policies\\{AFF25524-73A8-471C-A7F6-73CFD06538D3}\\gpt.ini"
+    },
+    {
+        "TimeCreated":  "\/Date(1792593229964)\/",
+        "Id":  5314,
+        "RecordId":  675,
+        "LevelDisplayName":  "Information",
+        "Message":  "A fast link was detected. The Estimated bandwidth is 30939 kbps. The slow link threshold is 500 kbps."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593229963)\/",
+        "Id":  5327,
+        "RecordId":  674,
+        "LevelDisplayName":  "Information",
+        "Message":  "Estimated network bandwidth on one of the connections: 3867475 kbps."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593229644)\/",
+        "Id":  4257,
+        "RecordId":  673,
+        "LevelDisplayName":  "Information",
+        "Message":  "Starting to download policies."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593229644)\/",
+        "Id":  4126,
+        "RecordId":  672,
+        "LevelDisplayName":  "Information",
+        "Message":  "Group Policy receiving applicable GPOs from the domain controller."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593229644)\/",
+        "Id":  5311,
+        "RecordId":  671,
+        "LevelDisplayName":  "Information",
+        "Message":  "The loopback policy processing mode is \"No loopback mode\"."
+    },
+    {
+        "TimeCreated":  "\/Date(1792593229639)\/",
+        "Id":  5310,
+        "RecordId":  670,
+        "LevelDisplayName":  "Information",
+        "Message":  "Account details: \r\n\tAccount Name: CN=uManager1,OU=ouManagers,DC=GMAKMA,DC=local\r\n\tAccount Domain Name: GMAKMA.LOCAL\r\n\tDC Name: \\\\ad-srv.GMAKMA.local\r\n\tDC Domain Name: GMAKMA.LOCAL"
+    },
+    {
+        "TimeCreated":  "\/Date(1792593229639)\/",
+        "Id":  5309,
+        "RecordId":  669,
+        "LevelDisplayName":  "Information",
+        "Message":  "Computer details: \r\n\tComputer role: 2\r\n\tNetwork name: "
+    }
+]
