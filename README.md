@@ -14,8 +14,8 @@
 - [Задание](lab-2/lab-2-task.md).
 - Отчёт для преподавателя: [Markdown](lab-2/lab-2-report.md), [PDF](lab-2/lab-2-report.pdf).
 - Подробное руководство для повторения работы: [Markdown](lab-2/lab-2-guide.md), [PDF](lab-2/lab-2-guide.pdf). Сохраняет прежнюю подробную версию; не предназначено для сдачи вместо отчёта.
-- Памятка для защиты с командами и ответами: [Markdown](lab-2/lab-2-defense.md), [PDF](lab-2/lab-2-defense.pdf)
-- Рассказ на двоих на 5-6 минут: [Markdown](lab-2/lab-2-defense-speech.md), [PDF](lab-2/lab-2-defense-speech.pdf)
+- Памятка для защиты с командами и ответами: [Markdown](lab-2/%D0%9B%D0%A02%20-%20%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BA%D0%B0.md), [PDF](lab-2/%D0%9B%D0%A02%20-%20%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BA%D0%B0.pdf)
+- Рассказ на двоих на 5-6 минут: [Markdown](lab-2/%D0%9B%D0%A02%20-%20%D0%A0%D0%B0%D1%81%D1%81%D0%BA%D0%B0%D0%B7%20%D0%B4%D0%BB%D1%8F%20%D0%B7%D0%B0%D1%89%D0%B8%D1%82%D1%8B.md), [PDF](lab-2/%D0%9B%D0%A02%20-%20%D0%A0%D0%B0%D1%81%D1%81%D0%BA%D0%B0%D0%B7%20%D0%B4%D0%BB%D1%8F%20%D0%B7%D0%B0%D1%89%D0%B8%D1%82%D1%8B.pdf)
 - [Сценарии PowerShell и CMD](lab-2/scripts/).
 
 PDF отчёта автоматически обновляется в GitHub Actions после отправки изменений. PDF руководства сохранён вместе с исходной подробной версией.
