@@ -1,0 +1,14 @@
+{
+  "File": "C:\\Lab2Private\\stage-d-before-c-acl.txt",
+  "Length": 97926918,
+  "Lines": 584345,
+  "Sha256": "1E627DD242254CBB7EF86D23FD0C3F5ECD921FEF9EE88FC9B8AA0AC45D0518CD",
+  "LogTail": [
+    "C:\\Users\\uSeller1\\SendTo\\*: Access is denied.",
+    "C:\\Users\\uSeller1\\Start Menu\\*: Access is denied.",
+    "C:\\Users\\uSeller1\\Templates\\*: Access is denied.",
+    "C:\\Windows\\System32\\config\\systemprofile\\AppData\\Local\\Microsoft\\Windows\\INetCache\\Content.IE5\\*: Access is denied.",
+    "Successfully processed 0 files; Failed processing 108 files"
+  ],
+  "Protected": true
+}

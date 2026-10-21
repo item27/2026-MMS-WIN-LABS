@@ -1,0 +1,68 @@
+{
+    "Providers":  [
+                      {
+                          "Name":  "Application Management Group Policy",
+                          "LogLinks":  [
+                                           {
+                                               "LogName":  "System",
+                                               "IsImported":  true,
+                                               "DisplayName":  "System"
+                                           }
+                                       ]
+                      },
+                      {
+                          "Name":  "Application Management",
+                          "LogLinks":  [
+                                           {
+                                               "LogName":  "Application",
+                                               "IsImported":  true,
+                                               "DisplayName":  "Application"
+                                           }
+                                       ]
+                      }
+                  ],
+    "Events":  [
+                   {
+                       "TimeCreated":  "\/Date(1792594737500)\/",
+                       "ProviderName":  "Application Management Group Policy",
+                       "Id":  308,
+                       "RecordId":  587,
+                       "Message":  "Changes to software installation settings were applied successfully."
+                   },
+                   {
+                       "TimeCreated":  "\/Date(1792594737453)\/",
+                       "ProviderName":  "Application Management Group Policy",
+                       "Id":  302,
+                       "RecordId":  586,
+                       "Message":  "The install of application 7-Zip 26.04 (x64 edition) from policy Lab2-Deploy-7Zip succeeded."
+                   },
+                   {
+                       "TimeCreated":  "\/Date(1792594726438)\/",
+                       "ProviderName":  "Application Management Group Policy",
+                       "Id":  301,
+                       "RecordId":  584,
+                       "Message":  "The assignment of application 7-Zip 26.04 (x64 edition) from policy Lab2-Deploy-7Zip succeeded."
+                   },
+                   {
+                       "TimeCreated":  "\/Date(1792594405463)\/",
+                       "ProviderName":  "Application Management Group Policy",
+                       "Id":  108,
+                       "RecordId":  526,
+                       "Message":  "Failed to apply changes to software installation settings. The installation of software deployed through Group Policy for this user has been delayed until the next log-on because the changes must be applied before the user log-on. The error was: %%1274"
+                   },
+                   {
+                       "TimeCreated":  "\/Date(1792594405463)\/",
+                       "ProviderName":  "Application Management Group Policy",
+                       "Id":  103,
+                       "RecordId":  525,
+                       "Message":  "The removal of the assignment of application 7-Zip 26.04 (x64 edition) from policy Lab2-Deploy-7Zip failed. The error was: %%2"
+                   },
+                   {
+                       "TimeCreated":  "\/Date(1792594405229)\/",
+                       "ProviderName":  "Application Management Group Policy",
+                       "Id":  101,
+                       "RecordId":  524,
+                       "Message":  "The assignment of application 7-Zip 26.04 (x64 edition) from policy Lab2-Deploy-7Zip failed. The error was : %%1274"
+                   }
+               ]
+}

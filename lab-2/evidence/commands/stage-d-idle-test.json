@@ -1,0 +1,10 @@
+{
+  "vmid": 105,
+  "user": "GMAKMA\\uSeller1",
+  "configuredTimeoutSeconds": 60,
+  "noInputWaitSeconds": 75,
+  "measuredIntervalSeconds": 76.70984698701068,
+  "inputDuringWait": false,
+  "lastAction": "mouse move to (900,650)",
+  "firstScreenshotAfterWait": "seller-idle-after"
+}

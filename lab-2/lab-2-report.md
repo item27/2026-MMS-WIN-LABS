@@ -843,3 +843,462 @@ Result: The operation completed successfully.
 Подтверждены четыре OU, размещение клиента в `ouComputers`, две глобальные группы безопасности и их состав, разделение NTFS-прав отделов, запрет изменения DACL и удаления корней, запись без просмотра `BlackHole`, удаление только собственных файлов в `Common`, два скрытых домашних ресурса, подключение `X:` у обоих пользователей и реальная синхронизация перемещаемого профиля продавца после перезагрузки.
 
 После проверок обе машины оставлены работающими. На клиенте открыт доменный сеанс `GMAKMA\uSeller1`, проверка `Test-ComputerSecureChannel` вернула `True`. Сетевые интерфейсы обеих машин подключены только к `vmbr1_lab`. Сохранены и проверены итоговые снимки `lab2-stage-c-verified` для VM104 и VM105. Состояние машин и список снимков находятся в [stage-c-final-vm-state.json](evidence/commands/stage-c-final-vm-state.json). Эти снимки не заменяют отдельную итоговую резервную копию.
+
+## 4. Работа с групповыми политиками
+
+Настройка выполнена в домене `GMAKMA.local`. Политики продавцов и менеджеров проверены на `AD-CLIENT` под обычными доменными пользователями `uSeller1` и `uManager1`. Параметры компьютера проверены после перезагрузки клиента. Наличие настроек на контроллере домена отдельно от проверки клиента не считалось подтверждением их действия.
+
+### 4.1. Доменная политика паролей
+
+В `Group Policy Management` открыт объект `Default Domain Policy`. В редакторе выбран путь:
+
+```text
+Computer Configuration -> Policies -> Windows Settings -> Security Settings
+-> Account Policies -> Password Policy
+```
+
+В окне `Minimum password length` установлено значение `6`. Флажок определения параметра включён.
+
+
+![Рисунок 123 – Минимальная длина пароля – 6 символов](screenshots/362-d-password-length.png)
+
+В параметре `Password must meet complexity requirements` выбрано `Disabled`. Изменение выполнено именно в доменной GPO, а не в локальной политике отдельной машины.
+
+
+![Рисунок 124 – Контроль сложности паролей отключён](screenshots/363-d-password-complexity.png)
+
+После обновления компьютерной политики на сервере выполнена проверка:
+
+```powershell
+gpupdate /target:computer /force
+Get-ADDefaultDomainPasswordPolicy |
+    Select-Object MinPasswordLength,ComplexityEnabled
+```
+
+Получены `MinPasswordLength = 6`, `ComplexityEnabled = False`. Проверка размещения компьютеров также показала, что `AD-CLIENT` находится в `ouComputers`, а `AD-SRV` остался в `Domain Controllers`. Службы `NTDS`, `DNS`, `DHCPServer` и `Netlogon` работают.
+
+
+![Рисунок 125 – Проверка политики паролей и сохранение DC в Domain Controllers](screenshots/405-d-domain-policy-readback.png)
+
+### 4.2. Политика подразделения продавцов
+
+Для создания объектов GPO и привязки к нужным OU использован модуль `GroupPolicy`. Например, политика продавцов создана командами:
+
+```powershell
+$g = New-GPO -Name 'Lab2-Sellers'
+New-GPLink -Guid $g.Id `
+    -Target 'OU=ouSellers,DC=GMAKMA,DC=local' -LinkEnabled Yes
+```
+
+Аналогично созданы `Lab2-Managers`, `Lab2-Computers` и отдельная `Lab2-Deploy-7Zip`. Все фактически выполненные команды создания и начальной настройки сохранены в [stage-d-create-gpo.ps1](evidence/commands/stage-d-create-gpo.ps1).
+
+В GPMC проверена область действия `Lab2-Sellers`: единственная ссылка ведёт на `ouSellers`, фильтр безопасности содержит `Authenticated Users`. Это не ссылка на весь домен. Пользователи других подразделений не получают эту пользовательскую GPO только из-за членства в `Authenticated Users`.
+
+
+![Рисунок 126 – Lab2-Sellers: ссылка только на ouSellers и фильтр Authenticated Users](screenshots/389-d-gpmc-seller-link.png)
+
+Параметры административных шаблонов внесены командлетом `Set-GPRegistryValue`. После записи каждый параметр отдельно открыт в `Group Policy Management Editor` и проверен в соответствующем окне. Поэтому приведённые ниже снимки показывают чтение реального состояния GPO, а не заменяют клиентские тесты.
+
+В `User Configuration -> Policies -> Administrative Templates -> Control Panel` параметр `Prohibit access to Control Panel and PC settings` имеет состояние `Enabled`. Ему соответствует значение:
+
+```powershell
+Set-GPRegistryValue -Name 'Lab2-Sellers' `
+    -Key 'HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer' `
+    -ValueName NoControlPanel -Type DWord -Value 1
+```
+
+
+![Рисунок 127 – Запрет Панели управления и параметров ПК](screenshots/364-d-seller-control-panel.png)
+
+В разделе `System` включён `Prevent access to registry editing tools`. Значение `DisableRegistryTools = 1` записано в `HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\System`. В открытом окне также видно запрещение бесшумного запуска `regedit`.
+
+
+![Рисунок 128 – Запрет редактирования реестра](screenshots/365-d-seller-registry.png)
+
+В `Windows Components -> File Explorer` включён `Hide these specified drives in My Computer`. В списке выбрано `Restrict C drive only`. Соответствующее значение `NoDrives = 4` скрывает только C. Политика запрета доступа к диску вместо скрытия не использовалась.
+
+
+![Рисунок 129 – Скрытие только диска C в Проводнике](screenshots/366-d-seller-hide-c.png)
+
+Для блокировки через заставку выбран раздел `Control Panel -> Personalization`. В нём включён `Enable screen saver`.
+
+
+![Рисунок 130 – Включение экранной заставки](screenshots/367-d-seller-screensaver.png)
+
+Параметр `Password protect the screen saver` установлен в `Enabled`. После завершения заставки требуется повторная аутентификация.
+
+
+![Рисунок 131 – Защита заставки паролем](screenshots/368-d-seller-screen-password.png)
+
+В `Screen saver timeout` установлено `Enabled` и значение `60` секунд.
+
+
+![Рисунок 132 – Таймаут заставки – 60 секунд](screenshots/369-d-seller-timeout.png)
+
+Параметр `Prevent changing screen saver` включён. Изменение параметров заставки пользователем запрещено.
+
+
+![Рисунок 133 – Запрет изменения заставки](screenshots/370-d-seller-no-change.png)
+
+Дополнительно включён `Force specific screen saver`, указано `scrnsave.scr`. Это гарантирует выбор существующей заставки, а не только таймаута при отсутствии выбранного файла.
+
+В GPO проверены строковые значения в `HKCU\Software\Policies\Microsoft\Windows\Control Panel\Desktop`:
+
+| Значение | Данные |
+|---|---|
+| `ScreenSaveActive` | `1` |
+| `ScreenSaverIsSecure` | `1` |
+| `ScreenSaveTimeOut` | `60` |
+| `SCRNSAVE.EXE` | `scrnsave.scr` |
+
+Запрет изменения задан значением `NoDispScrSavPage = 1` в пользовательском разделе `Policies\System`.
+
+
+![Рисунок 134 – Принудительное использование scrnsave.scr](screenshots/371-d-seller-force-saver.png)
+
+### 4.3. Проверка ограничений под uSeller1
+
+На клиенте выполнено обновление пользовательской политики:
+
+```cmd
+gpupdate /target:user /force
+gpresult /r /scope user
+```
+
+После этого пользователь вышел из системы и выполнил повторный доменный вход. Проверки проведены без административного токена.
+
+Первой из окна `Run` запущена команда `control.exe`. Вместо Панели управления получено сообщение `Restrictions`: операция отменена из-за действующих ограничений.
+
+
+![Рисунок 135 – uSeller1: Панель управления недоступна](screenshots/393-d-seller-control-denied.png)
+
+При попытке запуска `regedit.exe` появилось сообщение `Registry editing has been disabled by your administrator`. Это отказ редактора реестра, а не только отсутствие прав на изменение отдельного ключа.
+
+
+![Рисунок 136 – uSeller1: редактор реестра недоступен](screenshots/394-d-seller-regedit-denied.png)
+
+Командой `shell:mycomputerfolder` открыт раздел «Этот компьютер». Локальный диск C не отображается, а домашний диск X присутствует. Скрытие проверено именно в Проводнике текущего продавца.
+
+
+![Рисунок 137 – uSeller1: в «Этот компьютер» отсутствует диск C](screenshots/395-d-seller-c-hidden.png)
+
+Попытка открыть параметры заставки выполнена командой:
+
+```text
+rundll32.exe shell32.dll,Control_RunDLL desk.cpl,,1
+```
+
+Получено сообщение `Your system administrator has disabled launching of the Display Settings Control Panel`. Пользователь не смог изменить параметры заставки. Отдельная настройка `NoDispScrSavPage = 1` подтверждена также чтением пользовательского раздела политик.
+
+
+![Рисунок 138 – uSeller1: изменение параметров заставки запрещено](screenshots/396-d-seller-screensaver-denied.png)
+
+В пользовательском `gpresult /r /scope user` присутствует `Lab2-Sellers`. В той же обычной сессии выполнены функциональные проверки записи:
+
+- файл `X:\stage-d-seller-after-gpo.txt` создан и прочитан обратно;
+- файл в `C:\Users\uSeller1\Documents` создан и прочитан обратно;
+- создание файла непосредственно в корне `C:\` отклонено.
+
+В результате сохранены имя действующего пользователя `GMAKMA\uSeller1`, прочитанные данные и `RootWriteDenied = true`. [JSON проверки](evidence/reports/stage-d-seller-functional.json) содержит также фактические значения всех пользовательских ограничений. HTML сформирован командой `gpresult /h` в обычной сессии: [отчёт продавца](evidence/reports/stage-d-seller-gpresult.html).
+
+
+![Рисунок 139 – Пользовательский gpresult и проверка домашней папки](screenshots/397-d-seller-gpresult.png)
+
+Для проверки блокировки сессия оставлена без клавиатурного и мышиного ввода. Перед ожиданием зафиксирован открытый рабочий стол с результатами проверки.
+
+
+![Рисунок 140 – Сессия продавца перед проверкой простоя](screenshots/398-d-seller-idle-before.png)
+
+При заданном таймауте `60` секунд выдержано `75` секунд без ввода. Снятие изображения через VNC не отправляло клавиши или движение мыши. После ожидания рабочий стол перестал отображаться. Фактический интервал записан в [stage-d-idle-test.json](evidence/commands/stage-d-idle-test.json).
+
+
+![Рисунок 141 – Экран после отсутствия ввода более 60 секунд](screenshots/399-d-seller-idle-after.png)
+
+После возвращения к консоли появился экран входа `uSeller1` с полем пароля. Таким образом, проверена не только запись таймаута в GPO, но и реальная защита сессии после простоя.
+
+
+![Рисунок 142 – Возвращение в сессию требует пароль uSeller1](screenshots/400-d-seller-idle-password.png)
+
+### 4.4. Политика менеджеров и проверка разрешённых приложений
+
+`Lab2-Managers` связана только с `ouManagers`. Фильтрация безопасности проверена в GPMC.
+
+
+![Рисунок 143 – Lab2-Managers: ссылка только на ouManagers](screenshots/390-d-gpmc-manager-link.png)
+
+До включения ограничения из обычной сессии менеджера получены `gpresult /r` и `gpresult /h`: [исходный отчёт](evidence/reports/stage-d-manager-before.html). Затем включён параметр:
+
+```text
+User Configuration -> Policies -> Administrative Templates -> System
+-> Run only specified Windows applications = Enabled
+```
+
+Значение `RestrictRun = 1` задано в `HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer`. Команды настройки сохранены в [stage-d-manager-policy.ps1](evidence/commands/stage-d-manager-policy.ps1).
+
+
+![Рисунок 144 – Разрешены только заданные приложения](screenshots/375-d-manager-restrict-run.png)
+
+В окне `Show Contents` проверен разрешённый список. В нём ровно три имени: `mspaint.exe`, `calc.exe`, `notepad.exe`. Другие программы в список не добавлялись.
+
+
+![Рисунок 145 – Список mspaint.exe, calc.exe и notepad.exe](screenshots/376-d-manager-allowlist.png)
+
+После `gpupdate /target:user /force`, выхода и повторного входа `uManager1` из оболочки запущен `mspaint.exe`. Открылся Paint.
+
+
+![Рисунок 146 – Paint запускается у uManager1](screenshots/377-d-manager-paint.png)
+
+Команда `notepad.exe` открыла Блокнот.
+
+
+![Рисунок 147 – Блокнот запускается у uManager1](screenshots/378-d-manager-notepad.png)
+
+Команда `calc.exe` открыла Калькулятор Windows 10. Это запуск разрешённого штатного launcher; фактический процесс UWP имеет имя `Calculator.exe`. Расширять разрешённый список ради него не потребовалось.
+
+
+![Рисунок 148 – Запуск Калькулятора у uManager1](screenshots/379-d-manager-calc.png)
+
+Попытка запуска `wordpad.exe`, которого нет в разрешённом списке, завершилась сообщением `Restrictions`.
+
+
+![Рисунок 149 – Запрет приложения вне разрешённого списка](screenshots/380-d-manager-denied.png)
+
+Отдельно выполнен запуск неразрешённого приложения из самого Проводника. Командой `shell:system` открыт `System32`, выбран файл `cmd`, после Enter получен отказ политики. Командная строка в сессии менеджера не открылась.
+
+
+![Рисунок 150 – Запрет cmd.exe при запуске из Проводника](screenshots/381-d-manager-explorer-denied.png)
+
+После применения компьютерной GPO и перезагрузки клиент снова проверен под `uManager1`: Paint, Калькулятор и Блокнот работают. В Блокноте создан файл, в окне `Save As` выбран домашний диск `X:`, сохранён `stage-d-manager-home.txt`. На сервере прочитано его содержимое `Stage D manager home write after computer GPO`.
+
+Административное чтение процессов подтвердило владельца `GMAKMA\uManager1` у `mspaint.exe`, `Calculator.exe` и `notepad.exe`; `cmd.exe` и `powershell.exe` в этой сессии среди проверяемых процессов отсутствуют. Результат находится в [stage-d-manager-post-reboot-verification.json](evidence/commands/stage-d-manager-post-reboot-verification.json).
+
+
+![Рисунок 151 – Paint, Калькулятор и Блокнот работают после computer GPO; файл сохранён на X](screenshots/407-d-manager-post-reboot-apps.png)
+
+Финальный пользовательский RSoP считан административно:
+
+```cmd
+gpresult /user GMAKMA\uManager1 /scope user /r
+gpresult /user GMAKMA\uManager1 /scope user /h C:\Lab2Private\stage-d-manager-final.html /f
+```
+
+В нём применена `Lab2-Managers`: [финальный HTML](evidence/reports/stage-d-manager-final.html). Запрещённые менеджеру PowerShell или cmd для получения этого отчёта в его сессии не запускались. Согласно документации Microsoft, `Run only specified Windows applications` ограничивает запуск через Explorer; эта политика не является полноценной изоляцией выполнения произвольного кода.
+
+### 4.5. Политика компьютеров
+
+Перед применением компьютерной политики обеих машин созданы согласованные снимки `lab2-stage-d-before-gpo`. На клиенте сохранён ACL-файл `C:\Lab2Private\stage-d-before-c-acl.txt`. Каталог защищён разрешениями Administrators/SYSTEM.
+
+Размер ACL-файла составляет `97 926 918` байт, SHA-256 и сведения о чтении находятся в [манифесте резервной копии](evidence/commands/stage-d-acl-backup-manifest.json). Журнал содержит `108` отказов чтения отдельных защищённых или служебных путей; этот файл не рассматривается как безусловно полная резервная копия каждого объекта. Для восстановления всего состояния сохранены снимки VM, а исходные ACL проверяемых объектов отдельно записаны в JSON.
+
+Политика `Lab2-Computers` связана только с `ouComputers`, где находится клиент. Контроллер домена не перемещался в это OU.
+
+
+![Рисунок 152 – Lab2-Computers: ссылка на ouComputers](screenshots/391-d-gpmc-computer-link.png)
+
+В `Computer Configuration -> Policies -> Administrative Templates -> Windows Components -> Windows Error Reporting` установлен `Disable Windows Error Reporting = Enabled`.
+
+Настройка задана командой:
+
+```powershell
+Set-GPRegistryValue -Name 'Lab2-Computers' `
+    -Key 'HKLM\Software\Policies\Microsoft\Windows\Windows Error Reporting' `
+    -ValueName Disabled -Type DWord -Value 1
+```
+
+В редакторе проверено состояние `Enabled`.
+
+
+![Рисунок 153 – Отключение отчётов Windows об ошибках](screenshots/373-d-computer-wer.png)
+
+В разделе `Network -> Offline Files` параметр `Allow or Disallow use of the Offline Files feature` имеет состояние `Disabled`. Значение GPO:
+
+```powershell
+Set-GPRegistryValue -Name 'Lab2-Computers' `
+    -Key 'HKLM\Software\Policies\Microsoft\Windows\NetCache' `
+    -ValueName Enabled -Type DWord -Value 0
+```
+
+
+![Рисунок 154 – Запрет Offline Files](screenshots/374-d-computer-offline.png)
+
+В `Windows Settings -> Security Settings -> Local Policies -> Security Options` открыт `Accounts: Administrator account status`. Включён флажок определения параметра, выбрано `Disabled` и сохранено изменение. Это настройка встроенного локального Administrator, определяемого SID с окончанием `-500`, а не доменного администратора и не отдельного локального `LabAdmin`.
+
+
+![Рисунок 155 – Отключение встроенного локального Administrator](screenshots/372-d-computer-rid500-policy.png)
+
+### 4.6. ACL файловой системы C и граница безопасного применения
+
+В `Lab2-Computers` открыт раздел `Computer Configuration -> Policies -> Windows Settings -> Security Settings -> File System`. Через `Add File` добавлен корень `C:\`.
+
+В шаблоне ACL оставлены три записи. Для `GMAKMA\Domain Users` установлены `Read & execute`, `List folder contents`, `Read`. Разрешение записи не предоставлено.
+
+
+![Рисунок 156 – ACL C: – Domain Users: чтение и выполнение](screenshots/385-d-filesystem-domainusers.png)
+
+Для `SYSTEM` выбран `Full control`.
+
+
+![Рисунок 157 – ACL C: – SYSTEM: полный доступ](screenshots/386-d-filesystem-system.png)
+
+Для `Administrators` также выбран `Full control`.
+
+
+![Рисунок 158 – ACL C: – Administrators: полный доступ](screenshots/387-d-filesystem-admins.png)
+
+В следующем окне выбран режим `Propagate inheritable permissions to all subfolders and files`. Режим полной замены `Replace existing permissions on all subfolders and files with inheritable permissions` не применялся.
+
+В реальном файле `GptTmpl.inf` сохранено:
+
+```ini
+[System Access]
+EnableAdminAccount = 0
+[File Security]
+"%SystemDrive%\",0,"D:PAR(A;OICI;FA;;;SY)(A;OICI;FA;;;BA)(A;OICI;0x1200a9;;;DU)"
+```
+
+Здесь `0` обозначает распространение наследуемых разрешений; по спецификации Microsoft режим `1` означал бы замену существующих дочерних разрешений. Выбранный вариант не подменён отдельной учебной папкой: политика применена к корню системного тома.
+
+
+![Рисунок 159 – Режим распространения наследуемых разрешений без замены защищённых ACL](screenshots/388-d-filesystem-propagation.png)
+
+После обновления политики и перезагрузки прочитаны реальные DACL клиента. На корне C получены Administrators/SYSTEM FullControl и Domain Users ReadAndExecute. Но у защищённых системных объектов и профиля сохранились исходные специальные разрешения.
+
+| Проверенный объект | Фактический результат |
+|---|---|
+| `C:\` | Три заданные записи, наследование на дочерние объекты |
+| `C:\Windows\System32\notepad.exe` | Защищённая DACL; сохранены TrustedInstaller и группы приложений, SYSTEM/Administrators имеют RX |
+| `C:\Program Files\Windows NT\Accessories\wordpad.exe` | Защищённая DACL с исходными системными ACE |
+| `C:\Users\uSeller1` | Защищённая DACL: SYSTEM, Administrators и собственный пользователь имеют FullControl |
+| `C:\Users\uSeller1\NTUSER.DAT` | Права наследуются от защищённого профиля; пользователь сохраняет FullControl |
+
+Снимки DACL находятся в [исходном JSON](evidence/commands/stage-d-client-acl-before.json) и [JSON после перезагрузки](evidence/commands/stage-d-client-acl-after-reboot.json). Профиль, домашний диск и разрешённые приложения реально использованы после перезагрузки; проверена и невозможность обычного продавца писать в корень C.
+
+
+![Рисунок 160 – ACL корня C и сохранённые защищённые ACL ОС и профиля](screenshots/406-d-client-acl-readback.png)
+
+Требование задания «для всех файловых объектов на C» в буквальном варианте единой DACL из трёх субъектов не выполнено. Защищённые системные ACL и собственные права пользователя на профиль намеренно не заменялись. Удаление этих ACE изменило бы права TrustedInstaller, пакетов приложений и записи пользовательского профиля. Полное выравнивание всего тома не заявляется результатом этой работы.
+
+Таким образом, подтверждена настройка корня C: корень и наследуемые разрешения настроены политикой, системные и профильные исключения явно зафиксированы. Остальные параметры GPO и установка MSI проверены независимо от этого ограничения.
+
+### 4.7. Отдельная политика назначения MSI 7-Zip
+
+Для установки использован заранее полученный с официальной страницы 7-Zip пакет `7z2604-x64.msi`, версия `26.04`, x64. Источник записан в [7zip-package-source.json](evidence/commands/7zip-package-source.json).
+
+Файл размером `2 009 088` байт передан через guest agent частями и собран на сервере в `C:\Lab2Packages`. SHA-256 исходника, серверного файла и файла, прочитанного по SMB с клиента, совпал:
+
+```text
+0b01334a418654293513449f61d6bfc99e5196ca371e3c3dc961eda57cd535c6
+```
+
+Создан ресурс `LabPackages$`. На уровне NTFS группа `Domain Computers` имеет ReadAndExecute, SYSTEM и Administrators имеют FullControl. На уровне SMB `Domain Computers` имеет Read, `Domain Admins` имеет Full. Чтение пакета с клиента выполнено из `NT AUTHORITY\SYSTEM`; фактическое соединение SMB к `LabPackages$` использовало `GMAKMA\AD-CLIENT$`, что дополнительно подтверждено серверной SMB-сессией с адреса `10.0.0.100`. [Команда и результат SHA-256](evidence/commands/stage-d-client-machine-package-read.json), [учётная запись соединения SMB](evidence/commands/stage-d-package-smb-machine-credential.json).
+
+`Lab2-Deploy-7Zip` создана как отдельная GPO и связана только с `ouComputers`. Ссылка и фильтр безопасности проверены в GPMC.
+
+
+![Рисунок 161 – Отдельная Lab2-Deploy-7Zip: ссылка и фильтрация](screenshots/392-d-gpmc-msi-link.png)
+
+В редакторе выбрана ветвь:
+
+```text
+Computer Configuration -> Policies -> Software Settings
+-> Software installation -> New -> Package
+```
+
+В поле имени пакета введён полный UNC-путь, а не локальный путь сервера:
+
+```text
+\\ad-srv\LabPackages$\7z2604-x64.msi
+```
+
+
+![Рисунок 162 – Выбор MSI по сетевому пути UNC](screenshots/382-d-msi-unc.png)
+
+В окне `Deploy Software` выбран вариант `Assigned`.
+
+
+![Рисунок 163 – Назначение пакета компьютерам: Assigned](screenshots/383-d-msi-assigned.png)
+
+В Software installation появился `7-Zip 26.04 (x64 edition)`. Для пакета указаны назначение `Assigned`, источник UNC и архитектура x64. Установка вручную через `msiexec` вместо GPO не выполнялась.
+
+
+![Рисунок 164 – Пакет 7-Zip в Software installation](screenshots/384-d-msi-package.png)
+
+### 4.8. Проверка компьютерной политики и установки после перезагрузки
+
+На клиенте запущено принудительное обновление компьютерной политики и выполнена штатная перезагрузка Windows. В фоновом цикле Software Installation зарегистрировала необходимость foreground-обработки (`1274`); после загрузки назначение и установка завершились успешно. Это подтверждено последующими событиями, а не только фактом отправки команды перезагрузки.
+
+В административной сессии клиента выполнены:
+
+```powershell
+gpresult /r /scope computer
+Get-LocalUser | Where-Object { $_.SID.Value -match '-500$' } |
+    Select-Object Name,Enabled,SID
+Get-ItemProperty 'HKLM:\Software\Policies\Microsoft\Windows\Windows Error Reporting'
+Get-ItemProperty 'HKLM:\Software\Policies\Microsoft\Windows\NetCache'
+Test-ComputerSecureChannel
+```
+
+В применённых GPO присутствуют `Lab2-Computers`, `Lab2-Deploy-7Zip`, `Default Domain Policy`. Встроенный локальный `Administrator` отключён, отдельный `LabAdmin` остаётся включённым. Получены `WER Disabled = 1`, `Offline Files Enabled = 0`, доверительный канал `True`.
+
+
+![Рисунок 165 – AD-CLIENT: применённые computer GPO, RID-500 и 7-Zip](screenshots/401-d-computer-rsop.png)
+
+Параметры дополнительно считаны из настоящего WMI RSoP `root\RSOP\Computer`. Записи `RSOP_RegistryPolicySetting` для WER и NetCache ссылаются на GUID `Lab2-Computers`; `RSOP_SecuritySettingBoolean` содержит `EnableAdminAccount = false` из той же GPO. Это отличает итоговую проверку от чтения только настроенного объекта на сервере. [Результат RSoP](evidence/commands/stage-d-client-rsop-wmi.json), [компьютерный HTML gpresult](evidence/reports/stage-d-computer-gpresult.html).
+
+Наличие 7-Zip проверено без `Win32_Product`:
+
+```powershell
+Test-Path 'C:\Program Files\7-Zip\7z.exe'
+& 'C:\Program Files\7-Zip\7z.exe' i
+```
+
+Первый результат `True`; консоль сообщает `7-Zip 26.04 (x64)`. В `Programs and Features` клиента присутствует `7-Zip 26.04 (x64 edition)`, издатель `Igor Pavlov`, версия `26.04.00.0`.
+
+
+![Рисунок 166 – 7-Zip 26.04 в Programs and Features клиента](screenshots/402-d-msi-programs-features.png)
+
+Из установленного каталога запущен `7zFM.exe`. Открылся штатный 7-Zip File Manager.
+
+
+![Рисунок 167 – Запуск установленного 7-Zip File Manager](screenshots/403-d-msi-file-manager.png)
+
+В системном журнале клиента источник `Application Management Group Policy` зарегистрировал:
+
+| Event ID | Record ID | Фактическое сообщение |
+|---|---|---|
+| `301` | `584` | Назначение 7-Zip из `Lab2-Deploy-7Zip` выполнено успешно |
+| `302` | `586` | Установка 7-Zip из `Lab2-Deploy-7Zip` выполнена успешно |
+| `308` | `587` | Изменения Software Installation применены успешно |
+
+Связь установки с конкретной GPO прямо указана в событиях. Дополнительно сохранены транзакции `MsiInstaller`, события `SceCli` об успешном применении security policy и журнал `Microsoft-Windows-GroupPolicy/Operational`. [Выборка Application Management](evidence/commands/stage-d-application-management-events.json), [MSI/security events](evidence/commands/stage-d-client-installation-events.json), [Group Policy Operational](evidence/commands/stage-d-client-group-policy-events.json).
+
+
+![Рисунок 168 – События установки 7-Zip через Lab2-Deploy-7Zip](screenshots/404-d-msi-policy-events.png)
+
+### 4.9. Итог проверки
+
+| Требование | Результат |
+|---|---|
+| Доменный пароль от 6 символов, без сложности | Подтверждено `Get-ADDefaultDomainPasswordPolicy` |
+| Продавцы: Панель управления и regedit | Реальные отказы под `uSeller1` |
+| Продавцы: C скрыт, X доступен | Подтверждено Проводником |
+| Продавцы: заставка 60 секунд, защита паролем, запрет изменения | Параметры GPO, отказ изменения и реальная блокировка после простоя |
+| Менеджеры: три разрешённых приложения | Все три запущены, повторно проверены после computer GPO |
+| Менеджеры: запрет другого приложения | WordPad и cmd из Explorer запрещены |
+| Компьютер: WER, Offline Files, RID-500 | Подтверждено клиентом и RSoP, `LabAdmin` не отключён |
+| Единая DACL на каждом объекте C | Не заявляется: защищённые ACL ОС и профилей сохранены |
+| Отдельное назначение MSI 7-Zip | Установка через GPO доказана версиями и событиями 301/302 |
+| Домен, профиль и домашние каталоги после изменений | Доверие True, обе roaming-сессии загружены; запись в оба домашних каталога работает |
+
+После проверок обе VM оставлены работающими в изолированной сети `vmbr1_lab`. На клиенте сохранены обычные сессии продавца и менеджера с соответствующими политиками; административная сессия клиента завершена.
+
+#### Использованные источники Microsoft
+
+- [Развёртывание программ через Group Policy: UNC, Assigned и установка при старте](https://learn.microsoft.com/en-us/troubleshoot/windows-server/group-policy/use-group-policy-to-install-software).
+- [MS-GPSB: File Security и значения PermPropagationMode](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gpsb/abeebe06-49aa-44d4-ae5b-d6aff458e8e7).
+- [Правила распространения наследуемых ACE](https://learn.microsoft.com/en-us/windows/win32/secauthz/automatic-propagation-of-inheritable-aces).
+- [Run only specified Windows applications: соответствие ADMX и область ограничений](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-shellcommandpromptregedittools).
+- [Параметры таймаута, активности и защиты заставки](https://learn.microsoft.com/en-us/troubleshoot/windows-server/remote/troubleshoot-unexpected-rds-session-locks-or-disconnections).
+- [Accounts: Administrator account status](https://learn.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/accounts-administrator-account-status).
+
+Административные экспорты настроек: [Default Domain Policy](evidence/reports/stage-d-Default-Domain-Policy.html), [Lab2-Sellers](evidence/reports/stage-d-Lab2-Sellers.html), [Lab2-Managers](evidence/reports/stage-d-Lab2-Managers.html), [Lab2-Computers](evidence/reports/stage-d-Lab2-Computers.html), [Lab2-Deploy-7Zip](evidence/reports/stage-d-Lab2-Deploy-7Zip.html). Эти экспорты дополняют, но не заменяют клиентские функциональные проверки.

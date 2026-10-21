@@ -1,0 +1,104 @@
+{
+    "Domain":  "GMAKMA.local",
+    "PasswordPolicy":  {
+                           "MinPasswordLength":  6,
+                           "ComplexityEnabled":  false
+                       },
+    "Computers":  [
+                      {
+                          "Name":  "AD-CLIENT",
+                          "DistinguishedName":  "CN=AD-CLIENT,OU=ouComputers,DC=GMAKMA,DC=local"
+                      },
+                      {
+                          "Name":  "AD-SRV",
+                          "DistinguishedName":  "CN=AD-SRV,OU=Domain Controllers,DC=GMAKMA,DC=local"
+                      }
+                  ],
+    "Users":  [
+                  {
+                      "SamAccountName":  "uSeller1",
+                      "Enabled":  true,
+                      "HomeDirectory":  "\\\\ad-srv\\uSeller1$",
+                      "HomeDrive":  "X:",
+                      "ProfilePath":  "\\\\ad-srv\\uSeller1$\\_profile"
+                  },
+                  {
+                      "SamAccountName":  "uManager1",
+                      "Enabled":  true,
+                      "HomeDirectory":  "\\\\ad-srv\\uManager1$",
+                      "HomeDrive":  "X:",
+                      "ProfilePath":  "\\\\ad-srv\\uManager1$\\_profile"
+                  }
+              ],
+    "Services":  [
+                     {
+                         "Name":  "DHCPServer",
+                         "Status":  "Running"
+                     },
+                     {
+                         "Name":  "DNS",
+                         "Status":  "Running"
+                     },
+                     {
+                         "Name":  "Netlogon",
+                         "Status":  "Running"
+                     },
+                     {
+                         "Name":  "NTDS",
+                         "Status":  "Running"
+                     }
+                 ],
+    "Links":  [
+                  {
+                      "Path":  "ou=ousellers,dc=gmakma,dc=local",
+                      "GpoLinks":  [
+                                       {
+                                           "DisplayName":  "Lab2-Sellers",
+                                           "GpoId":  "613b9683-92b2-4c8e-a5a5-ea6301fc5429",
+                                           "Enabled":  true,
+                                           "Enforced":  false,
+                                           "Order":  1,
+                                           "Target":  "ou=ousellers,dc=gmakma,dc=local",
+                                           "GpoDomainName":  "GMAKMA.local"
+                                       }
+                                   ]
+                  },
+                  {
+                      "Path":  "ou=oumanagers,dc=gmakma,dc=local",
+                      "GpoLinks":  [
+                                       {
+                                           "DisplayName":  "Lab2-Managers",
+                                           "GpoId":  "aff25524-73a8-471c-a7f6-73cfd06538d3",
+                                           "Enabled":  true,
+                                           "Enforced":  false,
+                                           "Order":  1,
+                                           "Target":  "ou=oumanagers,dc=gmakma,dc=local",
+                                           "GpoDomainName":  "GMAKMA.local"
+                                       }
+                                   ]
+                  },
+                  {
+                      "Path":  "ou=oucomputers,dc=gmakma,dc=local",
+                      "GpoLinks":  [
+                                       {
+                                           "DisplayName":  "Lab2-Computers",
+                                           "GpoId":  "2c121627-0f4c-4539-af39-ef1da291fc8b",
+                                           "Enabled":  true,
+                                           "Enforced":  false,
+                                           "Order":  1,
+                                           "Target":  "ou=oucomputers,dc=gmakma,dc=local",
+                                           "GpoDomainName":  "GMAKMA.local"
+                                       },
+                                       {
+                                           "DisplayName":  "Lab2-Deploy-7Zip",
+                                           "GpoId":  "163ea89c-a6bb-4874-92d4-2872af30f41c",
+                                           "Enabled":  true,
+                                           "Enforced":  false,
+                                           "Order":  2,
+                                           "Target":  "ou=oucomputers,dc=gmakma,dc=local",
+                                           "GpoDomainName":  "GMAKMA.local"
+                                       }
+                                   ]
+                  }
+              ]
+}

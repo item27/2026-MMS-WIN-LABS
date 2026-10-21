@@ -1,0 +1,29 @@
+{
+    "Time":  "2026-10-21T16:58:09.4140984+01:00",
+    "SecureChannel":  true,
+    "RID500":  {
+                   "SID":  "S-1-5-21-2832659627-1375781648-1801406234-500",
+                   "Name":  "Administrator",
+                   "Enabled":  false
+               },
+    "WER":  1,
+    "OfflineFiles":  0,
+    "RootSDDL":  "O:S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464G:S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464D:PAI(A;OICI;FA;;;SY)(A;OICI;FA;;;BA)(A;OICI;0x1200a9;;;DU)",
+    "SevenZipVersion":  "26.04",
+    "Profiles":  [
+                     {
+                         "LocalPath":  "C:\\Users\\uManager1",
+                         "RoamingConfigured":  true,
+                         "RoamingPath":  "\\\\ad-srv\\uManager1$\\_profile.V6",
+                         "Loaded":  true,
+                         "Status":  2
+                     },
+                     {
+                         "LocalPath":  "C:\\Users\\uSeller1",
+                         "RoamingConfigured":  true,
+                         "RoamingPath":  "\\\\ad-srv\\uSeller1$\\_profile.V6",
+                         "Loaded":  true,
+                         "Status":  2
+                     }
+                 ]
+}

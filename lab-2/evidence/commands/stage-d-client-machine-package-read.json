@@ -1,0 +1,6 @@
+{
+  "out-truncated": 0,
+  "exitcode": 0,
+  "exited": 1,
+  "out-data": "nt authority\\system\r\n\r\nAlgorithm       Hash                                                                   Path                            \r\n---------       ----                                                                   ----                            \r\nSHA256          0B01334A418654293513449F61D6BFC99E5196CA371E3C3DC961EDA57CD535C6       \\\\ad-srv\\LabPackages$\\7z2604-...\r\n\r\n\r\n"
+}

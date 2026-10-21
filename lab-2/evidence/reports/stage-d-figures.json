@@ -1,0 +1,416 @@
+[
+  {
+    "figure": 123,
+    "screenshot": 362,
+    "file": "../../screenshots/362-d-password-length.png",
+    "caption": "Минимальная длина пароля – 6 символов",
+    "section": "4.1",
+    "vmid": 104,
+    "sha256": "f50b966f10937cc592209b352d5559502a58db0ef64da5308d9a895cd7c46abf"
+  },
+  {
+    "figure": 124,
+    "screenshot": 363,
+    "file": "../../screenshots/363-d-password-complexity.png",
+    "caption": "Контроль сложности паролей отключён",
+    "section": "4.1",
+    "vmid": 104,
+    "sha256": "ab613cad972d75dcdf3d2a104a91e30cd0d186d20677e4617807e94e916f8558"
+  },
+  {
+    "figure": 125,
+    "screenshot": 405,
+    "file": "../../screenshots/405-d-domain-policy-readback.png",
+    "caption": "Проверка политики паролей и сохранение DC в Domain Controllers",
+    "section": "4.1",
+    "vmid": 104,
+    "sha256": "8baf6b028bb2468b49ef65d0dccb4664ca0519f21017090fcf7c254366ac1abb"
+  },
+  {
+    "figure": 126,
+    "screenshot": 389,
+    "file": "../../screenshots/389-d-gpmc-seller-link.png",
+    "caption": "Lab2-Sellers: ссылка только на ouSellers и фильтр Authenticated Users",
+    "section": "4.2",
+    "vmid": 104,
+    "sha256": "3d3c1060d243f6a4372cee3660230e60cb28ecfc2feeba393a97e9500e8fc870"
+  },
+  {
+    "figure": 127,
+    "screenshot": 364,
+    "file": "../../screenshots/364-d-seller-control-panel.png",
+    "caption": "Запрет Панели управления и параметров ПК",
+    "section": "4.2",
+    "vmid": 104,
+    "sha256": "7e7e7b2315261781505cf620709ebec7b570b782ae2431270b4749cd603a0f7a"
+  },
+  {
+    "figure": 128,
+    "screenshot": 365,
+    "file": "../../screenshots/365-d-seller-registry.png",
+    "caption": "Запрет редактирования реестра",
+    "section": "4.2",
+    "vmid": 104,
+    "sha256": "a2ebfaa82e4ab9d831683820352b3f96727af6f2338d1c11f3e7f528a1592dca"
+  },
+  {
+    "figure": 129,
+    "screenshot": 366,
+    "file": "../../screenshots/366-d-seller-hide-c.png",
+    "caption": "Скрытие только диска C в Проводнике",
+    "section": "4.2",
+    "vmid": 104,
+    "sha256": "8693c009b354b483e80b57250c0be5bb23f91f92e63c8b0a9caad5b0282bfae5"
+  },
+  {
+    "figure": 130,
+    "screenshot": 367,
+    "file": "../../screenshots/367-d-seller-screensaver.png",
+    "caption": "Включение экранной заставки",
+    "section": "4.2",
+    "vmid": 104,
+    "sha256": "6c39862a8ec319a0510e08d7717179aecf843bdb45f867357200b328b358da76"
+  },
+  {
+    "figure": 131,
+    "screenshot": 368,
+    "file": "../../screenshots/368-d-seller-screen-password.png",
+    "caption": "Защита заставки паролем",
+    "section": "4.2",
+    "vmid": 104,
+    "sha256": "cfa9b27d00190946e2c484d513977bec9d38595d03b5f5abb127e6cbc771bda9"
+  },
+  {
+    "figure": 132,
+    "screenshot": 369,
+    "file": "../../screenshots/369-d-seller-timeout.png",
+    "caption": "Таймаут заставки – 60 секунд",
+    "section": "4.2",
+    "vmid": 104,
+    "sha256": "339a0478de06a5f5bffb448ebc398790a6425cac735969be0a8713043fdb2bee"
+  },
+  {
+    "figure": 133,
+    "screenshot": 370,
+    "file": "../../screenshots/370-d-seller-no-change.png",
+    "caption": "Запрет изменения заставки",
+    "section": "4.2",
+    "vmid": 104,
+    "sha256": "06e2183e3cb04adc0f8ecd2929a6a09fe980fe6a6d3ec9ecdb86509bfcb73bdc"
+  },
+  {
+    "figure": 134,
+    "screenshot": 371,
+    "file": "../../screenshots/371-d-seller-force-saver.png",
+    "caption": "Принудительное использование scrnsave.scr",
+    "section": "4.2",
+    "vmid": 104,
+    "sha256": "a026c5b75761a949b9fa19ece3104ec1a193507b2ec7765d211432ab651272c8"
+  },
+  {
+    "figure": 135,
+    "screenshot": 393,
+    "file": "../../screenshots/393-d-seller-control-denied.png",
+    "caption": "uSeller1: Панель управления недоступна",
+    "section": "4.3",
+    "vmid": 105,
+    "sha256": "bf783977145c5e3b1ae7ba385fbd424c455308c03b7eeb77295ec4c059001500"
+  },
+  {
+    "figure": 136,
+    "screenshot": 394,
+    "file": "../../screenshots/394-d-seller-regedit-denied.png",
+    "caption": "uSeller1: редактор реестра недоступен",
+    "section": "4.3",
+    "vmid": 105,
+    "sha256": "2c2077f93e2b7a5ebf3f38bf2b1c2cc69d5018a2bff5f145cc51e23a50a54ff5"
+  },
+  {
+    "figure": 137,
+    "screenshot": 395,
+    "file": "../../screenshots/395-d-seller-c-hidden.png",
+    "caption": "uSeller1: в «Этот компьютер» отсутствует диск C",
+    "section": "4.3",
+    "vmid": 105,
+    "sha256": "c30cd5f980478ed0f297138e71c8089cb8dcb9abb2439a0dfb6f549ecc6dd3f6"
+  },
+  {
+    "figure": 138,
+    "screenshot": 396,
+    "file": "../../screenshots/396-d-seller-screensaver-denied.png",
+    "caption": "uSeller1: изменение параметров заставки запрещено",
+    "section": "4.3",
+    "vmid": 105,
+    "sha256": "64c7a7fbaf147422216beda88b33dac849981b8de96e8fb45ff56044de027883"
+  },
+  {
+    "figure": 139,
+    "screenshot": 397,
+    "file": "../../screenshots/397-d-seller-gpresult.png",
+    "caption": "Пользовательский gpresult и проверка домашней папки",
+    "section": "4.3",
+    "vmid": 105,
+    "sha256": "2816d0e3cdac5a56c652adc49a7b2e8f2425d570f0c0a430d7b00f48e349e660"
+  },
+  {
+    "figure": 140,
+    "screenshot": 398,
+    "file": "../../screenshots/398-d-seller-idle-before.png",
+    "caption": "Сессия продавца перед проверкой простоя",
+    "section": "4.3",
+    "vmid": 105,
+    "sha256": "51b50c07a2d6d4f89baade2356e0069c09637680b48c291edfbd4e79baef8852"
+  },
+  {
+    "figure": 141,
+    "screenshot": 399,
+    "file": "../../screenshots/399-d-seller-idle-after.png",
+    "caption": "Экран после отсутствия ввода более 60 секунд",
+    "section": "4.3",
+    "vmid": 105,
+    "sha256": "63373382cfa36078355ba24feb69e5e94474e40ec28f26bb01c8bfd7f4ed18e6"
+  },
+  {
+    "figure": 142,
+    "screenshot": 400,
+    "file": "../../screenshots/400-d-seller-idle-password.png",
+    "caption": "Возвращение в сессию требует пароль uSeller1",
+    "section": "4.3",
+    "vmid": 105,
+    "sha256": "a2cb770399cd5002af79a4d3f38ba90abe2e72c650acc95a9b2194c76084b188"
+  },
+  {
+    "figure": 143,
+    "screenshot": 390,
+    "file": "../../screenshots/390-d-gpmc-manager-link.png",
+    "caption": "Lab2-Managers: ссылка только на ouManagers",
+    "section": "4.4",
+    "vmid": 104,
+    "sha256": "9c4196e2a4afd3822d7b2e82cdcd3e24c36a2a21e60416d53cbf9a22d477b7e3"
+  },
+  {
+    "figure": 144,
+    "screenshot": 375,
+    "file": "../../screenshots/375-d-manager-restrict-run.png",
+    "caption": "Разрешены только заданные приложения",
+    "section": "4.4",
+    "vmid": 104,
+    "sha256": "5b5ca7d15583dd6bcd048f260f72bb0d2067b832998c825a43db432524965077"
+  },
+  {
+    "figure": 145,
+    "screenshot": 376,
+    "file": "../../screenshots/376-d-manager-allowlist.png",
+    "caption": "Список mspaint.exe, calc.exe и notepad.exe",
+    "section": "4.4",
+    "vmid": 104,
+    "sha256": "1de4ef52f97c7a50ec15bbf96e6b8d8101b84fb56fc5a802ef5d02afffc49257"
+  },
+  {
+    "figure": 146,
+    "screenshot": 377,
+    "file": "../../screenshots/377-d-manager-paint.png",
+    "caption": "Paint запускается у uManager1",
+    "section": "4.4",
+    "vmid": 105,
+    "sha256": "74cf195a16d4c98cc6515aa96195461286d77244914ca23427b2b9a0106e8b4b"
+  },
+  {
+    "figure": 147,
+    "screenshot": 378,
+    "file": "../../screenshots/378-d-manager-notepad.png",
+    "caption": "Блокнот запускается у uManager1",
+    "section": "4.4",
+    "vmid": 105,
+    "sha256": "8efbdb96d8fc87e589d8f751ab69860fdf8a031e0e0782b130191ceb84a9278e"
+  },
+  {
+    "figure": 148,
+    "screenshot": 379,
+    "file": "../../screenshots/379-d-manager-calc.png",
+    "caption": "Запуск Калькулятора у uManager1",
+    "section": "4.4",
+    "vmid": 105,
+    "sha256": "67e3605d1b5a4ec4b0a05796476d88cc5a3141e960d271be6f1147124fb15215"
+  },
+  {
+    "figure": 149,
+    "screenshot": 380,
+    "file": "../../screenshots/380-d-manager-denied.png",
+    "caption": "Запрет приложения вне разрешённого списка",
+    "section": "4.4",
+    "vmid": 105,
+    "sha256": "f69730424e88abc26f1cf374a7556913ededc316d02034cfb08a3501da0b9449"
+  },
+  {
+    "figure": 150,
+    "screenshot": 381,
+    "file": "../../screenshots/381-d-manager-explorer-denied.png",
+    "caption": "Запрет cmd.exe при запуске из Проводника",
+    "section": "4.4",
+    "vmid": 105,
+    "sha256": "71f53f6be568a45ff8c6cab450cf72b762512d0fb89ba92c5cacc52f3e2ee577"
+  },
+  {
+    "figure": 151,
+    "screenshot": 407,
+    "file": "../../screenshots/407-d-manager-post-reboot-apps.png",
+    "caption": "Paint, Калькулятор и Блокнот работают после computer GPO; файл сохранён на X",
+    "section": "4.4",
+    "vmid": 105,
+    "sha256": "2f627ba2d520f60c41c1757b3bcb03f26e38fbfc8d5f73d1cb03cbdb3f1c0264"
+  },
+  {
+    "figure": 152,
+    "screenshot": 391,
+    "file": "../../screenshots/391-d-gpmc-computer-link.png",
+    "caption": "Lab2-Computers: ссылка на ouComputers",
+    "section": "4.5",
+    "vmid": 104,
+    "sha256": "d7fb445762de36f05015ecf58e32dc84fb1c0c171bfc6e9cc29d6b6231c36b49"
+  },
+  {
+    "figure": 153,
+    "screenshot": 373,
+    "file": "../../screenshots/373-d-computer-wer.png",
+    "caption": "Отключение отчётов Windows об ошибках",
+    "section": "4.5",
+    "vmid": 104,
+    "sha256": "2c6775123c2bf36090d1b793ba54a57154c49f4d9c5b93a3e8711d2af043c14e"
+  },
+  {
+    "figure": 154,
+    "screenshot": 374,
+    "file": "../../screenshots/374-d-computer-offline.png",
+    "caption": "Запрет Offline Files",
+    "section": "4.5",
+    "vmid": 104,
+    "sha256": "659cba359593778ecd244644dc25c378d51b8b3af4194dfeb5d5981bd607a9af"
+  },
+  {
+    "figure": 155,
+    "screenshot": 372,
+    "file": "../../screenshots/372-d-computer-rid500-policy.png",
+    "caption": "Отключение встроенного локального Administrator",
+    "section": "4.5",
+    "vmid": 104,
+    "sha256": "fd77a68fd3c000a4d9fee67ba1ecedded119a5cdb3499de6cba669a54ee60f2f"
+  },
+  {
+    "figure": 156,
+    "screenshot": 385,
+    "file": "../../screenshots/385-d-filesystem-domainusers.png",
+    "caption": "ACL C: – Domain Users: чтение и выполнение",
+    "section": "4.6",
+    "vmid": 104,
+    "sha256": "282551b953b8783999830eb5735fd4c537e2977aae6487e34ec94c5a484425f1"
+  },
+  {
+    "figure": 157,
+    "screenshot": 386,
+    "file": "../../screenshots/386-d-filesystem-system.png",
+    "caption": "ACL C: – SYSTEM: полный доступ",
+    "section": "4.6",
+    "vmid": 104,
+    "sha256": "97e44ac9dd0b509a866fb1f9bcb7ec718f9db2191b6df18c151ff985a2492f90"
+  },
+  {
+    "figure": 158,
+    "screenshot": 387,
+    "file": "../../screenshots/387-d-filesystem-admins.png",
+    "caption": "ACL C: – Administrators: полный доступ",
+    "section": "4.6",
+    "vmid": 104,
+    "sha256": "739cd3ceceb0e5f0e4edf2606a9fc59d6e433b87c754b577c9e79aac75c27b2b"
+  },
+  {
+    "figure": 159,
+    "screenshot": 388,
+    "file": "../../screenshots/388-d-filesystem-propagation.png",
+    "caption": "Режим распространения наследуемых разрешений без замены защищённых ACL",
+    "section": "4.6",
+    "vmid": 104,
+    "sha256": "07e0e9857722767c7bd461ccf098a1c77b974007ea7660d579c7d7cec06d537a"
+  },
+  {
+    "figure": 160,
+    "screenshot": 406,
+    "file": "../../screenshots/406-d-client-acl-readback.png",
+    "caption": "ACL корня C и сохранённые защищённые ACL ОС и профиля",
+    "section": "4.6",
+    "vmid": 105,
+    "sha256": "7eaf4e48149ca85b14be7d6283bf417c39d303f48057b72017ce0c2904f76dfe"
+  },
+  {
+    "figure": 161,
+    "screenshot": 392,
+    "file": "../../screenshots/392-d-gpmc-msi-link.png",
+    "caption": "Отдельная Lab2-Deploy-7Zip: ссылка и фильтрация",
+    "section": "4.7",
+    "vmid": 104,
+    "sha256": "0941bdce0301379af7da652fb24eb0138c20a55913e30fd5e4aa8b962caf80a2"
+  },
+  {
+    "figure": 162,
+    "screenshot": 382,
+    "file": "../../screenshots/382-d-msi-unc.png",
+    "caption": "Выбор MSI по сетевому пути UNC",
+    "section": "4.7",
+    "vmid": 104,
+    "sha256": "4be7a7e97770f85125e9de37451235793b172117d44185865fd14bab48e93e74"
+  },
+  {
+    "figure": 163,
+    "screenshot": 383,
+    "file": "../../screenshots/383-d-msi-assigned.png",
+    "caption": "Назначение пакета компьютерам: Assigned",
+    "section": "4.7",
+    "vmid": 104,
+    "sha256": "c57aae146caad870db51cd45ed59943a9ee6ff6ae3af19fbb5c7d327becd2541"
+  },
+  {
+    "figure": 164,
+    "screenshot": 384,
+    "file": "../../screenshots/384-d-msi-package.png",
+    "caption": "Пакет 7-Zip в Software installation",
+    "section": "4.7",
+    "vmid": 104,
+    "sha256": "d719a72db729765b782738d2f11596b27362f338dc8a12af61d4a3e2d2a29fc0"
+  },
+  {
+    "figure": 165,
+    "screenshot": 401,
+    "file": "../../screenshots/401-d-computer-rsop.png",
+    "caption": "AD-CLIENT: применённые computer GPO, RID-500 и 7-Zip",
+    "section": "4.8",
+    "vmid": 105,
+    "sha256": "843f84b9a486aa18ca8186a80a5a9539ddea8fb558e1252a4b64550e06540dbb"
+  },
+  {
+    "figure": 166,
+    "screenshot": 402,
+    "file": "../../screenshots/402-d-msi-programs-features.png",
+    "caption": "7-Zip 26.04 в Programs and Features клиента",
+    "section": "4.8",
+    "vmid": 105,
+    "sha256": "88d4f09f5e35c61d1bd758a6bfe5a79514cbf8010ac9a0534d9f86fe5540cb51"
+  },
+  {
+    "figure": 167,
+    "screenshot": 403,
+    "file": "../../screenshots/403-d-msi-file-manager.png",
+    "caption": "Запуск установленного 7-Zip File Manager",
+    "section": "4.8",
+    "vmid": 105,
+    "sha256": "d5d4d7ea5dc4aa6708079c38ecf20d49a15ae0cb4632751bc6e5d88f89d33639"
+  },
+  {
+    "figure": 168,
+    "screenshot": 404,
+    "file": "../../screenshots/404-d-msi-policy-events.png",
+    "caption": "События установки 7-Zip через Lab2-Deploy-7Zip",
+    "section": "4.8",
+    "vmid": 105,
+    "sha256": "c6fd4de60a0a4924360bf759632e51935ba1bc294026d4f034445523a339c2da"
+  }
+]

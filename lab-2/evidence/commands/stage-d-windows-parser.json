@@ -1,0 +1,34 @@
+{
+    "PSVersion":  "5.1.26100.1591",
+    "Mode":  "SyntaxOnly; functional results recorded separately",
+    "Results":  [
+                    {
+                        "File":  "stage-d-create-gpo.ps1",
+                        "ErrorCount":  0,
+                        "Errors":  [
+
+                                   ]
+                    },
+                    {
+                        "File":  "stage-d-manager-policy.ps1",
+                        "ErrorCount":  0,
+                        "Errors":  [
+
+                                   ]
+                    },
+                    {
+                        "File":  "stage-d-package-share.ps1",
+                        "ErrorCount":  0,
+                        "Errors":  [
+
+                                   ]
+                    },
+                    {
+                        "File":  "stage-d-seller-functional.ps1",
+                        "ErrorCount":  0,
+                        "Errors":  [
+
+                                   ]
+                    }
+                ]
+}

@@ -1,0 +1,23 @@
+﻿{
+    "Identity":  "GMAKMA\\uSeller1",
+    "HomePath":  "X:\\stage-d-seller-after-gpo.txt",
+    "HomeReadBack":  "Stage D verified GMAKMA\\uSeller1 2026-10-21T16:10:54.2275483+01:00",
+    "ProfilePath":  "C:\\Users\\uSeller1\\Documents\\stage-d-profile-write.txt",
+    "ProfileReadBack":  "Stage D verified GMAKMA\\uSeller1 2026-10-21T16:10:54.2275483+01:00",
+    "RootWriteDenied":  true,
+    "UserProfile":  "C:\\Users\\uSeller1",
+    "Explorer":  {
+                     "NoControlPanel":  1,
+                     "NoDrives":  4
+                 },
+    "System":  {
+                   "DisableRegistryTools":  1,
+                   "NoDispScrSavPage":  1
+               },
+    "ScreenSaver":  {
+                        "ScreenSaveActive":  "1",
+                        "ScreenSaverIsSecure":  "1",
+                        "ScreenSaveTimeOut":  "60",
+                        "SCRNSAVE.EXE":  "scrnsave.scr"
+                    }
+}

@@ -1,0 +1,79 @@
+{
+    "Time":  "2026-10-21T16:12:26.4306404+01:00",
+    "LastBoot":  "\/Date(1792594687500)\/",
+    "Computer":  "AD-CLIENT",
+    "SecureChannel":  true,
+    "LocalUsers":  [
+                       {
+                           "Name":  "Administrator",
+                           "Enabled":  false,
+                           "SID":  "S-1-5-21-2832659627-1375781648-1801406234-500"
+                       },
+                       {
+                           "Name":  "DefaultAccount",
+                           "Enabled":  false,
+                           "SID":  "S-1-5-21-2832659627-1375781648-1801406234-503"
+                       },
+                       {
+                           "Name":  "Guest",
+                           "Enabled":  false,
+                           "SID":  "S-1-5-21-2832659627-1375781648-1801406234-501"
+                       },
+                       {
+                           "Name":  "LabAdmin",
+                           "Enabled":  true,
+                           "SID":  "S-1-5-21-2832659627-1375781648-1801406234-1001"
+                       },
+                       {
+                           "Name":  "WDAGUtilityAccount",
+                           "Enabled":  false,
+                           "SID":  "S-1-5-21-2832659627-1375781648-1801406234-504"
+                       }
+                   ],
+    "WER":  1,
+    "OfflineFiles":  0,
+    "SevenZip":  {
+                     "Path":  "C:\\Program Files\\7-Zip\\7z.exe",
+                     "FileVersion":  "26.04",
+                     "ProductVersion":  "26.04"
+                 },
+    "Uninstall":  {
+                      "DisplayName":  "7-Zip 26.04 (x64 edition)",
+                      "DisplayVersion":  "26.04.00.0",
+                      "Publisher":  "Igor Pavlov",
+                      "InstallLocation":  "",
+                      "InstallDate":  "20261021",
+                      "PSChildName":  "{23170F69-40C1-2702-2604-000001000000}"
+                  },
+    "ACLBackup":  {
+                      "FullName":  "C:\\Lab2Private\\stage-d-before-c-acl.txt",
+                      "Length":  97926918
+                  },
+    "Services":  [
+                     {
+                         "Name":  "CscService",
+                         "Status":  1,
+                         "StartType":  3
+                     },
+                     {
+                         "Name":  "gpsvc",
+                         "Status":  4,
+                         "StartType":  2
+                     },
+                     {
+                         "Name":  "LanmanWorkstation",
+                         "Status":  4,
+                         "StartType":  2
+                     },
+                     {
+                         "Name":  "ProfSvc",
+                         "Status":  4,
+                         "StartType":  2
+                     },
+                     {
+                         "Name":  "WerSvc",
+                         "Status":  1,
+                         "StartType":  3
+                     }
+                 ]
+}

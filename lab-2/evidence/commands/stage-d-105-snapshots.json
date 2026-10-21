@@ -1,0 +1,58 @@
+[
+  {
+    "vmstate": 0,
+    "name": "lab2-client-base",
+    "parent": "lab2-client-preinstall",
+    "description": "Windows 10 Pro installed and named ad-client",
+    "snaptime": 1791158916
+  },
+  {
+    "snaptime": 1792539566,
+    "description": "",
+    "parent": "pre-attempt1-clean-reinstall",
+    "name": "lab2-a1-client-os-ready",
+    "vmstate": 0
+  },
+  {
+    "parent": "lab2-stage-c-before-acl-tests",
+    "vmstate": 0,
+    "name": "lab2-stage-c-verified",
+    "snaptime": 1792552917,
+    "description": "Stage C verified: both users SMB ACLs and drag/drop, home, seller reboot/relogon roaming profile"
+  },
+  {
+    "snaptime": 1792555027,
+    "description": "Stage C verified; before stage D GPO changes",
+    "snapstate": "prepare",
+    "parent": "lab2-stage-c-verified",
+    "name": "lab2-stage-d-before-gpo",
+    "vmstate": 0
+  },
+  {
+    "vmstate": 0,
+    "name": "lab2-stage-c-before-acl-tests",
+    "parent": "lab2-a1-client-os-ready",
+    "description": "Before nonadmin SMB functional tests; AD and shares configured",
+    "snaptime": 1792549251
+  },
+  {
+    "snaptime": 1791481728,
+    "description": "Preserved state before user-authorized clean attempt 1 reinstall",
+    "parent": "lab2-client-base",
+    "vmstate": 0,
+    "name": "pre-attempt1-clean-reinstall"
+  },
+  {
+    "name": "lab2-client-preinstall",
+    "vmstate": 0,
+    "snaptime": 1791146089,
+    "description": "Rollback before Windows 10 installation"
+  },
+  {
+    "running": 1,
+    "description": "You are here!",
+    "parent": "lab2-stage-c-verified",
+    "name": "current",
+    "digest": "60ce80a0eedf099f9670c253558e7794daa59cca"
+  }
+]

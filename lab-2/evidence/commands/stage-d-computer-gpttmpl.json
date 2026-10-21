@@ -1,0 +1,6 @@
+{
+  "exitcode": 0,
+  "out-truncated": 0,
+  "exited": 1,
+  "out-data": "[Unicode]\r\nUnicode=yes\r\n[Version]\r\nsignature=\"$CHICAGO$\"\r\nRevision=1\r\n[System Access]\r\nEnableAdminAccount = 0\r\n[Registry Values]\r\n[File Security]\r\n\"%SystemDrive%\\\",0,\"D:PAR(A;OICI;FA;;;SY)(A;OICI;FA;;;BA)(A;OICI;0x1200a9;;;DU)\"\r\n"
+}

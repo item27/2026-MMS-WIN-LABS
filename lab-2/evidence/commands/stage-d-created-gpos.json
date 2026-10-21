@@ -1,0 +1,6 @@
+{
+  "out-truncated": 0,
+  "exitcode": 0,
+  "exited": 1,
+  "out-data": "[\r\n    {\r\n        \"DisplayName\":  \"Lab2-Deploy-7Zip\",\r\n        \"Id\":  \"163ea89c-a6bb-4874-92d4-2872af30f41c\"\r\n    },\r\n    {\r\n        \"DisplayName\":  \"Lab2-Computers\",\r\n        \"Id\":  \"2c121627-0f4c-4539-af39-ef1da291fc8b\"\r\n    },\r\n    {\r\n        \"DisplayName\":  \"Default Domain Policy\",\r\n        \"Id\":  \"31b2f340-016d-11d2-945f-00c04fb984f9\"\r\n    },\r\n    {\r\n        \"DisplayName\":  \"Lab2-Sellers\",\r\n        \"Id\":  \"613b9683-92b2-4c8e-a5a5-ea6301fc5429\"\r\n    },\r\n    {\r\n        \"DisplayName\":  \"Default Domain Controllers Policy\",\r\n        \"Id\":  \"6ac1786c-016f-11d2-945f-00c04fb984f9\"\r\n    },\r\n    {\r\n        \"DisplayName\":  \"Lab2-Managers\",\r\n        \"Id\":  \"aff25524-73a8-471c-a7f6-73cfd06538d3\"\r\n    }\r\n]\r\n"
+}

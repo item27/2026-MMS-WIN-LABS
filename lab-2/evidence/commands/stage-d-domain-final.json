@@ -1,0 +1,6 @@
+{
+  "out-data": "{\r\n    \"MinPasswordLength\":  6,\r\n    \"ComplexityEnabled\":  false\r\n}\r\n\r\nDistinguishedName                                 \r\n-----------------                                 \r\nCN=AD-CLIENT,OU=ouComputers,DC=GMAKMA,DC=local    \r\nCN=AD-SRV,OU=Domain Controllers,DC=GMAKMA,DC=local\r\n                                                  \r\n                                                  \r\n                                                  \r\n                                                  \r\n                                                  \r\n                                                  \r\n\r\n\r\n",
+  "exited": 1,
+  "out-truncated": 0,
+  "exitcode": 0
+}
