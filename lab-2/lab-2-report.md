@@ -26,25 +26,25 @@ pre { break-inside: auto; page-break-inside: auto; }
 
 ## 1. Подготовка операционных систем
 
-Установили Windows Server с графической оболочкой и Windows 10 Pro. Сервер переименовали в `ad-srv`, клиент – в `ad-client`, после чего перезагрузили обе машины. Для первоначальной настройки клиента создали локальную учётную запись `LabAdmin`.
+Установили Windows Server с графической оболочкой и Windows 10 Pro. Сервер переименовали в `ad-srv`, клиент - в `ad-client`, после чего перезагрузили обе машины. Для первоначальной настройки клиента создали локальную учётную запись `LabAdmin`.
 
-![Рисунок 1 – Выбранная редакция Windows Server с Desktop Experience](screenshots/001-server-current.png)
+![Рисунок 1: Выбранная редакция Windows Server с Desktop Experience](screenshots/001-server-current.png)
 
-Рисунок 1 – Выбранная редакция Windows Server с Desktop Experience.
+Рисунок 1: Выбранная редакция Windows Server с Desktop Experience.
 
 На сервере настроили статический адрес `10.0.0.1` с маской `255.0.0.0`, DNS направили на сам сервер. Командами `hostname` и `ipconfig /all` проверили имя и сетевые параметры.
 
-![Рисунок 2 – Имя и статическая сетевая конфигурация ad-srv](screenshots/133-server-name-and-ip.png)
+![Рисунок 2: Имя и статическая сетевая конфигурация ad-srv](screenshots/133-server-name-and-ip.png)
 
-Рисунок 2 – Имя и статическая сетевая конфигурация ad-srv.
+Рисунок 2: Имя и статическая сетевая конфигурация ad-srv.
 
-![Рисунок 3 – Выбранная редакция Windows 10 Pro](screenshots/011-client-pro-selected.png)
+![Рисунок 3: Выбранная редакция Windows 10 Pro](screenshots/011-client-pro-selected.png)
 
-Рисунок 3 – Выбранная редакция Windows 10 Pro.
+Рисунок 3: Выбранная редакция Windows 10 Pro.
 
-![Рисунок 4 – Имя ad-client и локальная учётная запись LabAdmin](screenshots/134-client-name-local-user.png)
+![Рисунок 4: Имя ad-client и локальная учётная запись LabAdmin](screenshots/134-client-name-local-user.png)
 
-Рисунок 4 – Имя ad-client и локальная учётная запись LabAdmin.
+Рисунок 4: Имя ad-client и локальная учётная запись LabAdmin.
 
 После установки и проверки входа сохранили базовые снимки обеих виртуальных машин.
 
@@ -52,46 +52,46 @@ pre { break-inside: auto; page-break-inside: auto; }
 
 ### 2.1. Создание домена и проверка DNS
 
-Через **Server Manager -> Add roles and features** установили роль **Active Directory Domain Services** вместе со средствами управления. В мастере повышения сервера выбрали **Add a new forest** и создали домен `GMAKMA.local`. Оставили уровни леса и домена Windows Server 2025, включили DNS Server и Global Catalog. NetBIOS-имя – `GMAKMA`. Для DSRM задали отдельный пароль. Пути базы и журналов оставили `C:\Windows\NTDS`, SYSVOL – `C:\Windows\SYSVOL`.
+Через **Server Manager -> Add roles and features** установили роль **Active Directory Domain Services** вместе со средствами управления. В мастере повышения сервера выбрали **Add a new forest** и создали домен `GMAKMA.local`. Оставили уровни леса и домена Windows Server 2025, включили DNS Server и Global Catalog. NetBIOS-имя - `GMAKMA`. Для DSRM задали отдельный пароль. Пути базы и журналов оставили `C:\Windows\NTDS`, SYSVOL - `C:\Windows\SYSVOL`.
 
-![Рисунок 5 – Создание нового леса GMAKMA.local](screenshots/152-forest-domain-correct-case.png)
+![Рисунок 5: Создание нового леса GMAKMA.local](screenshots/152-forest-domain-correct-case.png)
 
-Рисунок 5 – Создание нового леса GMAKMA.local.
+Рисунок 5: Создание нового леса GMAKMA.local.
 
 После установки и перезагрузки вошли администратором домена. Проверили домен, работающие службы NTDS, DNS, Netlogon и наличие общих папок SYSVOL и NETLOGON. DNS настроен мастером: созданы интегрированные в AD зоны `GMAKMA.local` и `_msdcs.GMAKMA.local`, запись `ad-srv` указывает на `10.0.0.1`. С клиента имя `ad-srv.GMAKMA.local` разрешается в этот адрес.
 
-![Рисунок 6 – Записи автоматически созданной DNS-зоны GMAKMA.local](screenshots/182-dns-domain-records.png)
+![Рисунок 6: Записи автоматически созданной DNS-зоны GMAKMA.local](screenshots/182-dns-domain-records.png)
 
-Рисунок 6 – Записи автоматически созданной DNS-зоны GMAKMA.local.
+Рисунок 6: Записи автоматически созданной DNS-зоны GMAKMA.local.
 
 ### 2.2. Авторизация DHCP и область выдачи
 
 Через мастер добавления ролей установили **DHCP Server**, затем выполнили первоначальную настройку и авторизацию сервера в AD от имени администратора домена.
 
-![Рисунок 7 – Успешная авторизация DHCP-сервера и создание служебных групп](screenshots/186-dhcp-postinstall-summary.png)
+![Рисунок 7: Успешная авторизация DHCP-сервера и создание служебных групп](screenshots/186-dhcp-postinstall-summary.png)
 
-Рисунок 7 – Успешная авторизация DHCP-сервера и создание служебных групп.
+Рисунок 7: Успешная авторизация DHCP-сервера и создание служебных групп.
 
 В консоли DHCP создали и активировали область `Lab2Scope` со следующими параметрами:
 
 | Параметр | Значение |
 |---|---|
 | Сеть / маска | `10.0.0.0/8` / `255.0.0.0` |
-| Пул адресов | `10.0.0.100–10.0.0.110` |
+| Пул адресов | `10.0.0.100-10.0.0.110` |
 | 003 Router | `10.0.0.1` |
 | 006 DNS Servers | `10.0.0.1` |
 | 015 DNS Domain Name | `GMAKMA.local` |
 | Срок аренды | 8 дней |
 
-![Рисунок 8 – Границы адресного пула DHCP и маска сети /8](screenshots/199-dhcp-prefix-eight.png)
+![Рисунок 8: Границы адресного пула DHCP и маска сети /8](screenshots/199-dhcp-prefix-eight.png)
 
-Рисунок 8 – Границы адресного пула DHCP и маска сети /8.
+Рисунок 8: Границы адресного пула DHCP и маска сети /8.
 
 После настройки перезагрузили сервер. Служба DHCPServer запущена, область активна. На клиенте включили автоматическое получение IPv4 и DNS. В `ipconfig /all` получили `DHCP Enabled: Yes`, адрес `10.0.0.100`, маску `255.0.0.0`, шлюз, DHCP-сервер и DNS `10.0.0.1`. На сервере подтверждена активная аренда для `ad-client.GMAKMA.local`.
 
-![Рисунок 9 – Конфигурация ad-client, полученная через DHCP](screenshots/256-client-dhcp-confirmed.png)
+![Рисунок 9: Конфигурация ad-client, полученная через DHCP](screenshots/256-client-dhcp-confirmed.png)
 
-Рисунок 9 – Конфигурация ad-client, полученная через DHCP.
+Рисунок 9: Конфигурация ad-client, полученная через DHCP.
 
 ### 2.3. Присоединение клиента к домену
 
@@ -103,19 +103,19 @@ Add-Computer -DomainName 'GMAKMA.local' -Credential $cred -PassThru
 
 Перезагрузили клиент и вошли как `administrator@GMAKMA.local`. Команды `whoami` и `hostname` подтвердили доменную сессию на `ad-client`; `PartOfDomain = True`, проверка защищённого канала вернула `True`.
 
-![Рисунок 10 – Вход администратора домена на ad-client](screenshots/255-client-domain-session.png)
+![Рисунок 10: Вход администратора домена на ad-client](screenshots/255-client-domain-session.png)
 
-Рисунок 10 – Вход администратора домена на ad-client.
+Рисунок 10: Вход администратора домена на ad-client.
 
-В оснастке **Active Directory Users and Computers** нашли `AD-SRV` в `Domain Controllers`, а `AD-CLIENT` – первоначально в `Computers`. Для последующих компьютерных политик перенесли клиент в созданную OU `ouComputers`. Контроллер домена оставили в `Domain Controllers`.
+В оснастке **Active Directory Users and Computers** нашли `AD-SRV` в `Domain Controllers`, а `AD-CLIENT` - первоначально в `Computers`. Для последующих компьютерных политик перенесли клиент в созданную OU `ouComputers`. Контроллер домена оставили в `Domain Controllers`.
 
-![Рисунок 11 – Объект AD-SRV в Domain Controllers](screenshots/240-aduc-domain-controller-object.png)
+![Рисунок 11: Объект AD-SRV в Domain Controllers](screenshots/240-aduc-domain-controller-object.png)
 
-Рисунок 11 – Объект AD-SRV в Domain Controllers.
+Рисунок 11: Объект AD-SRV в Domain Controllers.
 
-![Рисунок 12 – Объект AD-CLIENT в подразделении ouComputers](screenshots/338-client-in-ouComputers-refreshed.png)
+![Рисунок 12: Объект AD-CLIENT в подразделении ouComputers](screenshots/338-client-in-ouComputers-refreshed.png)
 
-Рисунок 12 – Объект AD-CLIENT в подразделении ouComputers.
+Рисунок 12: Объект AD-CLIENT в подразделении ouComputers.
 
 Результаты сетевой и доменной проверки: [состояние домена и DHCP](evidence/commands/domain-stage-verified.json), [членство клиента в домене](evidence/commands/client-domain-verified.txt).
 
@@ -130,21 +130,21 @@ Add-Computer -DomainName 'GMAKMA.local' -Credential $cred -PassThru
 | `ouSellers` | `uSeller1` | `gSellers` | Security, Global |
 | `ouManagers` | `uManager1` | `gManagers` | Security, Global |
 
-![Рисунок 13 – Пользователь uSeller1 в группе gSellers](screenshots/328-sellers-group-members.png)
+![Рисунок 13: Пользователь uSeller1 в группе gSellers](screenshots/328-sellers-group-members.png)
 
-Рисунок 13 – Пользователь uSeller1 в группе gSellers.
+Рисунок 13: Пользователь uSeller1 в группе gSellers.
 
-![Рисунок 14 – Пользователь uManager1 в группе gManagers](screenshots/330-managers-group-members.png)
+![Рисунок 14: Пользователь uManager1 в группе gManagers](screenshots/330-managers-group-members.png)
 
-Рисунок 14 – Пользователь uManager1 в группе gManagers.
+Рисунок 14: Пользователь uManager1 в группе gManagers.
 
 ### 3.2. Общий ресурс и права отделов
 
-Создали `C:\AllUsers` с папками `Sellers`, `Managers`, `BlackHole` и `Common`. Опубликовали каталог под именем `AllUsersCom`. На уровне SMB выдали `Domain Users` право **Change**, `Domain Admins` – **Full**; доступ к отдельным папкам разграничили NTFS.
+Создали `C:\AllUsers` с папками `Sellers`, `Managers`, `BlackHole` и `Common`. Опубликовали каталог под именем `AllUsersCom`. На уровне SMB выдали `Domain Users` право **Change**, `Domain Admins` - **Full**; доступ к отдельным папкам разграничили NTFS.
 
-![Рисунок 15 – Структура каталога C:\AllUsers](screenshots/276-allusers-folders.png)
+![Рисунок 15: Структура каталога C:\AllUsers](screenshots/276-allusers-folders.png)
 
-Рисунок 15 – Структура каталога C:\AllUsers.
+Рисунок 15: Структура каталога C:\AllUsers.
 
 На корень `AllUsers` предоставили `Domain Users` чтение и выполнение только для самой папки. `SYSTEM` и `Administrators` имеют полный доступ к учебному дереву. Разрешения отделов разделили по области действия:
 
@@ -157,37 +157,37 @@ Add-Computer -DomainName 'GMAKMA.local' -Credential $cred -PassThru
 
 На корни отделов не выдавали **Delete**, **Change permissions** и **Take ownership**. Поэтому пользователи могут работать с вложенными объектами, но не удалять сам каталог отдела или изменять его разрешения. Доступ к чужому отделу отсутствует.
 
-![Рисунок 16 – Специальные права gSellers без удаления корня и изменения разрешений](screenshots/293-sellers-expanded-permissions.png)
+![Рисунок 16: Специальные права gSellers без удаления корня и изменения разрешений](screenshots/293-sellers-expanded-permissions.png)
 
-Рисунок 16 – Специальные права gSellers без удаления корня и изменения разрешений.
+Рисунок 16: Специальные права gSellers без удаления корня и изменения разрешений.
 
 ### 3.3. BlackHole и Common
 
 В `BlackHole` предоставили `gSellers` и `gManagers` запись, проход к папке, чтение атрибутов и разрешений без **List folder / read data**. Для `CREATOR OWNER` назначили **Modify** только на потомков. Чтение корня `AllUsers` сюда не наследуется.
 
-![Рисунок 17 – Разрешение записи в BlackHole без просмотра содержимого](screenshots/308-blackhole-no-list-permissions.png)
+![Рисунок 17: Разрешение записи в BlackHole без просмотра содержимого](screenshots/308-blackhole-no-list-permissions.png)
 
-Рисунок 17 – Разрешение записи в BlackHole без просмотра содержимого.
+Рисунок 17: Разрешение записи в BlackHole без просмотра содержимого.
 
 Под каждым из двух обычных пользователей перетащили мышью локальный файл на значок сетевой папки `BlackHole`. На сервере появились `seller-drop.txt` и `manager-drop.txt`, владельцы соответствуют отправителям. После копирования оба пользователя получили отказ при попытке просмотреть папку.
 
-![Рисунок 18 – Исходный файл менеджера и сетевой каталог для drag-and-drop](screenshots/310-manager-drag-source-target.png)
+![Рисунок 18: Исходный файл менеджера и сетевой каталог для drag-and-drop](screenshots/310-manager-drag-source-target.png)
 
-Рисунок 18 – Исходный файл менеджера и сетевой каталог для drag-and-drop.
+Рисунок 18: Исходный файл менеджера и сетевой каталог для drag-and-drop.
 
-![Рисунок 19 – Оба доставленных файла в BlackHole на сервере](screenshots/340-blackhole-two-files-on-server.png)
+![Рисунок 19: Оба доставленных файла в BlackHole на сервере](screenshots/340-blackhole-two-files-on-server.png)
 
-Рисунок 19 – Оба доставленных файла в BlackHole на сервере.
+Рисунок 19: Оба доставленных файла в BlackHole на сервере.
 
-![Рисунок 20 – Проверка запрета просмотра BlackHole под uManager1](screenshots/312-manager-blackhole-list-denied.png)
+![Рисунок 20: Проверка запрета просмотра BlackHole под uManager1](screenshots/312-manager-blackhole-list-denied.png)
 
-Рисунок 20 – Проверка запрета просмотра BlackHole под uManager1.
+Рисунок 20: Проверка запрета просмотра BlackHole под uManager1.
 
-Для `Common` назначили `Domain Users` чтение, выполнение и запись без **Delete** и **Delete subfolders and files**. Запись `CREATOR OWNER: Modify` действует только на дочерние объекты. В результате все пользователи домена могут создавать и изменять файлы, но удалять – только свои.
+Для `Common` назначили `Domain Users` чтение, выполнение и запись без **Delete** и **Delete subfolders and files**. Запись `CREATOR OWNER: Modify` действует только на дочерние объекты. В результате все пользователи домена могут создавать и изменять файлы, но удалять - только свои.
 
-![Рисунок 21 – Права Common с отдельной записью CREATOR OWNER](screenshots/314-common-advanced-security.png)
+![Рисунок 21: Права Common с отдельной записью CREATOR OWNER](screenshots/314-common-advanced-security.png)
 
-Рисунок 21 – Права Common с отдельной записью CREATOR OWNER.
+Рисунок 21: Права Common с отдельной записью CREATOR OWNER.
 
 ### 3.4. Проверка операций через SMB
 
@@ -207,13 +207,13 @@ Add-Computer -DomainName 'GMAKMA.local' -Credential $cred -PassThru
 | Записать и прочитать файл на X: | Разрешено |
 | Просмотреть чужой домашний ресурс | Запрещено |
 
-![Рисунок 22 – Результаты функциональных проверок под uManager1](screenshots/309-manager-functional-tests-complete.png)
+![Рисунок 22: Результаты функциональных проверок под uManager1](screenshots/309-manager-functional-tests-complete.png)
 
-Рисунок 22 – Результаты функциональных проверок под uManager1.
+Рисунок 22: Результаты функциональных проверок под uManager1.
 
-![Рисунок 23 – Взаимная проверка Common и данных после повторного входа uSeller1](screenshots/326-seller-second-functional-tests-complete.png)
+![Рисунок 23: Взаимная проверка Common и данных после повторного входа uSeller1](screenshots/326-seller-second-functional-tests-complete.png)
 
-Рисунок 23 – Взаимная проверка Common и данных после повторного входа uSeller1.
+Рисунок 23: Взаимная проверка Common и данных после повторного входа uSeller1.
 
 Всего получили 44 ожидаемых результата: 17 при первом входе продавца, 20 при входе менеджера и 7 после перезагрузки и повторного входа продавца; неуспешных проверок нет. Два графических перетаскивания в BlackHole в это число не входят. Журналы: [продавец, первый вход](evidence/commands/stage-c-seller-first.json), [менеджер](evidence/commands/stage-c-manager-first.json), [продавец, повторный вход](evidence/commands/stage-c-seller-second.json).
 
@@ -226,23 +226,23 @@ Add-Computer -DomainName 'GMAKMA.local' -Credential $cred -PassThru
 | `uSeller1` | `X:` | `\\ad-srv\uSeller1$` | `\\ad-srv\uSeller1$\_profile` |
 | `uManager1` | `X:` | `\\ad-srv\uManager1$` | `\\ad-srv\uManager1$\_profile` |
 
-![Рисунок 24 – UNC-пути домашней папки и перемещаемого профиля uSeller1](screenshots/333-seller-profile-home-unc.png)
+![Рисунок 24: UNC-пути домашней папки и перемещаемого профиля uSeller1](screenshots/333-seller-profile-home-unc.png)
 
-Рисунок 24 – UNC-пути домашней папки и перемещаемого профиля uSeller1.
+Рисунок 24: UNC-пути домашней папки и перемещаемого профиля uSeller1.
 
 `net view \\ad-srv` не показывает домашние ресурсы с `$`, при этом диск X: подключается и доступен владельцу для записи.
 
-![Рисунок 25 – Домашний ресурс скрыт из общего списка, диск X: подключён](screenshots/341-seller-shares-hidden-home-mapped.png)
+![Рисунок 25: Домашний ресурс скрыт из общего списка, диск X: подключён](screenshots/341-seller-shares-hidden-home-mapped.png)
 
-Рисунок 25 – Домашний ресурс скрыт из общего списка, диск X: подключён.
+Рисунок 25: Домашний ресурс скрыт из общего списка, диск X: подключён.
 
 После первого выхода Windows создала фактическую папку `_profile.V6` с `NTUSER.DAT`, `AppData` и рабочим столом. Поэтому данные профиля изучили по `X:\_profile.V6`, а не по папке без версионного суффикса. Для административной проверки добавили Administrators FullControl без смены владельца; доступ другим пользователям не открывали.
 
 Клиент перезагрузили, снова вошли как `uSeller1`. Домашний диск подключился, файлы на X: и маркер рабочего стола сохранились. `Win32_UserProfile` показал `RoamingConfigured=True`, `Status=2`, `RoamingPath=\\ad-srv\uSeller1$\_profile.V6`. Событие 7 User Profile Service подтвердило успешную синхронизацию с сервера на клиент. Серверная и клиентская копии маркера совпали.
 
-![Рисунок 26 – Перемещаемый профиль и успешная синхронизация после перезагрузки и входа](screenshots/337-seller-roaming-service-proof.png)
+![Рисунок 26: Перемещаемый профиль и успешная синхронизация после перезагрузки и входа](screenshots/337-seller-roaming-service-proof.png)
 
-Рисунок 26 – Перемещаемый профиль и успешная синхронизация после перезагрузки и входа.
+Рисунок 26: Перемещаемый профиль и успешная синхронизация после перезагрузки и входа.
 
 Сохранены [параметры загруженного профиля](evidence/commands/stage-c-client-profiles.json) и [события службы профилей](evidence/commands/stage-c-profile-service-events.json).
 
@@ -275,47 +275,47 @@ Add-Computer -DomainName 'GMAKMA.local' -Credential $cred -PassThru
 
 Команда `Get-ADDefaultDomainPasswordPolicy` вернула `MinPasswordLength=6` и `ComplexityEnabled=False`.
 
-![Рисунок 27 – Проверка доменной политики паролей](screenshots/405-d-domain-policy-readback.png)
+![Рисунок 27: Проверка доменной политики паролей](screenshots/405-d-domain-policy-readback.png)
 
-Рисунок 27 – Проверка доменной политики паролей.
+Рисунок 27: Проверка доменной политики паролей.
 
-![Рисунок 28 – Настройка таймаута заставки 60 секунд](screenshots/369-d-seller-timeout.png)
+![Рисунок 28: Настройка таймаута заставки 60 секунд](screenshots/369-d-seller-timeout.png)
 
-Рисунок 28 – Настройка таймаута заставки 60 секунд.
+Рисунок 28: Настройка таймаута заставки 60 секунд.
 
 ### 4.2. Проверка пользовательских политик
 
 После `gpupdate /target:user /force`, выхода и повторного входа продавца проверили запуск Панели управления и regedit: обе операции запрещены политикой. На снимках показаны ожидаемые запреты задания.
 
-![Рисунок 29 – Проверка запрета Панели управления под uSeller1](screenshots/393-d-seller-control-denied.png)
+![Рисунок 29: Проверка запрета Панели управления под uSeller1](screenshots/393-d-seller-control-denied.png)
 
-Рисунок 29 – Проверка запрета Панели управления под uSeller1.
+Рисунок 29: Проверка запрета Панели управления под uSeller1.
 
-![Рисунок 30 – Проверка запрета редактора реестра под uSeller1](screenshots/394-d-seller-regedit-denied.png)
+![Рисунок 30: Проверка запрета редактора реестра под uSeller1](screenshots/394-d-seller-regedit-denied.png)
 
-Рисунок 30 – Проверка запрета редактора реестра под uSeller1.
+Рисунок 30: Проверка запрета редактора реестра под uSeller1.
 
 В «Этот компьютер» диск C: скрыт, X: доступен. Изменение заставки запрещено. При отсутствии ввода более 60 секунд сессия блокируется; возврат требует пароль.
 
-![Рисунок 31 – Диск C: скрыт, домашний диск X: доступен продавцу](screenshots/395-d-seller-c-hidden.png)
+![Рисунок 31: Диск C: скрыт, домашний диск X: доступен продавцу](screenshots/395-d-seller-c-hidden.png)
 
-Рисунок 31 – Диск C: скрыт, домашний диск X: доступен продавцу.
+Рисунок 31: Диск C: скрыт, домашний диск X: доступен продавцу.
 
 Для менеджеров включили запуск только заданных Windows-приложений. Список из трёх имён приведён в таблице и в HTML-экспорте GPO.
 
-![Рисунок 32 – Включён параметр запуска только заданных Windows-приложений](screenshots/375-d-manager-restrict-run.png)
+![Рисунок 32: Включён параметр запуска только заданных Windows-приложений](screenshots/375-d-manager-restrict-run.png)
 
-Рисунок 32 – Включён параметр запуска только заданных Windows-приложений.
+Рисунок 32: Включён параметр запуска только заданных Windows-приложений.
 
 После обновления политики, повторного входа и последующей перезагрузки под `uManager1` запустились Paint, Калькулятор и Блокнот. В Блокноте сохранили файл на X:. Запуск `cmd.exe` из Проводника и WordPad запрещён. Политика ограничивает запуск через Explorer, но не является полной изоляцией произвольного кода.
 
-![Рисунок 33 – Разрешённые приложения менеджера и файл домашней папки после перезагрузки](screenshots/407-d-manager-post-reboot-apps.png)
+![Рисунок 33: Разрешённые приложения менеджера и файл домашней папки после перезагрузки](screenshots/407-d-manager-post-reboot-apps.png)
 
-Рисунок 33 – Разрешённые приложения менеджера и файл домашней папки после перезагрузки.
+Рисунок 33: Разрешённые приложения менеджера и файл домашней папки после перезагрузки.
 
-![Рисунок 34 – Проверка запрета cmd.exe при запуске из Проводника](screenshots/381-d-manager-explorer-denied.png)
+![Рисунок 34: Проверка запрета cmd.exe при запуске из Проводника](screenshots/381-d-manager-explorer-denied.png)
 
-Рисунок 34 – Проверка запрета cmd.exe при запуске из Проводника.
+Рисунок 34: Проверка запрета cmd.exe при запуске из Проводника.
 
 Применение пользовательских GPO подтверждено отчётами RSoP: [продавец](evidence/reports/stage-d-seller-gpresult.html), [менеджер](evidence/reports/stage-d-manager-final.html).
 
@@ -323,15 +323,15 @@ Add-Computer -DomainName 'GMAKMA.local' -Credential $cred -PassThru
 
 После `gpupdate /target:computer /force` и перезагрузки в клиентском RSoP присутствуют `Lab2-Computers` и `Lab2-Deploy-7Zip`. Получены `WER Disabled=1`, `Offline Files Enabled=0`; встроенный локальный Administrator отключён. Отдельный локальный `LabAdmin` сохранён включённым. Защищённый канал с доменом исправен.
 
-![Рисунок 35 – Применённые компьютерные GPO, отключённый RID 500 и параметры клиента](screenshots/401-d-computer-rsop.png)
+![Рисунок 35: Применённые компьютерные GPO, отключённый RID 500 и параметры клиента](screenshots/401-d-computer-rsop.png)
 
-Рисунок 35 – Применённые компьютерные GPO, отключённый RID 500 и параметры клиента.
+Рисунок 35: Применённые компьютерные GPO, отключённый RID 500 и параметры клиента.
 
-Для `C:\` в разделе **Security Settings -> File System** задали три записи: Administrators и SYSTEM – полный доступ, Domain Users – чтение, просмотр каталогов и выполнение. Выбрали **Propagate inheritable permissions to all subfolders and files**, а не полную замену дочерних ACL.
+Для `C:\` в разделе **Security Settings -> File System** задали три записи: Administrators и SYSTEM - полный доступ, Domain Users - чтение, просмотр каталогов и выполнение. Выбрали **Propagate inheritable permissions to all subfolders and files**, а не полную замену дочерних ACL.
 
-![Рисунок 36 – Распространение наследуемых прав C: без полной замены защищённых ACL](screenshots/388-d-filesystem-propagation.png)
+![Рисунок 36: Распространение наследуемых прав C: без полной замены защищённых ACL](screenshots/388-d-filesystem-propagation.png)
 
-Рисунок 36 – Распространение наследуемых прав C: без полной замены защищённых ACL.
+Рисунок 36: Распространение наследуемых прав C: без полной замены защищённых ACL.
 
 На корне C: подтвердили заданные три записи; запись обычного пользователя в корень запрещена. Защищённые ACL Windows и пользовательских профилей сохранили. Поэтому требование единой трёхсубъектной ACL буквально на каждом объекте диска C: выполнено не полностью: применена политика корня и наследуемых разрешений с сохранением системных и профильных исключений. Профиль пользователя, домашний диск и разрешённые приложения после изменения работают.
 
@@ -341,15 +341,15 @@ Add-Computer -DomainName 'GMAKMA.local' -Credential $cred -PassThru
 
 Для 7-Zip 26.04 x64 создали ресурс `LabPackages$`. Компьютерам домена предоставили чтение пакета по SMB и NTFS. В `Lab2-Deploy-7Zip` открыли **Computer Configuration -> Policies -> Software Settings -> Software installation**, указали UNC-путь `\\ad-srv\LabPackages$\7z2604-x64.msi` и выбрали **Assigned**.
 
-![Рисунок 37 – Выбор назначения MSI компьютерам в режиме Assigned](screenshots/383-d-msi-assigned.png)
+![Рисунок 37: Выбор назначения MSI компьютерам в режиме Assigned](screenshots/383-d-msi-assigned.png)
 
-Рисунок 37 – Выбор назначения MSI компьютерам в режиме Assigned.
+Рисунок 37: Выбор назначения MSI компьютерам в режиме Assigned.
 
 После перезагрузки клиента `7z.exe i` показал `7-Zip 26.04 (x64)`, пакет появился в Programs and Features, File Manager запустился. Установка выполнена политикой, а не ручным запуском `msiexec`. В системном журнале источник **Application Management Group Policy** зарегистрировал события 301 об успешном назначении и 302 об успешной установке из `Lab2-Deploy-7Zip`.
 
-![Рисунок 38 – События успешного назначения и установки 7-Zip через GPO](screenshots/404-d-msi-policy-events.png)
+![Рисунок 38: События успешного назначения и установки 7-Zip через GPO](screenshots/404-d-msi-policy-events.png)
 
-Рисунок 38 – События успешного назначения и установки 7-Zip через GPO.
+Рисунок 38: События успешного назначения и установки 7-Zip через GPO.
 
 Исходная [выборка событий установки](evidence/commands/stage-d-application-management-events.json) содержит связь пакета с отдельной политикой развёртывания.
 
@@ -404,27 +404,27 @@ C:\Lab2\Provision-Lab2.ps1 -CsvPath C:\Lab2Private\lab2-users.csv -ReportPath C:
 | SMB-ресурсы | 3 | 0 |
 | Файлы HTML-отчётов | 1 | 1 |
 
-Три каталога – корень профилей и две домашние папки; три ресурса – `Profiles$` и две домашние папки с `$`. Сравнение GUID обеих OU, трёх групп и двух пользователей подтвердило сохранение тех же семи объектов при повторном запуске.
+Три каталога - корень профилей и две домашние папки; три ресурса - `Profiles$` и две домашние папки с `$`. Сравнение GUID обеих OU, трёх групп и двух пользователей подтвердило сохранение тех же семи объектов при повторном запуске.
 
-![Рисунок 39 – Первый и повторный запуск скрипта без повторного создания объектов](screenshots/408-e-csv-two-runs.png)
+![Рисунок 39: Первый и повторный запуск скрипта без повторного создания объектов](screenshots/408-e-csv-two-runs.png)
 
-Рисунок 39 – Первый и повторный запуск скрипта без повторного создания объектов.
+Рисунок 39: Первый и повторный запуск скрипта без повторного создания объектов.
 
-![Рисунок 40 – HTML-отчёт с количеством и именами созданных объектов](screenshots/409-e-first-html.png)
+![Рисунок 40: HTML-отчёт с количеством и именами созданных объектов](screenshots/409-e-first-html.png)
 
-Рисунок 40 – HTML-отчёт с количеством и именами созданных объектов.
+Рисунок 40: HTML-отчёт с количеством и именами созданных объектов.
 
 Приложены [HTML первого запуска](evidence/reports/provision-first.html), [HTML повторного запуска](evidence/reports/provision-second.html), [GUID после первого](evidence/commands/stage-e-identities-first.json) и [второго запуска](evidence/commands/stage-e-identities-second.json).
 
 ### 5.3. Проверка созданной учётной записи
 
-Сверили с CSV ФИО, должность, отдел, почту, телефон, группы и UNC-пути. Серверная проверка дала 14 успешных результатов. Для домашних папок подтверждены защищённые DACL с полным доступом пользователя, SYSTEM и Administrators; для ресурсов – шифрование SMB, AccessBased enumeration и отключённое кэширование. Корень профилей допускает создание собственной папки с наследуемыми правами CREATOR OWNER.
+Сверили с CSV ФИО, должность, отдел, почту, телефон, группы и UNC-пути. Серверная проверка дала 14 успешных результатов. Для домашних папок подтверждены защищённые DACL с полным доступом пользователя, SYSTEM и Administrators; для ресурсов - шифрование SMB, AccessBased enumeration и отключённое кэширование. Корень профилей допускает создание собственной папки с наследуемыми правами CREATOR OWNER.
 
 Вошли на `ad-client` под `uCsvSeller1`: X: подключился, запись и чтение файла выполнились, доступ к чужому домашнему ресурсу запрещён. После выхода на сервер выгрузился профиль `uCsvSeller1.V6`; при повторном входе домашний диск и маркер рабочего стола сохранились. Параметры профиля и события службы подтвердили успешную загрузку по UNC, контрольные суммы маркера на сервере и клиенте совпали.
 
-![Рисунок 41 – Реальный профиль CSV-пользователя на сервере и совпадение маркера с клиентом](screenshots/420-e-csv-roaming.png)
+![Рисунок 41: Реальный профиль CSV-пользователя на сервере и совпадение маркера с клиентом](screenshots/420-e-csv-roaming.png)
 
-Рисунок 41 – Реальный профиль CSV-пользователя на сервере и совпадение маркера с клиентом.
+Рисунок 41: Реальный профиль CSV-пользователя на сервере и совпадение маркера с клиентом.
 
 Результаты: [атрибуты CSV и AD](evidence/commands/stage-e-csv-metadata.json), [серверная проверка](evidence/commands/stage-e-server-verification.json), [повторный вход](evidence/commands/stage-e-csv-client-second.json), [события перемещаемого профиля](evidence/commands/stage-e-csv-roaming-events.json).
 
@@ -439,7 +439,7 @@ Enable-ADOptionalFeature 'Recycle Bin Feature' -Scope ForestOrConfigurationSet -
 (Get-ADOptionalFeature 'Recycle Bin Feature').EnabledScopes
 ```
 
-Проверили непустой `EnabledScopes`. Затем тем же скриптом части 5 создали пять пользователей `uDelete1`–`uDelete5` в `unit-for-delete`:
+Проверили непустой `EnabledScopes`. Затем тем же скриптом части 5 создали пять пользователей `uDelete1`-`uDelete5` в `unit-for-delete`:
 
 ```powershell
 C:\Lab2\Provision-Lab2.ps1 -CsvPath C:\Lab2Private\lab2-delete-users.csv -ReportPath C:\Lab2\provision-delete.html
@@ -447,9 +447,9 @@ C:\Lab2\Provision-Lab2.ps1 -CsvPath C:\Lab2Private\lab2-delete-users.csv -Report
 
 Созданы пять пользователей, одна группа, пять домашних папок и пять личных SMB-ресурсов. OU уже существовала. Группу `gDeleteLab2` перенесли в `ouCsvSellers`, сохранив членство, чтобы в `unit-for-delete` остались только пять пользователей. Их GUID, SID и DN записали в [manifest](evidence/reports/delete-users-manifest.xml); атрибуты, группы и состояние домашних папок сохранили для сравнения.
 
-![Рисунок 42 – Пять пользователей в unit-for-delete до удаления](screenshots/413-e-aduc-five-before.png)
+![Рисунок 42: Пять пользователей в unit-for-delete до удаления](screenshots/413-e-aduc-five-before.png)
 
-Рисунок 42 – Пять пользователей в unit-for-delete до удаления.
+Рисунок 42: Пять пользователей в unit-for-delete до удаления.
 
 ### 6.2. Удаление пользователей
 
@@ -461,9 +461,9 @@ dsquery user "OU=unit-for-delete,DC=GMAKMA,DC=local" -limit 0 | dsrm -noprompt
 
 Для всех пяти пользователей получено `dsrm succeeded`, код завершения 0. Контрольный запрос вернул 0 пользователей, сама OU сохранена. Группы и объекты других контейнеров не удалялись.
 
-![Рисунок 43 – Пустое подразделение unit-for-delete после удаления пользователей](screenshots/415-e-aduc-empty.png)
+![Рисунок 43: Пустое подразделение unit-for-delete после удаления пользователей](screenshots/415-e-aduc-empty.png)
 
-Рисунок 43 – Пустое подразделение unit-for-delete после удаления пользователей.
+Рисунок 43: Пустое подразделение unit-for-delete после удаления пользователей.
 
 ### 6.3. Восстановление по исходным GUID
 
@@ -515,15 +515,15 @@ foreach ($entry in $expected) {
 
 В OU снова получили пять исходных пользователей. У каждого совпали GUID, SID, DN, открытые атрибуты, членство в `gDeleteLab2`, домашние пути, SMB-ресурсы и их ACL. Исходные группы сохранились, повторное создание пользователей не потребовалось.
 
-![Рисунок 44 – Совпадение GUID, SID, атрибутов, групп и домашних папок после восстановления](screenshots/417-e-restore-identities.png)
+![Рисунок 44: Совпадение GUID, SID, атрибутов, групп и домашних папок после восстановления](screenshots/417-e-restore-identities.png)
 
-Рисунок 44 – Совпадение GUID, SID, атрибутов, групп и домашних папок после восстановления.
+Рисунок 44: Совпадение GUID, SID, атрибутов, групп и домашних папок после восстановления.
 
 Вошли на клиент под `uDelete1` с исходным паролем, без сброса. SID совпал с исходным, X: подключился к `\\ad-srv\uDelete1$`, файл в домашней папке записан и прочитан.
 
-![Рисунок 45 – Вход восстановленного uDelete1 и работа домашнего диска X:](screenshots/422-e-restored-client.png)
+![Рисунок 45: Вход восстановленного uDelete1 и работа домашнего диска X:](screenshots/422-e-restored-client.png)
 
-Рисунок 45 – Вход восстановленного uDelete1 и работа домашнего диска X:.
+Рисунок 45: Вход восстановленного uDelete1 и работа домашнего диска X:.
 
 Подтверждения: [HTML создания пяти пользователей](evidence/reports/provision-delete.html), [результат удаления](evidence/commands/stage-e-delete-cmd-result.json), [сравнение после восстановления](evidence/commands/stage-e-restore-identity-comparison.json), [проверка восстановленной учётной записи](evidence/commands/stage-e-restored-client-check.json).
 
@@ -531,15 +531,15 @@ foreach ($entry in $expected) {
 
 ### 7.1. Раскройте смысл терминов дерево доменов, лес и схема Active Directory?
 
-Дерево доменов – иерархия доменов с непрерывным пространством DNS-имён, например `example.local` и `sales.example.local`, и доверительными отношениями. Лес объединяет одно или несколько деревьев с общей схемой, конфигурацией и глобальным каталогом; имена деревьев могут различаться. Схема задаёт классы объектов, их атрибуты и правила построения каталога. В работе создан лес с одним корневым доменом `GMAKMA.local`.
+Дерево доменов - иерархия доменов с непрерывным пространством DNS-имён, например `example.local` и `sales.example.local`, и доверительными отношениями. Лес объединяет одно или несколько деревьев с общей схемой, конфигурацией и глобальным каталогом; имена деревьев могут различаться. Схема задаёт классы объектов, их атрибуты и правила построения каталога. В работе создан лес с одним корневым доменом `GMAKMA.local`.
 
 ### 7.2. Где на контроллере домена хранится данные об объектах Active Directory в виде файлов? Какие файлы за что отвечают?
 
-В стандартной конфигурации база и журналы AD DS находятся в `C:\Windows\NTDS`; такой путь оставили и в работе. `ntds.dit` содержит базу объектов, атрибутов и данных безопасности. `edb.log` и нумерованные `edb*.log` – журналы транзакций для согласованности и восстановления; `edb.chk` – контрольная точка применённых транзакций; `edb*.jrs` – резервные журналы на случай нехватки места; `temp.edb` – временная база движка ESE.
+В стандартной конфигурации база и журналы AD DS находятся в `C:\Windows\NTDS`; такой путь оставили и в работе. `ntds.dit` содержит базу объектов, атрибутов и данных безопасности. `edb.log` и нумерованные `edb*.log` - журналы транзакций для согласованности и восстановления; `edb.chk` - контрольная точка применённых транзакций; `edb*.jrs` - резервные журналы на случай нехватки места; `temp.edb` - временная база движка ESE.
 
 ### 7.3. Где на контроллере домена хранятся файлы, содержащие групповые политики домена?
 
-Файловая часть GPO, GPT, хранится в SYSVOL: на стенде `C:\Windows\SYSVOL\sysvol\GMAKMA.local\Policies\{GUID-GPO}`, по сети – `\\GMAKMA.local\SYSVOL\GMAKMA.local\Policies\{GUID-GPO}`. Она содержит файлы параметров и сценарии. Вторая часть, GPC, является объектом AD с метаданными политики и сведениями о версии, поэтому одной папки SYSVOL недостаточно для полного представления GPO.
+Файловая часть GPO, GPT, хранится в SYSVOL: на стенде `C:\Windows\SYSVOL\sysvol\GMAKMA.local\Policies\{GUID-GPO}`, по сети - `\\GMAKMA.local\SYSVOL\GMAKMA.local\Policies\{GUID-GPO}`. Она содержит файлы параметров и сценарии. Вторая часть, GPC, является объектом AD с метаданными политики и сведениями о версии, поэтому одной папки SYSVOL недостаточно для полного представления GPO.
 
 ### 7.4. Какие компоненты автоматически устанавливаются мастером при добавлении ролей Active Directory?
 
@@ -555,7 +555,7 @@ foreach ($entry in $expected) {
 
 ### 7.7. Зачем нужно имя домена NetBIOS?
 
-NetBIOS-имя – короткое имя домена для совместимости и формата входа `ДОМЕН\пользователь`. Для созданного домена это `GMAKMA`, например `GMAKMA\uSeller1`; DNS-имя – `GMAKMA.local`, UPN пользователя – `uSeller1@GMAKMA.local`. Короткое имя не заменяет DNS-имя домена.
+NetBIOS-имя - короткое имя домена для совместимости и формата входа `ДОМЕН\пользователь`. Для созданного домена это `GMAKMA`, например `GMAKMA\uSeller1`; DNS-имя - `GMAKMA.local`, UPN пользователя - `uSeller1@GMAKMA.local`. Короткое имя не заменяет DNS-имя домена.
 
 ### 7.8. Какие группы пользователей создаются в AD автоматически? Опишите минимум 5 из них.
 
@@ -566,7 +566,7 @@ NetBIOS-имя – короткое имя домена для совмести�
 | Enterprise Admins | Администрирование леса; создаётся в корневом домене |
 | Schema Admins | Изменение общей схемы; создаётся в корневом домене |
 | Group Policy Creator Owners | Создание GPO и управление собственными созданными политиками, но не автоматически любыми GPO |
-| Backup Operators | Резервное копирование и восстановление файлов на контроллерах, в рамках этих операций – независимо от обычных файловых разрешений |
+| Backup Operators | Резервное копирование и восстановление файлов на контроллерах, в рамках этих операций - независимо от обычных файловых разрешений |
 
 ### 7.9. Какие записи в DNS создаются специально для AD? Перечислите их, укажете их назначение.
 
