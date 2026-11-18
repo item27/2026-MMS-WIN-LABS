@@ -36,7 +36,7 @@
     "off_page_words": [],
     "unicode_dashes": [],
     "empty_pages": [],
-    "sha256": "0ab9292a599ebec5f78053f28ca93f35618b90ee0fc766d5f02833a7450d788c",
+    "sha256": "ce4b8d4803bc1d7beb58d2d96cfb33dbde68304f1c05951323849df882f41d57",
     "cover_text_sha256": "eb0e1d68c44b927412978d73b99403858e6b3209e7e2969cf8354fff0677d52a"
   },
   "guide": {
@@ -57,5 +57,12 @@
   "unchanged_evidence_files": 32,
   "code_blocks_unchanged": true,
   "control_answers": 8,
-  "bibliography_removed": true
+  "bibliography_removed": true,
+  "portable_pdf_links_verified": 27,
+  "ci_run": 44241710853,
+  "ci_conclusion": "success",
+  "ci_source_sha": "0b1489b3ee25b624974d7f479c5492b396d34d06",
+  "ci_bot_sha": "fff4bd70dc98ff17b9d9ce25cb7713cc86af1d60",
+  "final_text_and_raster_match_visually_checked_local": true,
+  "comparison_scale": 1.5
 }

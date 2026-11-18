@@ -45,7 +45,11 @@
 
 ## Происхождение файлов
 
-Текущие PDF собраны и проверены локально после запроса на переоформление. Результат нового CI и сопоставление с опубликованными PDF будут зафиксированы после push. Прежний проверенный HEAD до переоформления: db3cc09c97044e47af7c4d0992b52420d3ab617c
+Документы собраны локально, все страницы просмотрены до push. GitHub Actions Render lab reports, run 44241710853, завершился success на коммите 0b1489b3ee25b624974d7f479c5492b396d34d06. Бот создал коммит fff4bd70dc98ff17b9d9ce25cb7713cc86af1d60 с повторно сгенерированными PDF, полученный через fast-forward. Все 17 страниц CI-отчёта совпали с проверенной локальной сборкой по тексту и растровому представлению при масштабе 1.5. Guide CI не пересобирает, его 6 страниц и байты сохранились
+
+У рендера выявлена особенность: локальные ссылки в PDF содержали абсолютные пути сборочного runner. В итоговом PDF ЛР3 исправлены только 27 файловых аннотаций на переносимые пути evidence/*.txt, evidence/*.md и evidence/*.json. Каждый целевой файл существует рядом с PDF. После исправления текст и растровое представление всех страниц повторно сопоставлены с визуально проверенной сборкой. В Markdown внутренние ссылки не менялись. Финальный коммит проверки использует [skip ci], чтобы повторная сборка не вернула абсолютные пути
+
+Штатный workflow автоматически изменил также PDF ЛР1 и ЛР2 внутри этой ветки, но локально они не рендерились. Их Markdown, оригинальные грязные checkout предыдущих работ и стенд не затрагивались. Прежний проверенный HEAD до переоформления: db3cc09c97044e47af7c4d0992b52420d3ab617c
 
 Исходные проверки 25 страниц Microsoft остаются в source-check.json. Удаление библиографии из сдаваемых документов не удаляет историю проверки источников. manifest-sha256.json фиксирует байты опубликованных текстовых доказательств
 
@@ -63,6 +67,7 @@ VM106 не затрагивалась. Исходный checkout ЛР2 и его
 
 ```sh
 uv run --with markdown --with pymupdf --with 'weasyprint>=62,<70' python -c "import runpy; from pathlib import Path; r=Path.cwd(); m=runpy.run_path(str(r/'scripts/render.py')); [print(m['render_report'](r/'templates/win-title.pdf',r/f'lab-3/lab-3-{kind}.md','3')) for kind in ['report','guide']]"
+uv run --with pymupdf python -c "from pathlib import Path; import pymupdf; p=Path('lab-3/lab-3-report.pdf'); d=pymupdf.open(p); links=[(page,link) for page in d for link in page.get_links() if 'file' in link]; [(link.update(file='evidence/'+Path(link['file']).name),page.update_link(link)) for page,link in links]; d.saveIncr()"
 uv run --with markdown --with pymupdf --with 'weasyprint>=62,<70' python tests/test_render.py
 git diff --check
 ```
