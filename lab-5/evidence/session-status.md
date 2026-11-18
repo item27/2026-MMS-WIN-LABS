@@ -7,7 +7,7 @@
 - Репозиторий: `/Users/k6zma/Documents/ChatGPT/Windows/2026-MMS-WIN-LABS`
 - Ветка: `lab-5-attempt-1`, origin `item27/2026-MMS-WIN-LABS`, push этой ветки пользователь разрешил
 - ТЗ: `sources/awin-5-2025.docx`, дословная копия `lab-5-task.md`
-- Последняя собственная версия отчёта: `evidence/versions/report-2026-11-19-04.md`
+- Последняя собственная версия отчёта: `evidence/versions/report-2026-11-19-05.md`
 - Чужой Lab-4.docx не является решением пятой работы
 
 ## Стенд
@@ -38,7 +38,7 @@
 
 Через GUI только Disk 1 переведён в Online, инициализирован GPT. Создан раздел №2 1024МиБ, NTFS, метка Lab5-Volume1, подключён C:\Volume1\ без буквы. Состояние Healthy подтверждено GUI и volume1-verification.json, размер раздела 1073741824 байт. Disk 2-4 остаются RAW/Offline, ReadOnly=false. Системный Disk 0 64ГиБ не размечали и не форматировали
 
-Скрипт Initialize-LabVolume.ps1 подготовлен и проверен парсером Windows PowerShell, SHA совпал. Сам скрипт T: не запускался. RAID, iSCSI и Storage Spaces не выполнялись
+Скрипт Initialize-LabVolume.ps1 подготовлен и проверен парсером Windows PowerShell, SHA совпал. Скрипт T: проверен в обоих режимах. RAID на W: создан, отказ d3 и восстановление на d4 проверены. Том V:, iSCSI и Storage Spaces предстоят
 
 ## Продолжение
 
@@ -66,3 +66,5 @@ Windows ISO `vm-media/Windows_Server_2022_x64.iso`, официальный Micro
 Используется utm-guest-tools-manual.iso с неизменённым официальным EXE и лицензией. Оригинальный Tools ISO содержит Autounattend.xml с отключением UAC, до установки Windows его не подключать. ВМ, ISO, qcow2, память и пароли вне Git
 
 19 ноября: проверены отказ и подтверждение скрипта T: на d2, NTFS Healthy, Repair-Volume NoErrorsFound. После очистки только d1/d2 все четыре учебных диска проверены RAW Offline, Disk 0 GPT Online. Далее часть 3
+
+RAID5 W: 8000 МиБ, Healthy после Repair Volume на d4. При отключении d3 Windows видела d4 как Disk 3 по serial DA1695117FB540359541, W: Failed Redundancy, два SHA-256 неизменны до/после восстановления. d3 возвращён, запущена загрузка S1. Перед очисткой заново проверить номера всех четырёх дисков
