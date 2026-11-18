@@ -1,0 +1,58 @@
+[
+  {
+    "Identifier": "0A88A1D7-C7C6-4491-A030-DBC6478709D2",
+    "ImageName": "0A88A1D7-C7C6-4491-A030-DBC6478709D2.qcow2",
+    "Interface": "VirtIO",
+    "VirtualSize": 10737418240,
+    "WindowsSerialNumber": "0A88A1D7C7C64491A030",
+    "WindowsDeviceId": "5"
+  },
+  {
+    "Identifier": "6B9BE43C-F856-4A8A-B73D-87A885CEC407",
+    "ImageName": "6B9BE43C-F856-4A8A-B73D-87A885CEC407.qcow2",
+    "Interface": "VirtIO",
+    "VirtualSize": 10737418240,
+    "WindowsSerialNumber": "6B9BE43CF8564A8AB73D",
+    "WindowsDeviceId": "6"
+  },
+  {
+    "Identifier": "DCE48FD0-8593-49A6-B9BF-912E72E67E31",
+    "ImageName": "DCE48FD0-8593-49A6-B9BF-912E72E67E31.qcow2",
+    "Interface": "VirtIO",
+    "VirtualSize": 10737418240,
+    "WindowsSerialNumber": "DCE48FD0859349A6B9BF",
+    "WindowsDeviceId": "7"
+  },
+  {
+    "Identifier": "DFA08748-2F9C-47B0-A55E-D61ECC7108A5",
+    "ImageName": "DFA08748-2F9C-47B0-A55E-D61ECC7108A5.qcow2",
+    "Interface": "VirtIO",
+    "VirtualSize": 10737418240,
+    "WindowsSerialNumber": "DFA087482F9C47B0A55E",
+    "WindowsDeviceId": "8"
+  },
+  {
+    "Identifier": "AB2F5C84-B6F3-4C54-AB06-6C8DF1D4281B",
+    "ImageName": "AB2F5C84-B6F3-4C54-AB06-6C8DF1D4281B.qcow2",
+    "Interface": "VirtIO",
+    "VirtualSize": 10737418240,
+    "WindowsSerialNumber": "AB2F5C84B6F34C54AB06",
+    "WindowsDeviceId": "9"
+  },
+  {
+    "Identifier": "D18E9301-9FE6-4870-B7A9-52F5F6509F16",
+    "ImageName": "D18E9301-9FE6-4870-B7A9-52F5F6509F16.qcow2",
+    "Interface": "VirtIO",
+    "VirtualSize": 10737418240,
+    "WindowsSerialNumber": "D18E93019FE64870B7A9",
+    "WindowsDeviceId": "10"
+  },
+  {
+    "Identifier": "043AA766-6767-4D1B-83D0-266CB84C534A",
+    "ImageName": "043AA766-6767-4D1B-83D0-266CB84C534A.qcow2",
+    "Interface": "VirtIO",
+    "VirtualSize": 10737418240,
+    "WindowsSerialNumber": "043AA76667674D1B83D0",
+    "WindowsDeviceId": "11"
+  }
+]

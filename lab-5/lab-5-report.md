@@ -489,7 +489,7 @@ DiskPart подтвердил создание и форматирование �
 
 ### 4.1-4.5. LUN на сервере s1
 
-Первый сервер ad-srv предоставляет блочное устройство как iSCSI Target. Второй сервер ad-srv-2 работает как Initiator: он подключается к цели и отправляет ей команды SCSI по IP. На первом сервере установили роль iSCSI Target Server и разместили LUN1 на томе V:. Доступ к цели разрешили адресу 10.0.0.2
+Первый сервер `ad-srv` предоставляет блочное устройство как iSCSI Target. Второй сервер `ad-srv-2` работает как Initiator: он подключается к цели и отправляет ей команды SCSI по IP. На первом сервере установили роль iSCSI Target Server и разместили LUN1 на томе `V:`. Доступ к цели разрешили адресу 10.0.0.2
 
 ```powershell
 Install-WindowsFeature FS-iSCSITarget-Server -IncludeManagementTools
@@ -499,11 +499,11 @@ New-IscsiServerTarget -TargetName Lab5Target -InitiatorIds 'IPAddress:10.0.0.2'
 Add-IscsiVirtualDiskTargetMapping -TargetName Lab5Target -Path V:\iSCSI\LUN1.vhdx
 ```
 
-Проверили через Get-IscsiVirtualDisk и Get-IscsiServerTarget: ёмкость виртуального диска 5 368 709 120 байт, он привязан к Lab5Target как LUN 0
+Проверили через `Get-IscsiVirtualDisk` и `Get-IscsiServerTarget`: ёмкость виртуального диска 5 368 709 120 байт, он привязан к `Lab5Target` как LUN 0
 
 ### 4.6. Подключение LUN1 на втором сервере
 
-На ad-srv-2 запустили службу Microsoft iSCSI Initiator, добавили портал 10.0.0.1 и подключили найденную цель с сохранением подключения
+На `ad-srv-2` запустили службу Microsoft iSCSI Initiator, добавили портал 10.0.0.1 и подключили найденную цель с сохранением подключения
 
 ```powershell
 Set-Service MSiSCSI -StartupType Automatic
@@ -513,9 +513,9 @@ $target = Get-IscsiTarget | Where-Object NodeAddress -like '*lab5target*'
 Connect-IscsiTarget -NodeAddress $target.NodeAddress -IsPersistent $true
 ```
 
-Get-IscsiSession показал одно подключение с IsConnected=True и IsPersistent=True. Цель имеет IQN iqn.1991-05.com.microsoft:ad-srv-lab5target-target
+`Get-IscsiSession` показал одно подключение с `IsConnected=True` и `IsPersistent=True`. Цель имеет IQN iqn.1991-05.com.microsoft:`ad-srv`-lab5target-target
 
-Сверили новый диск по шине iSCSI и ёмкости 5 ГиБ. На втором сервере он получил номер 1. Сняли защиту от записи, перевели диск в Online, создали GPT и том R: с NTFS
+Сверили новый диск по шине iSCSI и ёмкости 5 ГиБ. На втором сервере он получил номер 1. Сняли защиту от записи, перевели диск в Online, создали GPT и том `R:` с NTFS
 
 ```powershell
 Set-Disk -Number 1 -IsReadOnly $false
@@ -525,12 +525,18 @@ New-Partition -DiskNumber 1 -UseMaximumSize -DriveLetter R |
     Format-Volume -FileSystem NTFS -NewFileSystemLabel Lab5-LUN1
 ```
 
-Записали файл на R: и прочитали его. Команда Get-Content вернула строку Lab 5 iSCSI read/write check
+Записали файл на `R:` и прочитали его. Команда `Get-Content` вернула строку Lab 5 iSCSI read/write check
 
 ```powershell
 'Lab 5 iSCSI read/write check' | Set-Content R:\iscsi-check.txt -Encoding ASCII
 Get-Content R:\iscsi-check.txt
 ```
+
+После перезапуска первого сервера iSCSI-сеанс восстановился, `R:` остался исправным и тестовый файл снова прочитался
+
+![Рисунок 17: LUN1 на первом сервере в состоянии Connected](screenshots/022-iscsi-lun-connected.png)
+
+Рисунок 17: LUN1 на первом сервере в состоянии Connected
 
 ### 4.7-4.11. Инвентаризация хранилища второго сервера
 
@@ -542,17 +548,96 @@ Get-Volume
 Get-Disk | Where-Object BusType -eq iSCSI
 ```
 
-| Уровень | Что показал вывод на ad-srv-2 |
+| Уровень | Что показал вывод на `ad-srv-2` |
 |---|---|
 | Физические устройства | Системный QEMU HARDDISK на SATA и MSFT Virtual HD на iSCSI |
-| Логические устройства | C:, оптические D: и E:, новый локальный диск R: с NTFS |
-| Разделы | Четыре раздела на системном диске. На диске №1 служебный раздел GPT и раздел №2 с буквой R: |
-| Тома | R: с меткой Lab5-LUN1 и состоянием Healthy, ёмкость 5 350 879 232 байта |
+| Логические устройства | C:, оптические D: и E:, новый локальный диск `R:` с NTFS |
+| Разделы | Четыре раздела на системном диске. На диске №1 служебный раздел GPT и раздел №2 с буквой `R:` |
+| Тома | `R:` с меткой `Lab5-LUN1` и состоянием `Healthy`, ёмкость 5 350 879 232 байта |
 | Фильтр iSCSI | Один диск №1, 5 368 709 120 байт, GPT |
 
-## Вопросы:
+## Часть 5. Работа со Storage Spaces
 
-Ниже приведены ответы, для которых уже есть результаты или достаточно сведений о работе Windows. Объёмы томов RAID5 проверены в DiskPart. Объёмы Storage Spaces будут доступны после создания виртуальных дисков
+### 5.1. Подключение семи дисков по 10 ГиБ
+
+Выключили `ad-srv` и добавили семь расширяемых образов QCOW2 с интерфейсом VirtIO. После запуска Windows показала семь новых накопителей ёмкостью 10 ГиБ со значением `CanPool=True`
+
+```powershell
+Get-PhysicalDisk | Format-Table DeviceId,SerialNumber,Size,CanPool
+```
+
+### 5.2. Создание пула через Server Manager
+
+Открыли File and Storage Services -> Storage Pools -> New Storage Pool. Указали имя `Lab5Pool` и выбрали семь дисков по 10 ГиБ. В списке выбора было 70 ГиБ суммарной ёмкости
+
+![Рисунок 18: Выбор семи дисков для пула Lab5Pool](screenshots/018-seven-pool-disks.png)
+
+Рисунок 18: Выбор семи дисков для пула Lab5Pool
+
+Мастер завершил создание пула и обновил список устройств. После создания `Get-StoragePool` показал ёмкость 71 279 050 752 байта, около 66,38 ГиБ. Часть номинальной ёмкости дисков расходуется на служебные области пула
+
+![Рисунок 19: Мастер подтвердил создание пула](screenshots/019-pool-created.png)
+
+Рисунок 19: Мастер подтвердил создание пула
+
+### 5.3. Виртуальный диск Two-way mirror максимального объёма
+
+Создали диск с двумя копиями данных и фиксированным резервированием. Параметр `UseMaximumSize` поручает Windows выбрать максимальный размер для заданной схемы
+
+```powershell
+New-VirtualDisk -StoragePoolFriendlyName Lab5Pool -FriendlyName Lab5Mirror `
+    -ResiliencySettingName Mirror -PhysicalDiskRedundancy 1 `
+    -ProvisioningType Fixed -UseMaximumSize
+
+Get-VirtualDisk -FriendlyName Lab5Mirror |
+    Select-Object Size,FootprintOnPool,NumberOfColumns,NumberOfDataCopies
+```
+
+Получили 32 212 254 720 байт (30 ГиБ), три столбца и две копии. Диск был `Healthy`, запас отказоустойчивости равен одному физическому диску
+
+![Рисунок 20: Lab5Mirror максимального размера в пуле Lab5Pool](screenshots/020-space-mirror.png)
+
+Рисунок 20: Lab5Mirror максимального размера в пуле Lab5Pool
+
+### 5.4. Удаление диска Lab5Mirror
+
+Проверили, что на зеркале нет разделов, и удалили его перед созданием диска с чётностью
+
+```powershell
+Get-StoragePool -FriendlyName Lab5Pool | Get-VirtualDisk |
+    Where-Object FriendlyName -eq Lab5Mirror | Remove-VirtualDisk -Confirm:$false
+
+Get-StoragePool -FriendlyName Lab5Pool | Get-VirtualDisk
+Get-StoragePool -FriendlyName Lab5Pool | Select-Object Size,AllocatedSize
+```
+
+Первый запрос после удаления не вернул виртуальных дисков. `AllocatedSize` пула снизился до 1 879 048 192 байт
+
+### 5.5. Виртуальный диск Parity с защитой от потери двух дисков
+
+В свободном пуле создали диск с двойной чётностью и фиксированным резервированием. Для двух отказов задали `PhysicalDiskRedundancy 2`
+
+```powershell
+New-VirtualDisk -StoragePoolFriendlyName Lab5Pool -FriendlyName Lab5Parity `
+    -ResiliencySettingName Parity -PhysicalDiskRedundancy 2 `
+    -ProvisioningType Fixed -UseMaximumSize
+
+Get-VirtualDisk -FriendlyName Lab5Parity |
+    Select-Object Size,FootprintOnPool,NumberOfColumns,PhysicalDiskRedundancy
+```
+
+Windows создала диск объёмом 38 654 705 664 байта (36 ГиБ) с шестью столбцами. Проверка показала Parity, Fixed, `Healthy` и `PhysicalDiskRedundancy=2`
+
+| Схема | Полезная ёмкость | Занято в пуле | Столбцов | Допустимо отказов |
+|---|---:|---:|---:|---:|
+| Two-way mirror | 30 ГиБ | 60,50 ГиБ | 3 | 1 |
+| Двойная чётность | 36 ГиБ | 59,25 ГиБ | 6 | 2 |
+
+![Рисунок 21: Lab5Parity объёмом 36 ГиБ в пуле Lab5Pool](screenshots/021-space-dual-parity.png)
+
+Рисунок 21: Lab5Parity объёмом 36 ГиБ в пуле Lab5Pool
+
+## Вопросы:
 
 ### 1. В чем разница возможностей динамических и базовых дисков в Windows?
 
@@ -592,7 +677,7 @@ Install-WindowsFeature FS-iSCSITarget-Server -IncludeManagementTools
 
 ### 9. Сравните данные, полученные в части 2, п. 3-6 с данными, полученными в части 4, п. 7-10.
 
-В части 2 на первом сервере Windows показывала четыре локальных устройства VirtIO по 4 ГиБ. На первом из них раздел №2 был подключён в папку C:\Volume1, поэтому виден среди разделов и томов без отдельной буквы. В части 4 второй сервер обнаружил блочное устройство iSCSI на 5 ГиБ и создал на нём раздел №2 с буквой R:. Win32_LogicalDisk показывает R: как локальный диск, а тип iSCSI виден в BusType
+В части 2 на первом сервере Windows показывала четыре локальных устройства VirtIO по 4 ГиБ. На первом из них раздел №2 был подключён в папку `C:\Volume1`, поэтому виден среди разделов и томов без отдельной буквы. В части 4 второй сервер обнаружил блочное устройство iSCSI на 5 ГиБ и создал на нём раздел №2 с буквой `R:`. `Win32_LogicalDisk` показывает `R:` как локальный диск, а тип iSCSI виден в `BusType`
 
 ### 10. Чем отличается по-вашему программный RAID и Storage Spaces? Какие аналогии из мира Linux вы можете привести?
 
@@ -617,3 +702,7 @@ Get-StoragePool -FriendlyName Lab5Pool | Get-PhysicalDisk
 New-StoragePool -FriendlyName Lab5Pool `
     -StorageSubSystemFriendlyName "Windows Storage*" -PhysicalDisks $disks
 ```
+
+### 13. Сравните объемы дисков из части 5 п.3 и п.5. Какой диск больше? Почему?
+
+В нашем пуле диск с двойной чётностью больше на 6 ГиБ: 36 ГиБ против 30 ГиБ у зеркала. Зеркало хранит две копии каждого блока. При двойной чётности из шести столбцов в полосе четыре отведены под данные, два под контрольную информацию. Максимум Windows рассчитала для фактической схемы размещения с учётом метаданных и резерва пула

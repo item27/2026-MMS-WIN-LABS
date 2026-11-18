@@ -1,0 +1,79 @@
+{
+    "Host":  "AD-SRV",
+    "Pool":  {
+                 "FriendlyName":  "Lab5Pool",
+                 "Size":  71279050752,
+                 "AllocatedSize":  65498251264,
+                 "HealthStatus":  "Healthy"
+             },
+    "PoolDisks":  [
+                      {
+                          "DeviceId":  "11",
+                          "SerialNumber":  "043AA76667674D1B83D0",
+                          "Size":  10737418240
+                      },
+                      {
+                          "DeviceId":  "7",
+                          "SerialNumber":  "DCE48FD0859349A6B9BF",
+                          "Size":  10737418240
+                      },
+                      {
+                          "DeviceId":  "9",
+                          "SerialNumber":  "AB2F5C84B6F34C54AB06",
+                          "Size":  10737418240
+                      },
+                      {
+                          "DeviceId":  "6",
+                          "SerialNumber":  "6B9BE43CF8564A8AB73D",
+                          "Size":  10737418240
+                      },
+                      {
+                          "DeviceId":  "10",
+                          "SerialNumber":  "D18E93019FE64870B7A9",
+                          "Size":  10737418240
+                      },
+                      {
+                          "DeviceId":  "5",
+                          "SerialNumber":  "0A88A1D7C7C64491A030",
+                          "Size":  10737418240
+                      },
+                      {
+                          "DeviceId":  "8",
+                          "SerialNumber":  "DFA087482F9C47B0A55E",
+                          "Size":  10737418240
+                      }
+                  ],
+    "MirrorBeforeRemoval":  {
+                                "FriendlyName":  "Lab5Mirror",
+                                "Size":  32212254720,
+                                "FootprintOnPool":  64961380352,
+                                "NumberOfColumns":  3,
+                                "NumberOfDataCopies":  2,
+                                "PhysicalDiskRedundancy":  1,
+                                "ProvisioningType":  "Fixed",
+                                "HealthStatus":  "Healthy"
+                            },
+    "DisksInPool":  [
+                        {
+                            "FriendlyName":  "Lab5Parity",
+                            "Size":  38654705664,
+                            "FootprintOnPool":  63619203072,
+                            "NumberOfColumns":  6,
+                            "NumberOfDataCopies":  1,
+                            "PhysicalDiskRedundancy":  2,
+                            "ProvisioningType":  "Fixed",
+                            "ResiliencySettingName":  "Parity",
+                            "HealthStatus":  "Healthy"
+                        }
+                    ],
+    "VolumeV":  {
+                    "DriveLetter":  "V",
+                    "Size":  12831420416,
+                    "FileSystemLabel":  "Lab5-RAID5",
+                    "HealthStatus":  "Healthy"
+                },
+    "Lun":  {
+                "Path":  "V:\\iSCSI\\LUN1.vhdx",
+                "Size":  5368709120
+            }
+}
