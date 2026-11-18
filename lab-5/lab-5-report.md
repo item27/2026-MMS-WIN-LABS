@@ -7,7 +7,7 @@ p code, li code, td code { font: inherit; background: none; padding: 0; border: 
 
 ## Работа с томами хранения данных в Windows Server
 
-Черновик по выполненным шагам. На первом сервере создан домен `GMAKMA.local`. На втором установлены Windows и гостевые инструменты. Присоединение второго сервера, проверка связи и работа с учебными дисками пока не выполнены
+Черновик по выполненным шагам. На первом сервере создан домен `GMAKMA.local`. На втором установлены Windows и гостевые инструменты. Оба сервера состоят в домене и доступны друг другу по сети. Начата часть 2: подключены четыре учебных диска и создан том NTFS в папке `C:\Volume1`
 
 ### Цель работы
 
@@ -18,6 +18,8 @@ p code, li code, td code { font: inherit; background: none; padding: 0; border: 
 | Термин | Значение |
 |---|---|
 | Раздел и том | Раздел выделяет область диска, а том предоставляет пространство для файловой системы |
+| GPT | Таблица разделов с GUID-идентификаторами диска и разделов |
+| Точка подключения | Папка NTFS, через которую доступен отдельный том |
 | RAID5 | Массив с распределённой чётностью, сохраняющий доступ к данным при отказе одного диска |
 | iSCSI | Протокол доступа к блочному устройству по IP-сети |
 | Target и Initiator | Target предоставляет диск, Initiator подключается к нему |
@@ -134,7 +136,7 @@ sc query NTDS
 nltest /dsgetdc:GMAKMA.local /force
 ```
 
-Служба `NTDS` находится в состоянии `RUNNING`. Утилита `nltest` обнаружила `ad-srv.GMAKMA.local` по адресу `10.0.0.1`, вернула имя леса `GMAKMA.local` и завершилась успешно. Вывод сохранён в `evidence/commands/first-ntds-service.txt` и `first-domain-discovery.txt`. Проверка связи со вторым сервером пока не выполнена
+Служба `NTDS` находится в состоянии `RUNNING`. Утилита `nltest` обнаружила `ad-srv.GMAKMA.local` по адресу `10.0.0.1`, вернула имя леса `GMAKMA.local` и завершилась успешно. Вывод сохранён в `evidence/commands/first-ntds-service.txt` и `first-domain-discovery.txt`
 
 
 В PowerShell дополнительно проверили имя домена и NetBIOS:
@@ -159,3 +161,134 @@ Get-ADDomain | Select-Object DNSRoot, NetBIOSName | ConvertTo-Json
 Штатно выключили вторую ВМ через UTM и дождались состояния `stopped`. Подключили её к тому же профилю Host Network, который использует первый сервер, и запустили Windows. При изменении конфигурации сохранили системный диск, оба привода и выделенные два ядра
 
 Конфигурации до и после изменения сохранены в `evidence/commands/second-before-host-network.plist` и `second-host-network.plist`
+
+
+### 1.10. Адрес второго сервера и проверка DNS
+
+Проверили имя адаптера `Ethernet` и его MAC `AE-B8-7D-49-CE-EF`. Назначили адрес второго сервера и DNS контроллера домена:
+
+```bat
+netsh interface ipv4 set address name=Ethernet static 10.0.0.2 255.0.0.0 none
+netsh interface ipv4 set dnsservers name=Ethernet static 10.0.0.1 primary validate=no
+```
+
+Через `ipconfig /all` проверили адрес `10.0.0.2`, маску `255.0.0.0`, DNS `10.0.0.1` и отсутствие шлюза. Затем проверили доступность первого сервера по полному имени:
+
+```bat
+ping.exe -n 2 -w 1000 ad-srv.GMAKMA.local
+```
+
+Получили два ответа от `10.0.0.1` без потерь. Настройки и результат сохранены в `evidence/commands/second-ipconfig-static.txt` и `second-ping-first-before-join.txt`
+
+### 1.11. Присоединение второго сервера к домену
+
+Использовали существующие учётные данные `GMAKMA\Administrator`, переданные в `$credential`. В одной команде указали домен и новое имя компьютера:
+
+```powershell
+Add-Computer -DomainName GMAKMA.local -NewName ad-srv-2 `
+    -Credential $credential -PassThru | ConvertTo-Json
+```
+
+Команда вернула `HasSucceeded: true`. Для применения имени и членства в домене запустили перезагрузку:
+
+```bat
+shutdown.exe /r /t 5
+```
+
+Результат присоединения сохранён в `evidence/commands/second-domain-join.txt`
+
+
+### 1.12. Проверка готового доменного стенда
+
+После перезагрузки проверили имя второго сервера, его адрес, членство в домене и защищённый канал. Windows вернула `AD-SRV-2`, домен `GMAKMA.local`, два логических процессора и профиль `DomainAuthenticated`. Проверка `Test-ComputerSecureChannel` вернула `True`
+
+| Сервер | Роль | IPv4 | DNS | Ядра |
+|---|---|---|---|---|
+| `ad-srv` | Контроллер домена | `10.0.0.1/8` | `10.0.0.1` | 2 |
+| `ad-srv-2` | Член домена | `10.0.0.2/8` | `10.0.0.1` | 2 |
+
+На втором сервере разрешили входящие запросы ICMP Echo из учебной сети для доменного профиля:
+
+```powershell
+netsh advfirewall firewall add rule name=Lab5-ICMPv4 `
+    dir=in action=allow protocol=icmpv4:8,any `
+    remoteip=10.0.0.0/8 profile=domain
+```
+
+Повторили пинг по полным именам в обе стороны. В каждой проверке получили два ответа без потерь. Результаты сохранены в `first-ping-second.txt` и `second-ping-first-after-join.txt` в каталоге `evidence/commands/`
+
+На обеих ВМ отключили автоматический сон и погашение экрана при питании от сети, чтобы консоли оставались доступны во время длительных операций:
+
+```bat
+powercfg.exe /change standby-timeout-ac 0
+powercfg.exe /change monitor-timeout-ac 0
+```
+
+Через `powercfg /query SCHEME_CURRENT` проверили, что оба тайм-аута AC равны `0`. Вывод сохранён в `first-power-plan.txt` и `second-power-plan.txt`
+
+
+### 1.13. Исходные снимки
+
+Штатно выключили обе ВМ и сохранили для каждой снимок `lab5-before-storage`. Через список снимков UTM проверили их наличие. Снимки созданы 18 ноября 2026 года в 22:34 и содержат состояние дисков выключенных машин
+
+Результаты сохранены в `evidence/commands/first-baseline-snapshot-list.txt` и `second-baseline-snapshot-list.txt`
+
+## Часть 2. Управление разделами
+
+### 2.1. Подключение учебных дисков
+
+На выключенном `ad-srv` добавили четыре отдельных расширяемых диска QCOW2 по 4 ГиБ через VirtIO. Сначала подключили `d1` и проверили драйвер и серийный номер в Windows, затем добавили `d2`-`d4`. Системный диск и приводы сохранили
+
+После запуска через `Get-Disk` сверили номера, серийные номера, размер и признаки системного и загрузочного дисков
+
+| Диск | Номер Windows | Серийный номер | Размер |
+|---|---|---|---|
+| `d1` | 1 | `35D10684067C4BBC9907` | 4 ГиБ |
+| `d2` | 2 | `20917607355D40348669` | 4 ГиБ |
+| `d3` | 3 | `FF8C5B79269F4486A4B9` | 4 ГиБ |
+| `d4` | 4 | `DA1695117FB540359541` | 4 ГиБ |
+
+Системным и загрузочным остался диск №0 размером 64 ГиБ. Учебные диски определились как `RAW`, `Offline` и `ReadOnly`. Полная карта образов UTM и устройств Windows сохранена в `evidence/commands/data-disk-map.json`, исходные свойства в `first-four-disks.json`
+
+
+После сверки карты сняли защиту от записи только с четырёх учебных дисков:
+
+```powershell
+Get-Disk -Number 1,2,3,4 | Set-Disk -IsReadOnly $false
+```
+
+Повторная проверка показала `IsReadOnly: false`, при этом все четыре диска остались `Offline` и `RAW`. Результат сохранён в `evidence/commands/first-data-disks-writable.json`
+
+
+![Рисунок 8: Четыре учебных диска в Диспетчере дисков](screenshots/009-four-data-disks.png)
+
+Рисунок 8: Четыре учебных диска в Диспетчере дисков
+
+### 2.2. Том NTFS в папке C:\Volume1
+
+Через Диспетчер дисков перевели `d1`, диск №1, в Online и инициализировали его как GPT. Создали пустую папку для точки подключения:
+
+```bat
+mkdir C:\Volume1
+```
+
+В New Simple Volume Wizard указали размер 1024 МиБ, выбрали Mount in the following empty NTFS folder и папку `C:\Volume1`. Оставили файловую систему NTFS и размер кластера Default, задали метку `Lab5-Volume1` и быстрое форматирование
+
+![Рисунок 9: Параметры тома на диске d1 перед завершением мастера](screenshots/010-volume1-settings.png)
+
+Рисунок 9: Параметры тома на диске d1 перед завершением мастера
+
+После Finish дождались состояния Healthy. На `d1` появился том NTFS размером 1 ГиБ
+
+![Рисунок 10: Готовый том Lab5-Volume1 на диске d1](screenshots/011-volume1-ready.png)
+
+Рисунок 10: Готовый том Lab5-Volume1 на диске d1
+
+Проверили раздел и доступ к тому через папку:
+
+```powershell
+Get-Partition -DiskNumber 1
+Get-Volume -FilePath C:\Volume1\
+```
+
+Проверка вернула диск №1, раздел №2 размером 1073741824 байт, точку подключения `C:\Volume1\`, файловую систему NTFS, метку `Lab5-Volume1` и состояние Healthy. Полный результат сохранён в `evidence/commands/volume1-verification.json`

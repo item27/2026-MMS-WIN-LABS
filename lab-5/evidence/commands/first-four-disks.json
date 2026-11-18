@@ -1,0 +1,62 @@
+[
+    {
+        "Number":  0,
+        "FriendlyName":  "QEMU HARDDISK",
+        "SerialNumber":  "QM00003",
+        "UniqueId":  "     ATAQEMU HARDDISK",
+        "Size":  68719476736,
+        "IsBoot":  true,
+        "IsSystem":  true,
+        "IsOffline":  false,
+        "IsReadOnly":  false,
+        "PartitionStyle":  "GPT"
+    },
+    {
+        "Number":  2,
+        "FriendlyName":  "Red Hat VirtIO",
+        "SerialNumber":  "20917607355D40348669",
+        "UniqueId":  "20917607355D40348669",
+        "Size":  4294967296,
+        "IsBoot":  false,
+        "IsSystem":  false,
+        "IsOffline":  true,
+        "IsReadOnly":  true,
+        "PartitionStyle":  "RAW"
+    },
+    {
+        "Number":  4,
+        "FriendlyName":  "Red Hat VirtIO",
+        "SerialNumber":  "DA1695117FB540359541",
+        "UniqueId":  "DA1695117FB540359541",
+        "Size":  4294967296,
+        "IsBoot":  false,
+        "IsSystem":  false,
+        "IsOffline":  true,
+        "IsReadOnly":  true,
+        "PartitionStyle":  "RAW"
+    },
+    {
+        "Number":  1,
+        "FriendlyName":  "Red Hat VirtIO",
+        "SerialNumber":  "35D10684067C4BBC9907",
+        "UniqueId":  "35D10684067C4BBC9907",
+        "Size":  4294967296,
+        "IsBoot":  false,
+        "IsSystem":  false,
+        "IsOffline":  true,
+        "IsReadOnly":  true,
+        "PartitionStyle":  "RAW"
+    },
+    {
+        "Number":  3,
+        "FriendlyName":  "Red Hat VirtIO",
+        "SerialNumber":  "FF8C5B79269F4486A4B9",
+        "UniqueId":  "FF8C5B79269F4486A4B9",
+        "Size":  4294967296,
+        "IsBoot":  false,
+        "IsSystem":  false,
+        "IsOffline":  true,
+        "IsReadOnly":  true,
+        "PartitionStyle":  "RAW"
+    }
+]

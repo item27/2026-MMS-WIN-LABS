@@ -1,0 +1,24 @@
+
+Windows IP Configuration
+
+   Host Name . . . . . . . . . . . . : WIN-0GUHVQ9K59Q
+   Primary Dns Suffix  . . . . . . . : 
+   Node Type . . . . . . . . . . . . : Hybrid
+   IP Routing Enabled. . . . . . . . : No
+   WINS Proxy Enabled. . . . . . . . : No
+
+Ethernet adapter Ethernet:
+
+   Connection-specific DNS Suffix  . : 
+   Description . . . . . . . . . . . : Intel(R) PRO/1000 MT Network Connection
+   Physical Address. . . . . . . . . : AE-B8-7D-49-CE-EF
+   DHCP Enabled. . . . . . . . . . . : No
+   Autoconfiguration Enabled . . . . : Yes
+   Link-local IPv6 Address . . . . . : fe80::45e6:2111:5743:7368%3(Preferred) 
+   IPv4 Address. . . . . . . . . . . : 10.0.0.2(Preferred) 
+   Subnet Mask . . . . . . . . . . . : 255.0.0.0
+   Default Gateway . . . . . . . . . : 
+   DHCPv6 IAID . . . . . . . . . . . : 112113789
+   DHCPv6 Client DUID. . . . . . . . : 00-01-00-01-32-90-21-54-AE-B8-7D-49-CE-EF
+   DNS Servers . . . . . . . . . . . : 10.0.0.1
+   NetBIOS over Tcpip. . . . . . . . : Enabled

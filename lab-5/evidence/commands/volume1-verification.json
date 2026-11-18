@@ -1,0 +1,14 @@
+{
+    "DiskNumber":  1,
+    "PartitionNumber":  2,
+    "PartitionSize":  1073741824,
+    "AccessPaths":  [
+                        "C:\\Volume1\\",
+                        "\\\\?\\Volume{5cc1d473-7f67-4ad6-8d84-b4829a57a9e0}\\"
+                    ],
+    "Label":  "Lab5-Volume1",
+    "FileSystem":  "NTFS",
+    "VolumeSize":  1073737728,
+    "SizeRemaining":  1056030720,
+    "HealthStatus":  "Healthy"
+}

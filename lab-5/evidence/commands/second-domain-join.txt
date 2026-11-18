@@ -1,0 +1,5 @@
+WARNING: The changes will take effect after you restart the computer WIN-0GUHVQ9K59Q.
+{
+    "HasSucceeded":  true,
+    "ComputerName":  "WIN-0GUHVQ9K59Q"
+}

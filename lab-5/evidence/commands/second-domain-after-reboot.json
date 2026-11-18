@@ -1,0 +1,15 @@
+{
+    "Name":  "AD-SRV-2",
+    "Domain":  "GMAKMA.local",
+    "PartOfDomain":  true,
+    "DomainRole":  3,
+    "CPU":  2,
+    "IPv4":  "10.0.0.2",
+    "PrefixLength":  8,
+    "DNS":  [
+                "10.0.0.1"
+            ],
+    "Gateway":  null,
+    "NetworkCategory":  "DomainAuthenticated",
+    "SecureChannel":  true
+}

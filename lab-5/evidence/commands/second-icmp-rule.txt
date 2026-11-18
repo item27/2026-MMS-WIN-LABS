@@ -1,0 +1,16 @@
+
+Rule Name:                            Lab5-ICMPv4
+----------------------------------------------------------------------
+Enabled:                              Yes
+Direction:                            In
+Profiles:                             Domain
+Grouping:                             
+LocalIP:                              Any
+RemoteIP:                             10.0.0.0/8
+Protocol:                             ICMPv4
+                                      Type    Code
+                                      8       Any 
+Edge traversal:                       No
+Action:                               Allow
+Ok.
+

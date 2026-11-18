@@ -1,0 +1,30 @@
+[
+  {
+    "label": "d1",
+    "Identifier": "35D10684-067C-4BBC-9907-AFBB9ABC5573",
+    "ImageName": "35D10684-067C-4BBC-9907-AFBB9ABC5573.qcow2",
+    "Interface": "VirtIO",
+    "virtualBytes": 4294967296
+  },
+  {
+    "label": "d2",
+    "Identifier": "20917607-355D-4034-8669-6AFB4DC973AE",
+    "ImageName": "20917607-355D-4034-8669-6AFB4DC973AE.qcow2",
+    "Interface": "VirtIO",
+    "virtualBytes": 4294967296
+  },
+  {
+    "label": "d3",
+    "Identifier": "FF8C5B79-269F-4486-A4B9-724522376A5E",
+    "ImageName": "FF8C5B79-269F-4486-A4B9-724522376A5E.qcow2",
+    "Interface": "VirtIO",
+    "virtualBytes": 4294967296
+  },
+  {
+    "label": "d4",
+    "Identifier": "DA169511-7FB5-4035-9541-F1A060C353B2",
+    "ImageName": "DA169511-7FB5-4035-9541-F1A060C353B2.qcow2",
+    "Interface": "VirtIO",
+    "virtualBytes": 4294967296
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "label": "d1",
+  "Identifier": "35D10684-067C-4BBC-9907-AFBB9ABC5573",
+  "ImageName": "35D10684-067C-4BBC-9907-AFBB9ABC5573.qcow2",
+  "Interface": "VirtIO",
+  "virtualBytes": 4294967296,
+  "hostBytes": 196672
+}
