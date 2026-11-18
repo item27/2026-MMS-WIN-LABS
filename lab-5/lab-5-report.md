@@ -7,7 +7,7 @@ p code, li code, td code { font: inherit; background: none; padding: 0; border: 
 
 ## Работа с томами хранения данных в Windows Server
 
-Черновик по выполненным шагам. На первом сервере создан домен `GMAKMA.local`. На втором установлена Windows и запущен установщик гостевых инструментов. Присоединение второго сервера, проверка связи и работа с учебными дисками пока не выполнены
+Черновик по выполненным шагам. На первом сервере создан домен `GMAKMA.local`. На втором установлены Windows и гостевые инструменты. Присоединение второго сервера, проверка связи и работа с учебными дисками пока не выполнены
 
 ### Цель работы
 
@@ -135,3 +135,27 @@ nltest /dsgetdc:GMAKMA.local /force
 ```
 
 Служба `NTDS` находится в состоянии `RUNNING`. Утилита `nltest` обнаружила `ad-srv.GMAKMA.local` по адресу `10.0.0.1`, вернула имя леса `GMAKMA.local` и завершилась успешно. Вывод сохранён в `evidence/commands/first-ntds-service.txt` и `first-domain-discovery.txt`. Проверка связи со вторым сервером пока не выполнена
+
+
+В PowerShell дополнительно проверили имя домена и NetBIOS:
+
+```powershell
+Get-ADDomain | Select-Object DNSRoot, NetBIOSName | ConvertTo-Json
+```
+
+Команда вернула `DNSRoot: GMAKMA.local` и `NetBIOSName: GMAKMA`. Результат сохранён в `evidence/commands/first-ad-domain-powershell.json`
+
+### 1.8. Гостевые инструменты второго сервера
+
+На `lab5-ad-srv-2` установили тот же официальный пакет UTM Guest Tools. Дождались завершения установки и нажали Finish
+
+![Рисунок 7: Завершение установки UTM Guest Tools на втором сервере](screenshots/008-second-tools-installed.png)
+
+Рисунок 7: Завершение установки UTM Guest Tools на втором сервере
+
+
+### 1.9. Подключение второго сервера к изолированной сети
+
+Штатно выключили вторую ВМ через UTM и дождались состояния `stopped`. Подключили её к тому же профилю Host Network, который использует первый сервер, и запустили Windows. При изменении конфигурации сохранили системный диск, оба привода и выделенные два ядра
+
+Конфигурации до и после изменения сохранены в `evidence/commands/second-before-host-network.plist` и `second-host-network.plist`
