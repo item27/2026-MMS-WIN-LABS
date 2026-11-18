@@ -75,7 +75,6 @@ echo %NUMBER_OF_PROCESSORS%
 
 Рисунок 3: Windows первого сервера видит два логических процессора
 
-
 На второй ВМ выбрали ту же редакцию Windows и начали установку на отдельный пустой диск
 
 ![Рисунок 4: Пустой системный диск второго сервера](screenshots/005-second-system-disk.png)
@@ -100,8 +99,7 @@ echo %NUMBER_OF_PROCESSORS%
 Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
 ```
 
-Установка вернула `Success: true` и `ExitCode: 0`. Сохранили полный результат в `evidence/commands/first-server-install-ad-ds.json`
-
+Установка вернула `Success: true` и `ExitCode: 0`
 
 ### 1.6. Сеть первого сервера
 
@@ -112,8 +110,7 @@ netsh interface ipv4 set address name=Ethernet static 10.0.0.1 255.0.0.0 none
 netsh interface ipv4 set dnsservers name=Ethernet static 10.0.0.1 primary validate=no
 ```
 
-Проверили настройки через `Get-NetIPConfiguration`: адрес `10.0.0.1`, длина префикса `8`, DNS `10.0.0.1`, шлюз отсутствует. Полный результат сохранён в `evidence/commands/first-static-network.json`
-
+Проверили настройки через `Get-NetIPConfiguration`: адрес `10.0.0.1`, длина префикса `8`, DNS `10.0.0.1`, шлюз отсутствует
 
 ### 1.7. Создание домена
 
@@ -136,8 +133,7 @@ sc query NTDS
 nltest /dsgetdc:GMAKMA.local /force
 ```
 
-Служба `NTDS` находится в состоянии `RUNNING`. Утилита `nltest` обнаружила `ad-srv.GMAKMA.local` по адресу `10.0.0.1`, вернула имя леса `GMAKMA.local` и завершилась успешно. Вывод сохранён в `evidence/commands/first-ntds-service.txt` и `first-domain-discovery.txt`
-
+Служба `NTDS` находится в состоянии `RUNNING`. Утилита `nltest` обнаружила `ad-srv.GMAKMA.local` по адресу `10.0.0.1`, вернула имя леса `GMAKMA.local` и завершилась успешно
 
 В PowerShell дополнительно проверили имя домена и NetBIOS:
 
@@ -145,7 +141,7 @@ nltest /dsgetdc:GMAKMA.local /force
 Get-ADDomain | Select-Object DNSRoot, NetBIOSName | ConvertTo-Json
 ```
 
-Команда вернула `DNSRoot: GMAKMA.local` и `NetBIOSName: GMAKMA`. Результат сохранён в `evidence/commands/first-ad-domain-powershell.json`
+Команда вернула `DNSRoot: GMAKMA.local` и `NetBIOSName: GMAKMA`
 
 ### 1.8. Гостевые инструменты второго сервера
 
@@ -155,13 +151,9 @@ Get-ADDomain | Select-Object DNSRoot, NetBIOSName | ConvertTo-Json
 
 Рисунок 7: Завершение установки UTM Guest Tools на втором сервере
 
-
 ### 1.9. Подключение второго сервера к изолированной сети
 
 Штатно выключили вторую ВМ через UTM и дождались состояния `stopped`. Подключили её к тому же профилю Host Network, который использует первый сервер, и запустили Windows. При изменении конфигурации сохранили системный диск, оба привода и выделенные два ядра
-
-Конфигурации до и после изменения сохранены в `evidence/commands/second-before-host-network.plist` и `second-host-network.plist`
-
 
 ### 1.10. Адрес второго сервера и проверка DNS
 
@@ -178,7 +170,7 @@ netsh interface ipv4 set dnsservers name=Ethernet static 10.0.0.1 primary valida
 ping.exe -n 2 -w 1000 ad-srv.GMAKMA.local
 ```
 
-Получили два ответа от `10.0.0.1` без потерь. Настройки и результат сохранены в `evidence/commands/second-ipconfig-static.txt` и `second-ping-first-before-join.txt`
+Получили два ответа от `10.0.0.1` без потерь
 
 ### 1.11. Присоединение второго сервера к домену
 
@@ -194,9 +186,6 @@ Add-Computer -DomainName GMAKMA.local -NewName ad-srv-2 `
 ```bat
 shutdown.exe /r /t 5
 ```
-
-Результат присоединения сохранён в `evidence/commands/second-domain-join.txt`
-
 
 ### 1.12. Проверка готового доменного стенда
 
@@ -215,7 +204,7 @@ netsh advfirewall firewall add rule name=Lab5-ICMPv4 `
     remoteip=10.0.0.0/8 profile=domain
 ```
 
-Повторили пинг по полным именам в обе стороны. В каждой проверке получили два ответа без потерь. Результаты сохранены в `first-ping-second.txt` и `second-ping-first-after-join.txt` в каталоге `evidence/commands/`
+Повторили пинг по полным именам в обе стороны. В каждой проверке получили два ответа без потерь
 
 На обеих ВМ отключили автоматический сон и погашение экрана при питании от сети, чтобы консоли оставались доступны во время длительных операций:
 
@@ -224,14 +213,11 @@ powercfg.exe /change standby-timeout-ac 0
 powercfg.exe /change monitor-timeout-ac 0
 ```
 
-Через `powercfg /query SCHEME_CURRENT` проверили, что оба тайм-аута AC равны `0`. Вывод сохранён в `first-power-plan.txt` и `second-power-plan.txt`
-
+Через `powercfg /query SCHEME_CURRENT` проверили, что оба тайм-аута AC равны `0`
 
 ### 1.13. Исходные снимки
 
-Штатно выключили обе ВМ и сохранили для каждой снимок `lab5-before-storage`. Через список снимков UTM проверили их наличие. Снимки созданы 18 ноября 2026 года в 22:34 и содержат состояние дисков выключенных машин
-
-Результаты сохранены в `evidence/commands/first-baseline-snapshot-list.txt` и `second-baseline-snapshot-list.txt`
+Штатно выключили обе ВМ. В UTM создали для каждой снимок дисков `lab5-before-storage` и проверили, что он появился в списке снимков
 
 ## Часть 2. Управление разделами
 
@@ -248,17 +234,15 @@ powercfg.exe /change monitor-timeout-ac 0
 | `d3` | 3 | `FF8C5B79269F4486A4B9` | 4 ГиБ |
 | `d4` | 4 | `DA1695117FB540359541` | 4 ГиБ |
 
-Системным и загрузочным остался диск №0 размером 64 ГиБ. Учебные диски определились как `RAW`, `Offline` и `ReadOnly`. Полная карта образов UTM и устройств Windows сохранена в `evidence/commands/data-disk-map.json`, исходные свойства в `first-four-disks.json`
+Системным и загрузочным остался диск №0 размером 64 ГиБ. Учебные диски определились как `RAW`, `Offline` и `ReadOnly`
 
-
-После сверки карты сняли защиту от записи только с четырёх учебных дисков:
+После сверки номеров и серийных номеров сняли защиту от записи только с четырёх учебных дисков:
 
 ```powershell
 Get-Disk -Number 1,2,3,4 | Set-Disk -IsReadOnly $false
 ```
 
-Повторная проверка показала `IsReadOnly: false`, при этом все четыре диска остались `Offline` и `RAW`. Результат сохранён в `evidence/commands/first-data-disks-writable.json`
-
+Повторная проверка показала `IsReadOnly: false`, при этом все четыре диска остались `Offline` и `RAW`
 
 ![Рисунок 8: Четыре учебных диска в Диспетчере дисков](screenshots/009-four-data-disks.png)
 
@@ -291,7 +275,7 @@ Get-Partition -DiskNumber 1
 Get-Volume -FilePath C:\Volume1\
 ```
 
-Проверка вернула диск №1, раздел №2 размером 1073741824 байт, точку подключения `C:\Volume1\`, файловую систему NTFS, метку `Lab5-Volume1` и состояние Healthy. Полный результат сохранён в `evidence/commands/volume1-verification.json`
+Проверка вернула диск №1, раздел №2 размером 1073741824 байт, точку подключения `C:\Volume1\`, файловую систему NTFS, метку `Lab5-Volume1` и состояние Healthy
 
 ### 2.3. С помощью PowerShell выведите сведения о подключенных дисках как физических устройствах.
 
@@ -300,7 +284,7 @@ Get-PhysicalDisk |
     Select-Object DeviceId,FriendlyName,SerialNumber,Size,BusType
 ```
 
-В выводе пять устройств: системный диск на 64 ГиБ и четыре `Red Hat VirtIO` по 4 ГиБ. Серийные номера совпали с картой дисков. Windows показывает для этих четырёх устройств `BusType` `SCSI`
+В выводе пять устройств: системный диск на 64 ГиБ и четыре `Red Hat VirtIO` по 4 ГиБ. Серийные номера совпали со значениями в таблице пункта 2.1. Windows показывает для этих четырёх устройств `BusType` `SCSI`
 
 ### 2.4. С помощью PowerShell выведите сведения о подключенных дисках как логических устройствах.
 
@@ -328,7 +312,7 @@ Get-Volume |
     @{n="HealthStatus";e={[string]$_.HealthStatus}}
 ```
 
-У `Lab5-Volume1` файловая система `NTFS`, буква отсутствует. Поле `Path` совпало с GUID-путём раздела №2, объём файловой системы 1 073 737 728 байт. [Вывод четырёх команд](evidence/commands/first-storage-inventory.json)
+У `Lab5-Volume1` файловая система `NTFS`, буква отсутствует. Поле `Path` совпало с GUID-путём раздела №2, объём файловой системы 1 073 737 728 байт
 
 ## Вопросы:
 
@@ -344,11 +328,11 @@ Get-Volume |
 
 ### 3. Сопоставьте данные, полученные в части 2, п. 3-6. Соотнесите объекты, с которыми вы работали с элементами стека хранения Windows. Опишите результаты сопоставления и сравнения.
 
-По серийному номеру `35D10684067C4BBC9907` находим `d1` в списке физических дисков и связываем его с `Disk 1` по карте. На нём `Get-Partition` показывает раздел №2 с путём `C:\Volume1\`. GUID тома из `AccessPaths` совпадает с `Path` в `Get-Volume`. В списке `Win32_LogicalDisk` этой точки подключения нет, поскольку у тома нет буквы
+По серийному номеру `35D10684067C4BBC9907` находим `d1` в списке физических дисков и связываем его с `Disk 1` по таблице из пункта 2.1. На нём `Get-Partition` показывает раздел №2 с путём `C:\Volume1\`. GUID тома из `AccessPaths` совпадает с `Path` в `Get-Volume`. В списке `Win32_LogicalDisk` этой точки подключения нет, поскольку у тома нет буквы
 
 ### 4. Каков будет размер каталога Volume1 после выполнения п. 2 части 2? Почему?
 
-Через `C:\Volume1` доступен раздел на `d1` размером 1 ГиБ. `Get-Volume` показывает 1 073 737 728 байт ёмкости `NTFS` и 1 056 030 720 свободных байт на момент проверки. Размер файлов в папке зависит от её содержимого, а место под эти файлы выделяется на `d1`
+Через `C:\Volume1` доступен раздел на `d1` размером 1 ГиБ. `Get-Volume` показывает 1 073 737 728 байт ёмкости `NTFS` и 1 056 030 720 свободных байт на момент проверки. Место под файлы в этой папке выделяется на `d1`
 
 ### 5. Какой будет объем диска W: после выполнения п.1 части 3 и диска V: после п.9 части 3? Почему?
 
