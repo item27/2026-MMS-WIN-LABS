@@ -1,0 +1,106 @@
+{
+    "Success":  true,
+    "RestartNeeded":  1,
+    "FeatureResult":  [
+                          {
+                              "Id":  10,
+                              "Name":  "AD-Domain-Services",
+                              "DisplayName":  "Active Directory Domain Services",
+                              "Success":  true,
+                              "RestartNeeded":  false,
+                              "Message":  [
+
+                                          ],
+                              "SkipReason":  0
+                          },
+                          {
+                              "Id":  69,
+                              "Name":  "GPMC",
+                              "DisplayName":  "Group Policy Management",
+                              "Success":  true,
+                              "RestartNeeded":  false,
+                              "Message":  [
+
+                                          ],
+                              "SkipReason":  0
+                          },
+                          {
+                              "Id":  67,
+                              "Name":  "RSAT",
+                              "DisplayName":  "Remote Server Administration Tools",
+                              "Success":  true,
+                              "RestartNeeded":  false,
+                              "Message":  [
+
+                                          ],
+                              "SkipReason":  0
+                          },
+                          {
+                              "Id":  330,
+                              "Name":  "RSAT-AD-AdminCenter",
+                              "DisplayName":  "Active Directory Administrative Center",
+                              "Success":  true,
+                              "RestartNeeded":  false,
+                              "Message":  [
+
+                                          ],
+                              "SkipReason":  0
+                          },
+                          {
+                              "Id":  331,
+                              "Name":  "RSAT-AD-PowerShell",
+                              "DisplayName":  "Active Directory module for Windows PowerShell",
+                              "Success":  true,
+                              "RestartNeeded":  false,
+                              "Message":  [
+
+                                          ],
+                              "SkipReason":  0
+                          },
+                          {
+                              "Id":  329,
+                              "Name":  "RSAT-AD-Tools",
+                              "DisplayName":  "AD DS and AD LDS Tools",
+                              "Success":  true,
+                              "RestartNeeded":  false,
+                              "Message":  [
+
+                                          ],
+                              "SkipReason":  0
+                          },
+                          {
+                              "Id":  257,
+                              "Name":  "RSAT-ADDS",
+                              "DisplayName":  "AD DS Tools",
+                              "Success":  true,
+                              "RestartNeeded":  false,
+                              "Message":  [
+
+                                          ],
+                              "SkipReason":  0
+                          },
+                          {
+                              "Id":  299,
+                              "Name":  "RSAT-ADDS-Tools",
+                              "DisplayName":  "AD DS Snap-Ins and Command-Line Tools",
+                              "Success":  true,
+                              "RestartNeeded":  false,
+                              "Message":  [
+
+                                          ],
+                              "SkipReason":  0
+                          },
+                          {
+                              "Id":  256,
+                              "Name":  "RSAT-Role-Tools",
+                              "DisplayName":  "Role Administration Tools",
+                              "Success":  true,
+                              "RestartNeeded":  false,
+                              "Message":  [
+
+                                          ],
+                              "SkipReason":  0
+                          }
+                      ],
+    "ExitCode":  0
+}

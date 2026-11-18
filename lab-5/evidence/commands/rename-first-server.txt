@@ -1,0 +1,6 @@
+WARNING: The changes will take effect after you restart the computer WIN-8E7NV3AE689.
+{
+    "HasSucceeded":  true,
+    "NewComputerName":  "ad-srv",
+    "OldComputerName":  "WIN-8E7NV3AE689"
+}
