@@ -1,0 +1,16 @@
+select disk 1
+convert gpt
+convert dynamic
+select disk 2
+convert gpt
+convert dynamic
+select disk 3
+convert gpt
+convert dynamic
+select disk 4
+convert gpt
+convert dynamic
+create volume raid disk=1,2,3,4
+format fs=ntfs quick label=Lab5-RAID5
+assign letter=V
+detail volume
