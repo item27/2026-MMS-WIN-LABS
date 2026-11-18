@@ -1,0 +1,2 @@
+# Preserve the exact whitespace of native Windows command output
+evidence/*.txt -whitespace

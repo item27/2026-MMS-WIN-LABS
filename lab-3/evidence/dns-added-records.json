@@ -1,0 +1,170 @@
+[
+  {
+    "Zone": "GMAKMA.local",
+    "Name": "@",
+    "Type": "A",
+    "Data": "{\"IPv4Address\":{\"Address\":33554442,\"AddressFamily\":2,\"ScopeId\":null,\"IsIPv6Multicast\":false,\"IsIPv6LinkLocal\":false,\"IsIPv6SiteLocal\":false,\"IsIPv6Teredo\":false,\"IsIPv4MappedToIPv6\":false,\"IPAddressToString\":\"10.0.0.2\"}}"
+  },
+  {
+    "Zone": "GMAKMA.local",
+    "Name": "@",
+    "Type": "NS",
+    "Data": "{\"NameServer\":\"ad-srv-2.gmakma.local.\"}"
+  },
+  {
+    "Zone": "GMAKMA.local",
+    "Name": "_gc._tcp.Default-First-Site-Name._sites",
+    "Type": "SRV",
+    "Data": "{\"DomainName\":\"ad-srv-2.gmakma.local.\",\"Port\":3268,\"Priority\":0,\"Weight\":100}"
+  },
+  {
+    "Zone": "GMAKMA.local",
+    "Name": "_kerberos._tcp.Default-First-Site-Name._sites",
+    "Type": "SRV",
+    "Data": "{\"DomainName\":\"ad-srv-2.gmakma.local.\",\"Port\":88,\"Priority\":0,\"Weight\":100}"
+  },
+  {
+    "Zone": "GMAKMA.local",
+    "Name": "_ldap._tcp.Default-First-Site-Name._sites",
+    "Type": "SRV",
+    "Data": "{\"DomainName\":\"ad-srv-2.gmakma.local.\",\"Port\":389,\"Priority\":0,\"Weight\":100}"
+  },
+  {
+    "Zone": "GMAKMA.local",
+    "Name": "_gc._tcp",
+    "Type": "SRV",
+    "Data": "{\"DomainName\":\"ad-srv-2.gmakma.local.\",\"Port\":3268,\"Priority\":0,\"Weight\":100}"
+  },
+  {
+    "Zone": "GMAKMA.local",
+    "Name": "_kerberos._tcp",
+    "Type": "SRV",
+    "Data": "{\"DomainName\":\"ad-srv-2.gmakma.local.\",\"Port\":88,\"Priority\":0,\"Weight\":100}"
+  },
+  {
+    "Zone": "GMAKMA.local",
+    "Name": "_kpasswd._tcp",
+    "Type": "SRV",
+    "Data": "{\"DomainName\":\"ad-srv-2.gmakma.local.\",\"Port\":464,\"Priority\":0,\"Weight\":100}"
+  },
+  {
+    "Zone": "GMAKMA.local",
+    "Name": "_ldap._tcp",
+    "Type": "SRV",
+    "Data": "{\"DomainName\":\"ad-srv-2.gmakma.local.\",\"Port\":389,\"Priority\":0,\"Weight\":100}"
+  },
+  {
+    "Zone": "GMAKMA.local",
+    "Name": "_kerberos._udp",
+    "Type": "SRV",
+    "Data": "{\"DomainName\":\"ad-srv-2.gmakma.local.\",\"Port\":88,\"Priority\":0,\"Weight\":100}"
+  },
+  {
+    "Zone": "GMAKMA.local",
+    "Name": "_kpasswd._udp",
+    "Type": "SRV",
+    "Data": "{\"DomainName\":\"ad-srv-2.gmakma.local.\",\"Port\":464,\"Priority\":0,\"Weight\":100}"
+  },
+  {
+    "Zone": "GMAKMA.local",
+    "Name": "ad-srv-2",
+    "Type": "A",
+    "Data": "{\"IPv4Address\":{\"Address\":33554442,\"AddressFamily\":2,\"ScopeId\":null,\"IsIPv6Multicast\":false,\"IsIPv6LinkLocal\":false,\"IsIPv6SiteLocal\":false,\"IsIPv6Teredo\":false,\"IsIPv4MappedToIPv6\":false,\"IPAddressToString\":\"10.0.0.2\"}}"
+  },
+  {
+    "Zone": "GMAKMA.local",
+    "Name": "DomainDnsZones",
+    "Type": "A",
+    "Data": "{\"IPv4Address\":{\"Address\":33554442,\"AddressFamily\":2,\"ScopeId\":null,\"IsIPv6Multicast\":false,\"IsIPv6LinkLocal\":false,\"IsIPv6SiteLocal\":false,\"IsIPv6Teredo\":false,\"IsIPv4MappedToIPv6\":false,\"IPAddressToString\":\"10.0.0.2\"}}"
+  },
+  {
+    "Zone": "GMAKMA.local",
+    "Name": "_ldap._tcp.Default-First-Site-Name._sites.DomainDnsZones",
+    "Type": "SRV",
+    "Data": "{\"DomainName\":\"ad-srv-2.gmakma.local.\",\"Port\":389,\"Priority\":0,\"Weight\":100}"
+  },
+  {
+    "Zone": "GMAKMA.local",
+    "Name": "_ldap._tcp.DomainDnsZones",
+    "Type": "SRV",
+    "Data": "{\"DomainName\":\"ad-srv-2.gmakma.local.\",\"Port\":389,\"Priority\":0,\"Weight\":100}"
+  },
+  {
+    "Zone": "GMAKMA.local",
+    "Name": "ForestDnsZones",
+    "Type": "A",
+    "Data": "{\"IPv4Address\":{\"Address\":33554442,\"AddressFamily\":2,\"ScopeId\":null,\"IsIPv6Multicast\":false,\"IsIPv6LinkLocal\":false,\"IsIPv6SiteLocal\":false,\"IsIPv6Teredo\":false,\"IsIPv4MappedToIPv6\":false,\"IPAddressToString\":\"10.0.0.2\"}}"
+  },
+  {
+    "Zone": "GMAKMA.local",
+    "Name": "_ldap._tcp.Default-First-Site-Name._sites.ForestDnsZones",
+    "Type": "SRV",
+    "Data": "{\"DomainName\":\"ad-srv-2.gmakma.local.\",\"Port\":389,\"Priority\":0,\"Weight\":100}"
+  },
+  {
+    "Zone": "GMAKMA.local",
+    "Name": "_ldap._tcp.ForestDnsZones",
+    "Type": "SRV",
+    "Data": "{\"DomainName\":\"ad-srv-2.gmakma.local.\",\"Port\":389,\"Priority\":0,\"Weight\":100}"
+  },
+  {
+    "Zone": "_msdcs.GMAKMA.local",
+    "Name": "@",
+    "Type": "NS",
+    "Data": "{\"NameServer\":\"ad-srv-2.gmakma.local.\"}"
+  },
+  {
+    "Zone": "_msdcs.GMAKMA.local",
+    "Name": "3a787877-ec05-431b-9047-d2fda475a283",
+    "Type": "CNAME",
+    "Data": "{\"HostNameAlias\":\"ad-srv-2.gmakma.local.\"}"
+  },
+  {
+    "Zone": "_msdcs.GMAKMA.local",
+    "Name": "_kerberos._tcp.Default-First-Site-Name._sites.dc",
+    "Type": "SRV",
+    "Data": "{\"DomainName\":\"ad-srv-2.gmakma.local.\",\"Port\":88,\"Priority\":0,\"Weight\":100}"
+  },
+  {
+    "Zone": "_msdcs.GMAKMA.local",
+    "Name": "_ldap._tcp.Default-First-Site-Name._sites.dc",
+    "Type": "SRV",
+    "Data": "{\"DomainName\":\"ad-srv-2.gmakma.local.\",\"Port\":389,\"Priority\":0,\"Weight\":100}"
+  },
+  {
+    "Zone": "_msdcs.GMAKMA.local",
+    "Name": "_kerberos._tcp.dc",
+    "Type": "SRV",
+    "Data": "{\"DomainName\":\"ad-srv-2.gmakma.local.\",\"Port\":88,\"Priority\":0,\"Weight\":100}"
+  },
+  {
+    "Zone": "_msdcs.GMAKMA.local",
+    "Name": "_ldap._tcp.dc",
+    "Type": "SRV",
+    "Data": "{\"DomainName\":\"ad-srv-2.gmakma.local.\",\"Port\":389,\"Priority\":0,\"Weight\":100}"
+  },
+  {
+    "Zone": "_msdcs.GMAKMA.local",
+    "Name": "_ldap._tcp.a1f2fc06-b2c4-4e3b-807b-2891e54647de.domains",
+    "Type": "SRV",
+    "Data": "{\"DomainName\":\"ad-srv-2.gmakma.local.\",\"Port\":389,\"Priority\":0,\"Weight\":100}"
+  },
+  {
+    "Zone": "_msdcs.GMAKMA.local",
+    "Name": "gc",
+    "Type": "A",
+    "Data": "{\"IPv4Address\":{\"Address\":33554442,\"AddressFamily\":2,\"ScopeId\":null,\"IsIPv6Multicast\":false,\"IsIPv6LinkLocal\":false,\"IsIPv6SiteLocal\":false,\"IsIPv6Teredo\":false,\"IsIPv4MappedToIPv6\":false,\"IPAddressToString\":\"10.0.0.2\"}}"
+  },
+  {
+    "Zone": "_msdcs.GMAKMA.local",
+    "Name": "_ldap._tcp.Default-First-Site-Name._sites.gc",
+    "Type": "SRV",
+    "Data": "{\"DomainName\":\"ad-srv-2.gmakma.local.\",\"Port\":3268,\"Priority\":0,\"Weight\":100}"
+  },
+  {
+    "Zone": "_msdcs.GMAKMA.local",
+    "Name": "_ldap._tcp.gc",
+    "Type": "SRV",
+    "Data": "{\"DomainName\":\"ad-srv-2.gmakma.local.\",\"Port\":3268,\"Priority\":0,\"Weight\":100}"
+  }
+]

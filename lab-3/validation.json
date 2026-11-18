@@ -1,0 +1,68 @@
+{
+  "report": {
+    "pages": 17,
+    "text_characters": 25141,
+    "links": 27,
+    "external_links": [],
+    "images": 5,
+    "image_sizes": [
+      {
+        "page": 7,
+        "width_mm": 120.0,
+        "height_mm": 90.0
+      },
+      {
+        "page": 7,
+        "width_mm": 120.0,
+        "height_mm": 90.0
+      },
+      {
+        "page": 8,
+        "width_mm": 120.0,
+        "height_mm": 90.0
+      },
+      {
+        "page": 8,
+        "width_mm": 120.0,
+        "height_mm": 90.0
+      },
+      {
+        "page": 12,
+        "width_mm": 120.0,
+        "height_mm": 90.0
+      }
+    ],
+    "captions": 5,
+    "off_page_words": [],
+    "unicode_dashes": [],
+    "empty_pages": [],
+    "sha256": "ce4b8d4803bc1d7beb58d2d96cfb33dbde68304f1c05951323849df882f41d57",
+    "cover_text_sha256": "eb0e1d68c44b927412978d73b99403858e6b3209e7e2969cf8354fff0677d52a"
+  },
+  "guide": {
+    "pages": 6,
+    "text_characters": 8073,
+    "links": 0,
+    "external_links": [],
+    "images": 0,
+    "image_sizes": [],
+    "captions": 0,
+    "off_page_words": [],
+    "unicode_dashes": [],
+    "empty_pages": [],
+    "sha256": "fc1e3c4ce2d65e354f328b9166a1a0961331b277159a82b82fd4f4842bc345c6",
+    "cover_text_sha256": "eb0e1d68c44b927412978d73b99403858e6b3209e7e2969cf8354fff0677d52a"
+  },
+  "markdown_issues": [],
+  "unchanged_evidence_files": 32,
+  "code_blocks_unchanged": true,
+  "control_answers": 8,
+  "bibliography_removed": true,
+  "portable_pdf_links_verified": 27,
+  "ci_run": 44241710853,
+  "ci_conclusion": "success",
+  "ci_source_sha": "0b1489b3ee25b624974d7f479c5492b396d34d06",
+  "ci_bot_sha": "fff4bd70dc98ff17b9d9ce25cb7713cc86af1d60",
+  "final_text_and_raster_match_visually_checked_local": true,
+  "comparison_scale": 1.5
+}

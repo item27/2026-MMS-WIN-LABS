@@ -1,0 +1,17 @@
+VMID=109
+CAPTURE_UTC=2026-11-18T01:46:07.985619+00:00
+EXIT_CODE=0
+
+{
+    "User":  "lab3process",
+    "Valid":  true
+}
+
+
+Enabled         : True
+LockedOut       : False
+PasswordLastSet : 11/18/2026 4:40:38 AM
+
+
+
+

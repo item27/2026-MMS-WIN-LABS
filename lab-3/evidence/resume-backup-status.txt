@@ -1,0 +1,28 @@
+VMID=104
+CAPTURE_UTC=2026-11-18T01:19:53.116486+00:00
+EXIT_CODE=1
+
+0
+The backup of files reported by 'System Writer' is complete.
+The backup of files reported by 'DFS Replication service writer' is complete.
+The backup of files reported by 'Dhcp Jet Writer' is complete.
+The backup of files reported by 'COM+ REGDB Writer' is complete.
+Overall progress: 98%. 
+Currently backing up files reported by 'Registry Writer'...
+The backup of files reported by 'Registry Writer' is complete.
+The backup of files reported by 'WMI Writer' is complete.
+Overall progress: 99%. 
+Currently backing up files reported by 'NTDS'...
+Summary of the backup operation:
+------------------
+
+The backup operation successfully completed.
+The backup of the system state successfully completed [11/18/2026 11:03 AM].
+Log of files successfully backed up:
+C:\WINDOWS\Logs\WindowsServerBackup\Backup-18-11-2026_09-20-59.log
+
+wbadmin 1.0 - Backup command-line tool
+(C) Copyright Microsoft Corporation. All rights reserved.
+
+ERROR - No backup or recovery operation is currently running.
+

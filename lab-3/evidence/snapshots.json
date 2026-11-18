@@ -1,0 +1,65 @@
+[
+  {
+    "vmid": 104,
+    "snapshot": "lab3-pre-systemstate-20261118",
+    "upid": "UPID:ymir:000E5E5C:01E19635:6AFCCB7C:qmsnapshot:104:herme@pve:",
+    "result": "OK",
+    "read_back": true
+  },
+  {
+    "vmid": 104,
+    "snapshot": "lab3-pre-fsmo-20261118",
+    "upid": "UPID:ymir:000F1B48:01F7F236:6AFD04B9:qmsnapshot:104:herme@pve:",
+    "result": "OK",
+    "read_back": true
+  },
+  {
+    "vmid": 104,
+    "snapshot": "lab3-final-20261118",
+    "upid": "UPID:ymir:000F59BD:01FF2DFC:6AFD173E:qmsnapshot:104:herme@pve:",
+    "result": "OK",
+    "read_back": true
+  },
+  {
+    "vmid": 105,
+    "snapshot": "lab3-pre-systemstate-20261118",
+    "upid": "UPID:ymir:000E5F0C:01E1A90B:6AFCCBAC:qmsnapshot:105:herme@pve:",
+    "result": "OK",
+    "read_back": true
+  },
+  {
+    "vmid": 105,
+    "snapshot": "lab3-pre-fsmo-20261118",
+    "upid": "UPID:ymir:000F1BBC:01F7FBA5:6AFD04D2:qmsnapshot:105:herme@pve:",
+    "result": "OK",
+    "read_back": true
+  },
+  {
+    "vmid": 105,
+    "snapshot": "lab3-final-20261118",
+    "upid": "UPID:ymir:000F59BF:01FF2DFD:6AFD173E:qmsnapshot:105:herme@pve:",
+    "result": "OK",
+    "read_back": true
+  },
+  {
+    "vmid": 109,
+    "snapshot": "lab3-pre-systemstate-20261118",
+    "upid": "UPID:ymir:000E5F67:01E1B278:6AFCCBC4:qmsnapshot:109:herme@pve:",
+    "result": "OK",
+    "read_back": true
+  },
+  {
+    "vmid": 109,
+    "snapshot": "lab3-pre-fsmo-20261118",
+    "upid": "UPID:ymir:000F1C14:01F803EB:6AFD04E7:qmsnapshot:109:herme@pve:",
+    "result": "OK",
+    "read_back": true
+  },
+  {
+    "vmid": 109,
+    "snapshot": "lab3-final-20261118",
+    "upid": "UPID:ymir:000F59BE:01FF2DFC:6AFD173E:qmsnapshot:109:herme@pve:",
+    "result": "OK",
+    "read_back": true
+  }
+]

@@ -1,0 +1,58 @@
+VMID=109
+CAPTURE_UTC=2026-11-18T01:38:25.039819+00:00
+EXIT_CODE=0
+
+Syncing all NC's held on AD-SRV-2.
+Syncing partition: DC=ForestDnsZones,DC=GMAKMA,DC=local
+CALLBACK MESSAGE: The following replication is in progress:
+    From: CN=NTDS Settings,CN=AD-SRV,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+    To  : CN=NTDS Settings,CN=AD-SRV-2,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+CALLBACK MESSAGE: The following replication completed successfully:
+    From: CN=NTDS Settings,CN=AD-SRV,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+    To  : CN=NTDS Settings,CN=AD-SRV-2,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+CALLBACK MESSAGE: SyncAll Finished.
+SyncAll terminated with no errors.
+
+Syncing partition: DC=DomainDnsZones,DC=GMAKMA,DC=local
+CALLBACK MESSAGE: The following replication is in progress:
+    From: CN=NTDS Settings,CN=AD-SRV,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+    To  : CN=NTDS Settings,CN=AD-SRV-2,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+CALLBACK MESSAGE: The following replication completed successfully:
+    From: CN=NTDS Settings,CN=AD-SRV,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+    To  : CN=NTDS Settings,CN=AD-SRV-2,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+CALLBACK MESSAGE: SyncAll Finished.
+SyncAll terminated with no errors.
+
+Syncing partition: CN=Schema,CN=Configuration,DC=GMAKMA,DC=local
+CALLBACK MESSAGE: The following replication is in progress:
+    From: CN=NTDS Settings,CN=AD-SRV,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+    To  : CN=NTDS Settings,CN=AD-SRV-2,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+CALLBACK MESSAGE: The following replication completed successfully:
+    From: CN=NTDS Settings,CN=AD-SRV,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+    To  : CN=NTDS Settings,CN=AD-SRV-2,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+CALLBACK MESSAGE: SyncAll Finished.
+SyncAll terminated with no errors.
+
+Syncing partition: CN=Configuration,DC=GMAKMA,DC=local
+CALLBACK MESSAGE: The following replication is in progress:
+    From: CN=NTDS Settings,CN=AD-SRV,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+    To  : CN=NTDS Settings,CN=AD-SRV-2,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+CALLBACK MESSAGE: The following replication completed successfully:
+    From: CN=NTDS Settings,CN=AD-SRV,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+    To  : CN=NTDS Settings,CN=AD-SRV-2,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+CALLBACK MESSAGE: SyncAll Finished.
+SyncAll terminated with no errors.
+
+Syncing partition: DC=GMAKMA,DC=local
+CALLBACK MESSAGE: The following replication is in progress:
+    From: CN=NTDS Settings,CN=AD-SRV,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+    To  : CN=NTDS Settings,CN=AD-SRV-2,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+CALLBACK MESSAGE: The following replication completed successfully:
+    From: CN=NTDS Settings,CN=AD-SRV,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+    To  : CN=NTDS Settings,CN=AD-SRV-2,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+CALLBACK MESSAGE: SyncAll Finished.
+SyncAll terminated with no errors.
+
+Flags: 0
+Connection Status = 1311 0x51f ERROR_NO_LOGON_SERVERS
+The command completed successfully

@@ -1,0 +1,168 @@
+VMID=105
+CAPTURE_UTC=2026-11-18T03:08:16.869054+00:00
+EXIT_CODE=0
+
+**********************
+Windows PowerShell transcript start
+Start time: 20261118140747
+Username: GMAKMA\uSeller1
+RunAs User: GMAKMA\uSeller1
+Configuration Name: 
+Machine: AD-CLIENT (Microsoft Windows NT 10.0.19045.0)
+Host Application: C:\Windows\system32\WindowsPowerShell\v1.0\PowerShell.exe -NoProfile -NoExit -ExecutionPolicy Bypass -File C:/Lab3/final-user.ps1
+Process ID: 4132
+PSVersion: 5.1.19041.2673
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.19041.2673
+BuildVersion: 10.0.19041.2673
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+
+USER INFORMATION
+----------------
+
+User Name       SID
+=============== =============================================
+gmakma\useller1 S-1-5-21-3793483027-3712407111-974862227-1106
+COMPUTER=AD-CLIENT LOGONSERVER=\\AD-SRV-2
+
+
+Name               : GMAKMA\uSeller1
+AuthenticationType : Kerberos
+IsAuthenticated    : True
+
+
+
+
+Current LogonId is 0:0xb0e6cb
+A ticket to cifs/ad-srv.GMAKMA.local has been retrieved successfully.
+
+Cached Tickets: (2)
+
+#0>     Client: uSeller1 @ GMAKMA.LOCAL
+        Server: krbtgt/GMAKMA.LOCAL @ GMAKMA.LOCAL
+        KerbTicket Encryption Type: AES-256-CTS-HMAC-SHA1-96
+        Ticket Flags 0x40e10000 -> forwardable renewable initial pre_authent name_canonicalize
+        Start Time: 11/18/2026 14:07:48 (local)
+        End Time:   11/19/2026 0:07:48 (local)
+        Renew Time: 11/25/2026 14:07:48 (local)
+        Session Key Type: AES-256-CTS-HMAC-SHA1-96
+        Cache Flags: 0x1 -> PRIMARY
+        Kdc Called: AD-SRV-2.GMAKMA.local
+
+#1>     Client: uSeller1 @ GMAKMA.LOCAL
+        Server: cifs/ad-srv.GMAKMA.local @ GMAKMA.LOCAL
+        KerbTicket Encryption Type: AES-256-CTS-HMAC-SHA1-96
+        Ticket Flags 0x40a10000 -> forwardable renewable pre_authent name_canonicalize
+        Start Time: 11/18/2026 14:07:48 (local)
+        End Time:   11/19/2026 0:07:48 (local)
+        Renew Time: 11/25/2026 14:07:48 (local)
+        Session Key Type: AES-256-CTS-HMAC-SHA1-96
+        Cache Flags: 0
+        Kdc Called: AD-SRV-2.GMAKMA.local
+
+Current LogonId is 0:0xb0e6cb
+
+Cached Tickets: (2)
+
+#0>     Client: uSeller1 @ GMAKMA.LOCAL
+        Server: krbtgt/GMAKMA.LOCAL @ GMAKMA.LOCAL
+        KerbTicket Encryption Type: AES-256-CTS-HMAC-SHA1-96
+        Ticket Flags 0x40e10000 -> forwardable renewable initial pre_authent name_canonicalize
+        Start Time: 11/18/2026 14:07:48 (local)
+        End Time:   11/19/2026 0:07:48 (local)
+        Renew Time: 11/25/2026 14:07:48 (local)
+        Session Key Type: AES-256-CTS-HMAC-SHA1-96
+        Cache Flags: 0x1 -> PRIMARY
+        Kdc Called: AD-SRV-2.GMAKMA.local
+
+#1>     Client: uSeller1 @ GMAKMA.LOCAL
+        Server: cifs/ad-srv.GMAKMA.local @ GMAKMA.LOCAL
+        KerbTicket Encryption Type: AES-256-CTS-HMAC-SHA1-96
+        Ticket Flags 0x40a10000 -> forwardable renewable pre_authent name_canonicalize
+        Start Time: 11/18/2026 14:07:48 (local)
+        End Time:   11/19/2026 0:07:48 (local)
+        Renew Time: 11/25/2026 14:07:48 (local)
+        Session Key Type: AES-256-CTS-HMAC-SHA1-96
+        Cache Flags: 0
+        Kdc Called: AD-SRV-2.GMAKMA.local
+home GMAKMA\uSeller1
+reboot/relogon verified
+LAB3 SMB write/read OK
+PROFILE=C:\Users\uSeller1
+
+Name
+----
+DropSource
+roaming-proof.txt
+
+
+
+Microsoft (R) Windows (R) Operating System Group Policy Result tool v2.0
+¸ Microsoft Corporation. All rights reserved.
+
+Created on ?18/?11/?2026 at 14:07:49
+
+
+RSOP data for GMAKMA\uSeller1 on AD-CLIENT : Logging Mode
+----------------------------------------------------------
+
+OS Configuration:            Member Workstation
+OS Version:                  10.0.19045
+Site Name:                   N/A
+Roaming Profile:             \\ad-srv\uSeller1$\_profile.V6
+Local Profile:               C:\Users\uSeller1
+Connected over a slow link?: No
+
+
+USER SETTINGS
+--------------
+    CN=uSeller1,OU=ouSellers,DC=GMAKMA,DC=local
+    Last time Group Policy was applied: 18/11/2026 at 13:57:47
+    Group Policy was applied from:      AD-SRV-2.GMAKMA.local
+    Group Policy slow link threshold:   500 kbps
+    Domain Name:                        GMAKMA
+    Domain Type:                        Windows 2008 or later
+
+    Applied Group Policy Objects
+    -----------------------------
+        Lab2-Sellers
+
+    The following GPOs were not applied because they were filtered out
+    -------------------------------------------------------------------
+        Local Group Policy
+            Filtering:  Not Applied (Empty)
+
+    The user is a part of the following security groups
+    ---------------------------------------------------
+        Domain Users
+        Everyone
+        BUILTIN\Users
+        NT AUTHORITY\INTERACTIVE
+        CONSOLE LOGON
+        NT AUTHORITY\Authenticated Users
+        This Organization
+        LOCAL
+        gSellers
+        Authentication authority asserted identity
+        Medium Mandatory Level
+**********************
+Windows PowerShell transcript end
+End time: 20261118140749
+**********************
+True
+True
+
+Windows IP Configuration
+
+
+Ethernet adapter Ethernet:
+
+   Connection-specific DNS Suffix  . : GMAKMA.local
+   Link-local IPv6 Address . . . . . : fe80::bbb:f6ed:3bd0:fbc7%5
+   IPv4 Address. . . . . . . . . . . : 10.0.0.100
+   Subnet Mask . . . . . . . . . . . : 255.0.0.0
+   Default Gateway . . . . . . . . . : 10.0.0.1

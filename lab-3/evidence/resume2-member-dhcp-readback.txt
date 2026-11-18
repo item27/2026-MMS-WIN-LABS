@@ -1,0 +1,38 @@
+VMID=104
+CAPTURE_UTC=2026-11-18T02:55:32.140052+00:00
+EXIT_CODE=0
+
+
+Name               InstallState
+----               ------------
+AD-Domain-Services    Available
+DHCP                  Installed
+FS-FileServer         Installed
+
+
+
+{
+    "ProductType":  "ServerNT"
+}
+Flags: 800000b0 HAS_IP  HAS_TIMESERV  Authentication Service: Kerberos
+Trusted DC Name \\AD-SRV-2.GMAKMA.local 
+Trusted DC Connection Status Status = 0 0x0 NERR_Success
+Trust Verification Status = 0 0x0 NERR_Success
+The command completed successfully
+
+OptionId Name            Value         
+-------- ----            -----         
+       6 DNS Servers     {10.0.0.2}    
+      51 Lease           {691200}      
+       3 Router          {10.0.0.1}    
+      15 DNS Domain Name {GMAKMA.local}
+
+
+
+
+IPAddress            DnsName                                                                         
+---------            -------                                                                         
+10.0.0.1             ad-srv.gmakma.local                                                             
+
+
+

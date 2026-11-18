@@ -1,0 +1,148 @@
+VMID=104
+CAPTURE_UTC=2026-11-18T01:53:26.104592+00:00
+EXIT_CODE=0
+
+
+Directory Server Diagnosis
+
+Performing initial setup:
+   Trying to find home server...
+   Home Server = ad-srv
+   * Identified AD Forest. 
+   Done gathering initial info.
+
+Doing initial required tests
+   
+   Testing server: Default-First-Site-Name\AD-SRV
+      Starting test: Connectivity
+         ......................... AD-SRV passed test Connectivity
+
+Doing primary tests
+   
+   Testing server: Default-First-Site-Name\AD-SRV
+      Starting test: Advertising
+         ......................... AD-SRV passed test Advertising
+      Starting test: SysVolCheck
+         ......................... AD-SRV passed test SysVolCheck
+      Starting test: NetLogons
+         ......................... AD-SRV passed test NetLogons
+      Starting test: Replications
+         ......................... AD-SRV passed test Replications
+      Starting test: Services
+         ......................... AD-SRV passed test Services
+   
+   
+   Running partition tests on : ForestDnsZones
+   
+   Running partition tests on : DomainDnsZones
+   
+   Running partition tests on : Schema
+   
+   Running partition tests on : Configuration
+   
+   Running partition tests on : GMAKMA
+   
+   Running enterprise tests on : GMAKMA.local
+Replication Summary Start Time: 2026-11-18 04:53:12
+
+Beginning data collection for replication summary, this may take awhile:
+  .....
+
+
+Source DSA          largest delta    fails/total %%   error
+ AD-SRV                    14m:51s    0 /   5    0  
+ AD-SRV-2                  06m:14s    0 /   5    0  
+
+
+Destination DSA     largest delta    fails/total %%   error
+ AD-SRV                    06m:14s    0 /   5    0  
+ AD-SRV-2                  14m:52s    0 /   5    0  
+
+
+
+Status   Name               DisplayName                           
+------   ----               -----------                           
+Running  ADWS               Active Directory Web Services         
+Running  DHCPServer         DHCP Server                           
+Running  DNS                DNS Server                            
+Running  Netlogon           Netlogon                              
+Running  NTDS               Active Directory Domain Services      
+
+
+
+
+IPAddress            DnsName                                                                         
+---------            -------                                                                         
+10.0.0.1             ad-srv.gmakma.local                                                             
+
+
+
+
+
+ScopeId          : 10.0.0.0
+Name             : Lab2Scope
+Description      : 
+SuperscopeName   : 
+SubnetMask       : 255.0.0.0
+StartRange       : 10.0.0.100
+EndRange         : 10.0.0.110
+LeaseDuration    : 8.00:00:00
+NapProfile       : 
+NapEnable        : False
+Delay(ms)        : 0
+State            : Active
+Type             : Dhcp
+MaxBootpClients  : 4294967295
+ActivatePolicies : True
+
+
+
+
+
+
+OptionId   Name            Type       Value                VendorClass     UserClass       PolicyName     
+--------   ----            ----       -----                -----------     ---------       ----------     
+51         Lease           DWord      {691200}                                                            
+3          Router          IPv4Addres {10.0.0.1}                                                          
+                           s                                                                              
+15         DNS Domain Name String     {GMAKMA.local}                                                      
+6          DNS Servers     IPv4Addres {10.0.0.1}                                                          
+                           s                                                                              
+
+
+
+
+Name            Path                                         
+----            ----                                         
+ADMIN$          C:\WINDOWS                                   
+AllUsersCom     C:\AllUsers                                  
+B$              B:\                                          
+bebebe$         C:\UsersHome\bebebe                          
+C$              C:\                                          
+IPC$                                                         
+LabPackages$    C:\Lab2Packages                              
+LabTools$       C:\Lab2                                      
+lalala$         C:\UsersHome\lalala                          
+NETLOGON        C:\WINDOWS\SYSVOL\sysvol\GMAKMA.local\SCRIPTS
+Profiles$       C:\Profiles                                  
+ProfilesSimple$ C:\ProfilesSimple                            
+SYSVOL          C:\WINDOWS\SYSVOL\sysvol                     
+uCsvManager1$   C:\UsersHome\uCsvManager1                    
+uCsvManager2$   C:\UsersHome\uCsvManager2                    
+uCsvSeller1$    C:\UsersHome\uCsvSeller1                     
+uCsvSeller2$    C:\UsersHome\uCsvSeller2                     
+uDelete1$       C:\UsersHome\uDelete1                        
+uDelete2$       C:\UsersHome\uDelete2                        
+uDelete3$       C:\UsersHome\uDelete3                        
+uDelete4$       C:\UsersHome\uDelete4                        
+uDelete5$       C:\UsersHome\uDelete5                        
+uManager1$      C:\UsersHome\uManager1                       
+uSeller1$       C:\UsersHome\uSeller1                        
+uSimpleDelete1$ C:\UsersHome\uSimpleDelete1                  
+uSimpleDelete2$ C:\UsersHome\uSimpleDelete2                  
+uSimpleDelete3$ C:\UsersHome\uSimpleDelete3                  
+uSimpleDelete4$ C:\UsersHome\uSimpleDelete4                  
+uSimpleDelete5$ C:\UsersHome\uSimpleDelete5                  
+
+
+

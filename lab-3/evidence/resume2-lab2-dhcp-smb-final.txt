@@ -1,0 +1,20 @@
+VMID=104
+CAPTURE_UTC=2026-11-18T03:06:00.876412+00:00
+EXIT_CODE=0
+
+
+ClientComputerName ClientUserName    NumOpens
+------------------ --------------    --------
+10.0.0.100         GMAKMA\uSeller1          1
+10.0.0.100         GMAKMA\AD-CLIENT$        0
+
+
+
+
+IPAddress  HostName                     AddressState LeaseExpiryTime      
+---------  --------                     ------------ ---------------      
+10.0.0.100 ad-client.GMAKMA.local       Active       11/26/2026 5:54:35 AM
+10.0.0.101 WIN-K620LLPNMA7.GMAKMA.local Active       11/25/2026 8:38:06 PM
+
+
+

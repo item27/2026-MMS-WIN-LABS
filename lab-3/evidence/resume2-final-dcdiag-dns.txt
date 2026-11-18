@@ -1,0 +1,577 @@
+VMID=109
+CAPTURE_UTC=2026-11-18T02:50:54.956743+00:00
+EXIT_CODE=0
+
+
+Directory Server Diagnosis
+
+Performing initial setup:
+   Trying to find home server...
+   * Verifying that the local machine AD-SRV-2, is a Directory Server. 
+   Home Server = AD-SRV-2
+   * Connecting to directory service on server AD-SRV-2.
+   * Identified AD Forest. 
+   Collecting AD specific global data 
+   * Collecting site info.
+   Calling ldap_search_init_page(hld,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local,LDAP_SCOPE_SUBTREE,(objectCategory=ntDSSiteSettings),.......
+   The previous call succeeded 
+   Iterating through the sites 
+   Looking at base site object: CN=NTDS Site Settings,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+   Getting ISTG and options for the site
+   * Identifying all servers.
+   Calling ldap_search_init_page(hld,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local,LDAP_SCOPE_SUBTREE,(objectClass=ntDSDsa),.......
+   The previous call succeeded....
+   The previous call succeeded
+   Iterating through the list of servers 
+   Getting information for the server CN=NTDS Settings,CN=AD-SRV-2,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local 
+   objectGuid obtained
+   InvocationID obtained
+   dnsHostname obtained
+   site info obtained
+   All the info for the server collected
+   * Identifying all NC cross-refs.
+   * Found 1 DC(s). Testing 1 of them.
+   Done gathering initial info.
+
+Doing initial required tests
+   
+   Testing server: Default-First-Site-Name\AD-SRV-2
+      Starting test: Connectivity
+         * Active Directory LDAP Services Check
+         Determining IP4 connectivity 
+         * Active Directory RPC Services Check
+         ......................... AD-SRV-2 passed test Connectivity
+
+Doing primary tests
+   
+   Testing server: Default-First-Site-Name\AD-SRV-2
+      Starting test: Advertising
+         The DC AD-SRV-2 is advertising itself as a DC and having a DS.
+         The DC AD-SRV-2 is advertising as an LDAP server
+         The DC AD-SRV-2 is advertising as having a writeable directory
+         The DC AD-SRV-2 is advertising as a Key Distribution Center
+         The DC AD-SRV-2 is advertising as a time server
+         The DS AD-SRV-2 is advertising as a GC.
+         ......................... AD-SRV-2 passed test Advertising
+      Test omitted by user request: CheckSecurityError
+      Test omitted by user request: CutoffServers
+      Starting test: FrsEvent
+         * The File Replication Service Event log test 
+         Skip the test because the server is running DFSR.
+         ......................... AD-SRV-2 passed test FrsEvent
+      Starting test: DFSREvent
+         The DFS Replication Event Log. 
+         There are warning or error events within the last 24 hours after the
+         SYSVOL has been shared.  Failing SYSVOL replication problems may cause
+         Group Policy problems. 
+         An error event occurred.  EventID: 0xC00004B2
+            Time Generated: 11/17/2026   20:48:17
+            Event String:
+            The DFS Replication service failed to contact domain controller  to access configuration information. Replication is stopped. The service will try again during the next configuration polling cycle, which will occur in 60 minutes. This event can be caused by TCP/IP connectivity, firewall, Active Directory Domain Services, or DNS issues. 
+             
+            Additional Information: 
+            Error: 1355 (The specified domain either does not exist or could not be contacted.)
+         An error event occurred.  EventID: 0xC00004B2
+            Time Generated: 11/17/2026   21:48:18
+            Event String:
+            The DFS Replication service failed to contact domain controller  to access configuration information. Replication is stopped. The service will try again during the next configuration polling cycle, which will occur in 60 minutes. This event can be caused by TCP/IP connectivity, firewall, Active Directory Domain Services, or DNS issues. 
+             
+            Additional Information: 
+            Error: 1355 (The specified domain either does not exist or could not be contacted.)
+         An error event occurred.  EventID: 0xC00004B2
+            Time Generated: 11/17/2026   22:48:18
+            Event String:
+            The DFS Replication service failed to contact domain controller  to access configuration information. Replication is stopped. The service will try again during the next configuration polling cycle, which will occur in 60 minutes. This event can be caused by TCP/IP connectivity, firewall, Active Directory Domain Services, or DNS issues. 
+             
+            Additional Information: 
+            Error: 1355 (The specified domain either does not exist or could not be contacted.)
+         An error event occurred.  EventID: 0xC00004B2
+            Time Generated: 11/17/2026   23:48:18
+            Event String:
+            The DFS Replication service failed to contact domain controller  to access configuration information. Replication is stopped. The service will try again during the next configuration polling cycle, which will occur in 60 minutes. This event can be caused by TCP/IP connectivity, firewall, Active Directory Domain Services, or DNS issues. 
+             
+            Additional Information: 
+            Error: 1355 (The specified domain either does not exist or could not be contacted.)
+         An error event occurred.  EventID: 0xC00004B2
+            Time Generated: 11/18/2026   03:48:21
+            Event String:
+            The DFS Replication service failed to contact domain controller  to access configuration information. Replication is stopped. The service will try again during the next configuration polling cycle, which will occur in 60 minutes. This event can be caused by TCP/IP connectivity, firewall, Active Directory Domain Services, or DNS issues. 
+             
+            Additional Information: 
+            Error: 1355 (The specified domain either does not exist or could not be contacted.)
+         An error event occurred.  EventID: 0xC00004B2
+            Time Generated: 11/18/2026   04:27:41
+            Event String:
+            The DFS Replication service failed to contact domain controller  to access configuration information. Replication is stopped. The service will try again during the next configuration polling cycle, which will occur in 60 minutes. This event can be caused by TCP/IP connectivity, firewall, Active Directory Domain Services, or DNS issues. 
+             
+            Additional Information: 
+            Error: 160 (One or more arguments are not correct.)
+         An error event occurred.  EventID: 0xC00004B2
+            Time Generated: 11/18/2026   04:32:42
+            Event String:
+            The DFS Replication service failed to contact domain controller  to access configuration information. Replication is stopped. The service will try again during the next configuration polling cycle, which will occur in 60 minutes. This event can be caused by TCP/IP connectivity, firewall, Active Directory Domain Services, or DNS issues. 
+             
+            Additional Information: 
+            Error: 160 (One or more arguments are not correct.)
+         A warning event occurred.  EventID: 0x80001780
+            Time Generated: 11/18/2026   04:37:42
+            Event String:
+            The DFS Replication service failed to update configuration in Active Directory Domain Services. The service will retry this operation periodically. 
+             
+            Additional Information: 
+            Object Category: msDFSR-LocalSettings 
+            Object DN: CN=DFSR-LocalSettings,CN=AD-SRV-2,OU=Domain Controllers,DC=GMAKMA,DC=local 
+            Error: 2 (The system cannot find the file specified.) 
+            Domain Controller: ad-srv.gmakma.local 
+            Polling Cycle: 60
+         A warning event occurred.  EventID: 0x80001206
+            Time Generated: 11/18/2026   04:37:43
+            Event String:
+            The DFS Replication service initialized SYSVOL at local path C:\WINDOWS\SYSVOL\domain and is waiting to perform initial replication. The replicated folder will remain in the initial synchronization state until it has replicated with its partner ad-srv.GMAKMA.local. If the server was in the process of being promoted to a domain controller, the domain controller will not advertize and function as a domain controller until this issue is resolved. This can occur if the specified partner is also in the initial synchronization state, or if sharing violations are encountered on this server or the synchronization partner. If this event occurred during the migration of SYSVOL from File Replication service (FRS) to DFS Replication, changes will not replicate out until this issue is resolved. This can cause the SYSVOL folder on this server to become out of sync with other domain controllers. 
+             
+            Additional Information: 
+            Replicated Folder Name: SYSVOL Share 
+            Replicated Folder ID: 0801B5A1-0C3E-4C84-A1B3-B11C1A114587 
+            Replication Group Name: Domain System Volume 
+            Replication Group ID: 031711EF-17B2-46FC-9C2F-815D8A74CC58 
+            Member ID: 9EA17B7C-6A0B-4E20-8F8A-A155ACC8CC23 
+            Read-Only: 0
+         A warning event occurred.  EventID: 0x80001396
+            Time Generated: 11/18/2026   04:51:59
+            Event String:
+            The DFS Replication service is stopping communication with partner AD-SRV for replication group Domain System Volume due to an error. The service will retry the connection periodically. 
+             
+            Additional Information: 
+            Error: 9036 (Paused for backup or restore) 
+            Connection ID: F9C8E5BC-EA0E-4148-AA2F-85E143A815BD 
+            Replication Group ID: 031711EF-17B2-46FC-9C2F-815D8A74CC58
+         A warning event occurred.  EventID: 0x80001396
+            Time Generated: 11/18/2026   04:57:14
+            Event String:
+            The DFS Replication service is stopping communication with partner AD-SRV for replication group Domain System Volume due to an error. The service will retry the connection periodically. 
+             
+            Additional Information: 
+            Error: 1723 (The RPC server is too busy to complete this operation.) 
+            Connection ID: F9C8E5BC-EA0E-4148-AA2F-85E143A815BD 
+            Replication Group ID: 031711EF-17B2-46FC-9C2F-815D8A74CC58
+         An error event occurred.  EventID: 0xC000138A
+            Time Generated: 11/18/2026   04:57:28
+            Event String:
+            The DFS Replication service encountered an error communicating with partner AD-SRV for replication group Domain System Volume. 
+             
+            Partner DNS address: ad-srv.GMAKMA.local 
+             
+            Optional data if available: 
+            Partner WINS Address: ad-srv 
+            Partner IP Address:  
+             
+            The service will retry the connection periodically. 
+             
+            Additional Information: 
+            Error: 1753 (There are no more endpoints available from the endpoint mapper.) 
+            Connection ID: F9C8E5BC-EA0E-4148-AA2F-85E143A815BD 
+            Replication Group ID: 031711EF-17B2-46FC-9C2F-815D8A74CC58
+         ......................... AD-SRV-2 failed test DFSREvent
+      Starting test: SysVolCheck
+         * The File Replication Service SYSVOL ready test 
+         File Replication Service's SYSVOL is ready 
+         ......................... AD-SRV-2 passed test SysVolCheck
+      Starting test: KccEvent
+         * The KCC Event log test
+         Found no KCC errors in "Directory Service" Event log in the last 15 minutes.
+         ......................... AD-SRV-2 passed test KccEvent
+      Starting test: KnowsOfRoleHolders
+         Role Schema Owner = CN=NTDS Settings,CN=AD-SRV-2,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+         Role Domain Owner = CN=NTDS Settings,CN=AD-SRV-2,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+         Role PDC Owner = CN=NTDS Settings,CN=AD-SRV-2,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+         Role Rid Owner = CN=NTDS Settings,CN=AD-SRV-2,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+         Role Infrastructure Update Owner = CN=NTDS Settings,CN=AD-SRV-2,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+         ......................... AD-SRV-2 passed test KnowsOfRoleHolders
+      Starting test: MachineAccount
+         Checking machine account for DC AD-SRV-2 on DC AD-SRV-2.
+         * SPN found :LDAP/AD-SRV-2.GMAKMA.local/GMAKMA.local
+         * SPN found :LDAP/AD-SRV-2.GMAKMA.local
+         * SPN found :LDAP/AD-SRV-2
+         * SPN found :LDAP/AD-SRV-2.GMAKMA.local/GMAKMA
+         * SPN found :LDAP/3a787877-ec05-431b-9047-d2fda475a283._msdcs.GMAKMA.local
+         * SPN found :E3514235-4B06-11D1-AB04-00C04FC2DCD2/3a787877-ec05-431b-9047-d2fda475a283/GMAKMA.local
+         * SPN found :HOST/AD-SRV-2.GMAKMA.local/GMAKMA.local
+         * SPN found :HOST/AD-SRV-2.GMAKMA.local
+         * SPN found :HOST/AD-SRV-2
+         * SPN found :HOST/AD-SRV-2.GMAKMA.local/GMAKMA
+         * SPN found :GC/AD-SRV-2.GMAKMA.local/GMAKMA.local
+         ......................... AD-SRV-2 passed test MachineAccount
+      Starting test: NCSecDesc
+         * Security Permissions check for all NC's on DC AD-SRV-2.
+         * Security Permissions Check for
+           DC=ForestDnsZones,DC=GMAKMA,DC=local
+            (NDNC,Version 3)
+         * Security Permissions Check for
+           DC=DomainDnsZones,DC=GMAKMA,DC=local
+            (NDNC,Version 3)
+         * Security Permissions Check for
+           CN=Schema,CN=Configuration,DC=GMAKMA,DC=local
+            (Schema,Version 3)
+         * Security Permissions Check for
+           CN=Configuration,DC=GMAKMA,DC=local
+            (Configuration,Version 3)
+         * Security Permissions Check for
+           DC=GMAKMA,DC=local
+            (Domain,Version 3)
+         ......................... AD-SRV-2 passed test NCSecDesc
+      Starting test: NetLogons
+         * Network Logons Privileges Check
+         Verified share \\AD-SRV-2\netlogon
+         Verified share \\AD-SRV-2\sysvol
+         ......................... AD-SRV-2 passed test NetLogons
+      Starting test: ObjectsReplicated
+         AD-SRV-2 is in domain DC=GMAKMA,DC=local
+         Checking for CN=AD-SRV-2,OU=Domain Controllers,DC=GMAKMA,DC=local in domain DC=GMAKMA,DC=local on 1 servers
+            Object is up-to-date on all servers.
+         Checking for CN=NTDS Settings,CN=AD-SRV-2,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local in domain CN=Configuration,DC=GMAKMA,DC=local on 1 servers
+            Object is up-to-date on all servers.
+         ......................... AD-SRV-2 passed test ObjectsReplicated
+      Test omitted by user request: OutboundSecureChannels
+      Starting test: Replications
+         * Replications Check
+         * Replication Latency Check
+            DC=ForestDnsZones,DC=GMAKMA,DC=local
+               Latency information for 1 entries in the vector were ignored.
+                  1 were retired Invocations.  0 were either: read-only replicas and are not verifiably latent, or dc's no longer replicating this nc.  0 had no latency information (Win2K DC).  
+            DC=DomainDnsZones,DC=GMAKMA,DC=local
+               Latency information for 1 entries in the vector were ignored.
+                  1 were retired Invocations.  0 were either: read-only replicas and are not verifiably latent, or dc's no longer replicating this nc.  0 had no latency information (Win2K DC).  
+            CN=Schema,CN=Configuration,DC=GMAKMA,DC=local
+               Latency information for 1 entries in the vector were ignored.
+                  1 were retired Invocations.  0 were either: read-only replicas and are not verifiably latent, or dc's no longer replicating this nc.  0 had no latency information (Win2K DC).  
+            CN=Configuration,DC=GMAKMA,DC=local
+               Latency information for 1 entries in the vector were ignored.
+                  1 were retired Invocations.  0 were either: read-only replicas and are not verifiably latent, or dc's no longer replicating this nc.  0 had no latency information (Win2K DC).  
+            DC=GMAKMA,DC=local
+               Latency information for 1 entries in the vector were ignored.
+                  1 were retired Invocations.  0 were either: read-only replicas and are not verifiably latent, or dc's no longer replicating this nc.  0 had no latency information (Win2K DC).  
+         ......................... AD-SRV-2 passed test Replications
+      Starting test: RidManager
+         * Available RID Pool for the Domain is 2100 to 1073741823
+         * AD-SRV-2.GMAKMA.local is the RID Master
+         * DsBind with RID Master was successful
+         * rIDAllocationPool is 1600 to 2099
+         * rIDPreviousAllocationPool is 1600 to 2099
+         * rIDNextRID: 1601
+         ......................... AD-SRV-2 passed test RidManager
+      Starting test: Services
+         * Checking Service: EventSystem
+         * Checking Service: RpcSs
+         * Checking Service: NTDS
+         * Checking Service: DnsCache
+         * Checking Service: DFSR
+         * Checking Service: IsmServ
+         * Checking Service: kdc
+         * Checking Service: SamSs
+         * Checking Service: LanmanServer
+         * Checking Service: LanmanWorkstation
+         * Checking Service: w32time
+         * Checking Service: NETLOGON
+         ......................... AD-SRV-2 passed test Services
+      Starting test: SystemLog
+         * The System Event log test
+         A warning event occurred.  EventID: 0x0000000C
+            Time Generated: 11/18/2026   04:53:43
+            Event String:
+            Time Provider NtpClient: This machine is configured to use the domain hierarchy to determine its time source, but it is the AD PDC emulator for the domain at the root of the forest, so there is no machine above it in the domain hierarchy to use as a time source. It is recommended that you either configure a reliable time service in the root domain, or manually configure the AD PDC to synchronize with an external time source. Otherwise, this machine will function as the authoritative time source in the domain hierarchy. If an external time source is not configured or used for this computer, you may choose to disable the NtpClient.
+         Found no errors in "System" Event log in the last 60 minutes.
+         ......................... AD-SRV-2 passed test SystemLog
+      Test omitted by user request: Topology
+      Test omitted by user request: VerifyEnterpriseReferences
+      Starting test: VerifyReferences
+         The system object reference (serverReference)
+         CN=AD-SRV-2,OU=Domain Controllers,DC=GMAKMA,DC=local and backlink on
+         CN=AD-SRV-2,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+         are correct. 
+         The system object reference (serverReferenceBL)
+         CN=AD-SRV-2,CN=Topology,CN=Domain System Volume,CN=DFSR-GlobalSettings,CN=System,DC=GMAKMA,DC=local
+         and backlink on
+         CN=NTDS Settings,CN=AD-SRV-2,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+         are correct. 
+         The system object reference (msDFSR-ComputerReferenceBL)
+         CN=AD-SRV-2,CN=Topology,CN=Domain System Volume,CN=DFSR-GlobalSettings,CN=System,DC=GMAKMA,DC=local
+         and backlink on CN=AD-SRV-2,OU=Domain Controllers,DC=GMAKMA,DC=local
+         are correct. 
+         ......................... AD-SRV-2 passed test VerifyReferences
+      Test omitted by user request: VerifyReplicas
+   
+      Test omitted by user request: DNS
+      Test omitted by user request: DNS
+   
+   Running partition tests on : ForestDnsZones
+      Starting test: CheckSDRefDom
+         ......................... ForestDnsZones passed test CheckSDRefDom
+      Starting test: CrossRefValidation
+         ......................... ForestDnsZones passed test
+         CrossRefValidation
+   
+   Running partition tests on : DomainDnsZones
+      Starting test: CheckSDRefDom
+         ......................... DomainDnsZones passed test CheckSDRefDom
+      Starting test: CrossRefValidation
+         ......................... DomainDnsZones passed test
+         CrossRefValidation
+   
+   Running partition tests on : Schema
+      Starting test: CheckSDRefDom
+         ......................... Schema passed test CheckSDRefDom
+      Starting test: CrossRefValidation
+         ......................... Schema passed test CrossRefValidation
+   
+   Running partition tests on : Configuration
+      Starting test: CheckSDRefDom
+         ......................... Configuration passed test CheckSDRefDom
+      Starting test: CrossRefValidation
+         ......................... Configuration passed test CrossRefValidation
+   
+   Running partition tests on : GMAKMA
+      Starting test: CheckSDRefDom
+         ......................... GMAKMA passed test CheckSDRefDom
+      Starting test: CrossRefValidation
+         ......................... GMAKMA passed test CrossRefValidation
+   
+   Running enterprise tests on : GMAKMA.local
+      Test omitted by user request: DNS
+      Test omitted by user request: DNS
+      Starting test: LocatorCheck
+         GC Name: \\AD-SRV-2.GMAKMA.local
+         Locator Flags: 0xe007f3fd
+         PDC Name: \\AD-SRV-2.GMAKMA.local
+         Locator Flags: 0xe007f3fd
+         Time Server Name: \\AD-SRV-2.GMAKMA.local
+         Locator Flags: 0xe007f3fd
+         Preferred Time Server Name: \\AD-SRV-2.GMAKMA.local
+         Locator Flags: 0xe007f3fd
+         KDC Name: \\AD-SRV-2.GMAKMA.local
+         Locator Flags: 0xe007f3fd
+         ......................... GMAKMA.local passed test LocatorCheck
+      Starting test: Intersite
+         Skipping site Default-First-Site-Name, this site is outside the scope
+         provided by the command line arguments provided. 
+         ......................... GMAKMA.local passed test Intersite
+
+Directory Server Diagnosis
+
+Performing initial setup:
+   Trying to find home server...
+   * Verifying that the local machine AD-SRV-2, is a Directory Server. 
+   Home Server = AD-SRV-2
+   * Connecting to directory service on server AD-SRV-2.
+   * Identified AD Forest. 
+   Collecting AD specific global data 
+   * Collecting site info.
+   Calling ldap_search_init_page(hld,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local,LDAP_SCOPE_SUBTREE,(objectCategory=ntDSSiteSettings),.......
+   The previous call succeeded 
+   Iterating through the sites 
+   Looking at base site object: CN=NTDS Site Settings,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local
+   Getting ISTG and options for the site
+   * Identifying all servers.
+   Calling ldap_search_init_page(hld,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local,LDAP_SCOPE_SUBTREE,(objectClass=ntDSDsa),.......
+   The previous call succeeded....
+   The previous call succeeded
+   Iterating through the list of servers 
+   Getting information for the server CN=NTDS Settings,CN=AD-SRV-2,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=GMAKMA,DC=local 
+   objectGuid obtained
+   InvocationID obtained
+   dnsHostname obtained
+   site info obtained
+   All the info for the server collected
+   * Identifying all NC cross-refs.
+   * Found 1 DC(s). Testing 1 of them.
+   Done gathering initial info.
+
+Doing initial required tests
+   
+   Testing server: Default-First-Site-Name\AD-SRV-2
+      Starting test: Connectivity
+         * Active Directory LDAP Services Check
+         Determining IP4 connectivity 
+         * Active Directory RPC Services Check
+         ......................... AD-SRV-2 passed test Connectivity
+
+Doing primary tests
+   
+   Testing server: Default-First-Site-Name\AD-SRV-2
+      Test omitted by user request: Advertising
+      Test omitted by user request: CheckSecurityError
+      Test omitted by user request: CutoffServers
+      Test omitted by user request: FrsEvent
+      Test omitted by user request: DFSREvent
+      Test omitted by user request: SysVolCheck
+      Test omitted by user request: KccEvent
+      Test omitted by user request: KnowsOfRoleHolders
+      Test omitted by user request: MachineAccount
+      Test omitted by user request: NCSecDesc
+      Test omitted by user request: NetLogons
+      Test omitted by user request: ObjectsReplicated
+      Test omitted by user request: OutboundSecureChannels
+      Test omitted by user request: Replications
+      Test omitted by user request: RidManager
+      Test omitted by user request: Services
+      Test omitted by user request: SystemLog
+      Test omitted by user request: Topology
+      Test omitted by user request: VerifyEnterpriseReferences
+      Test omitted by user request: VerifyReferences
+      Test omitted by user request: VerifyReplicas
+   
+      Starting test: DNS
+         
+         DNS Tests are running and not hung. Please wait a few minutes...
+         See DNS test in enterprise tests section for results
+         ......................... AD-SRV-2 passed test DNS
+   
+   Running partition tests on : ForestDnsZones
+      Test omitted by user request: CheckSDRefDom
+      Test omitted by user request: CrossRefValidation
+   
+   Running partition tests on : DomainDnsZones
+      Test omitted by user request: CheckSDRefDom
+      Test omitted by user request: CrossRefValidation
+   
+   Running partition tests on : Schema
+      Test omitted by user request: CheckSDRefDom
+      Test omitted by user request: CrossRefValidation
+   
+   Running partition tests on : Configuration
+      Test omitted by user request: CheckSDRefDom
+      Test omitted by user request: CrossRefValidation
+   
+   Running partition tests on : GMAKMA
+      Test omitted by user request: CheckSDRefDom
+      Test omitted by user request: CrossRefValidation
+   
+   Running enterprise tests on : GMAKMA.local
+      Starting test: DNS
+         Test results for domain controllers:
+            
+            DC: AD-SRV-2.GMAKMA.local
+            Domain: GMAKMA.local
+            
+                  
+               TEST: Authentication (Auth)
+                  Authentication test: Successfully completed
+                  
+               TEST: Basic (Basc)
+                  The OS
+                  Microsoft Windows Server 2025 Standard Evaluation (Service Pack level: 0.0)
+                  is supported.
+                  NETLOGON service is running
+                  kdc service is running
+                  DNSCACHE service is running
+                  DNS service is running
+                  DC is a DNS server
+                  Network adapters information:
+                  Adapter [00000001] Intel(R) PRO/1000 MT Network Connection:
+                     MAC address is BC:24:11:1F:92:11
+                     IP Address is static 
+                     IP address: 10.0.0.2, fe80::a6ce:c9cc:3302:d269
+                     DNS servers:
+                        10.0.0.2 (AD-SRV-2) [Valid]
+                  The A host record(s) for this DC was found
+                  The SOA record for the Active Directory zone was found
+                  The Active Directory zone on this DC/DNS server was found primary
+                  Root zone on this DC/DNS server was not found
+                  
+               TEST: Forwarders/Root hints (Forw)
+                  Recursion is enabled
+                  Forwarders Information: 
+                     10.0.0.1 (ad-srv.gmakma.local.) [Valid] 
+                  
+               TEST: Delegations (Del)
+                  Delegation information for the zone: GMAKMA.local.
+                     Delegated domain name: _msdcs.GMAKMA.local.
+                        Warning: Delegation of DNS server ad-srv.gmakma.local. is broken on IP:10.0.0.1
+                        Error: DNS server: ad-srv.gmakma.local. IP:10.0.0.1
+                        [Broken delegation]
+                  
+               TEST: Dynamic update (Dyn)
+                  Warning: Failed to add the test record dcdiag-test-record in zone GMAKMA.local
+                  [Error details: 9502 (Type: Win32 - Description: Bad DNS packet.)]
+                  Test record dcdiag-test-record deleted successfully in zone GMAKMA.local
+                  
+               TEST: Records registration (RReg)
+                  Network Adapter
+                  [00000001] Intel(R) PRO/1000 MT Network Connection:
+                     Matching CNAME record found at DNS server 10.0.0.2:
+                     3a787877-ec05-431b-9047-d2fda475a283._msdcs.GMAKMA.local
+
+                     Matching A record found at DNS server 10.0.0.2:
+                     AD-SRV-2.GMAKMA.local
+
+                     Matching  SRV record found at DNS server 10.0.0.2:
+                     _ldap._tcp.GMAKMA.local
+
+                     Matching  SRV record found at DNS server 10.0.0.2:
+                     _ldap._tcp.a1f2fc06-b2c4-4e3b-807b-2891e54647de.domains._msdcs.GMAKMA.local
+
+                     Matching  SRV record found at DNS server 10.0.0.2:
+                     _kerberos._tcp.dc._msdcs.GMAKMA.local
+
+                     Matching  SRV record found at DNS server 10.0.0.2:
+                     _ldap._tcp.dc._msdcs.GMAKMA.local
+
+                     Matching  SRV record found at DNS server 10.0.0.2:
+                     _kerberos._tcp.GMAKMA.local
+
+                     Matching  SRV record found at DNS server 10.0.0.2:
+                     _kerberos._udp.GMAKMA.local
+
+                     Matching  SRV record found at DNS server 10.0.0.2:
+                     _kpasswd._tcp.GMAKMA.local
+
+                     Matching  SRV record found at DNS server 10.0.0.2:
+                     _ldap._tcp.Default-First-Site-Name._sites.GMAKMA.local
+
+                     Matching  SRV record found at DNS server 10.0.0.2:
+                     _kerberos._tcp.Default-First-Site-Name._sites.dc._msdcs.GMAKMA.local
+
+                     Matching  SRV record found at DNS server 10.0.0.2:
+                     _ldap._tcp.Default-First-Site-Name._sites.dc._msdcs.GMAKMA.local
+
+                     Matching  SRV record found at DNS server 10.0.0.2:
+                     _kerberos._tcp.Default-First-Site-Name._sites.GMAKMA.local
+
+                     Matching  SRV record found at DNS server 10.0.0.2:
+                     _ldap._tcp.gc._msdcs.GMAKMA.local
+
+                     Matching A record found at DNS server 10.0.0.2:
+                     gc._msdcs.GMAKMA.local
+
+                     Matching  SRV record found at DNS server 10.0.0.2:
+                     _gc._tcp.Default-First-Site-Name._sites.GMAKMA.local
+
+                     Matching  SRV record found at DNS server 10.0.0.2:
+                     _ldap._tcp.Default-First-Site-Name._sites.gc._msdcs.GMAKMA.local
+
+                     Matching  SRV record found at DNS server 10.0.0.2:
+                     _ldap._tcp.pdc._msdcs.GMAKMA.local
+
+         
+         Summary of test results for DNS servers used by the above domain
+         controllers:
+         
+            DNS server: 10.0.0.1 (ad-srv.gmakma.local.)
+               1 test failure on this DNS server
+               DNS delegation for the domain _msdcs.GMAKMA.local. is broken on IP 10.0.0.1
+
+               [Error details: 1460 (Type: Win32 - Description: This operation returned because the timeout period expired.)]
+               
+            DNS server: 10.0.0.2 (AD-SRV-2)
+               All tests passed on this DNS server
+               Name resolution is functional._ldap._tcp SRV record for the forest root domain is registered 
+               
+         Summary of DNS test results:
+         
+                                            Auth Basc Forw Del  Dyn  RReg Ext
+            _________________________________________________________________
+            Domain: GMAKMA.local
+               AD-SRV-2                     PASS PASS PASS FAIL WARN PASS n/a  
+         
+         ......................... GMAKMA.local failed test DNS
+      Test omitted by user request: LocatorCheck
+      Test omitted by user request: Intersite

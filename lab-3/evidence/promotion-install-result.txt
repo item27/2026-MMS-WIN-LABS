@@ -1,0 +1,15 @@
+VMID=109
+CAPTURE_UTC=2026-11-18T01:25:42.402281+00:00
+EXIT_CODE=0
+
+
+
+Message        : You must restart this computer to complete the operation.
+                 
+Context        : DCPromo.General.4
+RebootRequired : True
+Status         : Success
+
+
+
+
