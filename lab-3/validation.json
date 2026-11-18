@@ -1,25 +1,61 @@
 {
   "report": {
     "pages": 17,
-    "text_characters": 26794,
-    "links": 45,
+    "text_characters": 25141,
+    "links": 27,
+    "external_links": [],
     "images": 5,
+    "image_sizes": [
+      {
+        "page": 7,
+        "width_mm": 120.0,
+        "height_mm": 90.0
+      },
+      {
+        "page": 7,
+        "width_mm": 120.0,
+        "height_mm": 90.0
+      },
+      {
+        "page": 8,
+        "width_mm": 120.0,
+        "height_mm": 90.0
+      },
+      {
+        "page": 8,
+        "width_mm": 120.0,
+        "height_mm": 90.0
+      },
+      {
+        "page": 12,
+        "width_mm": 120.0,
+        "height_mm": 90.0
+      }
+    ],
     "captions": 5,
     "off_page_words": [],
     "unicode_dashes": [],
-    "empty_pages": []
+    "empty_pages": [],
+    "sha256": "0ab9292a599ebec5f78053f28ca93f35618b90ee0fc766d5f02833a7450d788c",
+    "cover_text_sha256": "eb0e1d68c44b927412978d73b99403858e6b3209e7e2969cf8354fff0677d52a"
   },
   "guide": {
-    "pages": 4,
-    "text_characters": 6605,
+    "pages": 6,
+    "text_characters": 8073,
     "links": 0,
+    "external_links": [],
     "images": 0,
+    "image_sizes": [],
     "captions": 0,
     "off_page_words": [],
     "unicode_dashes": [],
-    "empty_pages": []
+    "empty_pages": [],
+    "sha256": "fc1e3c4ce2d65e354f328b9166a1a0961331b277159a82b82fd4f4842bc345c6",
+    "cover_text_sha256": "eb0e1d68c44b927412978d73b99403858e6b3209e7e2969cf8354fff0677d52a"
   },
   "markdown_issues": [],
-  "source_count": 25,
-  "all_sources_http_200": true
+  "unchanged_evidence_files": 32,
+  "code_blocks_unchanged": true,
+  "control_answers": 8,
+  "bibliography_removed": true
 }
