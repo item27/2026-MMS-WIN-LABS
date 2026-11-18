@@ -1,0 +1,6 @@
+{
+    "Name":  "AD-SRV",
+    "Domain":  "WORKGROUP",
+    "PartOfDomain":  false,
+    "DomainRole":  2
+}

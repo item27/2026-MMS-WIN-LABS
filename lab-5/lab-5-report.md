@@ -7,7 +7,7 @@ p code, li code, td code { font: inherit; background: none; padding: 0; border: 
 
 ## Работа с томами хранения данных в Windows Server
 
-Черновик по выполненным шагам. На первом сервере установлены Windows, гостевые инструменты и роль AD DS. Домен ещё не создан, второй сервер заканчивает установку Windows. Учебные диски пока не подключены
+Черновик по выполненным шагам. На первом сервере создан домен `GMAKMA.local`. На втором установлена Windows и запущен установщик гостевых инструментов. Присоединение второго сервера, проверка связи и работа с учебными дисками пока не выполнены
 
 ### Цель работы
 
@@ -111,3 +111,27 @@ netsh interface ipv4 set dnsservers name=Ethernet static 10.0.0.1 primary valida
 ```
 
 Проверили настройки через `Get-NetIPConfiguration`: адрес `10.0.0.1`, длина префикса `8`, DNS `10.0.0.1`, шлюз отсутствует. Полный результат сохранён в `evidence/commands/first-static-network.json`
+
+
+### 1.7. Создание домена
+
+На первом сервере запустили создание нового леса с установкой DNS:
+
+```powershell
+Install-ADDSForest -DomainName GMAKMA.local -DomainNetbiosName GMAKMA -InstallDns
+```
+
+После ввода и подтверждения пароля DSRM установка прошла предварительные проверки и перезагрузила Windows. На экране входа появилась доменная учётная запись `GMAKMA\Administrator`
+
+![Рисунок 6: Доменная учётная запись на первом сервере после перезагрузки](screenshots/007-first-domain-signin.png)
+
+Рисунок 6: Доменная учётная запись на первом сервере после перезагрузки
+
+Запрос `Win32_ComputerSystem` вернул `Domain=GMAKMA.local`, `PartOfDomain=TRUE` и `DomainRole=5`. Проверили службу AD DS и обнаружение контроллера домена:
+
+```bat
+sc query NTDS
+nltest /dsgetdc:GMAKMA.local /force
+```
+
+Служба `NTDS` находится в состоянии `RUNNING`. Утилита `nltest` обнаружила `ad-srv.GMAKMA.local` по адресу `10.0.0.1`, вернула имя леса `GMAKMA.local` и завершилась успешно. Вывод сохранён в `evidence/commands/first-ntds-service.txt` и `first-domain-discovery.txt`. Проверка связи со вторым сервером пока не выполнена
