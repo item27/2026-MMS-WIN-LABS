@@ -3,3 +3,11 @@
 Thumbs.db
 *.swp
 *~
+
+# Local virtual machines and installation media
+*.utm/
+*.iso
+*.qcow2
+*.vhd
+*.vhdx
+*.vmem

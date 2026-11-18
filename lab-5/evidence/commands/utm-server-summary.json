@@ -1,0 +1,13 @@
+{
+  "name": "lab5-ad-srv",
+  "uuid": "41547CD4-49CB-45CF-B340-3A015563A0BD",
+  "architecture": "x86_64",
+  "memory_mib": 3072,
+  "cpu_count": 1,
+  "target": "q35",
+  "system_disk_gib": 64,
+  "network_mode": "Shared",
+  "guest_os_installed": false,
+  "domain_configured": false,
+  "data_disks_attached": false
+}
