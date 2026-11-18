@@ -3,8 +3,13 @@
 [CmdletBinding()]
 param(
   [Parameter(Mandatory=$true)][string]$ConfigPath,
-  [switch]$Apply
+  [switch]$Apply,
+  [switch]$RepairFailover
 )
+if ($RepairFailover) {
+  & "$PSScriptRoot/lab4-repair-failover.ps1" -ConfigPath $ConfigPath -Apply:$Apply
+  return
+}
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $c = Get-Content -LiteralPath $ConfigPath -Raw | ConvertFrom-Json
