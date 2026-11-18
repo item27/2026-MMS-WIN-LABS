@@ -1,0 +1,16 @@
+[
+  {
+    "name": "lab5-ad-srv",
+    "uuid": "41547CD4-49CB-45CF-B340-3A015563A0BD",
+    "cpu_count": 2,
+    "force_multicore": true,
+    "memory_mib": 3072
+  },
+  {
+    "name": "lab5-ad-srv-2",
+    "uuid": "16C86C38-CEDF-4F96-8D10-CEA6E50E0E75",
+    "cpu_count": 2,
+    "force_multicore": true,
+    "memory_mib": 3072
+  }
+]

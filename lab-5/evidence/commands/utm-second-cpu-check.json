@@ -1,0 +1,10 @@
+{
+  "vm": "lab5-ad-srv-2",
+  "uuid": "16C86C38-CEDF-4F96-8D10-CEA6E50E0E75",
+  "cpu_count_from_utm_api": 2,
+  "cpu_count_from_plist": 2,
+  "force_multicore": true,
+  "state_when_changed": "stopped",
+  "shutdown_command": "wpeutil shutdown",
+  "first_vm_change_pending": true
+}

@@ -8,7 +8,7 @@ p code, li code, td code { font: inherit; background: none; padding: 0; border: 
 
 ## Часть 1. Подготовительная.
 
-Устанавливаем Windows Server 2022 Standard Evaluation с Desktop Experience в UTM. Используем две отдельные машины, каждой выделяем 3072 МиБ RAM, одно ядро CPU и системный диск 64 ГиБ. Для образа x64 на Mac M5 выбран режим эмуляции
+Устанавливаем Windows Server 2022 Standard Evaluation с Desktop Experience в UTM. Используем две отдельные машины, каждой выделяем 3072 МиБ RAM, два ядра CPU и системный диск 64 ГиБ. Для образа x64 на Mac M5 выбран режим эмуляции. Для двух ядер включаем Force Multicore. Если появляются сбои, проверяем их связь с многоядерной эмуляцией
 
 | Машина Windows | Роль | IPv4 | DNS |
 |---|---|---|---|

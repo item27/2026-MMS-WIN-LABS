@@ -1,0 +1,8 @@
+{
+  "source_iso": "https://getutm.app/downloads/utm-guest-tools-latest.iso",
+  "installer": "utm-guest-tools-0.1.271.exe",
+  "installer_sha256": "839cdf4c00e5ff564f8337aba16ad7bbe8f02edd2b5c908b5daca31d88a6cdd1",
+  "installer_matches_official_iso": true,
+  "original_autounattend_excluded": true,
+  "manual_iso": "/Users/k6zma/Documents/ChatGPT/Windows/vm-media/utm-guest-tools-manual.iso"
+}
