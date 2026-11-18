@@ -4,7 +4,7 @@
 p code, li code, td code { font: inherit; background: none; padding: 0; border: 0; }
 </style>
 
-Два сервера включены в домен `GMAKMA.local`, связь проверена, исходные снимки сохранены. На первом сервере подключены четыре учебных диска и создан NTFS-том в `C:\Volume1`. Следующий шаг - вывести четыре уровня хранения, затем перейти к скрипту создания T:. Скрипт пока не запускали, RAID, iSCSI и Storage Spaces ещё предстоят. Текущий этап записан в [состоянии работы](evidence/session-status.md), выполненные действия находятся в [отчёте](lab-5-report.md)
+Два сервера включены в домен `GMAKMA.local`, связь проверена, исходные снимки сохранены. На первом сервере подключены четыре учебных диска и создан NTFS-том в `C:\Volume1`. Вывод четырёх уровней хранения сохранён. Дальше переводим учебные диски в Offline и проверяем скрипт создания T:. Скрипт пока не запускали, RAID, iSCSI и Storage Spaces ещё предстоят. Текущий этап записан в [состоянии работы](evidence/session-status.md), выполненные действия находятся в [отчёте](lab-5-report.md)
 
 ## Часть 1. Подготовительная.
 
@@ -200,7 +200,7 @@ mkdir C:\Volume1
 
 Этот этап выполнен: Disk Management показывает исправный том 1,00 ГБ. [Проверка PowerShell](evidence/commands/volume1-verification.json) подтверждает Disk 1, раздел 2 размером 1073741824 байта, путь `C:\Volume1\`, NTFS, метку `Lab5-Volume1` и состояние `Healthy`
 
-Следующий шаг - последовательно вывести в PowerShell четыре уровня хранения и сохранить вывод:
+Вывели в PowerShell четыре уровня хранения на первом сервере и сохранили результат
 
 ```powershell
 Get-PhysicalDisk
@@ -209,13 +209,13 @@ Get-Partition
 Get-Volume
 ```
 
-`Get-CimInstance Win32_LogicalDisk` показывает логические диски, а `Get-Volume` позволяет увидеть и том без буквы, подключённый в папку. Сохраняем вывод для сравнения с подключением iSCSI в части 4
+`Get-CimInstance Win32_LogicalDisk` показывает логические диски, а `Get-Volume` позволяет увидеть и том без буквы, подключённый в папку. Результаты для сравнения с частью 4 сохранены в [выводе PowerShell](evidence/commands/first-storage-inventory.json)
 
 В Disk Management переводим четыре учебных диска в Offline. Перед запуском скрипта убеждаемся, что буква `T:` свободна
 
 ### Скрипт создания T:
 
-Этот скрипт пока не запускали. К нему переходим после вывода четырёх уровней хранения и перевода учебных дисков в Offline
+Этот скрипт пока не запускали. К нему переходим после перевода учебных дисков в Offline. Вывод четырёх уровней уже сохранён
 
 Копируем [Initialize-LabVolume.ps1](scripts/Initialize-LabVolume.ps1) в `C:\Lab5`. Скрипт предназначен для части 2, пока выбранный диск остаётся базовым или RAW. После преобразования в динамический диск его не запускаем, поскольку используемые команды `Get-Disk` и `Set-Disk` не обслуживают такой диск. Запускаем его из повышенной Windows PowerShell:
 
@@ -362,7 +362,7 @@ New-VirtualDisk -StoragePoolFriendlyName Lab5Pool -FriendlyName Lab5Mirror `
     -ProvisioningType Fixed -UseMaximumSize
 
 Get-VirtualDisk -FriendlyName Lab5Mirror |
-    Select-Object FriendlyName, Size, FootprintOnPool, ResiliencySettingName
+    Select-Object FriendlyName, Size, FootprintOnPool, NumberOfColumns, PhysicalDiskRedundancy
 ```
 
 Сохраняем вывод и удаляем только виртуальный диск `Lab5Mirror`, оставляя пул и его семь накопителей:
@@ -387,7 +387,7 @@ New-VirtualDisk -StoragePoolFriendlyName Lab5Pool -FriendlyName Lab5Parity `
     -ProvisioningType Fixed -UseMaximumSize
 
 Get-VirtualDisk -FriendlyName Lab5Parity |
-    Select-Object FriendlyName, Size, FootprintOnPool, PhysicalDiskRedundancy
+    Select-Object FriendlyName, Size, FootprintOnPool, NumberOfColumns, PhysicalDiskRedundancy
 ```
 
 Числа для сравнения берём из фактического вывода. Для зеркала две копии данных занимают примерно вдвое больше места. Для двойной чётности часть ёмкости расходуется на две независимые проверки чётности. Итог зависит также от размещения столбцов и служебных расходов, поэтому размер Parity не подставляем заранее по одной формуле

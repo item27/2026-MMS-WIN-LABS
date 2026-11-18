@@ -1,0 +1,209 @@
+{
+    "Host":  "AD-SRV",
+    "Domain":  "GMAKMA.local",
+    "CPU":  2,
+    "PhysicalDisks":  [
+                          {
+                              "DeviceId":  "0",
+                              "FriendlyName":  "QEMU HARDDISK",
+                              "SerialNumber":  "QM00003",
+                              "Size":  68719476736,
+                              "BusType":  "SATA"
+                          },
+                          {
+                              "DeviceId":  "3",
+                              "FriendlyName":  "Red Hat VirtIO",
+                              "SerialNumber":  "FF8C5B79269F4486A4B9",
+                              "Size":  4294967296,
+                              "BusType":  "SCSI"
+                          },
+                          {
+                              "DeviceId":  "4",
+                              "FriendlyName":  "Red Hat VirtIO",
+                              "SerialNumber":  "DA1695117FB540359541",
+                              "Size":  4294967296,
+                              "BusType":  "SCSI"
+                          },
+                          {
+                              "DeviceId":  "2",
+                              "FriendlyName":  "Red Hat VirtIO",
+                              "SerialNumber":  "20917607355D40348669",
+                              "Size":  4294967296,
+                              "BusType":  "SCSI"
+                          },
+                          {
+                              "DeviceId":  "1",
+                              "FriendlyName":  "Red Hat VirtIO",
+                              "SerialNumber":  "35D10684067C4BBC9907",
+                              "Size":  4294967296,
+                              "BusType":  "SCSI"
+                          }
+                      ],
+    "LogicalDisks":  [
+                         {
+                             "DeviceID":  "C:",
+                             "DriveType":  3,
+                             "FileSystem":  "NTFS",
+                             "Size":  68045238272
+                         },
+                         {
+                             "DeviceID":  "D:",
+                             "DriveType":  5,
+                             "FileSystem":  "UDF",
+                             "Size":  5044094976
+                         },
+                         {
+                             "DeviceID":  "E:",
+                             "DriveType":  5,
+                             "FileSystem":  "CDFS",
+                             "Size":  78542848
+                         }
+                     ],
+    "Partitions":  [
+                       {
+                           "DiskNumber":  0,
+                           "PartitionNumber":  1,
+                           "DriveLetter":  null,
+                           "Size":  104857600,
+                           "AccessPaths":  [
+                                               "\\\\?\\Volume{b025d84a-1854-4c59-8320-3d55ee041a07}\\"
+                                           ]
+                       },
+                       {
+                           "DiskNumber":  0,
+                           "PartitionNumber":  2,
+                           "DriveLetter":  null,
+                           "Size":  16777216,
+                           "AccessPaths":  null
+                       },
+                       {
+                           "DiskNumber":  0,
+                           "PartitionNumber":  3,
+                           "DriveLetter":  "C",
+                           "Size":  68045242368,
+                           "AccessPaths":  [
+                                               "C:\\",
+                                               "\\\\?\\Volume{fdb0acff-6709-4119-851a-3070cbfe94b9}\\"
+                                           ]
+                       },
+                       {
+                           "DiskNumber":  0,
+                           "PartitionNumber":  4,
+                           "DriveLetter":  null,
+                           "Size":  549453824,
+                           "AccessPaths":  [
+                                               "\\\\?\\Volume{6dc83f1f-e6de-4527-9c8a-1e80f391c9a7}\\"
+                                           ]
+                       },
+                       {
+                           "DiskNumber":  1,
+                           "PartitionNumber":  1,
+                           "DriveLetter":  null,
+                           "Size":  16759808,
+                           "AccessPaths":  null
+                       },
+                       {
+                           "DiskNumber":  1,
+                           "PartitionNumber":  2,
+                           "DriveLetter":  null,
+                           "Size":  1073741824,
+                           "AccessPaths":  [
+                                               "C:\\Volume1\\",
+                                               "\\\\?\\Volume{5cc1d473-7f67-4ad6-8d84-b4829a57a9e0}\\"
+                                           ]
+                       }
+                   ],
+    "Volumes":  [
+                    {
+                        "DriveLetter":  "E",
+                        "FileSystemLabel":  "UTM_TOOLS_MANUAL",
+                        "FileSystem":  "CDFS",
+                        "Size":  78542848,
+                        "SizeRemaining":  0,
+                        "Path":  "\\\\?\\Volume{0df26e14-e3b7-11f1-ae42-806e6f6e6963}\\",
+                        "HealthStatus":  "Healthy"
+                    },
+                    {
+                        "DriveLetter":  null,
+                        "FileSystemLabel":  "Lab5-Volume1",
+                        "FileSystem":  "NTFS",
+                        "Size":  1073737728,
+                        "SizeRemaining":  1056030720,
+                        "Path":  "\\\\?\\Volume{5cc1d473-7f67-4ad6-8d84-b4829a57a9e0}\\",
+                        "HealthStatus":  "Healthy"
+                    },
+                    {
+                        "DriveLetter":  "D",
+                        "FileSystemLabel":  "SSS_X64FREE_EN-US_DV9",
+                        "FileSystem":  "UDF",
+                        "Size":  5044094976,
+                        "SizeRemaining":  0,
+                        "Path":  "\\\\?\\Volume{60b48d04-e3b3-11f1-ae40-806e6f6e6963}\\",
+                        "HealthStatus":  "Healthy"
+                    },
+                    {
+                        "DriveLetter":  null,
+                        "FileSystemLabel":  "",
+                        "FileSystem":  "NTFS",
+                        "Size":  549449728,
+                        "SizeRemaining":  87048192,
+                        "Path":  "\\\\?\\Volume{6dc83f1f-e6de-4527-9c8a-1e80f391c9a7}\\",
+                        "HealthStatus":  "Healthy"
+                    },
+                    {
+                        "DriveLetter":  null,
+                        "FileSystemLabel":  "",
+                        "FileSystem":  "FAT32",
+                        "Size":  100663296,
+                        "SizeRemaining":  70565888,
+                        "Path":  "\\\\?\\Volume{b025d84a-1854-4c59-8320-3d55ee041a07}\\",
+                        "HealthStatus":  "Healthy"
+                    },
+                    {
+                        "DriveLetter":  "C",
+                        "FileSystemLabel":  "",
+                        "FileSystem":  "NTFS",
+                        "Size":  68045238272,
+                        "SizeRemaining":  56254685184,
+                        "Path":  "\\\\?\\Volume{fdb0acff-6709-4119-851a-3070cbfe94b9}\\",
+                        "HealthStatus":  "Healthy"
+                    }
+                ],
+    "DiskState":  [
+                      {
+                          "Number":  0,
+                          "SerialNumber":  "QM00003",
+                          "IsOffline":  false,
+                          "IsReadOnly":  false,
+                          "PartitionStyle":  "GPT"
+                      },
+                      {
+                          "Number":  2,
+                          "SerialNumber":  "20917607355D40348669",
+                          "IsOffline":  true,
+                          "IsReadOnly":  false,
+                          "PartitionStyle":  "RAW"
+                      },
+                      {
+                          "Number":  4,
+                          "SerialNumber":  "DA1695117FB540359541",
+                          "IsOffline":  true,
+                          "IsReadOnly":  false,
+                          "PartitionStyle":  "RAW"
+                      },
+                      {
+                          "Number":  1,
+                          "SerialNumber":  "35D10684067C4BBC9907",
+                          "IsOffline":  false,
+                          "IsReadOnly":  false,
+                          "PartitionStyle":  "GPT"
+                      },
+                      {
+                          "Number":  3,
+                          "SerialNumber":  "FF8C5B79269F4486A4B9",
+                          "IsOffline":  true,
+                          "IsReadOnly":  false,
+                          "PartitionStyle":  "RAW"
+                      }
+                  ]
+}
