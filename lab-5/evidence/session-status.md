@@ -2,12 +2,12 @@
 
 ## Выполненные пункты
 
-Подготовительная часть и пункты 1-6 части 2 выполнены. Сверка с ТЗ находится в [отдельном файле](submission-audit.md)
+Подготовительная часть и часть 2 выполнены. Сверка с ТЗ находится в [отдельном файле](submission-audit.md)
 
 - Репозиторий: `/Users/k6zma/Documents/ChatGPT/Windows/2026-MMS-WIN-LABS`
 - Ветка: `lab-5-attempt-1`, origin `item27/2026-MMS-WIN-LABS`, push этой ветки пользователь разрешил
 - ТЗ: `sources/awin-5-2025.docx`, дословная копия `lab-5-task.md`
-- Последняя собственная версия отчёта: `evidence/versions/report-2026-11-19-03.md`
+- Последняя собственная версия отчёта: `evidence/versions/report-2026-11-19-04.md`
 - Чужой Lab-4.docx не является решением пятой работы
 
 ## Стенд
@@ -64,3 +64,5 @@
 Windows ISO `vm-media/Windows_Server_2022_x64.iso`, официальный Microsoft. SHA256 `3e4fa6d8507b554856fc9ca6079cc402df11a8b79344871669f0251535255325`, вычислен локально, с эталоном Microsoft не сравнивался
 
 Используется utm-guest-tools-manual.iso с неизменённым официальным EXE и лицензией. Оригинальный Tools ISO содержит Autounattend.xml с отключением UAC, до установки Windows его не подключать. ВМ, ISO, qcow2, память и пароли вне Git
+
+19 ноября: проверены отказ и подтверждение скрипта T: на d2, NTFS Healthy, Repair-Volume NoErrorsFound. После очистки только d1/d2 все четыре учебных диска проверены RAW Offline, Disk 0 GPT Online. Далее часть 3

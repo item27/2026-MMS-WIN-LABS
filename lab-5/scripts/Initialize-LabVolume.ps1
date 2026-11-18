@@ -22,8 +22,8 @@ if (Get-Volume -DriveLetter T -ErrorAction SilentlyContinue) {
 
 $disk | Format-List Number, SerialNumber, UniqueId, Size, PartitionStyle
 Write-Warning "Все разделы и данные диска $number будут удалены"
-$confirm = Read-Host "Для продолжения введите СТЕРЕТЬ $number"
-if ($confirm -cne "СТЕРЕТЬ $number") {
+$confirm = Read-Host "Для продолжения введите ERASE $number"
+if ($confirm -cne "ERASE $number") {
     Write-Host 'Отмена. Диск не изменён'
     return
 }

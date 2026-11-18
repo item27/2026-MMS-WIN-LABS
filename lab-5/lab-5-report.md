@@ -320,6 +320,78 @@ Get-Volume |
 
 У `Lab5-Volume1` файловая система `NTFS`, буква отсутствует. Поле `Path` совпало с GUID-путём раздела №2, объём файловой системы 1 073 737 728 байт
 
+### 2.7. В Диспетчере дисков переведите подключенные диски в offline режим (режим вне сети).
+
+В Диспетчере дисков перевели диск №1 в Offline. Диски №2-4 уже находились в этом состоянии
+
+![Рисунок 12: Четыре учебных диска в состоянии Offline](screenshots/013-disks-offline.png)
+
+Рисунок 12: Четыре учебных диска в состоянии Offline
+
+### 2.8. Напишите скрипт на Power Shell, который:
+
+Запустили скрипт от имени администратора. Сначала выбрали пустой диск №2 и ввели отказ. Затем повторили запуск с подтверждением ERASE 2
+
+```powershell
+#Requires -RunAsAdministrator
+$ErrorActionPreference = 'Stop'
+
+Get-Disk | Format-Table Number, FriendlyName, SerialNumber, Size, PartitionStyle
+
+$number = 0
+$answer = Read-Host 'Номер учебного диска из проверенной карты дисков'
+if (-not [int]::TryParse($answer, [ref]$number)) {
+    throw 'Нужно ввести номер диска'
+}
+
+$disk = Get-Disk -Number $number
+if ($disk.IsBoot -or $disk.IsSystem -or $disk.Size -ne 4GB) {
+    throw 'Допускается только учебный диск 4 ГиБ, не системный и не загрузочный'
+}
+if ($disk.IsReadOnly) {
+    throw 'Диск доступен только для чтения'
+}
+if (Get-Volume -DriveLetter T -ErrorAction SilentlyContinue) {
+    throw 'Буква T: уже занята'
+}
+
+$disk | Format-List Number, SerialNumber, UniqueId, Size, PartitionStyle
+Write-Warning "Все разделы и данные диска $number будут удалены"
+$confirm = Read-Host "Для продолжения введите ERASE $number"
+if ($confirm -cne "ERASE $number") {
+    Write-Host 'Отмена. Диск не изменён'
+    return
+}
+
+Set-Disk -Number $number -IsOffline $false
+if ($disk.PartitionStyle -ne 'RAW') {
+    Clear-Disk -Number $number -RemoveData -RemoveOEM -Confirm:$false
+}
+Initialize-Disk -Number $number -PartitionStyle GPT
+$partition = New-Partition -DiskNumber $number -UseMaximumSize -DriveLetter T
+$partition | Format-Volume -FileSystem NTFS -NewFileSystemLabel Lab5-T -Confirm:$false
+
+Repair-Volume -DriveLetter T -Scan
+Get-Volume -DriveLetter T
+```
+
+На диске №2 появился том T: с меткой Lab5-T. Windows показала 4 277 137 408 байт, файловую систему NTFS и состояние Healthy. Проверка Repair-Volume вернула NoErrorsFound
+
+![Рисунок 13: Исправный том T: на учебном диске №2](screenshots/014-volume-t.png)
+
+Рисунок 13: Исправный том T: на учебном диске №2
+
+### 2.9. Удалите все созданные тома и разделы, переведите диски, кроме исходного в состояние offline (вне сети).
+
+Сверили серийные номера, метки и отсутствие учебных файлов на двух созданных томах. Вернули диск №1 в Online и сняли защиту от записи, затем очистили разметку дисков №1 и №2
+
+```powershell
+Clear-Disk -Number 1,2 -RemoveData -RemoveOEM -Confirm:$false
+Get-Disk -Number 1,2 | Set-Disk -IsOffline $true
+```
+
+Проверка Get-Disk показала RAW и Offline для всех четырёх учебных дисков. Системный диск №0 остался GPT и Online
+
 ## Вопросы:
 
 Ниже приведены ответы, для которых уже есть результаты или достаточно сведений о работе Windows. Для RAID5 пока приведён расчёт. Сравнение результатов iSCSI и `Storage Spaces` требует измерений в частях 4 и 5
