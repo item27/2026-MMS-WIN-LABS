@@ -1,0 +1,46 @@
+VMID=109
+CAPTURE_UTC=2026-11-18T03:10:42.741786+00:00
+EXIT_CODE=0
+
+
+
+HostName        : AD-SRV-2.GMAKMA.local
+IPv4Address     : 10.0.0.2
+IsGlobalCatalog : True
+
+
+
+
+
+SchemaMaster       : AD-SRV-2.GMAKMA.local
+DomainNamingMaster : AD-SRV-2.GMAKMA.local
+ForestMode         : Windows2025Forest
+
+
+
+
+
+PDCEmulator          : AD-SRV-2.GMAKMA.local
+RIDMaster            : AD-SRV-2.GMAKMA.local
+InfrastructureMaster : AD-SRV-2.GMAKMA.local
+DomainMode           : Windows2025Domain
+
+
+
+
+Name     ScopeName Path                                          Description        
+----     --------- ----                                          -----------        
+NETLOGON *         C:\WINDOWS\SYSVOL\sysvol\GMAKMA.local\SCRIPTS Logon server share 
+SYSVOL   *         C:\WINDOWS\SYSVOL\sysvol                      Logon server share 
+
+
+
+
+
+SamAccountName : lab3process
+SID            : S-1-5-21-3793483027-3712407111-974862227-1601
+Enabled        : True
+MemberOf       : {}
+
+
+

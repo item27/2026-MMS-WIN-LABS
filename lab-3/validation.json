@@ -1,0 +1,25 @@
+{
+  "report": {
+    "pages": 17,
+    "text_characters": 26794,
+    "links": 45,
+    "images": 5,
+    "captions": 5,
+    "off_page_words": [],
+    "unicode_dashes": [],
+    "empty_pages": []
+  },
+  "guide": {
+    "pages": 4,
+    "text_characters": 6605,
+    "links": 0,
+    "images": 0,
+    "captions": 0,
+    "off_page_words": [],
+    "unicode_dashes": [],
+    "empty_pages": []
+  },
+  "markdown_issues": [],
+  "source_count": 25,
+  "all_sources_http_200": true
+}

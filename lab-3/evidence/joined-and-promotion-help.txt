@@ -1,0 +1,24 @@
+VMID=109
+CAPTURE_UTC=2026-11-18T01:23:30.390100+00:00
+EXIT_CODE=0
+
+{
+    "Name":  "AD-SRV-2",
+    "Domain":  "GMAKMA.local",
+    "PartOfDomain":  true
+}
+True
+
+Test-ADDSDomainControllerInstallation -DomainName <string> [-SafeModeAdministratorPassword <securestring>] [-SiteName <string>] [-ADPrepCredential <pscredential>] [-AllowDomainControllerReinstall] [-ApplicationPartitionsToReplicate <string[]>] [-CreateDnsDelegation] [-Credential <pscredential>] [-CriticalReplicationOnly] [-DatabasePath <string>] [-DnsDelegationCredential <pscredential>] [-NoDnsOnNetwork] [-NoGlobalCatalog] [-InstallationMediaPath <string>] [-InstallDns] [-LogPath <string>] [-MoveInfrastructureOperationMasterRoleIfNecessary] [-NoRebootOnCompletion] [-ReplicationSourceDC <string>] [-SkipAutoConfigureDns] [-SystemKey <securestring>] [-SysvolPath <string>] [-Force] [<CommonParameters>]
+
+Test-ADDSDomainControllerInstallation -DomainName <string> -SiteName <string> [-SafeModeAdministratorPassword <securestring>] [-ADPrepCredential <pscredential>] [-AllowDomainControllerReinstall] [-AllowPasswordReplicationAccountName <string[]>] [-ApplicationPartitionsToReplicate <string[]>] [-Credential <pscredential>] [-CriticalReplicationOnly] [-DatabasePath <string>] [-DelegatedAdministratorAccountName <string>] [-DenyPasswordReplicationAccountName <string[]>] [-NoDnsOnNetwork] [-NoGlobalCatalog] [-InstallationMediaPath <string>] [-InstallDns] [-LogPath <string>] [-MoveInfrastructureOperationMasterRoleIfNecessary] [-ReadOnlyReplica] [-NoRebootOnCompletion] [-ReplicationSourceDC <string>] [-SkipAutoConfigureDns] [-SystemKey <securestring>] [-SysvolPath <string>] [-Force] [<CommonParameters>]
+
+Test-ADDSDomainControllerInstallation -DomainName <string> [-SafeModeAdministratorPassword <securestring>] [-ADPrepCredential <pscredential>] [-ApplicationPartitionsToReplicate <string[]>] [-Credential <pscredential>] [-CriticalReplicationOnly] [-DatabasePath <string>] [-NoDnsOnNetwork] [-InstallationMediaPath <string>] [-LogPath <string>] [-NoRebootOnCompletion] [-ReplicationSourceDC <string>] [-SkipAutoConfigureDns] [-SystemKey <securestring>] [-SysvolPath <string>] [-UseExistingAccount] [-Force] [<CommonParameters>]
+
+
+Install-ADDSDomainController -DomainName <string> [-SkipPreChecks] [-SafeModeAdministratorPassword <securestring>] [-SiteName <string>] [-ADPrepCredential <pscredential>] [-AllowDomainControllerReinstall] [-ApplicationPartitionsToReplicate <string[]>] [-CreateDnsDelegation] [-Credential <pscredential>] [-CriticalReplicationOnly] [-DatabasePath <string>] [-DnsDelegationCredential <pscredential>] [-NoDnsOnNetwork] [-NoGlobalCatalog] [-InstallationMediaPath <string>] [-InstallDns] [-LogPath <string>] [-MoveInfrastructureOperationMasterRoleIfNecessary] [-NoRebootOnCompletion] [-ReplicationSourceDC <string>] [-SkipAutoConfigureDns] [-SystemKey <securestring>] [-SysvolPath <string>] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Install-ADDSDomainController -DomainName <string> -SiteName <string> [-SkipPreChecks] [-SafeModeAdministratorPassword <securestring>] [-ADPrepCredential <pscredential>] [-AllowDomainControllerReinstall] [-AllowPasswordReplicationAccountName <string[]>] [-ApplicationPartitionsToReplicate <string[]>] [-Credential <pscredential>] [-CriticalReplicationOnly] [-DatabasePath <string>] [-DelegatedAdministratorAccountName <string>] [-DenyPasswordReplicationAccountName <string[]>] [-NoDnsOnNetwork] [-NoGlobalCatalog] [-InstallationMediaPath <string>] [-InstallDns] [-LogPath <string>] [-MoveInfrastructureOperationMasterRoleIfNecessary] [-ReadOnlyReplica] [-NoRebootOnCompletion] [-ReplicationSourceDC <string>] [-SkipAutoConfigureDns] [-SystemKey <securestring>] [-SysvolPath <string>] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Install-ADDSDomainController -DomainName <string> [-SkipPreChecks] [-SafeModeAdministratorPassword <securestring>] [-ADPrepCredential <pscredential>] [-ApplicationPartitionsToReplicate <string[]>] [-Credential <pscredential>] [-CriticalReplicationOnly] [-DatabasePath <string>] [-NoDnsOnNetwork] [-InstallationMediaPath <string>] [-LogPath <string>] [-NoRebootOnCompletion] [-ReplicationSourceDC <string>] [-SkipAutoConfigureDns] [-SystemKey <securestring>] [-SysvolPath <string>] [-UseExistingAccount] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
+

@@ -1,0 +1,233 @@
+VMID=105
+CAPTURE_UTC=2026-11-18T01:51:31.093581+00:00
+EXIT_CODE=0
+
+=== GUI ===
+**********************
+Windows PowerShell transcript start
+Start time: 20261118124630
+Username: GMAKMA\lab3process
+RunAs User: GMAKMA\lab3process
+Configuration Name: 
+Machine: AD-CLIENT (Microsoft Windows NT 10.0.19045.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -NoExit -ExecutionPolicy Bypass -File C:\Lab3\process-proof.ps1 -Method GUI
+Process ID: 1584
+PSVersion: 5.1.19041.2673
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.19041.2673
+BuildVersion: 10.0.19041.2673
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+METHOD=GUI
+
+USER INFORMATION
+----------------
+
+User Name          SID
+================== =============================================
+gmakma\lab3process S-1-5-21-3793483027-3712407111-974862227-1601
+COMPUTER=AD-CLIENT LOGONSERVER=
+PID=1584 SESSION=2
+
+
+Name               : GMAKMA\lab3process
+AuthenticationType : Kerberos
+IsAuthenticated    : True
+
+
+
+
+Current LogonId is 0:0xa6f649
+
+Cached Tickets: (2)
+
+#0>     Client: lab3process @ GMAKMA.LOCAL
+        Server: krbtgt/GMAKMA.LOCAL @ GMAKMA.LOCAL
+        KerbTicket Encryption Type: AES-256-CTS-HMAC-SHA1-96
+        Ticket Flags 0x40e10000 -> forwardable renewable initial pre_authent name_canonicalize
+        Start Time: 11/18/2026 12:46:22 (local)
+        End Time:   11/18/2026 22:46:22 (local)
+        Renew Time: 11/25/2026 12:46:22 (local)
+        Session Key Type: AES-256-CTS-HMAC-SHA1-96
+        Cache Flags: 0x1 -> PRIMARY
+        Kdc Called: AD-SRV
+
+#1>     Client: lab3process @ GMAKMA.LOCAL
+        Server: LDAP/ad-srv.GMAKMA.local/GMAKMA.local @ GMAKMA.LOCAL
+        KerbTicket Encryption Type: AES-256-CTS-HMAC-SHA1-96
+        Ticket Flags 0x40a50000 -> forwardable renewable pre_authent ok_as_delegate name_canonicali
+ze
+        Start Time: 11/18/2026 12:46:22 (local)
+        End Time:   11/18/2026 22:46:22 (local)
+        Renew Time: 11/25/2026 12:46:22 (local)
+        Session Key Type: AES-256-CTS-HMAC-SHA1-96
+        Cache Flags: 0
+        Kdc Called: ad-srv.GMAKMA.local
+**********************
+Windows PowerShell transcript end
+End time: 20261118124631
+**********************
+=== RunAs ===
+**********************
+Windows PowerShell transcript start
+Start time: 20261118124912
+Username: GMAKMA\lab3process
+RunAs User: GMAKMA\lab3process
+Configuration Name: 
+Machine: AD-CLIENT (Microsoft Windows NT 10.0.19045.0)
+Host Application: powershell.exe -NoProfile -NoExit -ExecutionPolicy Bypass -File C:\Lab3\process-proof.ps1 -Method RunAs
+Process ID: 5132
+PSVersion: 5.1.19041.2673
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.19041.2673
+BuildVersion: 10.0.19041.2673
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+METHOD=RunAs
+
+USER INFORMATION
+----------------
+
+User Name          SID
+================== =============================================
+gmakma\lab3process S-1-5-21-3793483027-3712407111-974862227-1601
+COMPUTER=AD-CLIENT LOGONSERVER=
+PID=5132 SESSION=2
+
+
+Name               : GMAKMA\lab3process
+AuthenticationType : Kerberos
+IsAuthenticated    : True
+
+
+
+
+Current LogonId is 0:0xa878a6
+
+Cached Tickets: (1)
+
+#0>     Client: lab3process @ GMAKMA.LOCAL
+        Server: krbtgt/GMAKMA.LOCAL @ GMAKMA.LOCAL
+        KerbTicket Encryption Type: AES-256-CTS-HMAC-SHA1-96
+        Ticket Flags 0x40e10000 -> forwardable renewable initial pre_authent name_canonicalize
+        Start Time: 11/18/2026 12:49:12 (local)
+        End Time:   11/18/2026 22:49:12 (local)
+        Renew Time: 11/25/2026 12:49:12 (local)
+        Session Key Type: AES-256-CTS-HMAC-SHA1-96
+        Cache Flags: 0x1 -> PRIMARY
+        Kdc Called: ad-srv.GMAKMA.local
+**********************
+Windows PowerShell transcript end
+End time: 20261118124912
+**********************
+=== PowerShell ===
+**********************
+Windows PowerShell transcript start
+Start time: 20261118125121
+Username: GMAKMA\lab3process
+RunAs User: GMAKMA\lab3process
+Configuration Name: 
+Machine: AD-CLIENT (Microsoft Windows NT 10.0.19045.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -NoExit -ExecutionPolicy Bypass -File C:\Lab3\process-proof.ps1 -Method PowerShell
+Process ID: 5184
+PSVersion: 5.1.19041.2673
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.19041.2673
+BuildVersion: 10.0.19041.2673
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+METHOD=PowerShell
+
+USER INFORMATION
+----------------
+
+User Name          SID
+================== =============================================
+gmakma\lab3process S-1-5-21-3793483027-3712407111-974862227-1601
+COMPUTER=AD-CLIENT LOGONSERVER=
+PID=5184 SESSION=2
+
+
+Name               : GMAKMA\lab3process
+AuthenticationType : Kerberos
+IsAuthenticated    : True
+
+
+
+
+Current LogonId is 0:0xa94f45
+
+Cached Tickets: (1)
+
+#0>     Client: lab3process @ GMAKMA.LOCAL
+        Server: krbtgt/GMAKMA.LOCAL @ GMAKMA.LOCAL
+        KerbTicket Encryption Type: AES-256-CTS-HMAC-SHA1-96
+        Ticket Flags 0x40e10000 -> forwardable renewable initial pre_authent name_canonicalize
+        Start Time: 11/18/2026 12:51:20 (local)
+        End Time:   11/18/2026 22:51:20 (local)
+        Renew Time: 11/25/2026 12:51:20 (local)
+        Session Key Type: AES-256-CTS-HMAC-SHA1-96
+        Cache Flags: 0x1 -> PRIMARY
+        Kdc Called: AD-SRV
+**********************
+Windows PowerShell transcript end
+End time: 20261118125121
+**********************
+
+
+PID     : 624
+Session : 2
+Owner   : GMAKMA\uSeller1
+Command : "C:\Windows\system32\WindowsPowerShell\v1.0\PowerShell.exe" -NoExit -File C:/Lab3/baseline.ps1
+
+PID     : 1584
+Session : 2
+Owner   : GMAKMA\lab3process
+Command : "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NoExit -ExecutionPolicy Bypass -File 
+          C:\Lab3\process-proof.ps1 -Method GUI
+
+PID     : 5132
+Session : 2
+Owner   : GMAKMA\lab3process
+Command : powershell.exe -NoProfile -NoExit -ExecutionPolicy Bypass -File C:\Lab3\process-proof.ps1 -Method RunAs
+
+PID     : 1704
+Session : 2
+Owner   : GMAKMA\uSeller1
+Command : "C:\Windows\system32\WindowsPowerShell\v1.0\PowerShell.exe" -NoProfile -NoExit -ExecutionPolicy Bypass -File 
+          C:/Lab3/launch-powershell-proof.ps1
+
+PID     : 5184
+Session : 2
+Owner   : GMAKMA\lab3process
+Command : "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NoExit -ExecutionPolicy Bypass -File 
+          C:\Lab3\process-proof.ps1 -Method PowerShell 
+
+PID     : 212
+Session : 0
+Owner   : NT AUTHORITY\SYSTEM
+Command : powershell.exe -NoProfile -NonInteractive -EncodedCommand JABFAHIAcgBvAHIAQQBjAHQAaQBvAG4AUAByAGUAZgBlAHIAZQB
+          uAGMAZQA9ACcAUwB0AG8AcAAnADsAJABQAHIAbwBnAHIAZQBzAHMAUAByAGUAZgBlAHIAZQBuAGMAZQA9ACcAUwBpAGwAZQBuAHQAbAB5AEMA
+          bwBuAHQAaQBuAHUAZQAnADsAZgBvAHIAZQBhAGMAaAAoACQAbQAgAGkAbgAgACcARwBVAEkAJwAsACcAUgB1AG4AQQBzACcALAAnAFAAbwB3A
+          GUAcgBTAGgAZQBsAGwAJwApAHsAIgA9AD0APQAgACQAbQAgAD0APQA9ACIAOwBHAGUAdAAtAEMAbwBuAHQAZQBuAHQAIAAiAEMAOgBcAEwAYQ
+          BiADMAXABwAHIAbwBvAGYAcwBcACQAbQAuAHQAeAB0ACIAfQA7AEcAZQB0AC0AQwBpAG0ASQBuAHMAdABhAG4AYwBlACAAVwBpAG4AMwAyAF8
+          AUAByAG8AYwBlAHMAcwAgAC0ARgBpAGwAdABlAHIAIAAiAG4AYQBtAGUAPQAnAHAAbwB3AGUAcgBzAGgAZQBsAGwALgBlAHgAZQAnACIAIAB8
+          ACAARgBvAHIARQBhAGMAaAAtAE8AYgBqAGUAYwB0ACAAewAkAG8APQBJAG4AdgBvAGsAZQAtAEMAaQBtAE0AZQB0AGgAbwBkACAALQBJAG4Ac
+          AB1AHQATwBiAGoAZQBjAHQAIAAkAF8AIAAtAE0AZQB0AGgAbwBkAE4AYQBtAGUAIABHAGUAdABPAHcAbgBlAHIAOwBbAHAAcwBjAHUAcwB0AG
+          8AbQBvAGIAagBlAGMAdABdAEAAewBQAEkARAA9ACQAXwAuAFAAcgBvAGMAZQBzAHMASQBkADsAUwBlAHMAcwBpAG8AbgA9ACQAXwAuAFMAZQB
+          zAHMAaQBvAG4ASQBkADsATwB3AG4AZQByAD0AJABvAC4ARABvAG0AYQBpAG4AKwAnAFwAJwArACQAbwAuAFUAcwBlAHIAOwBDAG8AbQBtAGEA
+          bgBkAD0AJABfAC4AQwBvAG0AbQBhAG4AZABMAGkAbgBlAH0AfQAgAHwAIABGAG8AcgBtAGEAdAAtAEwAaQBzAHQAIAB8ACAATwB1AHQALQBTA
+          HQAcgBpAG4AZwA=
+
+
+
+

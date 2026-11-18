@@ -1,0 +1,30 @@
+VMID=109
+CAPTURE_UTC=2026-11-18T03:12:46.128297+00:00
+EXIT_CODE=0
+
+[
+    {
+        "TimeCreated":  "\/Date(1795011062222)\/",
+        "Id":  1206,
+        "LevelDisplayName":  "Information"
+    },
+    {
+        "TimeCreated":  "\/Date(1795011061207)\/",
+        "Id":  1104,
+        "LevelDisplayName":  "Information"
+    },
+    {
+        "TimeCreated":  "\/Date(1795011061206)\/",
+        "Id":  6102,
+        "LevelDisplayName":  "Information"
+    },
+    {
+        "TimeCreated":  "\/Date(1795011059133)\/",
+        "Id":  1102,
+        "LevelDisplayName":  "Information"
+    }
+]
+{
+    "ReplicatedFolderName":  "SYSVOL Share",
+    "State":  4
+}

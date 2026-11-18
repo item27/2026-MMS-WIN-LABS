@@ -1,0 +1,15 @@
+VMID=104
+CAPTURE_UTC=2026-11-18T02:53:55.321732+00:00
+EXIT_CODE=0
+
+
+
+Success       : True
+RestartNeeded : Yes
+FeatureResult : {Active Directory Domain Services, Group Policy Management, Active Directory Administrative Center, AD 
+                DS Tools...}
+ExitCode      : SuccessRestartRequired
+
+
+
+

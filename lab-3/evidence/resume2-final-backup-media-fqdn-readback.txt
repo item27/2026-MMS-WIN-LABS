@@ -1,0 +1,49 @@
+VMID=109
+CAPTURE_UTC=2026-11-18T03:23:18.819448+00:00
+EXIT_CODE=0
+
+EXITCODE
+0
+Overall progress: 96%. 
+Currently backing up files reported by 'System Writer'...
+Overall progress: 96%. 
+Currently backing up files reported by 'System Writer'...
+Overall progress: 97%. 
+Currently backing up files reported by 'System Writer'...
+The backup of files reported by 'System Writer' is complete.
+The backup of files reported by 'DFS Replication service writer' is complete.
+The backup of files reported by 'Dhcp Jet Writer' is complete.
+The backup of files reported by 'COM+ REGDB Writer' is complete.
+Overall progress: 98%. 
+Currently backing up files reported by 'Registry Writer'...
+The backup of files reported by 'Registry Writer' is complete.
+The backup of files reported by 'WMI Writer' is complete.
+Overall progress: 99%. 
+Currently backing up files reported by 'NTDS'...
+Summary of the backup operation:
+------------------
+
+The backup operation successfully completed.
+The backup of the system state successfully completed [11/18/2026 11:03 AM].
+Log of files successfully backed up:
+C:\WINDOWS\Logs\WindowsServerBackup\Backup-18-11-2026_09-20-59.log
+
+
+Name                     LastWriteTime         
+----                     -------------         
+Backup 2026-11-18 092059 11/18/2026 3:03:06 AM 
+Catalog                  11/18/2026 3:03:06 AM 
+Logs                     11/18/2026 3:03:08 AM 
+SPPMetadataCache         11/18/2026 3:03:06 AM 
+MediaId                  11/18/2026 12:57:34 AM
+
+
+
+HOME ACL
+
+
+Sddl : O:BAG:SYD:PAI(A;OICI;FA;;;SY)(A;OICI;FA;;;BA)(A;OICI;0x1301bf;;;S-1-5-21-3793483027-3712407111-974862227-1106)
+
+
+
+

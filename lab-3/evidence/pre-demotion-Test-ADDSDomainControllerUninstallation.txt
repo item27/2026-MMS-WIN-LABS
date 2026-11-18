@@ -1,0 +1,14 @@
+VMID=104
+CAPTURE_UTC=2026-11-18T01:55:26.021450+00:00
+EXIT_CODE=0
+
+
+
+Message        : Operation completed successfully
+Context        : Test.VerifyDcPromoCore.DCPromo.General.1
+RebootRequired : False
+Status         : Success
+
+
+
+

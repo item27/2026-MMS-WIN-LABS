@@ -1,0 +1,12 @@
+VMID=109
+CAPTURE_UTC=2026-11-18T01:21:57.121665+00:00
+EXIT_CODE=0
+
+
+
+HasSucceeded : True
+ComputerName : AD-SRV-2
+
+
+
+

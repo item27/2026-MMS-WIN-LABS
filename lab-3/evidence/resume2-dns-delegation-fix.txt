@@ -1,0 +1,51 @@
+VMID=109
+CAPTURE_UTC=2026-11-18T02:54:34.537917+00:00
+EXIT_CODE=0
+
+
+ZoneName     ChildZoneName        NameServer             IPAddress
+--------     -------------        ----------             ---------
+GMAKMA.local _msdcs.GMAKMA.local. ad-srv-2.GMAKMA.local. 10.0.0.2 
+
+
+
+
+
+UseRootHint        : True
+Timeout(s)         : 3
+EnableReordering   : True
+IPAddress          : 
+ReorderedIPAddress : 
+
+
+
+
+
+
+ChildZoneName         : _msdcs.GMAKMA.local.
+IPAddress             : {DnsServerResourceRecord}
+NameServer            : DnsServerResourceRecord
+ZoneName              : GMAKMA.local
+PSComputerName        : 
+CimClass              : root/Microsoft/Windows/DNS:DnsServerZoneDelegation
+CimInstanceProperties : {ChildZoneName, IPAddress, NameServer, ZoneName}
+CimSystemProperties   : Microsoft.Management.Infrastructure.CimSystemProperties
+
+
+
+
+
+
+IPAddress             : 
+ReorderedIPAddress    : 
+EnableReordering      : True
+Timeout               : 3
+UseRootHint           : True
+PSComputerName        : 
+CimClass              : root/Microsoft/Windows/DNS:DnsServerForwarder
+CimInstanceProperties : {EnableReordering, IPAddress, ReorderedIPAddress, Timeout...}
+CimSystemProperties   : Microsoft.Management.Infrastructure.CimSystemProperties
+
+
+
+

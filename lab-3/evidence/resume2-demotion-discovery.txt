@@ -1,0 +1,101 @@
+VMID=104
+CAPTURE_UTC=2026-11-18T02:44:07.722132+00:00
+EXIT_CODE=0
+
+11/18/2026 04:57:05 [INFO] DsRolepWaitForService: QueryServiceStatus on NETLOGON returned 1 (gle=0), SvcStatus.dwCS=3
+11/18/2026 04:57:06 [INFO] DsRolepWaitForService: QueryServiceStatus on NETLOGON returned 1 (gle=0), SvcStatus.dwCS=1
+11/18/2026 04:57:06 [INFO] DsRolepWaitForService: exiting because NETLOGON entered STOPPED state
+11/18/2026 04:57:06 [INFO] DsRolepWaitForService(for any end state) on NETLOGON service returned 0
+11/18/2026 04:57:06 [INFO] ControlService(STOP) on NETLOGON returned 0(gle=1062)
+11/18/2026 04:57:06 [INFO] Exiting service-stop loop after service NETLOGON entered STOPPED state
+11/18/2026 04:57:06 [INFO] StopService on NETLOGON returned 0
+11/18/2026 04:57:06 [INFO] Configuring service NETLOGON to 1 returned 0
+11/18/2026 04:57:06 [INFO] Stopped NETLOGON
+11/18/2026 04:57:06 [INFO] Configuring service NTDS
+11/18/2026 04:57:06 [INFO] Configuring service NTDS to 2112 returned 0
+11/18/2026 04:57:06 [INFO] Stopping service IsmServ
+11/18/2026 04:57:06 [INFO] ControlService(STOP) on IsmServ returned 1(gle=122)
+11/18/2026 04:57:06 [INFO] DsRolepWaitForService: waiting for IsmServ to enter one of 7 states
+11/18/2026 04:57:06 [INFO] DsRolepWaitForService: QueryServiceStatus on IsmServ returned 1 (gle=0), SvcStatus.dwCS=3
+11/18/2026 04:57:07 [INFO] DsRolepWaitForService: QueryServiceStatus on IsmServ returned 1 (gle=0), SvcStatus.dwCS=1
+11/18/2026 04:57:07 [INFO] DsRolepWaitForService: exiting because IsmServ entered STOPPED state
+11/18/2026 04:57:07 [INFO] DsRolepWaitForService(for any end state) on IsmServ service returned 0
+11/18/2026 04:57:07 [INFO] ControlService(STOP) on IsmServ returned 0(gle=1062)
+11/18/2026 04:57:07 [INFO] Exiting service-stop loop after service IsmServ entered STOPPED state
+11/18/2026 04:57:07 [INFO] StopService on IsmServ returned 0
+11/18/2026 04:57:07 [INFO] Configuring service IsmServ to 577 returned 0
+11/18/2026 04:57:07 [INFO] Stopping service kdc
+11/18/2026 04:57:07 [INFO] ControlService(STOP) on kdc returned 1(gle=122)
+11/18/2026 04:57:07 [INFO] DsRolepWaitForService: waiting for kdc to enter one of 7 states
+11/18/2026 04:57:07 [INFO] DsRolepWaitForService: QueryServiceStatus on kdc returned 1 (gle=0), SvcStatus.dwCS=3
+11/18/2026 04:57:08 [INFO] DsRolepWaitForService: QueryServiceStatus on kdc returned 1 (gle=0), SvcStatus.dwCS=1
+11/18/2026 04:57:08 [INFO] DsRolepWaitForService: exiting because kdc entered STOPPED state
+11/18/2026 04:57:08 [INFO] DsRolepWaitForService(for any end state) on kdc service returned 0
+11/18/2026 04:57:08 [INFO] ControlService(STOP) on kdc returned 0(gle=1062)
+11/18/2026 04:57:08 [INFO] Exiting service-stop loop after service kdc entered STOPPED state
+11/18/2026 04:57:08 [INFO] StopService on kdc returned 0
+11/18/2026 04:57:08 [INFO] Configuring service kdc to 65 returned 0
+11/18/2026 04:57:08 [INFO] Stopping service NETLOGON
+11/18/2026 04:57:08 [INFO] ControlService(STOP) on NETLOGON returned 0(gle=1062)
+11/18/2026 04:57:08 [INFO] Exiting service-stop loop after service NETLOGON entered STOPPED state
+11/18/2026 04:57:08 [INFO] StopService on NETLOGON returned 0
+11/18/2026 04:57:08 [INFO] Configuring service NETLOGON to 273 returned 0
+11/18/2026 04:57:08 [INFO] Configuring service DFSR
+11/18/2026 04:57:08 [INFO] Configuring service DFSR to 2304 returned 0
+11/18/2026 04:57:08 [INFO] Configured domain controller services
+11/18/2026 04:57:08 [INFO] Uninstalling the Directory Service
+11/18/2026 04:57:08 [INFO] Invoking NtdsDemote
+11/18/2026 04:57:08 [INFO] Preparing the security account manager (SAM) and Active Directory Domain Services for demotion...
+11/18/2026 04:57:08 [INFO] Validating the removal of this Active Directory Domain Controller...
+11/18/2026 04:57:08 [INFO] Authenticating supplied credentials
+11/18/2026 04:57:08 [INFO] Creating new local account information...
+11/18/2026 04:57:08 [INFO] Creating a new local security account manager (SAM) database...
+11/18/2026 04:57:08 [INFO] Setting the new Local Security Authority (LSA) account information...
+11/18/2026 04:57:08 [INFO] Removing Active Directory Domain Services objects that refer to the local Active Directory Domain Controller from the remote Active Directory Domain Controller AD-SRV-2.GMAKMA.local...
+11/18/2026 04:57:09 [INFO] Removing LDAP and remote procedure call (RPC) access to Active Directory Domain Services...
+11/18/2026 04:57:10 [INFO] Completing removal of Active Directory Domain Services, SAM and LSA...
+11/18/2026 04:57:10 [INFO] Active Directory Domain Services is attempting to recursively delete the \Registry\Machine\System\CurrentControlSet\Services\NTDS registry key (DeleteRoot=0).
+11/18/2026 04:57:10 [INFO] Active Directory Domain Services is attempting to recursively delete the \Registry\Machine\System\CurrentControlSet\Services\NTDS\Diagnostics registry key (DeleteRoot=1).
+11/18/2026 04:57:10 [INFO] Active Directory Domain Services successfully deleted the \Registry\Machine\System\CurrentControlSet\Services\NTDS\Diagnostics registry key (DeleteRoot=1).
+11/18/2026 04:57:10 [INFO] Active Directory Domain Services is attempting to recursively delete the \Registry\Machine\System\CurrentControlSet\Services\NTDS\Parameters registry key (DeleteRoot=1).
+11/18/2026 04:57:10 [INFO] Active Directory Domain Services successfully deleted the \Registry\Machine\System\CurrentControlSet\Services\NTDS\Parameters registry key (DeleteRoot=1).
+11/18/2026 04:57:10 [INFO] Active Directory Domain Services is attempting to recursively delete the \Registry\Machine\System\CurrentControlSet\Services\NTDS\RID Values registry key (DeleteRoot=1).
+11/18/2026 04:57:10 [INFO] Active Directory Domain Services successfully deleted the \Registry\Machine\System\CurrentControlSet\Services\NTDS\RID Values registry key (DeleteRoot=1).
+11/18/2026 04:57:10 [INFO] Active Directory Domain Services is attempting to recursively delete the \Registry\Machine\System\CurrentControlSet\Services\NTDS\Security registry key (DeleteRoot=1).
+11/18/2026 04:57:10 [INFO] Active Directory Domain Services successfully deleted the \Registry\Machine\System\CurrentControlSet\Services\NTDS\Security registry key (DeleteRoot=1).
+11/18/2026 04:57:10 [INFO] Active Directory Domain Services successfully deleted the \Registry\Machine\System\CurrentControlSet\Services\NTDS registry key (DeleteRoot=0).
+11/18/2026 04:57:10 [INFO] NtdsDemote returned 0
+11/18/2026 04:57:10 [INFO] DsRolepDemoteDs returned 0
+11/18/2026 04:57:10 [INFO] This machine is no longer a domain controller
+11/18/2026 04:57:14 [INFO] Successfully informed DNS Server to prepare for demotion
+11/18/2026 04:57:27 [ERROR] Setting security on server files failed with 2
+11/18/2026 04:57:27 [INFO] The attempted domain controller operation has completed
+11/18/2026 04:57:27 [INFO] Updating service status to 4
+11/18/2026 04:57:27 [INFO] DsRolepSetOperationDone returned 0
+
+Name                                LastWriteTime        
+----                                -------------        
+dhcp-before.xml                     11/18/2026 1:05:44 AM
+systemstate-backup.log              11/18/2026 3:03:21 AM
+systemstate-exit.txt                11/18/2026 3:03:21 AM
+systemstate-interrupted-license.log 11/18/2026 1:07:31 AM
+
+Name         Id StartTime            
+----         -- ---------            
+powershell 5884 11/18/2026 5:44:02 AM
+
+
+
+                                                         
+dcpromoui 19B0.824 0C1D 04:57:29.075         need to reboot, but not rebooting per the answerfile
+dcpromoui 19B0.824 0C1E 04:57:29.075         Enter RebootFunct_MapExitCodeToRebootExitCode
+dcpromoui 19B0.824 0C1F 04:57:29.075       performed state 30, next state 36
+dcpromoui 19B0.824 0C20 04:57:29.075       Error: You must restart this computer to complete the operation.
+dcpromoui 19B0.824 0C21 04:57:29.075       Enter State::GetHadNonCriticalFailures
+dcpromoui 19B0.824 0C22 04:57:29.075         bHadNonCriticalFailures = false
+dcpromoui 19B0.824 0C23 04:57:29.075     Enter State::UnbindFromReplicationPartnetDC
+dcpromoui 19B0.824 0C24 04:57:29.075     Exit code is 2
+dcpromoui 19B0.824 0C25 04:57:29.075   Exit code is 2
+dcpromoui 19B0.D3C 0C26 04:57:29.103 closing log
+
+

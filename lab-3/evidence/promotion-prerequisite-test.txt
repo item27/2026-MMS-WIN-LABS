@@ -1,0 +1,29 @@
+VMID=109
+CAPTURE_UTC=2026-11-18T01:24:03.981615+00:00
+EXIT_CODE=0
+
+
+
+Message        : Test VerifyAdminTrustedForDelegation completed successfully
+Context        : Test.VerifyAdminTrustedForDelegation.DCPromo.General.1
+RebootRequired : False
+Status         : Success
+
+Message        : Test VerifyADPrepPrerequisites completed successfully
+Context        : Test.VerifyADPrepPrerequisites.ADPrep.General.0
+RebootRequired : False
+Status         : Success
+
+Message        : Operation completed successfully
+Context        : Test.VerifyDcPromoCore.DCPromo.General.3
+RebootRequired : False
+Status         : Success
+
+Message        : Test VerifyOutboundReplicationEnabled completed successfully
+Context        : Test.VerifyOutboundReplicationEnabled.DCPromo.General.1
+RebootRequired : False
+Status         : Success
+
+
+
+
