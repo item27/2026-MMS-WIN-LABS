@@ -7,7 +7,7 @@
 - Репозиторий: `/Users/k6zma/Documents/ChatGPT/Windows/2026-MMS-WIN-LABS`
 - Ветка: `lab-5-attempt-1`, origin `item27/2026-MMS-WIN-LABS`, push этой ветки пользователь разрешил
 - ТЗ: `sources/awin-5-2025.docx`, дословная копия `lab-5-task.md`
-- Последняя собственная версия отчёта: `evidence/versions/report-2026-11-19-06.md`
+- Последняя собственная версия отчёта: `evidence/versions/report-2026-11-19-07.md`
 - Чужой Lab-4.docx не является решением пятой работы
 
 ## Стенд
@@ -70,3 +70,5 @@ Windows ISO `vm-media/Windows_Server_2022_x64.iso`, официальный Micro
 RAID5 W: 8000 МиБ, Healthy после Repair Volume на d4. При отключении d3 Windows видела d4 как Disk 3 по serial DA1695117FB540359541, W: Failed Redundancy, два SHA-256 неизменны до/после восстановления. d3 возвращён, запущена загрузка S1. Перед очисткой заново проверить номера всех четырёх дисков
 
 На четырёх сверенных дисках удалена старая разметка, выполнен Create-Raid5.txt. V: создан, DiskPart подтвердил NTFS и четыре динамических диска. На S2 служба MSiSCSI Running. На S1 выполняется установка FS-iSCSITarget-Server с созданием LUN1 после успеха
+
+Часть 4 выполнена. V: Healthy 12831420416 байт. V:\iSCSI\LUN1.vhdx, 5 ГиБ, привязан к Lab5Target, инициатор 10.0.0.2. S2: зарегистрирован портал 10.0.0.1, сеанс IsConnected/IsPersistent=True, Disk 1 iSCSI 5368709120 байт GPT, R: NTFS Healthy 5350879232 байта. Тестовый файл прочитан. Далее подключаем семь дисков Storage Spaces

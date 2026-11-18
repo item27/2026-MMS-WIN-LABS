@@ -7,8 +7,6 @@ p code, li code, td code { font: inherit; background: none; padding: 0; border: 
 
 ## Работа с томами хранения данных в Windows Server
 
-Черновик по выполненным шагам. На первом сервере создан домен `GMAKMA.local`. На втором установлены Windows и гостевые инструменты. Оба сервера состоят в домене и доступны друг другу по сети. В части 2 подключены четыре учебных диска, снята инвентаризация и проверен том NTFS в папке `C:\Volume1`
-
 ### Цель работы
 
 Получить представление и практические навыки работы по настройки томов хранения данных, организации программного RAID и использование протокола iSCSI.
@@ -485,11 +483,76 @@ detail volume
 diskpart /s C:\Lab5\Create-Raid5.txt
 ```
 
-DiskPart подтвердил создание и форматирование тома V: на дисках №1-4. В detail volume ёмкость отображается округлённо как 11 GB
+DiskPart подтвердил создание и форматирование тома V: на дисках №1-4. Get-Volume показал состояние Healthy и ёмкость 12 831 420 416 байт (11,95 ГиБ)
+
+## Часть 4. Подключение дисков через iSCSI
+
+### 4.1-4.5. LUN на сервере s1
+
+Первый сервер ad-srv предоставляет блочное устройство как iSCSI Target. Второй сервер ad-srv-2 работает как Initiator: он подключается к цели и отправляет ей команды SCSI по IP. На первом сервере установили роль iSCSI Target Server и разместили LUN1 на томе V:. Доступ к цели разрешили адресу 10.0.0.2
+
+```powershell
+Install-WindowsFeature FS-iSCSITarget-Server -IncludeManagementTools
+New-Item V:\iSCSI -ItemType Directory
+New-IscsiVirtualDisk -Path V:\iSCSI\LUN1.vhdx -Size 5GB
+New-IscsiServerTarget -TargetName Lab5Target -InitiatorIds 'IPAddress:10.0.0.2'
+Add-IscsiVirtualDiskTargetMapping -TargetName Lab5Target -Path V:\iSCSI\LUN1.vhdx
+```
+
+Проверили через Get-IscsiVirtualDisk и Get-IscsiServerTarget: ёмкость виртуального диска 5 368 709 120 байт, он привязан к Lab5Target как LUN 0
+
+### 4.6. Подключение LUN1 на втором сервере
+
+На ad-srv-2 запустили службу Microsoft iSCSI Initiator, добавили портал 10.0.0.1 и подключили найденную цель с сохранением подключения
+
+```powershell
+Set-Service MSiSCSI -StartupType Automatic
+Start-Service MSiSCSI
+New-IscsiTargetPortal -TargetPortalAddress 10.0.0.1
+$target = Get-IscsiTarget | Where-Object NodeAddress -like '*lab5target*'
+Connect-IscsiTarget -NodeAddress $target.NodeAddress -IsPersistent $true
+```
+
+Get-IscsiSession показал одно подключение с IsConnected=True и IsPersistent=True. Цель имеет IQN iqn.1991-05.com.microsoft:ad-srv-lab5target-target
+
+Сверили новый диск по шине iSCSI и ёмкости 5 ГиБ. На втором сервере он получил номер 1. Сняли защиту от записи, перевели диск в Online, создали GPT и том R: с NTFS
+
+```powershell
+Set-Disk -Number 1 -IsReadOnly $false
+Set-Disk -Number 1 -IsOffline $false
+Initialize-Disk -Number 1 -PartitionStyle GPT
+New-Partition -DiskNumber 1 -UseMaximumSize -DriveLetter R |
+    Format-Volume -FileSystem NTFS -NewFileSystemLabel Lab5-LUN1
+```
+
+Записали файл на R: и прочитали его. Команда Get-Content вернула строку Lab 5 iSCSI read/write check
+
+```powershell
+'Lab 5 iSCSI read/write check' | Set-Content R:\iscsi-check.txt -Encoding ASCII
+Get-Content R:\iscsi-check.txt
+```
+
+### 4.7-4.11. Инвентаризация хранилища второго сервера
+
+```powershell
+Get-PhysicalDisk
+Get-CimInstance Win32_LogicalDisk
+Get-Partition
+Get-Volume
+Get-Disk | Where-Object BusType -eq iSCSI
+```
+
+| Уровень | Что показал вывод на ad-srv-2 |
+|---|---|
+| Физические устройства | Системный QEMU HARDDISK на SATA и MSFT Virtual HD на iSCSI |
+| Логические устройства | C:, оптические D: и E:, новый локальный диск R: с NTFS |
+| Разделы | Четыре раздела на системном диске. На диске №1 служебный раздел GPT и раздел №2 с буквой R: |
+| Тома | R: с меткой Lab5-LUN1 и состоянием Healthy, ёмкость 5 350 879 232 байта |
+| Фильтр iSCSI | Один диск №1, 5 368 709 120 байт, GPT |
 
 ## Вопросы:
 
-Ниже приведены ответы, для которых уже есть результаты или достаточно сведений о работе Windows. Объёмы томов RAID5 проверены в DiskPart. Сравнение результатов iSCSI и `Storage Spaces` требует измерений в частях 4 и 5
+Ниже приведены ответы, для которых уже есть результаты или достаточно сведений о работе Windows. Объёмы томов RAID5 проверены в DiskPart. Объёмы Storage Spaces будут доступны после создания виртуальных дисков
 
 ### 1. В чем разница возможностей динамических и базовых дисков в Windows?
 
@@ -509,7 +572,7 @@ DiskPart подтвердил создание и форматирование �
 
 ### 5. Какой будет объем диска W: после выполнения п.1 части 3 и диска V: после п.9 части 3? Почему?
 
-При одинаковом размере участков полезная ёмкость RAID5 равна `(N - 1) × S`, где N - число дисков, S - размер участка на одном диске. Для `W:` выделили по 4000 МиБ на диск и получили 8000 МиБ (7,81 ГиБ). Для `V:` использовали доступное пространство на всех четырёх дисках. DiskPart округлил ёмкость до 11 GB. Эквивалент ёмкости одного диска занимает распределённая чётность
+При одинаковом размере участков полезная ёмкость RAID5 равна `(N - 1) × S`, где N - число дисков, S - размер участка на одном диске. Для `W:` выделили по 4000 МиБ на диск и получили 8000 МиБ (7,81 ГиБ). Для `V:` использовали доступное пространство на всех четырёх дисках. Get-Volume показал 12 831 420 416 байт (11,95 ГиБ). Эквивалент ёмкости одного диска занимает распределённая чётность
 
 ### 6. Дайте определения понятиям iSCSI Initiator, iSCSI Target и IQN (iSCSI qualified name).
 
@@ -526,6 +589,10 @@ Install-WindowsFeature FS-iSCSITarget-Server -IncludeManagementTools
 ### 8. При создании виртуального диска iSCSI возможно выбрать три типа диска Фиксированный, Динамический и Разностный. В чем разница этих типов? Придумайте реальные ситуации, когда целесообразно применять каждый из трех типов дисков.
 
 Фиксированный диск сразу занимает место под всю ёмкость, что удобно для базы данных с заранее выделенным объёмом. Динамический файл растёт при записи до заданного предела и подходит для небольшого учебного LUN. Разностный хранит изменения поверх родительского образа, поэтому подходит для нескольких учебных систем с общим неизменяемым образом
+
+### 9. Сравните данные, полученные в части 2, п. 3-6 с данными, полученными в части 4, п. 7-10.
+
+В части 2 на первом сервере Windows показывала четыре локальных устройства VirtIO по 4 ГиБ. На первом из них раздел №2 был подключён в папку C:\Volume1, поэтому виден среди разделов и томов без отдельной буквы. В части 4 второй сервер обнаружил блочное устройство iSCSI на 5 ГиБ и создал на нём раздел №2 с буквой R:. Win32_LogicalDisk показывает R: как локальный диск, а тип iSCSI виден в BusType
 
 ### 10. Чем отличается по-вашему программный RAID и Storage Spaces? Какие аналогии из мира Linux вы можете привести?
 
