@@ -4,7 +4,7 @@
 p code, li code, td code { font: inherit; background: none; padding: 0; border: 0; }
 </style>
 
-Стенд ещё готовится. Команды ниже предназначены для последующего выполнения и пока не проверены в гостевой Windows. Текущий этап записан в [состоянии работы](evidence/session-status.md), выполненные действия будут попадать в [отчёт](lab-5-report.md)
+На первом сервере создан домен `GMAKMA.local`. Присоединение второго сервера и проверка связи между машинами ещё не выполнены. Ниже сохраняем команды для повторения подготовки и последующих этапов. Текущий этап записан в [состоянии работы](evidence/session-status.md), выполненные действия находятся в [отчёте](lab-5-report.md)
 
 ## Часть 1. Подготовительная.
 
@@ -41,9 +41,9 @@ Get-NetAdapter
 
 В следующих командах `Ethernet` заменяем фактическим именем из вывода, если оно отличается. На `ad-srv` задаём адрес и DNS:
 
-```powershell
-New-NetIPAddress -InterfaceAlias Ethernet -IPAddress 10.0.0.1 -PrefixLength 8
-Set-DnsClientServerAddress -InterfaceAlias Ethernet -ServerAddresses 10.0.0.1
+```bat
+netsh interface ipv4 set address name=Ethernet static 10.0.0.1 255.0.0.0 none
+netsh interface ipv4 set dnsservers name=Ethernet static 10.0.0.1 primary validate=no
 ```
 
 На `ad-srv-2` задаём другой адрес и тот же DNS. Шлюз в изолированной сети не указываем:
@@ -61,15 +61,30 @@ Set-DnsClientServerAddress -InterfaceAlias Ethernet -ServerAddresses 10.0.0.1
 Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
 ```
 
-В Server Manager открываем уведомление о настройке AD DS и выбираем Promote this server to a domain controller. В мастере выбираем Add a new forest, указываем `GMAKMA.local`, оставляем включёнными DNS Server и Global Catalog. Проверяем NetBIOS-имя `GMAKMA`. Пароль DSRM пользователь вводит самостоятельно, в скрипты и отчёт его не записываем
+В той же повышенной PowerShell создаём новый лес и устанавливаем DNS:
 
-После проверки параметров завершаем мастер и дожидаемся перезагрузки. Входим на `ad-srv` администратором домена. На `ad-srv-2` открываем повышенную PowerShell и присоединяем машину к домену:
+```powershell
+Install-ADDSForest -DomainName GMAKMA.local -DomainNetbiosName GMAKMA -InstallDns
+```
+
+Пользователь вводит новый пароль DSRM и его повтор, затем подтверждает продолжение ответом `Y`. Пароль в файлы не записываем. После завершения установки Windows автоматически перезагружается
+
+На первом сервере этот шаг уже выполнен. Запрос `Win32_ComputerSystem` подтвердил домен `GMAKMA.local` и `DomainRole=5`, служба `NTDS` запущена. В cmd проверяем службу и обнаружение контроллера:
+
+```bat
+sc query NTDS
+nltest /dsgetdc:GMAKMA.local /force
+```
+
+На `ad-srv` обе проверки прошли успешно. Это подтверждает работу первого контроллера, связь со вторым сервером проверяем отдельно
+
+На `ad-srv-2` открываем повышенную PowerShell и присоединяем машину к домену:
 
 ```powershell
 Add-Computer -DomainName GMAKMA.local -Credential GMAKMA\Administrator -Restart
 ```
 
-В появившемся окне пользователь вводит пароль администратора домена. После перезагрузки проверяем членство в домене
+В запросе учётных данных вводим действующий пароль администратора домена. После перезагрузки проверяем членство в домене
 
 ### Проверка и исходные снимки
 
@@ -77,7 +92,7 @@ Add-Computer -DomainName GMAKMA.local -Credential GMAKMA\Administrator -Restart
 
 ```powershell
 hostname
-Get-CimInstance Win32_ComputerSystem | Select-Object Name, Domain, PartOfDomain
+Get-CimInstance Win32_ComputerSystem | Select-Object Name, Domain, PartOfDomain, DomainRole
 Get-NetIPConfiguration
 ```
 

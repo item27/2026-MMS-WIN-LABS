@@ -98,7 +98,7 @@ echo %NUMBER_OF_PROCESSORS%
 Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
 ```
 
-Установка вернула `Success: true` и `ExitCode: 0`. Сохранили полный результат в `evidence/commands/first-server-install-ad-ds.json`. Создание леса `GMAKMA.local` ещё не выполнено
+Установка вернула `Success: true` и `ExitCode: 0`. Сохранили полный результат в `evidence/commands/first-server-install-ad-ds.json`
 
 
 ### 1.6. Сеть первого сервера
