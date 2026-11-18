@@ -1,0 +1,90 @@
+{
+  "source": "Запись экрана — 2026-11-18 в 19.10.09.mov",
+  "speed": 1,
+  "audio": false,
+  "duration": 116,
+  "segments": [
+    {
+      "source_start": 262,
+      "source_end": 270,
+      "output_start": 0,
+      "output_end": 8,
+      "label": "Tools -> DHCP",
+      "view": "server"
+    },
+    {
+      "source_start": 291,
+      "source_end": 299,
+      "output_start": 8,
+      "output_end": 16,
+      "label": "Дерево DHCP",
+      "view": "server"
+    },
+    {
+      "source_start": 304,
+      "source_end": 324,
+      "output_start": 16,
+      "output_end": 36,
+      "label": "Свойства области и Failover Normal",
+      "view": "server"
+    },
+    {
+      "source_start": 326,
+      "source_end": 334,
+      "output_start": 36,
+      "output_end": 44,
+      "label": "Пул и исключения",
+      "view": "server"
+    },
+    {
+      "source_start": 335,
+      "source_end": 342,
+      "output_start": 44,
+      "output_end": 51,
+      "label": "Резервирование .199",
+      "view": "server"
+    },
+    {
+      "source_start": 358,
+      "source_end": 363,
+      "output_start": 51,
+      "output_end": 56,
+      "label": "Политика включена",
+      "view": "server"
+    },
+    {
+      "source_start": 374,
+      "source_end": 383,
+      "output_start": 56,
+      "output_end": 65,
+      "label": "Свойства политики",
+      "view": "server"
+    },
+    {
+      "source_start": 388,
+      "source_end": 407,
+      "output_start": 65,
+      "output_end": 84,
+      "label": "Условие MAC и Router",
+      "view": "server"
+    },
+    {
+      "source_start": 423,
+      "source_end": 437,
+      "output_start": 84,
+      "output_end": 98,
+      "label": "Исходный ipconfig /all",
+      "view": "client"
+    },
+    {
+      "source_start": 920,
+      "source_end": 938,
+      "output_start": 98,
+      "output_end": 116,
+      "label": "Advanced и Locally Administered Address",
+      "view": "client"
+    }
+  ],
+  "output": "lab4-part1-cut.mp4",
+  "status": "part1_only_pending_new_recording"
+}
