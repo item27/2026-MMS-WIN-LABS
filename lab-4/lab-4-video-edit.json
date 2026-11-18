@@ -1,90 +1,248 @@
 {
-  "source": "Запись экрана — 2026-11-18 в 19.10.09.mov",
-  "speed": 1,
-  "audio": false,
-  "duration": 116,
-  "segments": [
+  "sources": [
     {
-      "source_start": 262,
-      "source_end": 270,
-      "output_start": 0,
-      "output_end": 8,
-      "label": "Tools -> DHCP",
-      "view": "server"
+      "file": "Запись экрана — 2026-11-18 в 19.10.09.mov",
+      "segments": [
+        {
+          "source_start": 262,
+          "source_end": 270,
+          "output_start": 0.0,
+          "output_end": 5.333,
+          "label": "Tools -> DHCP",
+          "view": "server"
+        },
+        {
+          "source_start": 291,
+          "source_end": 299,
+          "output_start": 5.333,
+          "output_end": 10.667,
+          "label": "Дерево DHCP",
+          "view": "server"
+        },
+        {
+          "source_start": 304,
+          "source_end": 324,
+          "output_start": 10.667,
+          "output_end": 24.0,
+          "label": "Свойства области и Failover Normal",
+          "view": "server"
+        },
+        {
+          "source_start": 326,
+          "source_end": 334,
+          "output_start": 24.0,
+          "output_end": 29.333,
+          "label": "Пул и исключения",
+          "view": "server"
+        },
+        {
+          "source_start": 335,
+          "source_end": 342,
+          "output_start": 29.333,
+          "output_end": 34.0,
+          "label": "Резервирование .199",
+          "view": "server"
+        },
+        {
+          "source_start": 358,
+          "source_end": 363,
+          "output_start": 34.0,
+          "output_end": 37.333,
+          "label": "Политика включена",
+          "view": "server"
+        },
+        {
+          "source_start": 374,
+          "source_end": 383,
+          "output_start": 37.333,
+          "output_end": 43.333,
+          "label": "Свойства политики",
+          "view": "server"
+        },
+        {
+          "source_start": 388,
+          "source_end": 407,
+          "output_start": 43.333,
+          "output_end": 56.0,
+          "label": "Условие MAC и Router",
+          "view": "server"
+        },
+        {
+          "source_start": 423,
+          "source_end": 437,
+          "output_start": 56.0,
+          "output_end": 65.333,
+          "label": "Исходный ipconfig /all",
+          "view": "client"
+        },
+        {
+          "source_start": 920,
+          "source_end": 938,
+          "output_start": 65.333,
+          "output_end": 77.333,
+          "label": "Advanced и Locally Administered Address",
+          "view": "client"
+        }
+      ]
     },
     {
-      "source_start": 291,
-      "source_end": 299,
-      "output_start": 8,
-      "output_end": 16,
-      "label": "Дерево DHCP",
-      "view": "server"
-    },
-    {
-      "source_start": 304,
-      "source_end": 324,
-      "output_start": 16,
-      "output_end": 36,
-      "label": "Свойства области и Failover Normal",
-      "view": "server"
-    },
-    {
-      "source_start": 326,
-      "source_end": 334,
-      "output_start": 36,
-      "output_end": 44,
-      "label": "Пул и исключения",
-      "view": "server"
-    },
-    {
-      "source_start": 335,
-      "source_end": 342,
-      "output_start": 44,
-      "output_end": 51,
-      "label": "Резервирование .199",
-      "view": "server"
-    },
-    {
-      "source_start": 358,
-      "source_end": 363,
-      "output_start": 51,
-      "output_end": 56,
-      "label": "Политика включена",
-      "view": "server"
-    },
-    {
-      "source_start": 374,
-      "source_end": 383,
-      "output_start": 56,
-      "output_end": 65,
-      "label": "Свойства политики",
-      "view": "server"
-    },
-    {
-      "source_start": 388,
-      "source_end": 407,
-      "output_start": 65,
-      "output_end": 84,
-      "label": "Условие MAC и Router",
-      "view": "server"
-    },
-    {
-      "source_start": 423,
-      "source_end": 437,
-      "output_start": 84,
-      "output_end": 98,
-      "label": "Исходный ipconfig /all",
-      "view": "client"
-    },
-    {
-      "source_start": 920,
-      "source_end": 938,
-      "output_start": 98,
-      "output_end": 116,
-      "label": "Advanced и Locally Administered Address",
-      "view": "client"
+      "file": "Запись экрана — 2026-11-18 в 19.38.17.mov",
+      "segments": [
+        {
+          "source_start": 76,
+          "source_end": 94,
+          "output_start": 77.333,
+          "output_end": 89.333,
+          "label": "MAC резервирования: 000102030405",
+          "view": "client"
+        },
+        {
+          "source_start": 139,
+          "source_end": 157,
+          "output_start": 89.333,
+          "output_end": 101.333,
+          "label": "Освобождение и запрос аренды",
+          "view": "client"
+        },
+        {
+          "source_start": 173,
+          "source_end": 185,
+          "output_start": 101.333,
+          "output_end": 109.333,
+          "label": "Результат: адрес 10.0.0.199",
+          "view": "client"
+        },
+        {
+          "source_start": 225,
+          "source_end": 240,
+          "output_start": 109.333,
+          "output_end": 119.333,
+          "label": "MAC политики: AA0102030405",
+          "view": "client"
+        },
+        {
+          "source_start": 262,
+          "source_end": 282,
+          "output_start": 119.333,
+          "output_end": 132.667,
+          "label": "Повторный запрос аренды",
+          "view": "client"
+        },
+        {
+          "source_start": 300,
+          "source_end": 307,
+          "output_start": 132.667,
+          "output_end": 137.333,
+          "label": "Получен шлюз политики",
+          "view": "client"
+        },
+        {
+          "source_start": 332,
+          "source_end": 343,
+          "output_start": 137.333,
+          "output_end": 144.667,
+          "label": "Результат: шлюз 10.10.10.10",
+          "view": "client"
+        },
+        {
+          "source_start": 357,
+          "source_end": 377,
+          "output_start": 144.667,
+          "output_end": 158.0,
+          "label": "Возврат исходного MAC: Not Present",
+          "view": "client"
+        },
+        {
+          "source_start": 393,
+          "source_end": 413,
+          "output_start": 158.0,
+          "output_end": 171.333,
+          "label": "Запрос аренды после возврата MAC",
+          "view": "client"
+        },
+        {
+          "source_start": 428,
+          "source_end": 440,
+          "output_start": 171.333,
+          "output_end": 179.333,
+          "label": "Исходный MAC и шлюз восстановлены",
+          "view": "client"
+        },
+        {
+          "source_start": 671,
+          "source_end": 679,
+          "output_start": 179.333,
+          "output_end": 184.667,
+          "label": "Резервный сервер: Normal, Standby, 35%",
+          "view": "reserve"
+        },
+        {
+          "source_start": 739,
+          "source_end": 763,
+          "output_start": 184.667,
+          "output_end": 200.667,
+          "label": "Отключение Ethernet основного сервера",
+          "view": "server"
+        },
+        {
+          "source_start": 820,
+          "source_end": 834,
+          "output_start": 200.667,
+          "output_end": 210.0,
+          "label": "Release и renew при отключённом основном",
+          "view": "client"
+        },
+        {
+          "source_start": 843,
+          "source_end": 852,
+          "output_start": 210.0,
+          "output_end": 216.0,
+          "label": "Получение адреса от резерва",
+          "view": "client"
+        },
+        {
+          "source_start": 860,
+          "source_end": 876,
+          "output_start": 216.0,
+          "output_end": 226.667,
+          "label": "Результат: DHCP Server 10.0.0.2",
+          "view": "client"
+        },
+        {
+          "source_start": 890,
+          "source_end": 898,
+          "output_start": 226.667,
+          "output_end": 232.0,
+          "label": "Резервный сервер: Partner down",
+          "view": "reserve"
+        },
+        {
+          "source_start": 901,
+          "source_end": 918,
+          "output_start": 232.0,
+          "output_end": 243.333,
+          "label": "Включение Ethernet основного сервера",
+          "view": "server"
+        },
+        {
+          "source_start": 936,
+          "source_end": 961,
+          "output_start": 243.333,
+          "output_end": 260.0,
+          "label": "Восстановление: Normal / Normal",
+          "view": "reserve"
+        }
+      ]
     }
   ],
-  "output": "lab4-part1-cut.mp4",
-  "status": "part1_only_pending_new_recording"
+  "speed": 1.5,
+  "audio": false,
+  "duration": 260.0,
+  "output": "lab4-demo-1.5x.mp4",
+  "status": "complete",
+  "crops": {
+    "server": "2048:1670:0:80",
+    "client": "2048:1670:568:478",
+    "reserve": "1972:1670:1628:504"
+  }
 }
