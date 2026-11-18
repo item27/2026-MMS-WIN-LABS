@@ -206,13 +206,13 @@ PASS: wrong-primary guard stopped before changes
 
 В выводе выше опущены две повторные строки PLAN перед PASS. Реальная установка и настройка этим сценарием не выполнялись, работоспособность полного развёртывания на чистом стенде не доказана. Транзакционного отката нет, ошибка может оставить частичную конфигурацию. Не запускать -Apply на текущем стенде. Для полного теста нужен отдельно согласованный чистый стенд с проверенной изоляцией
 
-Листинг сценария приведён последовательно по частям без изменения строк
+Сценарий следует запускать от имени администратора домена на основном сервере только в проверенном изолированном стенде. При наличии областей DHCP изменение конфигурации не допускается без отдельной проверки
+
+Листинг сценария приведён последовательно по частям без служебных комментариев
 
 Часть 1
 
 ```powershell
-# Run as domain administrator on the primary Windows Server, only on a verified isolated lab.
-# Default: validation and execution plan ONLY. -Apply explicitly permits changes.
 [CmdletBinding()]
 param(
   [Parameter(Mandatory=$true)][string]$ConfigPath,
@@ -221,7 +221,11 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $c = Get-Content -LiteralPath $ConfigPath -Raw | ConvertFrom-Json
-$required = 'Primary','Partner','PrimaryIP','PartnerIP','ScopeName','ScopeId','StartRange','EndRange','SubnetMask','ExclusionStart','ExclusionEnd','ReservationIP','ReservationMac','LeaseHours','Router','DnsServer','DnsDomain','PolicyName','PolicyMacPattern','PolicyRouter','Relationship','ReservePercent','McltMinutes','SwitchMinutes'
+$required = 'Primary','Partner','PrimaryIP','PartnerIP','ScopeName',
+  'ScopeId','StartRange','EndRange','SubnetMask','ExclusionStart',
+  'ExclusionEnd','ReservationIP','ReservationMac','LeaseHours','Router',
+  'DnsServer','DnsDomain','PolicyName','PolicyMacPattern','PolicyRouter',
+  'Relationship','ReservePercent','McltMinutes','SwitchMinutes'
 foreach ($name in $required) {
 ```
 
@@ -230,7 +234,9 @@ foreach ($name in $required) {
 ```powershell
   if (-not $c.PSObject.Properties[$name] -or [string]::IsNullOrWhiteSpace([string]$c.$name)) { throw "Missing parameter: $name" }
 }
-foreach ($name in 'PrimaryIP','PartnerIP','ScopeId','StartRange','EndRange','SubnetMask','ExclusionStart','ExclusionEnd','ReservationIP','Router','DnsServer','PolicyRouter') {
+foreach ($name in 'PrimaryIP','PartnerIP','ScopeId','StartRange',
+  'EndRange','SubnetMask','ExclusionStart','ExclusionEnd',
+  'ReservationIP','Router','DnsServer','PolicyRouter') {
   $ip = $null
   if (-not [System.Net.IPAddress]::TryParse([string]$c.$name,[ref]$ip) -or $ip.AddressFamily -ne [System.Net.Sockets.AddressFamily]::InterNetwork) { throw "Invalid IPv4: $name" }
 }
@@ -238,24 +244,27 @@ if ($c.ReservePercent -lt 1 -or $c.ReservePercent -gt 99 -or $c.LeaseHours -le 0
 if ($c.ReservationMac -notmatch '^([0-9A-Fa-f]{2}-){5}[0-9A-Fa-f]{2}$') { throw 'Invalid reservation MAC' }
 Write-Output "PLAN primary=$($c.Primary) partner=$($c.Partner) scope=$($c.ScopeId) range=$($c.StartRange)-$($c.EndRange)"
 Write-Output 'PLAN install DHCP and tools on both; authorize both; create scope, options, exclusion, reservation, policy; create hot standby relationship.'
-if (-not $Apply) { Write-Output 'DRY RUN ONLY: no changes made, no remote operations, no full provisioning tested.'; return }
+if (-not $Apply) {
+  Write-Output 'DRY RUN ONLY: no changes made, no remote operations, no full provisioning tested.';
+  return
+}
 if ($env:COMPUTERNAME -ine ($c.Primary -split '\.')[0]) { throw 'Apply must run locally on the named primary.' }
 ```
 
-Часть 3
+<p style="break-after: avoid; page-break-after: avoid">Часть 3</p>
 
 ```powershell
 $principal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 if (-not $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { throw 'An elevated administrator session is required.' }
 if (-not (Get-NetIPAddress -AddressFamily IPv4 | Where-Object IPAddress -eq $c.PrimaryIP)) { throw 'Primary IPv4 does not match configuration.' }
-# Fail closed before making any change if an existing server role already contains a scope.
-# Existing configurations require an independent rehearsal, never an implicit overwrite.
 foreach ($server in @($c.Primary,$c.Partner)) {
   $state = Invoke-Command -ComputerName $server -ScriptBlock {
     $feature = Get-WindowsFeature DHCP
     if ($feature.Installed) { @(Get-DhcpServerv4Scope -ErrorAction Stop).Count } else { 0 }
   }
-  if ([int]$state -ne 0) { throw "Existing DHCP scope on $server; refusing to modify it." }
+  if ([int]$state -ne 0) {
+    throw "Existing DHCP scope on $server; refusing to modify it."
+  }
 }
 ```
 
