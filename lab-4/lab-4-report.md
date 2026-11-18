@@ -302,7 +302,7 @@ try {
   if ($ptr -ne [IntPtr]::Zero) { [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($ptr) }
 ```
 
-Часть 6
+<p style="break-after: avoid; page-break-after: avoid">Часть 6</p>
 
 ```powershell
   $secureSecret.Dispose()
