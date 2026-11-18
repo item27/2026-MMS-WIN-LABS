@@ -1,0 +1,7 @@
+{
+    "InterfaceAlias":  "Ethernet",
+    "IPv4":  "10.0.0.1",
+    "PrefixLength":  8,
+    "DNS":  "10.0.0.1",
+    "IPv4DefaultGateway":  null
+}

@@ -99,3 +99,15 @@ Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
 ```
 
 Установка вернула `Success: true` и `ExitCode: 0`. Сохранили полный результат в `evidence/commands/first-server-install-ad-ds.json`. Создание леса `GMAKMA.local` ещё не выполнено
+
+
+### 1.6. Сеть первого сервера
+
+На выключенной ВМ сменили Shared Network на общий профиль Host Network. После запуска назначили статический адрес без шлюза и DNS первого сервера:
+
+```bat
+netsh interface ipv4 set address name=Ethernet static 10.0.0.1 255.0.0.0 none
+netsh interface ipv4 set dnsservers name=Ethernet static 10.0.0.1 primary validate=no
+```
+
+Проверили настройки через `Get-NetIPConfiguration`: адрес `10.0.0.1`, длина префикса `8`, DNS `10.0.0.1`, шлюз отсутствует. Полный результат сохранён в `evidence/commands/first-static-network.json`
