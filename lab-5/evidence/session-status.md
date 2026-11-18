@@ -7,7 +7,7 @@
 - Репозиторий: `/Users/k6zma/Documents/ChatGPT/Windows/2026-MMS-WIN-LABS`
 - Ветка: `lab-5-attempt-1`, origin `item27/2026-MMS-WIN-LABS`, push этой ветки пользователь разрешил
 - ТЗ: `sources/awin-5-2025.docx`, дословная копия `lab-5-task.md`
-- Последняя собственная версия отчёта: `evidence/versions/report-2026-11-19-02.md`
+- Последняя собственная версия отчёта: `evidence/versions/report-2026-11-19-03.md`
 - Чужой Lab-4.docx не является решением пятой работы
 
 ## Стенд
