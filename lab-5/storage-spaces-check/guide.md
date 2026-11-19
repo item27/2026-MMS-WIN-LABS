@@ -2,21 +2,18 @@
 
 В опыте участвует `Lab5Parity` на `ad-srv`. Он создан в пуле `Lab5Pool` из семи дисков по 10 ГиБ с `PhysicalDiskRedundancy = 2`. Проверяем, что после отключения двух дисков за один запуск файл на томе `P:` читается с прежним содержимым и SHA-256
 
-## 1. Находим виртуальный диск
+## 1. Находим Lab5Parity в Server Manager
 
-На `ad-srv` открываем Windows PowerShell от имени администратора и смотрим, какой номер Windows назначила виртуальному диску `Lab5Parity`
+1. На `ad-srv` открываем **Server Manager -> File and Storage Services -> Storage Pools**
+2. В верхней таблице выбираем **Lab5Pool**. Внизу слева, в **Virtual Disks**, виден **Lab5Parity** с **Layout** = **Parity**, **Capacity** = **36.0 GB** и **Volume** = **P:**. Справа, в **Physical Disks**, видны семь участников пула
+3. Правой кнопкой по **Lab5Parity -> Properties -> Details**. В списке **Property** выбираем **PhysicalDiskRedundancy** и проверяем, что в **Value** стоит **2**
+4. Чтобы показать том Windows, нажимаем правой кнопкой по **Пуск -> Disk Management**. В нижней панели находим диск, на котором показан **Lab5Parity (P:)**
 
-```powershell
-$parity = Get-VirtualDisk -FriendlyName Lab5Parity
-$parity | Format-List FriendlyName,HealthStatus,PhysicalDiskRedundancy,Size
-$parity | Get-Disk | Format-Table Number,PartitionStyle,IsOffline,Size
-```
+![Рисунок 1: Lab5Parity, том P и семь участников в Server Manager](screenshots/00-storage-pools-ui.png)
 
-В нашем запуске это **Disk 12**, 36 ГиБ, `RAW` и `Offline`. Номер проверяем перед каждым опытом. Если уже есть том `Lab5Parity (P:)` с NTFS, переходим к шагу 4
+![Рисунок 2: PhysicalDiskRedundancy равно 2 в свойствах Lab5Parity](screenshots/00-dual-parity-properties-ui.png)
 
-Нажимаем **Win+R**, вводим `diskmgmt.msc` и нажимаем **OK**
-
-![Рисунок 1: Запуск Disk Management](screenshots/01-open-disk-management.png)
+На нашем стенде `P:` уже создан вместе с тестовым файлом. Для показа на защите сразу переходим к шагу 4. Если повторяем с исходного неразмеченного диска, в Disk Management сверяем отдельный виртуальный диск **36.00 GB**. В нашем опыте это был **Disk 12**, отмеченный **Unknown**, **Offline**, **Unallocated**. Сверяем размер и состояние перед инициализацией, так как номер диска может измениться
 
 ## 2. Включаем и инициализируем диск
 
@@ -24,48 +21,41 @@ $parity | Get-Disk | Format-Table Number,PartitionStyle,IsOffline,Size
 2. Правой кнопкой по той же карточке -> **Initialize Disk**
 3. Проверяем, что отмечен только нужный диск, выбираем **GPT (GUID Partition Table)** -> **OK**
 
-![Рисунок 2: Перевод Lab5Parity в Online](screenshots/02-parity-online.png)
+![Рисунок 3: Перевод Lab5Parity в Online](screenshots/02-parity-online.png)
 
-![Рисунок 3: Команда Initialize Disk](screenshots/03-initialize-menu.png)
+![Рисунок 4: Команда Initialize Disk](screenshots/03-initialize-menu.png)
 
-![Рисунок 4: Инициализация Disk 12 с GPT](screenshots/04-select-gpt.png)
+![Рисунок 5: Инициализация Disk 12 с GPT](screenshots/04-select-gpt.png)
 
 ## 3. Создаём том P:
 
 Правой кнопкой по области с чёрной полосой **Unallocated** у Disk 12 -> **New Simple Volume**
 
-![Рисунок 5: Создание простого тома на виртуальном диске Lab5Parity](screenshots/05-new-simple-volume.png)
+![Рисунок 6: Создание простого тома на виртуальном диске Lab5Parity](screenshots/05-new-simple-volume.png)
 
 В мастере нажимаем **Next**, оставляем максимальный размер, выбираем свободную букву **P**, затем **NTFS**, метку **Lab5Parity** и **Perform a quick format**. Проверяем сводку и нажимаем **Finish**
 
-![Рисунок 6: Максимальный размер раздела](screenshots/06-volume-size.png)
+![Рисунок 7: Максимальный размер раздела](screenshots/06-volume-size.png)
 
-![Рисунок 7: Назначение буквы P](screenshots/07-drive-letter.png)
+![Рисунок 8: Назначение буквы P](screenshots/07-drive-letter.png)
 
-![Рисунок 8: NTFS и метка Lab5Parity](screenshots/08-format-ntfs.png)
+![Рисунок 9: NTFS и метка Lab5Parity](screenshots/08-format-ntfs.png)
 
-![Рисунок 9: Подтверждение настроек тома](screenshots/09-finish-volume.png)
+![Рисунок 10: Подтверждение настроек тома](screenshots/09-finish-volume.png)
 
-## 4. Записываем файл и запоминаем SHA-256
+## 4. Открываем тестовый файл
 
-В PowerShell создаём файл, читаем его и записываем контрольную сумму для сравнения после перезапуска
+В **File Explorer -> This PC -> Lab5Parity (P:)** дважды нажимаем **parity-check.txt**. В Блокноте увидим строку `Lab 5 Storage Spaces dual parity`
 
-```powershell
-'Lab 5 Storage Spaces dual parity' | Set-Content P:\parity-check.txt -Encoding ASCII
-Get-Content P:\parity-check.txt
-Get-FileHash P:\parity-check.txt | Format-List Hash,Path
-```
+Если файла ещё нет, открываем **Notepad** через меню **Пуск**, вводим эту строку и выбираем **File -> Save As**. В поле имени вводим полный путь `P:\parity-check.txt` и нажимаем **Save**
 
-![Рисунок 10: Файл на P и его исходная контрольная сумма](screenshots/10-file-before.png)
+![Рисунок 11: Исходное содержимое файла и SHA-256 из выполненного опыта](screenshots/10-file-before.png)
 
 ## 5. Сверяем диски пула и выключаем ВМ
 
-В PowerShell выводим состав пула. У каждого из его семи дисков свой `SerialNumber`. По нему находим соответствующий образ в UTM
+В **Server Manager -> File and Storage Services -> Storage Pools** выбираем **Lab5Pool**. В нижней правой таблице **Physical Disks** нажимаем правой кнопкой по строке диска -> **Properties -> General** и смотрим **Serial number**. Для отключения на нашем стенде сверяем имена образов с таблицей ниже
 
-```powershell
-Get-StoragePool Lab5Pool | Get-PhysicalDisk |
-    Format-Table SerialNumber,Size,HealthStatus,OperationalStatus
-```
+![Рисунок 12: Серийный номер выбранного диска в его свойствах](screenshots/00-physical-disk-serial-ui.png)
 
 В этом опыте выбрали эти два диска:
 
@@ -74,7 +64,7 @@ Get-StoragePool Lab5Pool | Get-PhysicalDisk |
 | `0A88A1D7C7C64491A030` | `0A88A1D7-C7C6-4491-A030-DBC6478709D2.qcow2` |
 | `6B9BE43CF8564A8AB73D` | `6B9BE43C-F856-4A8A-B73D-87A885CEC407.qcow2` |
 
-Штатно выключаем сначала `ad-srv-2`, затем `ad-srv`. В Windows можно выбрать **Пуск -> Питание -> Завершение работы** или выполнить `Stop-Computer` в PowerShell. Ждём, пока UTM покажет **Остановлена**
+Штатно выключаем сначала `ad-srv-2`, затем `ad-srv`. В Windows выбираем **Пуск -> Питание -> Завершение работы**. Ждём, пока UTM покажет **Остановлена**
 
 Для повторения на своём стенде после выключения сохрани копию пакета `lab5-ad-srv.utm` в Finder. В нашем запуске тестировали на APFS-копиях образов, а исходные образы и конфигурацию сохранили для возврата стенда
 
@@ -88,32 +78,24 @@ Get-StoragePool Lab5Pool | Get-PhysicalDisk |
 
 В этом стенде выбранные диски были пятым и шестым VirtIO в списке. Поле **Размер** в UTM может показывать текущий размер файла образа на Mac. Для выбора дисков используй поле **Имя**
 
-![Рисунок 11: Настройки остановленной ВМ открываются значком справа сверху](screenshots/11-utm-edit.png)
+![Рисунок 13: Настройки остановленной ВМ открываются значком справа сверху](screenshots/11-utm-edit.png)
 
-![Рисунок 12: Первый образ пула с интерфейсом «Отсутствует»](screenshots/12-utm-first-disk-off.png)
+![Рисунок 14: Первый образ пула с интерфейсом «Отсутствует»](screenshots/12-utm-first-disk-off.png)
 
-![Рисунок 13: Второй отключённый образ и кнопка «Сохранить»](screenshots/13-utm-second-disk-off.png)
+![Рисунок 15: Второй отключённый образ и кнопка «Сохранить»](screenshots/13-utm-second-disk-off.png)
 
-## 7. Проверяем, что файл читается
+## 7. Показываем отказ и читаем файл
 
-Когда Windows загрузится, открываем PowerShell от имени администратора. Смотрим состояние виртуального диска, двух выбранных участников пула и файла
+1. После входа в Windows снова открываем **Server Manager -> File and Storage Services -> Storage Pools -> Lab5Pool**. Нажимаем **Refresh** (круглая стрелка вверху) и открываем правой кнопкой **Lab5Parity -> Properties -> Health**. Здесь видны **Health status**, **Operational status** и **Status** физических дисков, которые использует виртуальный диск
+2. В **File Explorer -> This PC -> Lab5Parity (P:)** заново открываем **parity-check.txt**. Показываем содержимое в Блокноте
 
-```powershell
-Get-VirtualDisk Lab5Parity |
-    Format-List FriendlyName,HealthStatus,OperationalStatus,PhysicalDiskRedundancy
+В выполненном опыте Windows зафиксировала `Lost Communication` у двух участников и `Degraded, Incomplete` у виртуального диска. Файл открылся с исходным содержимым. Если попросят подтвердить SHA-256, показываем сохранённый вывод со скриншотов до и после отключения
 
-Get-StoragePool Lab5Pool | Get-PhysicalDisk |
-    Format-Table SerialNumber,HealthStatus,OperationalStatus -AutoSize
+![Рисунок 16: Вкладка Health и список дисков до отключения](screenshots/00-parity-health-ui.png)
 
-Get-Content P:\parity-check.txt
-Get-FileHash P:\parity-check.txt | Format-List Hash,Path
-```
+![Рисунок 17: Два диска недоступны, файл читается, SHA-256 совпадает](screenshots/14-file-after-two.png)
 
-У двух выбранных дисков ожидаем `Lost Communication`. У нас `Lab5Parity` показал `Warning` и `Degraded, Incomplete`. Буква `P:` сохранилась и SHA-256 файла совпала с исходной. Для наглядной проверки нажимаем **Win+R**, вводим `notepad P:\parity-check.txt` и нажимаем **OK**
-
-![Рисунок 14: Два диска недоступны, файл читается, SHA-256 совпадает](screenshots/14-file-after-two.png)
-
-![Рисунок 15: Тот же файл открыт в Блокноте после отключения двух дисков](screenshots/15-notepad-after-two.png)
+![Рисунок 18: Тот же файл открыт в Блокноте после отключения двух дисков](screenshots/15-notepad-after-two.png)
 
 ## 8. Возвращаем стенд
 
