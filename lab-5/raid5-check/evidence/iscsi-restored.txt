@@ -1,0 +1,15 @@
+TargetNodeAddress : iqn.1991-05.com.microsoft:ad-srv-lab5target-target
+IsConnected       : True
+IsPersistent      : True
+
+
+
+
+
+DriveLetter     : R
+FileSystemLabel : Lab5-LUN1
+HealthStatus    : Healthy
+
+
+
+Lab 5 iSCSI read/write check

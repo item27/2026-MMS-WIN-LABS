@@ -1,0 +1,36 @@
+Index SerialNumber               Size
+----- ------------               ----
+    1 35D10684067C4BBC9907 4293596160
+    2 20917607355D40348669 4293596160
+
+
+
+Microsoft DiskPart version 10.0.20348.1
+
+Copyright (C) Microsoft Corporation.
+On computer: AD-SRV
+
+DISKPART>
+  Disk ###  Status         Size     Free     Dyn  Gpt
+  --------  -------------  -------  -------  ---  ---
+  Disk 0    Online           64 GB  1024 KB        *
+  Disk 1    Online         4096 MB      0 B   *    *
+  Disk 2    Online         4096 MB      0 B   *    *
+  Disk 10   Offline          36 GB    36 GB
+  Disk M0   Missing            0 B      0 B   *
+  Disk M1   Missing            0 B      0 B   *
+
+DISKPART>
+  Volume ###  Ltr  Label        Fs     Type        Size     Status     Info
+  ----------  ---  -----------  -----  ----------  -------  ---------  --------
+  Volume 0                             RAID-5        11 GB  Failed
+  Volume 1     D   SSS_X64FREE  UDF    CD-ROM      4810 MB  Healthy
+  Volume 2     E   UTM_TOOLS_M  CDFS   CD-ROM        74 MB  Healthy
+  Volume 3     C                NTFS   Partition     63 GB  Healthy    Boot
+  Volume 4                      FAT32  Partition    100 MB  Healthy    System
+  Volume 5                      NTFS   Partition    524 MB  Healthy    Hidden
+
+DISKPART>
+Leaving DiskPart...
+READ=FAILED
+ERROR=A parameter cannot be found that matches parameter name 'Raw'.
