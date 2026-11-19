@@ -1,0 +1,46 @@
+AD-SRV
+
+
+FriendlyName           : Lab5Parity
+HealthStatus           : Healthy
+OperationalStatus      : OK
+ResiliencySettingName  : Parity
+PhysicalDiskRedundancy : 2
+Size                   : 38654705664
+
+
+
+
+SerialNumber         HealthStatus OperationalStatus
+------------         ------------ -----------------
+043AA76667674D1B83D0 Healthy      OK
+0A88A1D7C7C64491A030 Healthy      OK
+6B9BE43CF8564A8AB73D Healthy      OK
+AB2F5C84B6F34C54AB06 Healthy      OK
+D18E93019FE64870B7A9 Healthy      OK
+DCE48FD0859349A6B9BF Healthy      OK
+DFA087482F9C47B0A55E Healthy      OK
+
+
+
+Index SerialNumber                                  Size
+----- ------------                                  ----
+    0 QM00003                                68713989120
+    1 35D10684067C4BBC9907                    4293596160
+    2 20917607355D40348669                    4293596160
+    3 FF8C5B79269F4486A4B9                    4293596160
+    4 DA1695117FB540359541                    4293596160
+   12 {45afad06-2e0e-491b-8806-5dfbd399ed37} 38650590720
+
+
+
+DriveLetter FileSystemLabel FileSystem HealthStatus
+----------- --------------- ---------- ------------
+          P Lab5Parity      NTFS       Healthy
+
+
+Lab 5 Storage Spaces dual parity
+
+Algorithm Hash                                                             Path
+--------- ----                                                             ----
+SHA256    7B53CC66CAD31BBFF92CBA55427434E76576CE39B04665FAEB9720103E02583F P:\parity-check.txt
