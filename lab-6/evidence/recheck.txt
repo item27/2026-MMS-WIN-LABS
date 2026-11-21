@@ -1,0 +1,63 @@
+Boots found: 10 (maximum 10)
+2026-11-19 14:12:00 -08:00
+2026-11-19 10:17:33 -08:00
+2026-11-19 09:30:35 -08:00
+2026-11-19 01:34:39 -08:00
+2026-11-19 00:54:19 -08:00
+2026-11-19 00:44:06 -08:00
+2026-11-19 00:29:43 -08:00
+2026-11-18 22:48:18 -08:00
+2026-11-18 22:40:51 -08:00
+2026-11-18 09:00:36 -08:00
+
+Successful updates found: 3 (maximum 5)
+2022-03-03 15:58:00  Package_for_RollupFix~31bf3856ad364e35~amd64~~20348.587.1.7
+2022-03-03 15:49:00  Package_for_DotNetRollup~31bf3856ad364e35~amd64~~10.0.4465.4
+2022-03-03 15:48:00  Package_for_ServicingStack_557~31bf3856ad364e35~amd64~~20348.557.1.3
+
+Application, System, Setup from 2026-11-20T06:10:01.6566882-08:00 to 2026-11-21T06:10:01.6566882-08:00
+Errors: 0
+Warnings: 6
+
+Count Name
+----- ----
+   40 NT AUTHORITY\SYSTEM
+   20 GMAKMA\Administrator
+    1 Window Manager\DWM-1
+    1 Font Driver Host\UMFD-0
+    1 Font Driver Host\UMFD-1
+    1
+    5 NT AUTHORITY\NETWORK SERVICE
+    7 NT AUTHORITY\LOCAL SERVICE
+
+
+
+Folder: \
+HostName:                             AD-SRV
+TaskName:                             \Lab6-ClearTestDisk
+Next Run Time:                        N/A
+Status:                               Ready
+Logon Mode:                           Interactive/Background
+Last Run Time:                        11/21/2026 6:03:04 AM
+Last Result:                          0
+Author:                               N/A
+Task To Run:                          C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -File "C:\Lab6\Clear-TestDisk.ps1"
+Start In:                             N/A
+Comment:                              N/A
+Scheduled Task State:                 Enabled
+Idle Time:                            Disabled
+Power Management:
+Run As User:                          SYSTEM
+Delete Task If Not Rescheduled:       Disabled
+Stop Task If Runs X Hours and X Mins: 72:00:00
+Schedule:                             Scheduling data is not available in this format.
+Schedule Type:                        On demand only
+Start Time:                           N/A
+Start Date:                           N/A
+End Date:                             N/A
+Days:                                 N/A
+Months:                               N/A
+Repeat: Every:                        N/A
+Repeat: Until: Time:                  N/A
+Repeat: Until: Duration:              N/A
+Repeat: Stop If Still Running:        N/A

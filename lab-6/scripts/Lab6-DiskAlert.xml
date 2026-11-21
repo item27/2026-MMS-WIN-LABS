@@ -1,0 +1,12 @@
+<DataCollectorSet>
+  <DisplayName>Lab6-DiskAlert</DisplayName>
+  <RootPath>C:\PerfLogs\Lab6\DiskAlert</RootPath>
+  <AlertDataCollector>
+    <Name>LowSpace</Name>
+    <SampleInterval>5</SampleInterval>
+    <Alert>\LogicalDisk(T:)\% Free Space&lt;20</Alert>
+    <EventLog>-1</EventLog>
+    <Task>\Lab6-ClearTestDisk</Task>
+    <TaskRunAsSelf>0</TaskRunAsSelf>
+  </AlertDataCollector>
+</DataCollectorSet>

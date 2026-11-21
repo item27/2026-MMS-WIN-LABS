@@ -1,0 +1,13 @@
+<ViewerConfig>
+  <QueryConfig>
+    <QueryParams/>
+    <QueryNode>
+      <Name>Lab6 Administrator - failed logons</Name>
+      <QueryList>
+        <Query Id="0" Path="Security">
+          <Select Path="Security">*[System[EventID=4625] and EventData[Data[@Name='TargetUserName']='Administrator']]</Select>
+        </Query>
+      </QueryList>
+    </QueryNode>
+  </QueryConfig>
+</ViewerConfig>

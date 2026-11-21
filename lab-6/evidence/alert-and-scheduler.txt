@@ -1,0 +1,164 @@
+First threshold event:
+
+
+TimeCreated      : 11/21/2026 5:59:24 AM
+Id               : 2031
+LevelDisplayName : Information
+Message          : Performance counter \LogicalDisk(T:)\% Free Space has tripped its alert threshold. The counter
+                   value of 11.602210 is under the limit value of 20.000000. 20.000000 is the alert threshold value.
+
+
+
+Alert count: 18
+Automatic cleanup:
+
+
+TimeCreated      : 11/21/2026 5:59:35 AM
+Id               : 6100
+LevelDisplayName : Warning
+Message          : Free bytes on T: before=22659072 after=176062464
+
+
+
+
+
+DriveLetter     : T
+FileSystemLabel : Lab6-Alert
+Size            : 190836736
+SizeRemaining   : 176062464
+
+
+
+
+
+LastRunTime    : 11/21/2026 6:00:00 AM
+LastTaskResult : 267009
+
+
+
+
+Folder: \
+HostName:                             AD-SRV
+TaskName:                             \Lab6-ClearTestDisk
+Next Run Time:                        N/A
+Status:                               Running
+Logon Mode:                           Interactive/Background
+Last Run Time:                        11/21/2026 6:00:59 AM
+Last Result:                          267009
+Author:                               N/A
+Task To Run:                          C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -File "C:\Lab6\Clear-TestDisk.ps1"
+Start In:                             N/A
+Comment:                              N/A
+Scheduled Task State:                 Enabled
+Idle Time:                            Disabled
+Power Management:
+Run As User:                          SYSTEM
+Delete Task If Not Rescheduled:       Disabled
+Stop Task If Runs X Hours and X Mins: 72:00:00
+Schedule:                             Scheduling data is not available in this format.
+Schedule Type:                        On demand only
+Start Time:                           N/A
+Start Date:                           N/A
+End Date:                             N/A
+Days:                                 N/A
+Months:                               N/A
+Repeat: Every:                        N/A
+Repeat: Until: Time:                  N/A
+Repeat: Until: Duration:              N/A
+Repeat: Stop If Still Running:        N/A
+Process sampling:
+
+
+TimeCreated      : 11/21/2026 6:00:21 AM
+Id               : 1000
+LevelDisplayName : Information
+Message          : Saved 76 processes to C:\Lab6\samples\processes-20261121-060010713.csv.
+
+TimeCreated      : 11/21/2026 5:57:17 AM
+Id               : 1000
+LevelDisplayName : Information
+Message          : Saved 76 processes to C:\Lab6\samples\processes-20261121-055709949.csv.
+
+TimeCreated      : 11/21/2026 5:56:14 AM
+Id               : 1001
+LevelDisplayName : Error
+Message          : Sample failed for C:\Lab6\Get-SystemHistory.ps1\lab6-failure.csv: Could not find a part of the path
+                   'C:\Lab6\Get-SystemHistory.ps1\lab6-failure.csv'.
+
+TimeCreated      : 11/21/2026 5:54:18 AM
+Id               : 1000
+LevelDisplayName : Information
+Message          : Saved 77 processes to C:\Lab6\samples\processes-20261121-055409854.csv.
+
+TimeCreated      : 11/21/2026 5:51:19 AM
+Id               : 1000
+LevelDisplayName : Information
+Message          : Saved 80 processes to C:\Lab6\samples\processes-20261121-055109674.csv.
+
+TimeCreated      : 11/21/2026 5:48:24 AM
+Id               : 1000
+LevelDisplayName : Information
+Message          : Saved 83 processes to C:\Lab6\samples\processes-20261121-054811308.csv.
+
+TimeCreated      : 11/21/2026 5:45:18 AM
+Id               : 1000
+LevelDisplayName : Information
+Message          : Saved 80 processes to C:\Lab6\samples\processes-20261121-054509110.csv.
+
+TimeCreated      : 11/21/2026 5:42:22 AM
+Id               : 1000
+LevelDisplayName : Information
+Message          : Saved 83 processes to C:\Lab6\samples\processes-20261121-054210319.csv.
+
+TimeCreated      : 11/21/2026 5:39:18 AM
+Id               : 1000
+LevelDisplayName : Information
+Message          : Saved 74 processes to C:\Lab6\samples\processes-20261121-053910405.csv.
+
+TimeCreated      : 11/21/2026 5:37:31 AM
+Id               : 1000
+LevelDisplayName : Information
+Message          : Saved 79 processes to C:\Lab6\samples\processes-20261121-053721424.csv.
+
+
+
+
+
+LastRunTime    : 11/21/2026 6:00:00 AM
+LastTaskResult : 0
+NextRunTime    : 11/21/2026 6:03:03 AM
+
+
+
+
+
+Interval : PT3M
+Duration :
+
+
+
+
+
+DisallowStartIfOnBatteries : False
+StopIfGoingOnBatteries     : False
+
+
+
+
+Name:                 Lab6-DiskAlert
+Status:               Running
+Root Path:            C:\PerfLogs\Lab6\DiskAlert
+Segment:              Off
+Schedules:            On
+Run as:               SYSTEM
+
+Name:                 Lab6-DiskAlert\LowSpace
+Type:                 Alert
+Sample Interval:      5 second(s)
+Event Log:            On
+Task:                 \Lab6-ClearTestDisk
+
+Thresholds:
+  \LogicalDisk(T:)\% Free Space<20
+
+The command completed successfully.

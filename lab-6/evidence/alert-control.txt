@@ -1,0 +1,31 @@
+Before filling:
+
+Path                                           CookedValue
+----                                           -----------
+\\ad-srv\logicaldisk(t:)\% free space     92.2651933701657
+\\ad-srv\logicaldisk(_total)\% free space  89.427827102193
+\\ad-srv\logicaldisk(t:)\free megabytes                167
+
+
+
+DriveLetter      Size SizeRemaining
+-----------      ---- -------------
+          T 190836736      22659072
+At low space, alert stopped:
+
+
+
+Path                                           CookedValue
+----                                           -----------
+\\ad-srv\logicaldisk(t:)\% free space     92.2651933701657
+\\ad-srv\logicaldisk(_total)\% free space  89.427827102193
+\\ad-srv\logicaldisk(t:)\free megabytes                167
+
+
+After clearing the control run:
+
+Path                                           CookedValue
+----                                           -----------
+\\ad-srv\logicaldisk(t:)\% free space     92.2651933701657
+\\ad-srv\logicaldisk(_total)\% free space  89.427827102193
+\\ad-srv\logicaldisk(t:)\free megabytes                167

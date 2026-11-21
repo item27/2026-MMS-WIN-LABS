@@ -1,0 +1,27 @@
+The command completed successfully.
+
+Name:                 Lab6-DiskAlert
+Status:               Stopped
+Root Path:            C:\PerfLogs\Lab6\DiskAlert
+Segment:              Off
+Schedules:            On
+Run as:               SYSTEM
+
+Name:                 Lab6-DiskAlert\LowSpace
+Type:                 Alert
+Sample Interval:      5 second(s)
+Event Log:            On
+Task:                 \Lab6-ClearTestDisk
+
+Thresholds:
+  \LogicalDisk(T:)\% Free Space<20
+
+The command completed successfully.
+
+
+LastRunTime    : 11/21/2026 6:03:03 AM
+LastTaskResult : 0
+
+
+
+False

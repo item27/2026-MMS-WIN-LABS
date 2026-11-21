@@ -1,0 +1,26 @@
+<DataCollectorSet>
+  <DisplayName>Lab6-Workload</DisplayName>
+  <RootPath>C:\PerfLogs\Lab6\Workload</RootPath>
+  <SubdirectoryFormat>1</SubdirectoryFormat>
+  <SubdirectoryFormatPattern>yyyyMMdd-HHmmss</SubdirectoryFormatPattern>
+  <PerformanceCounterDataCollector>
+    <Name>Platform</Name>
+    <FileName>platform</FileName>
+    <LogFileFormat>3</LogFileFormat>
+    <SampleInterval>5</SampleInterval>
+    <Counter>\Processor(_Total)\% Processor Time</Counter>
+    <Counter>\Memory\Available MBytes</Counter>
+    <Counter>\PhysicalDisk(_Total)\Disk Bytes/sec</Counter>
+    <Counter>\Network Interface(*)\Bytes Total/sec</Counter>
+  </PerformanceCounterDataCollector>
+  <TraceDataCollector>
+    <Name>KernelProcess</Name>
+    <FileName>kernel</FileName>
+    <TraceDataProvider>
+      <Guid>{22FB2CD6-0E7B-422B-A0C7-2FAD1FD0E716}</Guid>
+      <DisplayName>Microsoft-Windows-Kernel-Process</DisplayName>
+      <Level><Value>5</Value></Level>
+      <KeywordsAny><Value>16</Value></KeywordsAny>
+    </TraceDataProvider>
+  </TraceDataCollector>
+</DataCollectorSet>

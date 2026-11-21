@@ -1,0 +1,38 @@
+Input
+----------------
+File(s):
+     C:\Lab6\idle.blg (Binary)
+
+Begin:    11/21/2026 5:46:16
+End:      11/21/2026 5:47:31
+Samples:  16
+
+0.00%0.00%62.50%100.00%
+
+Output
+----------------
+File:     C:\Lab6\idle.csv
+
+Begin:    11/21/2026 5:46:16
+End:      11/21/2026 5:47:31
+Samples:  16
+
+The command completed successfully.
+FullName                               Length LastWriteTime
+--------                               ------ -------------
+C:\PerfLogs\Lab6\Workload\kernel.etl    24576 11/21/2026 5:47:35 AM
+C:\PerfLogs\Lab6\Workload\platform.blg 131072 11/21/2026 5:47:35 AM
+
+
+
+TimeCreated           ProviderName                     Id
+-----------           ------------                     --
+11/21/2026 5:46:16 AM                                   0
+11/21/2026 5:46:39 AM Microsoft-Windows-Kernel-Process  2
+11/21/2026 5:46:49 AM Microsoft-Windows-Kernel-Process  1
+11/21/2026 5:46:50 AM Microsoft-Windows-Kernel-Process  1
+11/21/2026 5:46:57 AM Microsoft-Windows-Kernel-Process  1
+11/21/2026 5:47:11 AM Microsoft-Windows-Kernel-Process  2
+11/21/2026 5:47:21 AM Microsoft-Windows-Kernel-Process  1
+11/21/2026 5:47:22 AM Microsoft-Windows-Kernel-Process  1
+11/21/2026 5:47:23 AM Microsoft-Windows-Kernel-Process  1

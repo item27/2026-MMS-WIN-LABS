@@ -1,0 +1,24 @@
+LogName     : Microsoft-Windows-WindowsUpdateClient/Operational
+IsEnabled   : True
+RecordCount : 56
+
+
+
+Windows Update Agent history count: 0
+
+Name           Count
+----           -----
+OnDemandPack      34
+FeaturePack        3
+Foundation         1
+LanguagePack       1
+Update             2
+SecurityUpdate     1
+
+
+
+PackageName                                                             ReleaseType InstallTime
+-----------                                                             ----------- -----------
+Package_for_RollupFix~31bf3856ad364e35~amd64~~20348.587.1.7          SecurityUpdate 3/3/2022 3:58:00 PM
+Package_for_DotNetRollup~31bf3856ad364e35~amd64~~10.0.4465.4                 Update 3/3/2022 3:49:00 PM
+Package_for_ServicingStack_557~31bf3856ad364e35~amd64~~20348.557.1.3         Update 3/3/2022 3:48:00 PM
