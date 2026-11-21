@@ -1,0 +1,18 @@
+Actual: 92.26% 176062464/190836736 bytes
+Chunks: 0
+
+TimeCreated : 11/21/2026 6:25:44 AM
+Message     : Data collector set Lab6-DiskAlert started as GMAKMA\AD-SRV$.
+
+TimeCreated : 11/21/2026 6:30:49 AM
+Id          : 2031
+Message     : Performance counter \LogicalDisk(T:)\% Free Space has tripped its alert threshold. The counter value of
+              11.602210 is under the limit value of 20.000000. 20.000000 is the alert threshold value.
+
+TimeCreated      : 11/21/2026 6:31:13 AM
+Id               : 6100
+LevelDisplayName : Warning
+Message          : Free bytes on T: before=22659072 after=176062464
+
+LastRunTime    : 11/21/2026 6:34:34 AM
+LastTaskResult : 0
